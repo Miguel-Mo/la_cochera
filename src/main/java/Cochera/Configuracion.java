@@ -4,7 +4,7 @@ public enum Configuracion {
     USER("root"),
     PASS("m1sql"),
     PORT("3306"),
-    DB("la_cochera");
+    DB("la_coechera");
 
     public final String dato;
 

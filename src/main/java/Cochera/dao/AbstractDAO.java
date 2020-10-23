@@ -14,6 +14,7 @@ public abstract class AbstractDAO {
     public AbstractDAO() {
         try {
             conexion = DriverManager.getConnection(URL, Configuracion.USER.dato, Configuracion.PASS.dato);
+            System.out.println("Conexion ok");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -22,6 +23,7 @@ public abstract class AbstractDAO {
     public void closeDB() {
         try {
             conexion.close();
+            System.out.println("Conexion cerrar");
         } catch (SQLException e) {
             e.printStackTrace();
         }

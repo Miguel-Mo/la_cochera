@@ -1,4 +1,4 @@
-package controllers;
+package Cochera.controllers;
 
 public class Controller {
 }

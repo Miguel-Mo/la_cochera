@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Pane layoutY="64.0" prefHeight="536.0" prefWidth="399.0" style="-fx-background-color: red;" />
+      <Pane layoutX="399.0" layoutY="63.0" prefHeight="536.0" prefWidth="501.0">
+         <children>
+            <PasswordField layoutX="147.0" layoutY="302.0" prefHeight="32.0" prefWidth="207.0" promptText="Contraseña">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </PasswordField>
+            <TextField layoutX="147.0" layoutY="245.0" prefHeight="32.0" prefWidth="207.0" promptText="Usuario">
+               <font>
+                  <Font name="SansSerif Regular" size="14.0" />
+               </font>
+            </TextField>
+            <Button layoutX="277.0" layoutY="362.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="77.0" style="-fx-background-color: orange;" text="Login" textAlignment="CENTER" textFill="#e4e4e4">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+      <Pane layoutX="-6.0" layoutY="-2.0" prefHeight="66.0" prefWidth="907.0" style="-fx-background-color: green;" />
+   </children>
+</AnchorPane>

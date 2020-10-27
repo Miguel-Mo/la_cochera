@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.SVGPath?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="470.0" prefWidth="740.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <left>
+      <AnchorPane prefHeight="470.0" prefWidth="304.0" style="-fx-background-color: linear-gradient(to bottom, #E9C46A, #E76F51);" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="229.0" fitWidth="242.0" layoutX="32.0" layoutY="121.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@log_preview_rev_1.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </left>
+   <right>
+      <AnchorPane prefHeight="400.0" prefWidth="436.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+         <children>
+            <Pane layoutX="71.0" layoutY="76.0" prefHeight="372.0" prefWidth="294.0">
+               <children>
+                  <TextField layoutX="45.0" layoutY="186.0" prefHeight="25.0" prefWidth="205.0" promptText="Usuario" />
+                  <TextField layoutX="45.0" layoutY="219.0" prefHeight="25.0" prefWidth="204.0" promptText="Contraseña" />
+                  <Button layoutX="169.0" layoutY="261.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="80.0" style="-fx-background-color: E76F51; -fx-background-radius: 18,18,18,18;" text="LogIn" textFill="WHITE" />
+                  <SVGPath content="M16 4C12.144531 4 9 7.144531 9 11C9 13.394531 10.21875 15.519531 12.0625 16.78125C8.484375 18.304688 6 21.859375 6 26L8 26C8 21.535156 11.535156 18 16 18C20.464844 18 24 21.535156 24 26L26 26C26 21.859375 23.515625 18.304688 19.9375 16.78125C21.78125 15.519531 23 13.394531 23 11C23 7.144531 19.855469 4 16 4 Z M 16 6C18.773438 6 21 8.226563 21 11C21 13.773438 18.773438 16 16 16C13.226563 16 11 13.773438 11 11C11 8.226563 13.226563 6 16 6Z" fill="#e76f51" layoutX="132.0" layoutY="78.0" />
+               </children>
+            </Pane>
+         </children>
+      </AnchorPane>
+   </right>
+</BorderPane>

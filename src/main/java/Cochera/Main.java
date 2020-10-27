@@ -16,10 +16,10 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         this.primaryStage = primaryStage;
-        initLogin();
+        iniciarLogin();
     }
 
-    public void initLogin() throws IOException {
+    public void iniciarLogin() throws IOException {
         // Cargamos el Layout
         FXMLLoader login = new FXMLLoader(getClass().getResource("/Login/login.fxml"));
 
@@ -28,7 +28,7 @@ public class Main extends Application {
         primaryStage.setResizable(false);
         primaryStage.initStyle(StageStyle.UNDECORATED);
 
-        // Damos acceso a la app a su controlador
+        // Le damos la referencia del Main al controlador
         ControladorLogin controladorLogin =  login.getController();
         controladorLogin.setMain(this);
 

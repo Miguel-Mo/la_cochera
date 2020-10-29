@@ -19,16 +19,16 @@ public abstract class Usuario {
     public static final String JEFE = "jefe";
 
     public Usuario(ResultSet datos) throws SQLException {
-        id = datos.getInt(1);
-        login = new SimpleStringProperty(datos.getString(2));
-        tipo = new SimpleStringProperty(datos.getString(4));
-        nombre = new SimpleStringProperty(datos.getString(5));
-        apellidos = new SimpleStringProperty(datos.getString(6));
-        dni = new SimpleStringProperty(datos.getString(7));
-        email = new SimpleStringProperty(datos.getString(8));
-        telefono = new SimpleStringProperty(datos.getString(9));
-        salario = new SimpleIntegerProperty(datos.getInt(10));
-        concesionarioID = datos.getInt(11);
+        id = datos.getInt("id");
+        login = new SimpleStringProperty(datos.getString("login"));
+        tipo = new SimpleStringProperty(datos.getString("tipo"));
+        nombre = new SimpleStringProperty(datos.getString("nombre"));
+        apellidos = new SimpleStringProperty(datos.getString("apellidos"));
+        dni = new SimpleStringProperty(datos.getString("dni"));
+        email = new SimpleStringProperty(datos.getString("email"));
+        telefono = new SimpleStringProperty(datos.getString("telefono"));
+        salario = new SimpleIntegerProperty(datos.getInt("salario"));
+        concesionarioID = datos.getInt("concesionario_id");
     }
 
     public static Usuario obtener(ResultSet datos) throws SQLException {

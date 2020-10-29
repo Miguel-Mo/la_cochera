@@ -6,6 +6,7 @@ import Cochera.models.Usuario.Usuario;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
@@ -23,6 +24,8 @@ public class ControladorLogin {
     private Button login;
     @FXML
     private BorderPane parent;
+    @FXML
+    private Label error;
 
     private double xOffset = 0;
     private double yOffset = 0;
@@ -37,7 +40,7 @@ public class ControladorLogin {
     //Inicializa después de que se haya cargado el fxml (la vista) a la que está conectado
     private void initialize() {
 
-        // Eventos que nos controlan que la pantalla se mueva aunque hayamops eliminado la ventana del SO
+        // Eventos que nos controlan que la pantalla se mueva aunque hayamos eliminado la ventana del SO
 
         parent.setOnMousePressed(event -> {
             xOffset = event.getSceneX();
@@ -57,11 +60,13 @@ public class ControladorLogin {
 
     @FXML
     public void login(ActionEvent event) {
+        resetError();
+
         if (checkCampos()) {
             Usuario usuario = new UsuarioDAO().login(campoUsuario.getText(), campoPass.getText());
 
             if (usuario == null) {
-                System.out.println("Fallo en contraseña o usuario");
+                mostrarError("Fallo al ecribir el usuario o la contraseña");
             } else {
                 app.setUsuario(usuario);
                 System.out.println("Usuario Logueado");
@@ -71,11 +76,21 @@ public class ControladorLogin {
 
     private boolean checkCampos() {
         if (campoUsuario.getText().isEmpty() || campoPass.getText().isEmpty()) {
-            System.out.println("Campos vacíos");
+            mostrarError("No puede haber campos vacíos");
             return false;
         }
 
         return true;
+    }
+
+    private void mostrarError(String mensaje) {
+        error.setText(mensaje);
+        error.setVisible(true);
+    }
+
+    private void resetError() {
+        error.setVisible(false);
+        error.setText("");
     }
 
     @FXML

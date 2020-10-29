@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+
+
+<BorderPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Cochera.controllers.ControladorPanel">
+   <top>
+      <Pane prefHeight="81.0" prefWidth="878.0" BorderPane.alignment="CENTER" />
+   </top>
+   <center>
+      <Pane prefHeight="528.0" prefWidth="878.0" style="-fx-background-color: red;" BorderPane.alignment="CENTER" />
+   </center>
+</BorderPane>

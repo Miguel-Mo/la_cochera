@@ -1,6 +1,7 @@
 package Cochera;
 
 import Cochera.controllers.ControladorLogin;
+import Cochera.controllers.ControladorPanel;
 import Cochera.models.Usuario.Usuario;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -33,6 +34,24 @@ public class Main extends Application {
         // Le damos la referencia del Main al controlador
         ControladorLogin controladorLogin =  login.getController();
         controladorLogin.setMain(this);
+
+        // Mostramos
+        primaryStage.show();
+    }
+
+    public void iniciarPanel() throws IOException {
+        // Cargamos el Layout
+        FXMLLoader panel = new FXMLLoader(getClass().getResource("/Panel.fxml"));
+
+        // Lo colocamos como escena en el Stage
+        primaryStage.setScene(new Scene(panel.load()));
+        primaryStage.setResizable(false);
+        primaryStage.setFullScreen(true);
+        primaryStage.initStyle(StageStyle.UNDECORATED);
+
+        // Le damos la referencia del Main al controlador
+        ControladorPanel controladorPanel = panel.getController();
+        controladorPanel.setMain(this);
 
         // Mostramos
         primaryStage.show();

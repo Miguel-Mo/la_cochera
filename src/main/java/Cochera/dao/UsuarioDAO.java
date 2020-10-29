@@ -11,7 +11,9 @@ public class UsuarioDAO extends AbstractDAO {
     public UsuarioDAO() { }
 
     public Usuario login(String username, String password) {
-        super.openDB();
+        if (!super.openDB()) return null;
+        /* TODO: Averiguar cómo se puede hacer que primero se detecte que hay conexión para todos los métodos y
+        *   evitar ejecutar la consulta, además de enviar mensje de error al usuario. Por el momento booleano al openDB. */
 
         try (PreparedStatement pst = conexion.prepareStatement("SELECT * FROM usuarios WHERE BINARY login = ? AND password = ?")) {
             pst.setString(1, username);

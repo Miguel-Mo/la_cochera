@@ -1,4 +1,4 @@
-package Cochera.DAO;
+package Cochera.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

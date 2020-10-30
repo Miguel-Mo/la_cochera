@@ -1,6 +1,6 @@
 package Cochera.controllers;
 
-import Cochera.DAO.UsuarioDAO;
+import Cochera.dao.UsuarioDAO;
 import Cochera.models.Usuario.Usuario;
 import Cochera.utils.Vistas.VentanaCustom;
 import javafx.event.ActionEvent;

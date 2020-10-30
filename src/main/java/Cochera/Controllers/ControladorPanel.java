@@ -1,4 +1,4 @@
-package Cochera.Controllers;
+package Cochera.controllers;
 
 import Cochera.utils.Vistas.VentanaCustom;
 import javafx.event.ActionEvent;

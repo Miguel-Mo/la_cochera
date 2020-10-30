@@ -14,7 +14,7 @@
 
 <!--TODO: El login todavía no está del todo bien. Mensajes de error pencos-->
 
-<Scene stylesheets="@../css/login.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Cochera.Controllers.ControladorLogin">
+<Scene stylesheets="@../css/login.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Cochera.controllers.ControladorLogin">
    <BorderPane fx:id="parent" prefHeight="510.0" prefWidth="842.0">
       <right>
          <AnchorPane prefHeight="512.0" prefWidth="497.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">

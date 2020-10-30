@@ -1,7 +1,7 @@
 package Cochera;
 
-import Cochera.Controllers.ControladorLogin;
-import Cochera.Controllers.ControladorPanel;
+import Cochera.controllers.ControladorLogin;
+import Cochera.controllers.ControladorPanel;
 import Cochera.models.Usuario.Usuario;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

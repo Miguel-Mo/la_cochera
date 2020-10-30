@@ -1,0 +1,17 @@
+
+.top-bar {
+    -fx-border-color: transparent transparent #e2dfdf transparent;
+    -fx-border-width: 5;
+}
+
+.close {
+    -fx-background-image : url('../icons/close-icon.png');
+    -fx-background-color: transparent;
+    -fx-background-size: 100%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+
+.close:hover {
+    -fx-cursor: hand;
+}

@@ -10,34 +10,38 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.Region?>
+<?import javafx.scene.Scene?>
 
 <!--TODO: El login todavía no está del todo bien. Mensajes de error pencos-->
-<BorderPane fx:id="parent" prefHeight="510.0" prefWidth="842.0" stylesheets="@../css/login.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Cochera.controllers.ControladorLogin">
-   <right>
-      <AnchorPane prefHeight="512.0" prefWidth="497.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
-         <children>
-            <Button fx:id="close" cancelButton="true" focusTraversable="false" layoutX="440.0" layoutY="28.0" mnemonicParsing="false" onAction="#cerrar" prefHeight="14.0" prefWidth="26.0" styleClass="close" />
-            <Pane layoutX="107.0" layoutY="76.0" prefHeight="393.0" prefWidth="294.0">
-               <children>
-                  <Region layoutX="103.0" layoutY="49.0" prefHeight="95.0" prefWidth="89.0" styleClass="user-icon" />
-                  <TextField fx:id="campoUsuario" layoutX="37.0" layoutY="195.0" prefHeight="28.0" prefWidth="221.0" promptText="Usuario" />
-                  <PasswordField fx:id="campoPass" layoutX="37.0" layoutY="245.0" prefHeight="28.0" prefWidth="221.0" promptText="Contraseña" />
-                  <Button fx:id="login" layoutX="168.0" layoutY="298.0" mnemonicParsing="false" onAction="#login" prefHeight="20.0" prefWidth="90.0" styleClass="login" text="LogIn" />
-                  <Label fx:id="error" layoutX="37.0" layoutY="348.0" prefHeight="19.0" prefWidth="250.0" style="visibility: false;" styleClass="error" text="Error" textAlignment="CENTER" textFill="#d63e3eeb" />
-               </children>
-            </Pane>
-         </children>
-      </AnchorPane>
-   </right>
-   <center>
-      <AnchorPane prefHeight="510.0" prefWidth="341.0" style="-fx-background-color: linear-gradient(to bottom, #E9C46A, #E76F51);" BorderPane.alignment="CENTER">
-         <children>
-            <ImageView fitHeight="304.0" fitWidth="284.0" layoutX="31.0" layoutY="103.0" pickOnBounds="true">
-               <image>
-                  <Image url="@logo.png" />
-               </image>
-            </ImageView>
-         </children>
-      </AnchorPane>
-   </center>
-</BorderPane>
+
+<Scene stylesheets="@../css/login.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Cochera.Controllers.ControladorLogin">
+   <BorderPane fx:id="parent" prefHeight="510.0" prefWidth="842.0">
+      <right>
+         <AnchorPane prefHeight="512.0" prefWidth="497.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+            <children>
+               <Button fx:id="close" cancelButton="true" focusTraversable="false" layoutX="440.0" layoutY="28.0" mnemonicParsing="false" onAction="#cerrar" prefHeight="14.0" prefWidth="26.0" styleClass="close" />
+               <Pane layoutX="107.0" layoutY="76.0" prefHeight="393.0" prefWidth="294.0">
+                  <children>
+                     <Region layoutX="103.0" layoutY="49.0" prefHeight="95.0" prefWidth="89.0" styleClass="user-icon" />
+                     <TextField fx:id="campoUsuario" layoutX="37.0" layoutY="195.0" prefHeight="28.0" prefWidth="221.0" promptText="Usuario" />
+                     <PasswordField fx:id="campoPass" layoutX="37.0" layoutY="245.0" prefHeight="28.0" prefWidth="221.0" promptText="Contraseña" />
+                     <Button fx:id="login" layoutX="168.0" layoutY="298.0" mnemonicParsing="false" onAction="#login" prefHeight="20.0" prefWidth="90.0" styleClass="login" text="LogIn" />
+                     <Label fx:id="error" layoutX="37.0" layoutY="348.0" prefHeight="19.0" prefWidth="250.0" style="visibility: false;" styleClass="error" text="Error" textAlignment="CENTER" textFill="#d63e3eeb" />
+                  </children>
+               </Pane>
+            </children>
+         </AnchorPane>
+      </right>
+      <center>
+         <AnchorPane prefHeight="510.0" prefWidth="341.0" style="-fx-background-color: linear-gradient(to bottom, #E9C46A, #E76F51);" BorderPane.alignment="CENTER">
+            <children>
+               <ImageView fitHeight="304.0" fitWidth="284.0" layoutX="31.0" layoutY="103.0" pickOnBounds="true">
+                  <image>
+                     <Image url="@logo.png" />
+                  </image>
+               </ImageView>
+            </children>
+         </AnchorPane>
+      </center>
+   </BorderPane>
+</Scene>

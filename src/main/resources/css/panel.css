@@ -1,4 +1,8 @@
 
+.imagen-marca {
+    -fx-background-image : url('../icons/close-icon.png');
+}
+
 .close {
     -fx-background-image : url('../icons/close-icon.png');
     -fx-background-color: transparent;

@@ -13,6 +13,7 @@ public abstract class VentanaCustom {
 
     @FXML
     protected Parent parent;
+
     @FXML
     protected Button close;
 

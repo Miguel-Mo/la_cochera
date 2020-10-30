@@ -1,6 +1,7 @@
 
-.imagen-marca {
-    -fx-background-image : url('../icons/close-icon.png');
+.top-bar {
+    -fx-border-color: transparent transparent #e2dfdf transparent;
+    -fx-border-width: 5;
 }
 
 .close {

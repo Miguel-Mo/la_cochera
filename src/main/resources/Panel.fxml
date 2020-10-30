@@ -14,12 +14,12 @@
          <Pane fx:id="root" BorderPane.alignment="CENTER" />
       </center>
       <top>
-         <BorderPane prefHeight="85.0" prefWidth="878.0" BorderPane.alignment="CENTER" styleClass="top-bar">
+         <BorderPane prefHeight="85.0" prefWidth="878.0" styleClass="top-bar" BorderPane.alignment="CENTER">
             <right>
-               <Button fx:id="close" styleClass="close" mnemonicParsing="false" onAction="#cerrar" prefHeight="60.0" prefWidth="77.0" BorderPane.alignment="CENTER" />
+               <Button fx:id="close" mnemonicParsing="false" onAction="#cerrar" prefHeight="60.0" prefWidth="77.0" styleClass="close" BorderPane.alignment="CENTER" />
             </right>
             <left>
-               <ImageView fitHeight="72.0" fitWidth="87.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+               <ImageView fitHeight="82.0" fitWidth="97.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
                   <image>
                      <Image url="@icons/astronauta.png" />
                   </image>

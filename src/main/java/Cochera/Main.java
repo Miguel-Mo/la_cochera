@@ -1,11 +1,10 @@
 package Cochera;
 
-import Cochera.controllers.ControladorLogin;
-import Cochera.controllers.ControladorPanel;
+import Cochera.Controllers.ControladorLogin;
+import Cochera.Controllers.ControladorPanel;
 import Cochera.models.Usuario.Usuario;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -17,44 +16,53 @@ public class Main extends Application {
     private Usuario usuario;
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
+        this.primaryStage.setResizable(false);
+        this.primaryStage.initStyle(StageStyle.UNDECORATED);
+
         iniciarLogin();
     }
 
-    public void iniciarLogin() throws IOException {
+    public void cerrarSesion() {
+        usuario = null;
+        iniciarLogin();
+    }
+
+    public void iniciarLogin() {
         // Cargamos el Layout
         FXMLLoader login = new FXMLLoader(getClass().getResource("/Login/login.fxml"));
 
-        // Lo colocamos como escena en el Stage
-        primaryStage.setScene(new Scene(login.load()));
-        primaryStage.setResizable(false);
-        primaryStage.initStyle(StageStyle.UNDECORATED);
+        try {
+            // Lo colocamos como escena en el Stage
+            primaryStage.setScene(login.load());
+            primaryStage.setMaximized(false);
 
-        // Le damos la referencia del Main al controlador
-        ControladorLogin controladorLogin =  login.getController();
-        controladorLogin.setMain(this);
+            // Le damos la referencia del Main al controlador
+            ControladorLogin controladorLogin =  login.getController();
+            controladorLogin.setMain(this);
 
-        // Mostramos
-        primaryStage.show();
+            // Mostramos
+            primaryStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    public void iniciarPanel() throws IOException {
-        // Cargamos el Layout
+    public void iniciarPanel() {
         FXMLLoader panel = new FXMLLoader(getClass().getResource("/Panel.fxml"));
 
-        // Lo colocamos como escena en el Stage
-        primaryStage.setScene(new Scene(panel.load()));
-        primaryStage.setResizable(false);
-        primaryStage.setFullScreen(true);
-        primaryStage.initStyle(StageStyle.UNDECORATED);
+        try {
+            primaryStage.setScene(panel.load());
+            primaryStage.setMaximized(true);
 
-        // Le damos la referencia del Main al controlador
-        ControladorPanel controladorPanel = panel.getController();
-        controladorPanel.setMain(this);
+            ControladorPanel controladorPanel = panel.getController();
+            controladorPanel.setMain(this);
 
-        // Mostramos
-        primaryStage.show();
+            primaryStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void main(String[] args) {

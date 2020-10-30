@@ -1,13 +1,15 @@
-package Cochera.utils.vistas;
+package Cochera.utils.Vistas;
 
 import Cochera.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
-import javafx.stage.Stage;
 
-public class VentanaCustom {
+/**
+ * Para heredar de esta clase es necesario que el al panel padre se le coloque como id 'parent'
+ */
+public abstract class VentanaCustom {
 
     @FXML
     protected Parent parent;
@@ -43,8 +45,5 @@ public class VentanaCustom {
     }
 
     @FXML
-    public void cerrar(ActionEvent event) {
-        Stage stage = (Stage) close.getScene().getWindow();
-        stage.close();
-    }
+    public abstract void cerrar(ActionEvent event);
 }

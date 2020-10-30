@@ -1,13 +1,14 @@
-package Cochera.controllers;
+package Cochera.Controllers;
 
-import Cochera.dao.UsuarioDAO;
+import Cochera.DAO.UsuarioDAO;
 import Cochera.models.Usuario.Usuario;
-import Cochera.utils.vistas.VentanaCustom;
+import Cochera.utils.Vistas.VentanaCustom;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 
@@ -62,5 +63,11 @@ public class ControladorLogin extends VentanaCustom {
     private void resetError() {
         error.setVisible(false);
         error.setText("");
+    }
+
+    @Override
+    public void cerrar(ActionEvent event) {
+        Stage stage = (Stage) close.getScene().getWindow();
+        stage.close();
     }
 }

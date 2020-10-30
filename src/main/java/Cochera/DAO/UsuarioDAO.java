@@ -1,4 +1,4 @@
-package Cochera.dao;
+package Cochera.DAO;
 
 import Cochera.models.Usuario.Usuario;
 

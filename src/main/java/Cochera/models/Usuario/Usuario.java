@@ -28,11 +28,11 @@ public abstract class Usuario {
         email = new SimpleStringProperty(datos.getString("email"));
         telefono = new SimpleStringProperty(datos.getString("telefono"));
         salario = new SimpleIntegerProperty(datos.getInt("salario"));
-        concesionarioID = datos.getInt("concesionario_id");
+        concesionarioID = datos.getInt("concesionarios_id");
     }
 
     public static Usuario obtener(ResultSet datos) throws SQLException {
-        switch (datos.getString(4)) {
+        switch (datos.getString("tipo")) {
             case VENDEDOR: return new Vendedor(datos);
             case MECANICO: return new Mecanico(datos);
             case JEFE: return new Jefe(datos);

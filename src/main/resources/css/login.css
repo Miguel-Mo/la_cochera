@@ -11,6 +11,8 @@
 .login {
     -fx-background-color: #E76F51;
     -fx-background-radius: 18;
+    -fx-font-size: 14;
+    -fx-text-fill: white;
 }
 
 .login:hover {
@@ -25,4 +27,10 @@
 .text-field:focused, .password-field:focused {
     -fx-faint-focus-color: transparent;
     -fx-focus-color: #E76F51;
+}
+
+.error {
+    -fx-font-size: 13;
+    -fx-text-fill: #be2727;
+    -fx-text-alignment: center;
 }

@@ -1,6 +1,7 @@
 package Cochera;
 
 import Cochera.controllers.ControladorLogin;
+import Cochera.models.Usuario.Usuario;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -12,6 +13,7 @@ import java.io.IOException;
 public class Main extends Application {
 
     private Stage primaryStage;
+    private Usuario usuario;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -42,5 +44,9 @@ public class Main extends Application {
 
     public Stage getPrimaryStage() {
         return primaryStage;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 }

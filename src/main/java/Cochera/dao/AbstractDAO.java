@@ -11,16 +11,20 @@ public abstract class AbstractDAO {
 
     protected Connection conexion;
 
-    public AbstractDAO() {
+    public AbstractDAO() { }
+
+    protected boolean openDB() {
         try {
             conexion = DriverManager.getConnection(URL, Configuracion.USER.dato, Configuracion.PASS.dato);
             System.out.println("Conexion ok");
+            return true;
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("Sin conexión a Internet");
+            return false;
         }
     }
 
-    public void closeDB() {
+    protected void closeDB() {
         try {
             conexion.close();
             System.out.println("Conexion cerrar");

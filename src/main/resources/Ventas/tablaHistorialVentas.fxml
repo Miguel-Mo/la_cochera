@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="500.0" prefWidth="1000.0" stylesheets="@../css/tablaVehiculos.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Ventas.Tabla">
+    <children>
+        <SplitPane dividerPositions="0.26753507014028055" layoutX="-1.0" prefHeight="500.0" prefWidth="1000.0">
+            <items>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="498.0" prefWidth="423.0" />
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                    <children>
+                        <TableView layoutX="-1.0" prefHeight="498.0" prefWidth="768.0">
+                            <columns>
+                                <TableColumn prefWidth="165.60007935762405" text="Coche vendido" />
+                                <TableColumn prefWidth="168.79994201660156" text="Fecha Limite" />
+                                <TableColumn prefWidth="165.60003662109375" text="Cliente" />
+                                <TableColumn prefWidth="107.20001220703125" text="Precio" />
+                                <TableColumn prefWidth="170.39990234375" text="Status" />
+                            </columns>
+                        </TableView>
+                    </children>
+                </AnchorPane>
+            </items>
+        </SplitPane>
+    </children>
+</AnchorPane>

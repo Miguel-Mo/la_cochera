@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="500.0" prefWidth="1000.0" stylesheets="@../css/tablaVehiculos.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Ventas.Tabla">
+    <children>
+        <SplitPane dividerPositions="0.30861723446893785" layoutX="-1.0" prefHeight="500.0" prefWidth="1000.0">
+            <items>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                    </AnchorPane>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                    <children>
+                        <TableView layoutX="-1.0" prefHeight="498.0" prefWidth="768.0">
+                            <columns>
+                                <TableColumn prefWidth="185.59997254610062" text="Cliente" />
+                                <TableColumn prefWidth="178.40003967285156" text="Fecha de Registro" />
+                                <TableColumn prefWidth="180.00006103515625" text="Teléfono" />
+                                <TableColumn prefWidth="149.5999755859375" text="Acciones" />
+                            </columns>
+                        </TableView>
+                    </children>
+                </AnchorPane>
+            </items>
+        </SplitPane>
+    </children>
+</AnchorPane>

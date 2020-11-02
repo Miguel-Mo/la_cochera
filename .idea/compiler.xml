@@ -20,7 +20,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="cochera" target="1.8" />
+      <module name="cochera" target="14" />
     </bytecodeTargetLevel>
   </component>
 </project>

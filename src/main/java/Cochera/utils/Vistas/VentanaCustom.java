@@ -45,6 +45,10 @@ public abstract class VentanaCustom {
         this.app = app;
     }
 
+    /**
+     * El botón de cerrar no tiene por qué apagar la aplicación directamente, por lo que obligamos a que
+     * se deba implementar por cada caso
+     */
     @FXML
     public abstract void cerrar(ActionEvent event);
 }

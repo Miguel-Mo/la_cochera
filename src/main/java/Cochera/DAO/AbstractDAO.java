@@ -5,31 +5,34 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import Cochera.Configuracion;
 
-public abstract class AbstractDAO {
+public abstract class AbstractDAO implements AutoCloseable {
     private static final String URL = "jdbc:mysql://localhost:" + Configuracion.PORT.dato + "/" + Configuracion.DB.dato
             + "?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
 
     protected Connection conexion;
+    protected String tabla;
 
-    public AbstractDAO() { }
-
-    protected boolean openDB() {
-        try {
-            conexion = DriverManager.getConnection(URL, Configuracion.USER.dato, Configuracion.PASS.dato);
-            System.out.println("Conexion ok");
-            return true;
-        } catch (SQLException e) {
-            System.out.println("Sin conexión a Internet");
-            return false;
-        }
+    public AbstractDAO(String tabla) throws SQLException {
+        this.tabla = tabla;
+        openDB();
     }
 
-    protected void closeDB() {
+    private void openDB() throws SQLException {
+        conexion = DriverManager.getConnection(URL, Configuracion.USER.dato, Configuracion.PASS.dato);
+        System.out.println("Conexion ok");
+    }
+
+    @Override
+    public void close() {
         try {
             conexion.close();
             System.out.println("Conexion cerrar");
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public String getTabla() {
+        return tabla;
     }
 }

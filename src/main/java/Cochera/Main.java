@@ -2,13 +2,20 @@ package Cochera;
 
 import Cochera.controllers.ControladorLogin;
 import Cochera.controllers.ControladorPanel;
+import Cochera.dao.VehiculoDAO;
+import Cochera.dao.VehiculoVenderDAO;
 import Cochera.models.Usuario.Usuario;
+import Cochera.models.Vehiculo.Vehiculo;
+import Cochera.models.Vehiculo.VehiculoVender;
 import javafx.application.Application;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.HashMap;
 
 public class Main extends Application {
 
@@ -47,6 +54,34 @@ public class Main extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        try (VehiculoVenderDAO vdao = new VehiculoVenderDAO()) {
+            ObservableList<VehiculoVender> v = vdao.read();
+            v.forEach(System.out::println);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+
+//        try {
+//            HashMap<String, Object> datos = new HashMap<>();
+//
+//            datos.put("tipoID",1);
+//            datos.put("concesionarioID",1);
+//            datos.put("potencia","40-CV");
+//            datos.put("marca","Marca");
+//            datos.put("modelo","Modelo");
+//            datos.put("precio",20000f);
+//
+//            VehiculoVender vv = new VehiculoVender(datos);
+//
+//            try (VehiculoVenderDAO vdao = new VehiculoVenderDAO()) {
+//                vdao.create(vv);
+//            }
+//
+//        } catch (SQLException throwables) {
+//            throwables.printStackTrace();
+//        }
     }
 
     public void iniciarPanel() {

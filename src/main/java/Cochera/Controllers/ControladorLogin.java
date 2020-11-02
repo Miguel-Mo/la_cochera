@@ -14,6 +14,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class ControladorLogin extends VentanaCustom {
 
@@ -43,18 +44,25 @@ public class ControladorLogin extends VentanaCustom {
         });
     }
 
+
     @FXML
-    public void login(ActionEvent event) throws IOException {
+    public void login(ActionEvent event) {
         resetError();
 
         if (checkCampos()) {
-            Usuario usuario = new UsuarioDAO().login(campoUsuario.getText(), campoPass.getText());
+            try (UsuarioDAO dao = new UsuarioDAO()) {
 
-            if (usuario == null) {
-                mostrarError("Fallo al ecribir el usuario o la contraseña");
-            } else {
-                app.setUsuario(usuario);
-                app.iniciarPanel();
+                Usuario usuario = dao.login(campoUsuario.getText(), campoPass.getText());
+
+                if (usuario == null) {
+                    mostrarError("Fallo al ecribir el usuario o la contraseña");
+                } else {
+                    app.setUsuario(usuario);
+                    app.iniciarPanel();
+                }
+
+            } catch (SQLException throwables) {
+                mostrarError("Fallo al conectar a la Base de Datos");
             }
         }
     }

@@ -5,10 +5,8 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.FloatProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.ObservableList;
-
 import java.lang.reflect.Field;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -22,8 +20,8 @@ public abstract class CrudDAO<T> extends AbstractDAO {
     protected String[] campos;
     protected HashMap<String, String> relaciones;
 
-    public CrudDAO(String tabla) throws SQLException {
-        super(tabla);
+    public CrudDAO() throws SQLException {
+        super();
         relaciones = new HashMap<>();
     }
 
@@ -32,7 +30,20 @@ public abstract class CrudDAO<T> extends AbstractDAO {
     protected abstract boolean update(T objeto);
     protected abstract boolean delete(T objeto);
 
-    protected int executeInsert(PreparedStatement ps, T objeto) throws Exception {
+    protected PreparedStatement executeInsert(PreparedStatement ps, T objeto) throws Exception {
+        setPropertiesInStatement(ps, objeto);
+        ps.executeUpdate();
+        return ps;
+    }
+
+    protected boolean executeUpdate(PreparedStatement ps, T objeto, int id) throws Exception {
+        int parameterIndex = setPropertiesInStatement(ps, objeto);
+        ps.setInt(parameterIndex, id);
+        int rows = ps.executeUpdate();
+        return rows > 0;
+    }
+
+    private int setPropertiesInStatement(PreparedStatement ps,T objeto) throws Exception {
         int parameterIndex = 1;
 
         for (String campo : campos) {
@@ -58,11 +69,10 @@ public abstract class CrudDAO<T> extends AbstractDAO {
             parameterIndex++;
         }
 
-        ps.executeUpdate();
-        ResultSet rs = ps.getGeneratedKeys();
-        rs.next();
-        return rs.getInt(1);
+        return parameterIndex;
     }
+
+    /* ZONA DE QUERIES */
 
     protected String queryInsert() {
         StringBuilder sb = new StringBuilder("INSERT INTO ");
@@ -95,7 +105,18 @@ public abstract class CrudDAO<T> extends AbstractDAO {
         return querySelect(tipoJoin, tablaJoin) + " WHERE " + tabla + ".id=?" ;
     }
 
-    protected String queryDelete(int id) {
-        return "DELETE FROM " + tabla + " WHERE id = " + id;
+    protected String queryUpdate() {
+        StringBuilder sb = new StringBuilder("UPDATE " + tabla + " SET ");
+
+        for(String campo : campos) {
+            sb.append(campo).append("=?,");
+        }
+        sb.deleteCharAt(sb.length()-1).append(" WHERE ").append(tabla).append(".id=?");
+
+        return sb.toString();
+    }
+
+    protected String queryDelete() {
+        return "DELETE FROM " + tabla + " WHERE id = ?";
     }
 }

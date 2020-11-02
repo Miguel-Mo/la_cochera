@@ -55,14 +55,27 @@ public class Main extends Application {
             e.printStackTrace();
         }
 
-        try (VehiculoVenderDAO vdao = new VehiculoVenderDAO()) {
-            ObservableList<VehiculoVender> v = vdao.read();
-            v.forEach(System.out::println);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
+        /* ZONA DE PRUEBAS */
 
 
+//      LECTURA
+//        try (VehiculoVenderDAO vdao = new VehiculoVenderDAO()) {
+//            ObservableList<VehiculoVender> v = vdao.read();
+//            v.forEach(System.out::println);
+//        } catch (SQLException throwables) {
+//            throwables.printStackTrace();
+//        }
+
+        // ELIMINAR
+//        try (VehiculoVenderDAO vdao = new VehiculoVenderDAO()) {
+//            VehiculoVender v = vdao.read(30);
+//            vdao.delete(v);
+//        } catch (SQLException throwables) {
+//            throwables.printStackTrace();
+//        }
+
+
+        // CREACION
 //        try {
 //            HashMap<String, Object> datos = new HashMap<>();
 //
@@ -79,6 +92,16 @@ public class Main extends Application {
 //                vdao.create(vv);
 //            }
 //
+//        } catch (SQLException throwables) {
+//            throwables.printStackTrace();
+//        }
+
+        // ACTUALIZAR
+//        try (VehiculoVenderDAO vdao = new VehiculoVenderDAO()) {
+//            VehiculoVender v = vdao.read(31);
+//            v.setSegundaMano(true);
+//            v.setPotencia("45-CV");
+//            vdao.update(v);
 //        } catch (SQLException throwables) {
 //            throwables.printStackTrace();
 //        }

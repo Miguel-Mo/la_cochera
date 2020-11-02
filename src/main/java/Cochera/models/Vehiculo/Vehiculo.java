@@ -16,7 +16,7 @@ public abstract class Vehiculo {
 
 
     protected int vehiculoID, tipoID, concesionarioID;
-    public StringProperty potencia, marca, modelo;
+    protected StringProperty potencia, marca, modelo;
     protected Timestamp fechaRegistro;
 
     public Vehiculo() {  }

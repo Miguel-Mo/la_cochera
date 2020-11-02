@@ -8,8 +8,11 @@ import java.sql.SQLException;
 
 public class UsuarioDAO extends AbstractDAO {
 
+    public static final String TABLA = "usuarios";
+
     public UsuarioDAO() throws SQLException {
-        super("usuarios");
+        super();
+        tabla = TABLA;
     }
 
     public Usuario login(String username, String password) {

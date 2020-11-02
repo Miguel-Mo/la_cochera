@@ -12,8 +12,7 @@ public abstract class AbstractDAO implements AutoCloseable {
     protected Connection conexion;
     protected String tabla;
 
-    public AbstractDAO(String tabla) throws SQLException {
-        this.tabla = tabla;
+    public AbstractDAO() throws SQLException {
         openDB();
     }
 
@@ -30,9 +29,5 @@ public abstract class AbstractDAO implements AutoCloseable {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
-
-    public String getTabla() {
-        return tabla;
     }
 }

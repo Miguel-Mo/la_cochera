@@ -13,9 +13,7 @@ import java.io.IOException;
 public class ControladorPanel extends VentanaCustom {
 
     @FXML
-    private Pane navegacion;
-    @FXML
-    private Pane tablas;
+    private Pane root;
 
     //Constructor. Es lo primero que se realiza. Antes que initialize()
     public ControladorPanel() { }
@@ -28,14 +26,8 @@ public class ControladorPanel extends VentanaCustom {
 
     private void iniciarVentas() {
         try {
-            FXMLLoader tablaVehiculos = new FXMLLoader(getClass().getResource("/Ventas/tablaVehiculos.fxml"));
-            FXMLLoader navegacionFX = new FXMLLoader(getClass().getResource("/Ventas/Navegacion.fxml"));
-
-            navegacion.getChildren().add(navegacionFX.load());
-            tablas.getChildren().add(tablaVehiculos.load());
-
-
-
+            FXMLLoader ventas = new FXMLLoader(getClass().getResource("/Ventas/ventas.fxml"));
+            root.getChildren().add(ventas.load());
         } catch (IOException e) {
             e.printStackTrace();
         }

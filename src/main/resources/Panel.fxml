@@ -11,14 +11,7 @@
    <!-- El prefHeight y prefWidth tiene que coincidir con las mismas que el fx:id="parent" de login.fxml -->
    <BorderPane fx:id="parent" prefHeight="510.0" prefWidth="842.0">
       <center>
-         <BorderPane>
-            <top>
-               <Pane fx:id="navegacion" BorderPane.alignment="CENTER" />
-            </top>
-            <center>
-               <Pane fx:id="tablas" BorderPane.alignment="CENTER" />
-            </center>
-         </BorderPane>
+         <Pane fx:id="root" BorderPane.alignment="CENTER" />
       </center>
       <top>
          <BorderPane prefHeight="85.0" prefWidth="878.0" styleClass="top-bar" BorderPane.alignment="CENTER">

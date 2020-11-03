@@ -1,16 +1,14 @@
 package Cochera.controllers.Ventas;
 
 import Cochera.controllers.ControladorPanel;
-import Cochera.dao.VehiculoVenderDAO;
-import Cochera.models.Vehiculo.VehiculoVender;
-import javafx.collections.ObservableList;
+import javafx.beans.property.StringProperty;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
-
 import java.io.IOException;
-import java.sql.SQLException;
 
 public class ControladorVentas {
 
@@ -33,5 +31,26 @@ public class ControladorVentas {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    private void cambiarVentana(ActionEvent e) throws IOException {
+        String ruta;
+        switch (((Node)e.getSource()).getId()) {
+            case "vehiculos" :
+                ruta = "/Ventas/tablaVehiculos.fxml";
+                break;
+            case "clientes":
+                ruta = "/Ventas/tablaClientes.fxml";
+                break;
+            case "propuestas":
+                ruta = "/Ventas/tablaHistorialVentas.fxml";
+                break;
+            default:
+                throw new IllegalStateException("No existe: " + ((Node) e.getSource()).getId());
+        }
+
+        FXMLLoader tablaFX = new FXMLLoader(getClass().getResource(ruta));
+        contenido.getChildren().add(tablaFX.load());
     }
 }

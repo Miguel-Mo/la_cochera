@@ -2,8 +2,10 @@ package Cochera;
 
 import Cochera.controllers.ControladorLogin;
 import Cochera.controllers.ControladorPanel;
+import Cochera.dao.ClienteDAO;
 import Cochera.dao.VehiculoDAO;
 import Cochera.dao.VehiculoVenderDAO;
+import Cochera.models.Clientes.Cliente;
 import Cochera.models.Usuario.Usuario;
 import Cochera.models.Vehiculo.Vehiculo;
 import Cochera.models.Vehiculo.VehiculoVender;
@@ -59,16 +61,16 @@ public class Main extends Application {
 
 
 //      LECTURA
-//        try (VehiculoVenderDAO vdao = new VehiculoVenderDAO()) {
-//            ObservableList<VehiculoVender> v = vdao.read();
-//            v.forEach(System.out::println);
-//        } catch (SQLException throwables) {
-//            throwables.printStackTrace();
-//        }
+        try (ClienteDAO vdao = new ClienteDAO()) {
+            ObservableList<Cliente> v = vdao.read();
+            v.forEach(System.out::println);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
 
         // ELIMINAR
-//        try (VehiculoVenderDAO vdao = new VehiculoVenderDAO()) {
-//            VehiculoVender v = vdao.read(30);
+//        try (ClienteDAO vdao = new ClienteDAO()) {
+//            Cliente v = vdao.read(52);
 //            vdao.delete(v);
 //        } catch (SQLException throwables) {
 //            throwables.printStackTrace();
@@ -79,16 +81,17 @@ public class Main extends Application {
 //        try {
 //            HashMap<String, Object> datos = new HashMap<>();
 //
-//            datos.put("tipoID",1);
-//            datos.put("concesionarioID",1);
-//            datos.put("potencia","40-CV");
-//            datos.put("marca","Marca");
-//            datos.put("modelo","Modelo");
-//            datos.put("precio",20000f);
+//            datos.put("id",1);
+//            datos.put("nombre","Pepito");
+//            datos.put("apellidos","Profesor");
+//            datos.put("telefono","600600666");
+//            datos.put("dni","80180180S");
+//            datos.put("email","JoseProfe@prueba.com");
+//            datos.put("presupuesto",20000f);
 //
-//            VehiculoVender vv = new VehiculoVender(datos);
+//            Cliente vv = new Cliente(datos);
 //
-//            try (VehiculoVenderDAO vdao = new VehiculoVenderDAO()) {
+//            try (ClienteDAO vdao = new ClienteDAO()) {
 //                vdao.create(vv);
 //            }
 //
@@ -97,10 +100,10 @@ public class Main extends Application {
 //        }
 
         // ACTUALIZAR
-//        try (VehiculoVenderDAO vdao = new VehiculoVenderDAO()) {
-//            VehiculoVender v = vdao.read(31);
-//            v.setSegundaMano(true);
-//            v.setPotencia("45-CV");
+//        try (ClienteDAO vdao = new ClienteDAO()) {
+//            Cliente v = vdao.read(53);
+//            v.setEmail("estoesunaPRUEBA@gmail.com");
+//            v.setPresupuesto(6000);
 //            vdao.update(v);
 //        } catch (SQLException throwables) {
 //            throwables.printStackTrace();

@@ -6,7 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class VehiculoDAO extends CrudDAO<Vehiculo> {
+public class VehiculoDAO extends Cochera.dao.CrudDAO<Vehiculo> {
 
     public static final String TABLA = "vehiculos";
 

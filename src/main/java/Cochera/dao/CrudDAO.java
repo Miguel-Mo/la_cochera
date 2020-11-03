@@ -60,10 +60,10 @@ public abstract class CrudDAO<T> extends AbstractDAO {
             String tipo = Arrays.stream(estado.getClass().getName().split("\\.")).reduce((primero, ultimo) -> ultimo).get();
 
             switch (tipo) {
-                case "SimpleStringProperty" -> ps.setString(parameterIndex,((StringProperty) estado).getValue());
-                case "SimpleBooleanProperty" -> ps.setBoolean(parameterIndex,((BooleanProperty) estado).getValue());
-                case "SimpleFloatProperty" -> ps.setFloat(parameterIndex,((FloatProperty) estado).getValue());
-                case "Integer" -> ps.setInt(parameterIndex,((Integer) estado));
+                case "SimpleStringProperty": ps.setString(parameterIndex,((StringProperty) estado).getValue());break;
+                case "SimpleBooleanProperty": ps.setBoolean(parameterIndex,((BooleanProperty) estado).getValue());break;
+                case "SimpleFloatProperty": ps.setFloat(parameterIndex,((FloatProperty) estado).getValue());break;
+                case "Integer": ps.setInt(parameterIndex,((Integer) estado));break;
             }
 
             parameterIndex++;

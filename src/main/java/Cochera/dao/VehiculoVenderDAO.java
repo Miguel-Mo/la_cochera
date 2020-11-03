@@ -8,12 +8,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class VehiculoVenderDAO extends CrudDAO<VehiculoVender> {
+public class VehiculoVenderDAO extends AbstractDAO<VehiculoVender> implements Crud<VehiculoVender> {
 
     public static final String TABLA = "vehiculos_vender";
 
     public VehiculoVenderDAO() throws SQLException {
-        super();
         tabla = TABLA;
         campos = new String[]{"precio","vendido","segundaMano","tiempoUsado","imagen","vehiculoID"};
         relaciones.put("vehiculos", "vehiculoID");

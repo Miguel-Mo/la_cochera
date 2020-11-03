@@ -6,17 +6,16 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class VehiculoDAO extends Cochera.dao.CrudDAO<Vehiculo> {
+public class VehiculoDAO extends AbstractDAO<Vehiculo> {
 
     public static final String TABLA = "vehiculos";
 
     public VehiculoDAO() throws SQLException {
-        super();
         tabla = TABLA;
         campos = new String[]{"potencia","marca","modelo","tipoID","concesionarioID"};
     }
 
-    @Override
+
     public int create(Vehiculo vehiculo) {
         try (PreparedStatement pst = conexion.prepareStatement(super.queryInsert(), PreparedStatement.RETURN_GENERATED_KEYS)) {
 
@@ -32,12 +31,6 @@ public class VehiculoDAO extends Cochera.dao.CrudDAO<Vehiculo> {
         }
     }
 
-    @Override
-    public ObservableList<Vehiculo> read() {
-        return null;
-    }
-
-    @Override
     public boolean update(Vehiculo vehiculo) {
         try (PreparedStatement pst = conexion.prepareStatement(super.queryUpdate())) {
 
@@ -51,7 +44,6 @@ public class VehiculoDAO extends Cochera.dao.CrudDAO<Vehiculo> {
         }
     }
 
-    @Override
     public boolean delete(Vehiculo vehiculo) {
         try (PreparedStatement pst = conexion.prepareStatement(super.queryDelete())) {
 

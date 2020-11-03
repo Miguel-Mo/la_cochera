@@ -6,12 +6,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class UsuarioDAO extends AbstractDAO {
+public class UsuarioDAO extends AbstractDAO<Usuario> {
 
     public static final String TABLA = "usuarios";
 
     public UsuarioDAO() throws SQLException {
-        super();
         tabla = TABLA;
     }
 

@@ -1,8 +1,6 @@
 package Cochera.dao;
 
 import Cochera.models.Clientes.Cliente;
-import Cochera.models.Vehiculo.Vehiculo;
-import Cochera.models.Vehiculo.VehiculoVender;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -10,12 +8,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class ClienteDAO extends Cochera.dao.CrudDAO<Cliente> {
+public class ClienteDAO extends AbstractDAO<Cliente> implements Crud<Cliente> {
 
     public static final String TABLA = "cliente";
 
     public ClienteDAO() throws SQLException {
-        super();
         tabla = TABLA;
         campos = new String[]{"id","nombre","apellidos","telefono","dni","email","presupuesto"};
     }

@@ -1,11 +1,9 @@
 package Cochera.controllers.Ventas;
 
 import Cochera.controllers.ControladorPanel;
-import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import java.io.IOException;
@@ -36,7 +34,9 @@ public class ControladorVentas {
     @FXML
     private void cambiarVentana(ActionEvent e) throws IOException {
         String ruta;
-        switch (((Node)e.getSource()).getId()) {
+        Button botonPulsado = (Button) e.getSource();
+
+        switch (botonPulsado.getId()) {
             case "vehiculos" :
                 ruta = "/Ventas/tablaVehiculos.fxml";
                 break;
@@ -47,7 +47,7 @@ public class ControladorVentas {
                 ruta = "/Ventas/tablaHistorialVentas.fxml";
                 break;
             default:
-                throw new IllegalStateException("No existe: " + ((Node) e.getSource()).getId());
+                throw new IllegalStateException("No existe acción para: " + botonPulsado.getId());
         }
 
         FXMLLoader tablaFX = new FXMLLoader(getClass().getResource(ruta));

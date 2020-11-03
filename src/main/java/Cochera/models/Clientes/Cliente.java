@@ -1,7 +1,6 @@
 package Cochera.models.Clientes;
 
 import Cochera.dao.ClienteDAO;
-import Cochera.dao.VehiculoVenderDAO;
 import javafx.beans.property.*;
 
 import java.sql.ResultSet;

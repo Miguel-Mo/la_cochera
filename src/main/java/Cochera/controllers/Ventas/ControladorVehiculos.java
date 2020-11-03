@@ -3,13 +3,9 @@ package Cochera.controllers.Ventas;
 import Cochera.dao.VehiculoVenderDAO;
 import Cochera.models.Vehiculo.VehiculoVender;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.util.Callback;
 
 import java.sql.SQLException;
 

@@ -2,22 +2,13 @@ package Cochera;
 
 import Cochera.controllers.ControladorLogin;
 import Cochera.controllers.ControladorPanel;
-import Cochera.dao.ClienteDAO;
-import Cochera.dao.VehiculoDAO;
-import Cochera.dao.VehiculoVenderDAO;
-import Cochera.models.Clientes.Cliente;
 import Cochera.models.Usuario.Usuario;
-import Cochera.models.Vehiculo.Vehiculo;
-import Cochera.models.Vehiculo.VehiculoVender;
 import javafx.application.Application;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
-import java.sql.SQLException;
-import java.util.HashMap;
 
 public class Main extends Application {
 

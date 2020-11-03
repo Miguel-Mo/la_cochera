@@ -1,9 +1,6 @@
 package Cochera.models.Vehiculo;
 
 import Cochera.dao.VehiculoDAO;
-import Cochera.dao.VehiculoVenderDAO;
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleFloatProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 

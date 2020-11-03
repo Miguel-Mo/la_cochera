@@ -137,4 +137,8 @@ public class Main extends Application {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
 }

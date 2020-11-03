@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="500.0" prefWidth="1000.0" stylesheets="@../css/tablaVehiculos.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Ventas.Tabla">
+<AnchorPane prefHeight="500.0" prefWidth="1000.0" stylesheets="@../css/tablaVehiculos.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Cochera.controllers.Ventas.ControladorVehiculos">
    <children>
       <SplitPane dividerPositions="0.30861723446893785" layoutX="-1.0" prefHeight="500.0" prefWidth="1000.0">
         <items>
@@ -30,13 +30,14 @@
                </children></AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                  <TableView layoutX="-1.0" prefHeight="498.0" prefWidth="768.0">
+                  <TableView layoutX="-1.0" prefHeight="498.0" prefWidth="768.0" fx:id="tabla">
                     <columns>
-                        <TableColumn prefWidth="165.60007935762405" text="Imagen" />
-                        <TableColumn prefWidth="168.79994201660156" text="Modelo" />
-                        <TableColumn prefWidth="165.60003662109375" text="Fecha Entrada" />
-                        <TableColumn prefWidth="107.20001220703125" text="Status" />
-                        <TableColumn prefWidth="170.39990234375" text="Acciones" />
+                        <TableColumn text="Imagen" fx:id="imagen"/>
+                        <TableColumn text="Modelo" fx:id="modelo"/>
+                        <TableColumn text="Fecha Entrada" fx:id="fechaEntrada"/>
+                        <TableColumn text="Tipo" fx:id="tipo"/>
+                        <TableColumn text="Status" fx:id="concesionario"/>
+                        <TableColumn text="Acciones" fx:id="acciones"/>
                     </columns>
                   </TableView>
                </children>

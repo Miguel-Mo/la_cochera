@@ -1,5 +1,6 @@
 package Cochera.controllers;
 
+import Cochera.models.Usuario.Usuario;
 import Cochera.utils.Vistas.VentanaCustom;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -20,10 +21,30 @@ public class ControladorPanel extends VentanaCustom {
     //Inicializa después de que se haya cargado el fxml (la vista) a la que está conectado
     private void initialize() {
         super.moverVentana();
-        iniciarVehiculos();
+
+        switch (app.getUsuario().getTipo()) {
+            case Usuario.VENDEDOR:
+                iniciarVentas();
+                break;
+            case Usuario.MECANICO:
+                iniciarMecanico();
+                break;
+        }
     }
 
-    private void iniciarVehiculos() {
+    private void iniciarVentas() {
+        try {
+            FXMLLoader tablaVehiculos = new FXMLLoader(getClass().getResource("/Ventas/tablaVehiculos.fxml"));
+            root.getChildren().add(tablaVehiculos.load());
+
+            tablaVehiculos.getController();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void iniciarMecanico() {
         try {
             FXMLLoader tablaVehiculos = new FXMLLoader(getClass().getResource("/Ventas/tablaVehiculos.fxml"));
             root.getChildren().add(tablaVehiculos.load());

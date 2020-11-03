@@ -39,4 +39,116 @@ public abstract class Usuario {
             default: return null;
         }
     }
+
+    public String getLogin() {
+        return login.get();
+    }
+
+    public StringProperty loginProperty() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login.set(login);
+    }
+
+    public String getTipo() {
+        return tipo.get();
+    }
+
+    public StringProperty tipoProperty() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo.set(tipo);
+    }
+
+    public String getNombre() {
+        return nombre.get();
+    }
+
+    public StringProperty nombreProperty() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre.set(nombre);
+    }
+
+    public String getApellidos() {
+        return apellidos.get();
+    }
+
+    public StringProperty apellidosProperty() {
+        return apellidos;
+    }
+
+    public void setApellidos(String apellidos) {
+        this.apellidos.set(apellidos);
+    }
+
+    public String getDni() {
+        return dni.get();
+    }
+
+    public StringProperty dniProperty() {
+        return dni;
+    }
+
+    public void setDni(String dni) {
+        this.dni.set(dni);
+    }
+
+    public String getEmail() {
+        return email.get();
+    }
+
+    public StringProperty emailProperty() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email.set(email);
+    }
+
+    public String getTelefono() {
+        return telefono.get();
+    }
+
+    public StringProperty telefonoProperty() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono.set(telefono);
+    }
+
+    public int getSalario() {
+        return salario.get();
+    }
+
+    public IntegerProperty salarioProperty() {
+        return salario;
+    }
+
+    public void setSalario(int salario) {
+        this.salario.set(salario);
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getConcesionarioID() {
+        return concesionarioID;
+    }
+
+    public void setConcesionarioID(int concesionarioID) {
+        this.concesionarioID = concesionarioID;
+    }
 }

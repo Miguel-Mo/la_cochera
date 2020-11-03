@@ -1,5 +1,6 @@
 package Cochera.controllers;
 
+import Cochera.Main;
 import Cochera.models.Usuario.Usuario;
 import Cochera.utils.Vistas.VentanaCustom;
 import javafx.event.ActionEvent;
@@ -21,15 +22,6 @@ public class ControladorPanel extends VentanaCustom {
     //Inicializa después de que se haya cargado el fxml (la vista) a la que está conectado
     private void initialize() {
         super.moverVentana();
-
-        switch (app.getUsuario().getTipo()) {
-            case Usuario.VENDEDOR:
-                iniciarVentas();
-                break;
-            case Usuario.MECANICO:
-                iniciarMecanico();
-                break;
-        }
     }
 
     private void iniciarVentas() {
@@ -53,6 +45,20 @@ public class ControladorPanel extends VentanaCustom {
 
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void setMain(Main app) {
+        super.setMain(app);
+
+        switch (app.getUsuario().getTipo()) {
+            case Usuario.VENDEDOR:
+                iniciarVentas();
+                break;
+            case Usuario.MECANICO:
+                iniciarMecanico();
+                break;
         }
     }
 

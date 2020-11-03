@@ -61,12 +61,12 @@ public class Main extends Application {
 
 
 //      LECTURA
-        try (ClienteDAO vdao = new ClienteDAO()) {
-            ObservableList<Cliente> v = vdao.read();
-            v.forEach(System.out::println);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
+//        try (ClienteDAO vdao = new ClienteDAO()) {
+//            ObservableList<Cliente> v = vdao.read();
+//            v.forEach(System.out::println);
+//        } catch (SQLException throwables) {
+//            throwables.printStackTrace();
+//        }
 
         // ELIMINAR
 //        try (ClienteDAO vdao = new ClienteDAO()) {

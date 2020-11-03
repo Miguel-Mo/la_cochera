@@ -28,9 +28,9 @@
 
 /* formato para las celdas del tableview*/
 .table-cell {
-    -fx-border-color: gray -transparent gray transparent;
-    //-fx-font: 13px "Segoe UI";
-    //-fx-border-insets: 0;
+    -fx-border-color: gray transparent gray transparent;
+    /*-fx-font: 13px "Segoe UI";
+    //-fx-border-insets: 0;*/
 }
 
 /*divider transparente*/

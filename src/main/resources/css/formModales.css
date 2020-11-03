@@ -1,0 +1,12 @@
+
+.button{
+    -fx-text-fill: BLACK;
+    -fx-alignment: center;
+    -fx-background-color: orange;
+}
+
+#btnCancelar{
+-fx-background-color: gray;
+}
+
+

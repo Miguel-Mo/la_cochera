@@ -28,7 +28,7 @@ public abstract class Usuario {
         email = new SimpleStringProperty(datos.getString("email"));
         telefono = new SimpleStringProperty(datos.getString("telefono"));
         salario = new SimpleIntegerProperty(datos.getInt("salario"));
-        concesionarioID = datos.getInt("concesionarios_id");
+        concesionarioID = datos.getInt("concesionarioID");
     }
 
     public static Usuario obtener(ResultSet datos) throws SQLException {

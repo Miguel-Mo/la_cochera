@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.paint.Color;
 
 import java.sql.SQLException;
 import java.util.prefs.Preferences;
@@ -43,17 +44,29 @@ public class ControladorVehiculos {
             tabla.setItems(vehiculos);
 
             imagen.setCellValueFactory(dato -> dato.getValue().imagenProperty());
+
+
+
             modelo.setCellValueFactory(dato -> dato.getValue().modeloProperty());
             fechaEntrada.setCellValueFactory(dato -> dato.getValue().fechaRegistroProperty());
             tipo.setCellValueFactory(dato -> dato.getValue().getTipoVehiculo().descripcionProperty());
-            concesionario.setCellValueFactory(dato -> dato.getValue().concesionarioIDProperty().asObject());
 
+            concesionario.setCellValueFactory(dato -> dato.getValue().concesionarioIDProperty().asObject());
             concesionario.setCellFactory(column -> new TableCell<>() {
                 @Override
                 protected void updateItem(Integer item, boolean empty) {
                     super.updateItem(item, empty);
-                    setText(empty ? null : item.equals(Integer.valueOf(concesionarioID))
-                            ? "Concesionario Actual" : "Otro Concesionario");
+
+                    if (empty) return;
+
+                    // Si el concesionarioID del vehiculo coincide con el del usuario logueado es que son el mismo
+                    if (item.equals(Integer.valueOf(concesionarioID))) {
+                        setText("Concesionario Actual");
+                        setTextFill(Color.valueOf("#3CC13B"));
+                    } else { // si no, es que son concesionarios diferentes
+                        setText("Otro Concesionario");
+                        setTextFill(Color.valueOf("#F3BD32"));
+                    }
                 }
             });
 

@@ -9,6 +9,15 @@
 }
 
 
+#busqueda_pane{
+    -fx-background-color:  F0F0F0;
+}
+
+#pane_botones{
+-fx-background-color:  white;
+}
+
+
 /* hacer transparente el fondo de los titulos*/
 .table-view .column-header-background {
     -fx-background-color: white;
@@ -38,7 +47,7 @@
 /*divider transparente*/
 .split-pane:horizontal > .split-pane-divider {
     -fx-border-color: transparent  transparent ;
-    -fx-background-color: transparent;
+    -fx-background-color:  F0F0F0;
 }
 
 /*busqueda transparente*/

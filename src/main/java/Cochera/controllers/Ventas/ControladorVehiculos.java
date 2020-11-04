@@ -36,9 +36,8 @@ public class ControladorVehiculos {
             ObservableList<VehiculoVender> vehiculos = dao.read();
             tabla.setItems(vehiculos);
 
-            imagen.setCellValueFactory(dato -> dato.getValue().modeloProperty());
+            imagen.setCellValueFactory(dato -> dato.getValue().imagenProperty());
             modelo.setCellValueFactory(dato -> dato.getValue().modeloProperty());
-            concesionario.setCellValueFactory(dato -> dato.getValue().modeloProperty());
             
         } catch (SQLException throwables) {
             throwables.printStackTrace();

@@ -28,6 +28,7 @@ public abstract class AbstractDAO<T> implements AutoCloseable {
 
     public AbstractDAO() throws SQLException {
         openDB();
+        relaciones = new HashMap<>();
     }
 
     private void openDB() throws SQLException {

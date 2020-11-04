@@ -9,6 +9,8 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
+import java.util.prefs.BackingStoreException;
+import java.util.prefs.Preferences;
 
 public class Main extends Application {
 
@@ -21,11 +23,6 @@ public class Main extends Application {
         this.primaryStage.setResizable(false);
         this.primaryStage.initStyle(StageStyle.UNDECORATED);
 
-        iniciarLogin();
-    }
-
-    public void cerrarSesion() {
-        usuario = null;
         iniciarLogin();
     }
 
@@ -127,6 +124,20 @@ public class Main extends Application {
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+        Preferences usuarioActivo = Preferences.userRoot();
+        usuarioActivo.put("concesionarioID", String.valueOf(usuario.getId()));
+        usuarioActivo.put("tipo",usuario.getTipo());
+    }
+
+    public void cerrarSesion()  {
+        try {
+            Preferences usuarioActivo = Preferences.userRoot();
+            usuarioActivo.clear();
+        } catch (BackingStoreException e) {
+            e.printStackTrace();
+        }
+        usuario = null;
+        iniciarLogin();
     }
 
     public Usuario getUsuario() {

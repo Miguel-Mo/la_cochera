@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="500.0" prefWidth="1000.0" stylesheets="@../css/tablaVehiculos.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Cochera.controllers.Ventas.ControladorVehiculos">
+
+<AnchorPane prefHeight="539.0" prefWidth="1700.0" stylesheets="@../css/tablaVehiculos.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Cochera.controllers.Ventas.ControladorVehiculos">
    <children>
-      <SplitPane dividerPositions="0.30861723446893785" layoutX="-1.0" prefHeight="500.0" prefWidth="1000.0">
+      <SplitPane dividerPositions="0.1313" layoutX="-1.0" prefHeight="539.0" prefWidth="1800.0">
         <items>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+          <AnchorPane id="busqueda_pane" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
                   <Label layoutX="26.0" prefHeight="27.0" prefWidth="100.0" text="BUSQUEDA">
                      <font>
@@ -24,18 +26,25 @@
                   <Button id="bFiltrar" fx:id="bFiltrar" layoutX="30.0" layoutY="237.0" mnemonicParsing="false" onAction="#filtrar" prefHeight="26.0" prefWidth="149.0" text="Filtrar" />
                   <Button id="bLimpiar" fx:id="bLimpiar" layoutX="30.0" layoutY="272.0" mnemonicParsing="false" onAction="#limpiar" prefHeight="26.0" prefWidth="149.0" text="Limpiar" />
                </children></AnchorPane>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="498.0" prefWidth="1046.0" style="-fx-background-color: white;">
                <children>
-                  <TableView fx:id="tabla" layoutX="-1.0" prefHeight="498.0" prefWidth="768.0">
+
+                  <TableView fx:id="tabla" layoutX="197.0" layoutY="45.0" prefHeight="493.0" prefWidth="1016.0">
                     <columns>
-                        <TableColumn fx:id="imagen" text="Imagen" />
-                        <TableColumn fx:id="modelo" text="Modelo" />
-                        <TableColumn fx:id="fechaEntrada" text="Fecha Entrada" />
-                        <TableColumn fx:id="tipo" text="Tipo" />
-                        <TableColumn fx:id="concesionario" text="Status" />
-                        <TableColumn fx:id="acciones" text="Acciones" />
+                        <TableColumn fx:id="imagen" prefWidth="201.59996032714844" text="Imagen" />
+                        <TableColumn fx:id="modelo" prefWidth="148.0" text="Modelo" />
+                        <TableColumn fx:id="fechaEntrada" prefWidth="192.7999267578125" text="Fecha Entrada" />
+                        <TableColumn fx:id="tipo" prefWidth="145.5999755859375" text="Tipo" />
+                        <TableColumn fx:id="concesionario" prefWidth="149.59991455078125" text="Status" />
+                        <TableColumn fx:id="acciones" prefWidth="180.0" text="Acciones" />
+
                     </columns>
                   </TableView>
+                  <Pane layoutX="349.0" layoutY="-1.0" prefHeight="30.0" prefWidth="860.0">
+                     <children>
+                        <Button layoutX="575.0" layoutY="1.0" mnemonicParsing="false" text="Registrar Nuevo Clientes" />
+                     </children>
+                  </Pane>
                </children>
             </AnchorPane>
         </items>

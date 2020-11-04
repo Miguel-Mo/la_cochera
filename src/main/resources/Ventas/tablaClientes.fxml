@@ -1,26 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 
-<AnchorPane prefHeight="500.0" prefWidth="1000.0" stylesheets="@../css/tablaVehiculos.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Cochera.controllers.Ventas.ControladorClientes">
+<AnchorPane prefHeight="539.0" prefWidth="1700.0" stylesheets="@../css/tablaVehiculos.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Cochera.controllers.Ventas.ControladorClientes">
     <children>
-        <SplitPane dividerPositions="0.30861723446893785" layoutX="-1.0" prefHeight="500.0" prefWidth="1000.0">
+        <SplitPane dividerPositions="0.1313" layoutX="-1.0" prefHeight="539.0" prefWidth="1800.0">
             <items>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                <AnchorPane id="busqueda_pane" minHeight="0.0" minWidth="0.0" prefHeight="600.0" prefWidth="100.0">
                     </AnchorPane>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="498.0" prefWidth="1046.0" style="-fx-background-color: white;">
                     <children>
-                        <TableView layoutX="-1.0" prefHeight="498.0" prefWidth="768.0">
+                        <TableView layoutX="197.0" layoutY="45.0" prefHeight="493.0" prefWidth="1016.0">
                             <columns>
-                                <TableColumn prefWidth="185.59997254610062" text="Cliente" />
-                                <TableColumn prefWidth="178.40003967285156" text="Fecha de Registro" />
-                                <TableColumn prefWidth="180.00006103515625" text="Teléfono" />
-                                <TableColumn prefWidth="149.5999755859375" text="Acciones" />
+                                <TableColumn prefWidth="296.00001525878906" text="Cliente" />
+                                <TableColumn prefWidth="318.4000244140625" text="Fecha de Registro" />
+                                <TableColumn prefWidth="179.2000732421875" text="Teléfono" />
+                                <TableColumn prefWidth="220.79986572265625" text="Acciones" />
                             </columns>
                         </TableView>
+                  <Pane layoutX="349.0" layoutY="-1.0" prefHeight="30.0" prefWidth="860.0">
+                     <children>
+                        <Button layoutX="575.0" layoutY="1.0" mnemonicParsing="false" text="Enviar Propuesta" />
+                     </children>
+                  </Pane>
                     </children>
                 </AnchorPane>
             </items>

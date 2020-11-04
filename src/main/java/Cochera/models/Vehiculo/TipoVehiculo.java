@@ -17,4 +17,16 @@ public class TipoVehiculo {
         id = rs.getInt(TABLA + ".id");
         descripcion = new SimpleStringProperty(rs.getString(TABLA + ".descripcion"));
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getDescripcion() {
+        return descripcion.get();
+    }
+
+    public StringProperty descripcionProperty() {
+        return descripcion;
+    }
 }

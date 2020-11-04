@@ -1,6 +1,8 @@
 package Cochera.models.Vehiculo;
 
 import Cochera.dao.VehiculoDAO;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
@@ -11,63 +13,38 @@ import java.util.HashMap;
 
 public abstract class Vehiculo {
 
-
-    protected int vehiculoID, tipoID, concesionarioID;
-    protected StringProperty potencia, marca, modelo;
-    protected Timestamp fechaRegistro;
+    protected StringProperty potencia, marca, modelo, fechaRegistro;
+    protected IntegerProperty vehiculoID, concesionarioID;
+    protected TipoVehiculo tipoVehiculo;
 
     public Vehiculo() {  }
 
     public Vehiculo(ResultSet rs) throws SQLException {
         String tabla = VehiculoDAO.TABLA;
 
-        vehiculoID = rs.getInt(tabla + ".id");
-        tipoID = rs.getInt(tabla + ".tipoID");
-        concesionarioID = rs.getInt(tabla + ".concesionarioID");
+        vehiculoID = new SimpleIntegerProperty(rs.getInt(tabla + ".id"));
+        concesionarioID = new SimpleIntegerProperty(rs.getInt(tabla + ".concesionarioID"));
+
+        tipoVehiculo = new TipoVehiculo(rs);
 
         potencia = new SimpleStringProperty(rs.getString(tabla + ".potencia"));
         marca = new SimpleStringProperty(rs.getString(tabla + ".marca"));
         modelo = new SimpleStringProperty(rs.getString(tabla + ".modelo"));
-
-        fechaRegistro = rs.getTimestamp(tabla + ".fechaRegistro");
+        fechaRegistro = new SimpleStringProperty(rs.getTimestamp(tabla + ".fechaRegistro").toLocalDateTime().toString());
     }
 
     public Vehiculo(HashMap<String,Object> datos) {
+        tipoVehiculo = (TipoVehiculo) datos.get("tipo");
 
-        tipoID = (int) datos.get("tipoID");
-        concesionarioID = (int) datos.get("concesionarioID");
+        concesionarioID = new SimpleIntegerProperty((int) datos.get("concesionarioID"));
 
         potencia = new SimpleStringProperty((String) datos.get("potencia"));
         marca = new SimpleStringProperty((String) datos.get("marca"));
         modelo = new SimpleStringProperty((String) datos.get("modelo"));
     }
 
-    public int getVehiculoID() {
-        return vehiculoID;
-    }
-
-    public void setVehiculoID(int vehiculoID) {
-        this.vehiculoID = vehiculoID;
-    }
-
-    public void setFechaRegistro(Timestamp fechaRegistro) {
-        this.fechaRegistro = fechaRegistro;
-    }
-
-    public int getTipoID() {
-        return tipoID;
-    }
-
-    public void setTipoID(int tipoID) {
-        this.tipoID = tipoID;
-    }
-
-    public int getConcesionarioID() {
-        return concesionarioID;
-    }
-
-    public void setConcesionarioID(int concesionarioID) {
-        this.concesionarioID = concesionarioID;
+    public TipoVehiculo getTipoVehiculo() {
+        return tipoVehiculo;
     }
 
     public String getPotencia() {
@@ -106,7 +83,43 @@ public abstract class Vehiculo {
         this.modelo.set(modelo);
     }
 
-    public Timestamp getFechaRegistro() {
+    public String getFechaRegistro() {
+        return fechaRegistro.get();
+    }
+
+    public StringProperty fechaRegistroProperty() {
         return fechaRegistro;
+    }
+
+    public void setFechaRegistro(String fechaRegistro) {
+        this.fechaRegistro.set(fechaRegistro);
+    }
+
+    public int getVehiculoID() {
+        return vehiculoID.get();
+    }
+
+    public IntegerProperty vehiculoIDProperty() {
+        return vehiculoID;
+    }
+
+    public void setVehiculoID(int vehiculoID) {
+        this.vehiculoID.set(vehiculoID);
+    }
+
+    public int getConcesionarioID() {
+        return concesionarioID.get();
+    }
+
+    public IntegerProperty concesionarioIDProperty() {
+        return concesionarioID;
+    }
+
+    public void setConcesionarioID(int concesionarioID) {
+        this.concesionarioID.set(concesionarioID);
+    }
+
+    public void setTipoVehiculo(TipoVehiculo tipoVehiculo) {
+        this.tipoVehiculo = tipoVehiculo;
     }
 }

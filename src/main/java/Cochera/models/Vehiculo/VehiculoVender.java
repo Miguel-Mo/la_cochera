@@ -136,7 +136,6 @@ public class VehiculoVender extends Vehiculo {
                 ", id=" + id +
                 ", vehiculoID=" + vehiculoID +
                 ", vehiculoID=" + vehiculoID +
-                ", tipoID=" + tipoID +
                 ", concesionarioID=" + concesionarioID +
                 ", potencia=" + potencia.getValue() +
                 ", marca=" + marca.getValue() +

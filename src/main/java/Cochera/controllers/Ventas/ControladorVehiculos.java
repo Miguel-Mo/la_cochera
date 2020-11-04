@@ -146,7 +146,7 @@ public class ControladorVehiculos {
     @FXML
     private void filtrar(ActionEvent actionEvent) {
         String modelo = tfModelo.getText().trim();
-// TODO: Filtrar bien por varios campos
+        // TODO: Filtrar bien por varios campos
 
         if (modelo.length() > 0)
             listaFiltrable.setPredicate(vehiculo -> vehiculo.getModelo().toLowerCase().contains(modelo.toLowerCase()));

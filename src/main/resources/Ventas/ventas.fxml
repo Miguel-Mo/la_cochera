@@ -45,6 +45,9 @@
       </AnchorPane>
    </top>
    <center>
-      <Pane fx:id="contenido" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" style="-fx-background-color: F0F0F0;"/>
+      <Pane id="root_pane" fx:id="contenido" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Pane prefHeight="200.0" prefWidth="200.0" />
+         </children></Pane>
    </center>
 </BorderPane>

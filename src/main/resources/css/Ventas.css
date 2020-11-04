@@ -2,3 +2,10 @@
 #toptop{
 -fx-background-color: transparent;
 }
+
+/*TODO BUSCAR DONDE ESTA LA LINEA GRIS QUE IDIVDE LAS DOS TABLAS (QUIZAS CODIGO ADD O QUIZAS AQUI)*/
+#root_pane{
+-fx-background-color: red;
+    -fx-border-color: red;
+    -fx-border-width:4px;
+}

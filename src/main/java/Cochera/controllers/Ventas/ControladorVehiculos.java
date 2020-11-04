@@ -27,6 +27,8 @@ public class ControladorVehiculos {
     @FXML
     private TableColumn<VehiculoVender, Image> imagen;
     @FXML
+    private TableColumn<VehiculoVender, String> marca;
+    @FXML
     private TableColumn<VehiculoVender, String> modelo;
     @FXML
     private TableColumn<VehiculoVender, Date> fechaEntrada;
@@ -69,6 +71,7 @@ public class ControladorVehiculos {
             imagen.setCellValueFactory(dato -> dato.getValue().getImageView().imageProperty());
             imagen.setSortable(false);
 
+            marca.setCellValueFactory(dato -> dato.getValue().marcaProperty());
             modelo.setCellValueFactory(dato -> dato.getValue().modeloProperty());
 
             fechaEntrada.setCellValueFactory(dato -> dato.getValue().fechaRegistroProperty());

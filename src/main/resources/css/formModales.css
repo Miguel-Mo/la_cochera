@@ -10,3 +10,14 @@
 }
 
 
+#root_pane{
+-fx-background-color: white;
+-fx-background-radius: 0 0 18 18;
+    -fx-border-radius: 0 0 18 18;
+}
+
+#pane_cont{
+-fx-background-color:white;
+-fx-background-radius: 0 0 18 18;
+    -fx-border-radius: 0 0 18 18;
+}

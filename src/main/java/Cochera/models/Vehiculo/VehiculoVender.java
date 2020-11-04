@@ -54,7 +54,7 @@ public class VehiculoVender extends Vehiculo {
 
         vendido = datos.containsKey("vendido") ?
                 new SimpleBooleanProperty((Boolean) datos.get("vendido")) : new SimpleBooleanProperty(false);
-        segundaMano = datos.containsKey("vendido") ?
+        segundaMano = datos.containsKey("segundaMano") ?
                 new SimpleBooleanProperty((Boolean) datos.get("segundaMano")) : new SimpleBooleanProperty(false);
 
         tiempoUsado = datos.containsKey("tiempoUsado") ?

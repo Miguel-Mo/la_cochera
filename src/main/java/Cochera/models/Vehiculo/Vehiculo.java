@@ -1,19 +1,18 @@
 package Cochera.models.Vehiculo;
 
 import Cochera.dao.VehiculoDAO;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.HashMap;
 
 public abstract class Vehiculo {
 
-    protected StringProperty potencia, marca, modelo, fechaRegistro;
+    protected StringProperty potencia, marca, modelo;
+    protected ObjectProperty<Date> fechaRegistro;
     protected IntegerProperty vehiculoID, concesionarioID;
     protected TipoVehiculo tipoVehiculo;
 
@@ -30,7 +29,7 @@ public abstract class Vehiculo {
         potencia = new SimpleStringProperty(rs.getString(tabla + ".potencia"));
         marca = new SimpleStringProperty(rs.getString(tabla + ".marca"));
         modelo = new SimpleStringProperty(rs.getString(tabla + ".modelo"));
-        fechaRegistro = new SimpleStringProperty(rs.getTimestamp(tabla + ".fechaRegistro").toLocalDateTime().toString());
+        fechaRegistro = new SimpleObjectProperty<>(new Date(rs.getTimestamp(tabla + ".fechaRegistro").getTime()));
     }
 
     public Vehiculo(HashMap<String,Object> datos) {
@@ -83,15 +82,15 @@ public abstract class Vehiculo {
         this.modelo.set(modelo);
     }
 
-    public String getFechaRegistro() {
+    public Date getFechaRegistro() {
         return fechaRegistro.get();
     }
 
-    public StringProperty fechaRegistroProperty() {
+    public ObjectProperty<Date> fechaRegistroProperty() {
         return fechaRegistro;
     }
 
-    public void setFechaRegistro(String fechaRegistro) {
+    public void setFechaRegistro(Date fechaRegistro) {
         this.fechaRegistro.set(fechaRegistro);
     }
 

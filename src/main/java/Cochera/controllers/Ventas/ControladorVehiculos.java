@@ -14,6 +14,8 @@ import javafx.scene.paint.Color;
 
 import javax.swing.text.html.ImageView;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.function.Predicate;
 import java.util.prefs.Preferences;
 
@@ -27,7 +29,7 @@ public class ControladorVehiculos {
     @FXML
     private TableColumn<VehiculoVender, String> modelo;
     @FXML
-    private TableColumn<VehiculoVender, String> fechaEntrada;
+    private TableColumn<VehiculoVender, Date> fechaEntrada;
     @FXML
     private TableColumn<VehiculoVender, String> tipo;
     @FXML
@@ -53,29 +55,48 @@ public class ControladorVehiculos {
 
         try (VehiculoVenderDAO dao = new VehiculoVenderDAO()) {
             // Envolvemos los datos de la base de datos en una lista que nos permita filtrar
+            // Lo mantenemos en el estado porque es este tipo de lista la que nos permitirá filtrar por campo en el método correcpondiente
             listaFiltrable = new FilteredList<>(dao.read(), mostrarTodoAlInicio -> true);
 
             // Volvemos a envolver para darle la capacidad de ordenarse
             SortedList<VehiculoVender> listaVehiculos = new SortedList<>(listaFiltrable);
             listaVehiculos.comparatorProperty().bind(tabla.comparatorProperty());
 
-
+            // Finalmente seteamos la lista para mostrarla en la tabla
             tabla.setItems(listaVehiculos);
 
             imagen.setCellValueFactory(dato -> dato.getValue().getImageView().imageProperty());
-
+            imagen.setSortable(false);
 
             modelo.setCellValueFactory(dato -> dato.getValue().modeloProperty());
+
             fechaEntrada.setCellValueFactory(dato -> dato.getValue().fechaRegistroProperty());
+            fechaEntrada.setCellFactory(dato -> new TableCell<>() {
+                private final SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+
+                @Override
+                protected void updateItem(Date fecha, boolean empty) {
+                    super.updateItem(fecha, empty);
+
+                    if (empty) { // En caso de que nos filtren tenemos que setear a null para no mostrar
+                        setText(null);
+                        return;
+                    }
+
+                    setText(format.format(fecha));
+                }
+            });
+
+
             tipo.setCellValueFactory(dato -> dato.getValue().getTipoVehiculo().descripcionProperty());
 
             concesionario.setCellValueFactory(dato -> dato.getValue().concesionarioIDProperty().asObject());
-            concesionario.setCellFactory(column -> new TableCell<>() {
+            concesionario.setCellFactory(dato -> new TableCell<>() {
                 @Override
                 protected void updateItem(Integer item, boolean empty) {
                     super.updateItem(item, empty);
 
-                    if (empty) { // En caso de que nos filtren tenemos que setear a null para no mostrar
+                    if (empty) {
                         setText(null);
                         return;
                     }
@@ -93,6 +114,7 @@ public class ControladorVehiculos {
 
 
             acciones.setCellValueFactory(dato -> new ReadOnlyObjectWrapper(dato.getValue()));
+            acciones.setSortable(false);
             acciones.setCellFactory(dato -> new TableCell<>() {
                 private final Button lupa = new Button("Lupa");
 

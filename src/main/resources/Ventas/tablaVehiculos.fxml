@@ -1,13 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <AnchorPane prefHeight="500.0" prefWidth="1000.0" stylesheets="@../css/tablaVehiculos.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Cochera.controllers.Ventas.ControladorVehiculos">
    <children>
@@ -23,21 +18,22 @@
                   <Label layoutX="26.0" layoutY="36.0" text="Modelo:" />
                   <Label layoutX="27.0" layoutY="102.0" text="Fecha Entrada:" />
                   <Label layoutX="27.0" layoutY="168.0" text="Estado:" />
-                  <TextField id="tfModelo" layoutX="29.0" layoutY="54.0" />
-                  <TextField id="tfFecha" layoutX="30.0" layoutY="120.0" />
-                  <TextField id="tfEstado" layoutX="30.0" layoutY="186.0" />
-                  <Button id="bFiltrar" layoutX="30.0" layoutY="237.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="149.0" text="Filtrar" />
+                  <TextField id="tfModelo" fx:id="tfModelo" layoutX="29.0" layoutY="54.0" />
+                  <TextField id="tfFecha" fx:id="tfFecha" layoutX="30.0" layoutY="120.0" />
+                  <TextField id="tfEstado" fx:id="tfEstado" layoutX="30.0" layoutY="186.0" />
+                  <Button id="bFiltrar" fx:id="bFiltrar" layoutX="30.0" layoutY="237.0" mnemonicParsing="false" onAction="#filtrar" prefHeight="26.0" prefWidth="149.0" text="Filtrar" />
+                  <Button id="bLimpiar" fx:id="bLimpiar" layoutX="30.0" layoutY="272.0" mnemonicParsing="false" onAction="#limpiar" prefHeight="26.0" prefWidth="149.0" text="Limpiar" />
                </children></AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                  <TableView layoutX="-1.0" prefHeight="498.0" prefWidth="768.0" fx:id="tabla">
+                  <TableView fx:id="tabla" layoutX="-1.0" prefHeight="498.0" prefWidth="768.0">
                     <columns>
-                        <TableColumn text="Imagen" fx:id="imagen"/>
-                        <TableColumn text="Modelo" fx:id="modelo"/>
-                        <TableColumn text="Fecha Entrada" fx:id="fechaEntrada"/>
-                        <TableColumn text="Tipo" fx:id="tipo"/>
-                        <TableColumn text="Status" fx:id="concesionario"/>
-                        <TableColumn text="Acciones" fx:id="acciones"/>
+                        <TableColumn fx:id="imagen" text="Imagen" />
+                        <TableColumn fx:id="modelo" text="Modelo" />
+                        <TableColumn fx:id="fechaEntrada" text="Fecha Entrada" />
+                        <TableColumn fx:id="tipo" text="Tipo" />
+                        <TableColumn fx:id="concesionario" text="Status" />
+                        <TableColumn fx:id="acciones" text="Acciones" />
                     </columns>
                   </TableView>
                </children>

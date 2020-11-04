@@ -2,9 +2,14 @@ package Cochera.models.Vehiculo;
 
 import Cochera.dao.VehiculoVenderDAO;
 import javafx.beans.property.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Base64;
 import java.util.HashMap;
 
 public class VehiculoVender extends Vehiculo {
@@ -13,6 +18,7 @@ public class VehiculoVender extends Vehiculo {
     private BooleanProperty vendido, segundaMano;
     private StringProperty tiempoUsado, imagen; // En caso de que guardemos la ruta o codificada en base64
     private int id, vehiculoID;
+    private ImageView imageView;
 
     public VehiculoVender() { }
 
@@ -28,6 +34,14 @@ public class VehiculoVender extends Vehiculo {
 
         tiempoUsado = new SimpleStringProperty(rs.getString(tabla + ".tiempoUsado"));
         imagen = new SimpleStringProperty(rs.getString(tabla + ".imagen"));
+
+        try {
+            Image in = new Image(new ByteArrayInputStream(Base64.getDecoder().decode(rs.getString(tabla + ".imagen"))));
+            imageView = new ImageView(in);
+        } catch (Exception e) {
+            imageView = new ImageView();
+        }
+
 
         id = rs.getInt(tabla + ".id");
         vehiculoID = rs.getInt(tabla + ".vehiculoID");
@@ -97,10 +111,6 @@ public class VehiculoVender extends Vehiculo {
         this.tiempoUsado.set(tiempoUsado);
     }
 
-    public String getImagen() {
-        return imagen.get();
-    }
-
     public StringProperty imagenProperty() {
         return imagen;
     }
@@ -123,6 +133,10 @@ public class VehiculoVender extends Vehiculo {
 
     public void setVehiculoID(int vehiculoID) {
         this.vehiculoID = vehiculoID;
+    }
+
+    public ImageView getImageView() {
+        return imageView;
     }
 
     @Override

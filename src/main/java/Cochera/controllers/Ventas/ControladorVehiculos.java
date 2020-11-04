@@ -3,13 +3,17 @@ package Cochera.controllers.Ventas;
 import Cochera.dao.VehiculoVenderDAO;
 import Cochera.models.Vehiculo.VehiculoVender;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
+import javax.swing.text.html.ImageView;
 import java.sql.SQLException;
+import java.util.function.Predicate;
 import java.util.prefs.Preferences;
 
 public class ControladorVehiculos {
@@ -18,7 +22,7 @@ public class ControladorVehiculos {
     @FXML
     private TableView<VehiculoVender> tabla;
     @FXML
-    private TableColumn<VehiculoVender, String> imagen;
+    private TableColumn<VehiculoVender, Image> imagen;
     @FXML
     private TableColumn<VehiculoVender, String> modelo;
     @FXML
@@ -28,7 +32,15 @@ public class ControladorVehiculos {
     @FXML
     private TableColumn<VehiculoVender, Integer> concesionario;
     @FXML
-    private TableColumn acciones;
+    private TableColumn<VehiculoVender, Void> acciones;
+    @FXML
+    private TextField tfModelo;
+    @FXML
+    private TextField tfFecha;
+    @FXML
+    private TextField tfEstado;
+
+    FilteredList<VehiculoVender> listaFiltrable;
 
     public ControladorVehiculos() {
     }
@@ -39,12 +51,17 @@ public class ControladorVehiculos {
         String concesionarioID = usuarioActivo.get("concesionarioID",null);
 
         try (VehiculoVenderDAO dao = new VehiculoVenderDAO()) {
-            ObservableList<VehiculoVender> vehiculos = dao.read();
+            // Envolvemos los datos de la base de datos en una lista que nos permita filtrar
+            listaFiltrable = new FilteredList<>(dao.read(), mostrarTodoAlInicio -> true);
 
-            tabla.setItems(vehiculos);
+            // Volvemos a envolver para darle la capacidad de ordenarse
+            SortedList<VehiculoVender> listaVehiculos = new SortedList<>(listaFiltrable);
+            listaVehiculos.comparatorProperty().bind(tabla.comparatorProperty());
 
-            imagen.setCellValueFactory(dato -> dato.getValue().imagenProperty());
 
+            tabla.setItems(listaVehiculos);
+
+            imagen.setCellValueFactory(dato -> dato.getValue().getImageView().imageProperty());
 
 
             modelo.setCellValueFactory(dato -> dato.getValue().modeloProperty());
@@ -57,7 +74,10 @@ public class ControladorVehiculos {
                 protected void updateItem(Integer item, boolean empty) {
                     super.updateItem(item, empty);
 
-                    if (empty) return;
+                    if (empty) {
+                        setText(null);
+                        return;
+                    }
 
                     // Si el concesionarioID del vehiculo coincide con el del usuario logueado es que son el mismo
                     if (item.equals(Integer.valueOf(concesionarioID))) {
@@ -71,8 +91,25 @@ public class ControladorVehiculos {
             });
 
 
+
+
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+    }
+
+    @FXML
+    private void filtrar(ActionEvent actionEvent) {
+        String modelo = tfModelo.getText().trim();
+
+
+        if (modelo.length() > 0)
+            listaFiltrable.setPredicate(vehiculo -> vehiculo.getModelo().toLowerCase().contains(modelo.toLowerCase()));
+    }
+
+    public void limpiar(ActionEvent actionEvent) {
+        tfModelo.setText("");
+        tabla.getSortOrder().clear();
+        listaFiltrable.setPredicate(mostrar -> true);
     }
 }

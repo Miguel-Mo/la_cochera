@@ -68,16 +68,16 @@ public class Main extends Application {
 //        }
 
 
-        // CREACION
+       // CREACION
 //        try {
 //            HashMap<String, Object> datos = new HashMap<>();
 //
 //            datos.put("id",1);
-//            datos.put("nombre","Pepito");
-//            datos.put("apellidos","Profesor");
+//            datos.put("nombre","Vendedor");
+//            datos.put("apellidos","vendedor");
 //            datos.put("telefono","600600666");
 //            datos.put("dni","80180180S");
-//            datos.put("email","JoseProfe@prueba.com");
+//            datos.put("email","vendedor@prueba.com");
 //            datos.put("presupuesto",20000f);
 //
 //            Cliente vv = new Cliente(datos);

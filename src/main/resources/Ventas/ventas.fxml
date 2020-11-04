@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
 
-
-<BorderPane prefHeight="641.0" prefWidth="866.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Cochera.controllers.Ventas.ControladorVentas">
+<BorderPane id="#root_navegacion" prefHeight="641.0" prefWidth="1564.0" stylesheets="@../css/Ventas.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Cochera.controllers.Ventas.ControladorVentas">
    <top>
-      <AnchorPane prefHeight="200.0" prefWidth="768.0" style="-fx-background-color: transparent;" BorderPane.alignment="CENTER">
+      <AnchorPane id="toptop" prefHeight="200.0" prefWidth="1177.0" BorderPane.alignment="CENTER">
          <children>
-            <Line endX="170.0" endY="-0.1999969482421875" layoutX="533.0" layoutY="99.0" startX="-122.0" startY="-0.1999969482421875" stroke="#e76f51" strokeWidth="5.0" />
-            <Line endX="170.0" endY="-0.1999969482421875" layoutX="188.0" layoutY="100.0" startX="-103.20001220703125" startY="-0.1999969482421875" stroke="#e76f51" strokeWidth="5.0" />
-            <Button fx:id="vehiculos" onAction="#cambiarVentana" layoutX="14.0" layoutY="69.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="52.0">
+            <Line endX="956.0" endY="-1.0000152587890625" layoutX="286.0" layoutY="93.0" startX="272.0" startY="-1.0000076293945312" stroke="#e76f51" strokeWidth="5.0" />
+            <Button fx:id="vehiculos" layoutX="515.0" layoutY="65.0" mnemonicParsing="false" onAction="#cambiarVentana" prefHeight="53.0" prefWidth="52.0">
                <graphic>
                   <ImageView fitHeight="54.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -21,7 +22,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="clientes" onAction="#cambiarVentana" layoutX="350.0" layoutY="66.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="52.0">
+            <Button fx:id="clientes" layoutX="904.0" layoutY="64.0" mnemonicParsing="false" onAction="#cambiarVentana" prefHeight="53.0" prefWidth="52.0">
                <graphic>
                   <ImageView fitHeight="54.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -30,7 +31,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="propuestas" onAction="#cambiarVentana" layoutX="686.0" layoutY="66.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="52.0">
+            <Button fx:id="propuestas" layoutX="1242.0" layoutY="65.0" mnemonicParsing="false" onAction="#cambiarVentana" prefHeight="53.0" prefWidth="52.0">
                <graphic>
                   <ImageView fitHeight="54.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -39,10 +40,17 @@
                   </ImageView>
                </graphic>
             </Button>
+            <Pane layoutX="-1.0" layoutY="-2.0" prefHeight="206.0" prefWidth="240.5" style="-fx-background-color: F0F0F0;">
+               <children>
+                  <Button layoutX="24.0" layoutY="91.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="184.0" text="Registrar Nuevos Clientes" />
+               </children></Pane>
          </children>
       </AnchorPane>
    </top>
    <center>
-      <Pane fx:id="contenido" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+      <Pane fx:id="contenido" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Pane prefHeight="200.0" prefWidth="200.0" />
+         </children></Pane>
    </center>
 </BorderPane>

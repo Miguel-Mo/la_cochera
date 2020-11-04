@@ -9,9 +9,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="500.0" prefWidth="1000.0" stylesheets="@../css/tablaVehiculos.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Cochera.controllers.Ventas.ControladorVehiculos">
+<AnchorPane prefHeight="500.0" prefWidth="1700.0" stylesheets="@../css/tablaVehiculos.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Cochera.controllers.Ventas.ControladorVehiculos">
    <children>
-      <SplitPane dividerPositions="0.30861723446893785" layoutX="-1.0" prefHeight="500.0" prefWidth="1000.0">
+      <SplitPane dividerPositions="0.13125695216907676" layoutX="-1.0" prefHeight="500.0" prefWidth="1800.0">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
@@ -28,16 +28,16 @@
                   <TextField id="tfEstado" layoutX="30.0" layoutY="186.0" />
                   <Button id="bFiltrar" layoutX="30.0" layoutY="237.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="149.0" text="Filtrar" />
                </children></AnchorPane>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="498.0" prefWidth="1046.0" style="-fx-background-color: white;">
                <children>
-                  <TableView layoutX="-1.0" prefHeight="498.0" prefWidth="768.0" fx:id="tabla">
+                  <TableView fx:id="tabla" layoutX="197.0" prefHeight="498.0" prefWidth="1016.0">
                     <columns>
-                        <TableColumn text="Imagen" fx:id="imagen"/>
-                        <TableColumn text="Modelo" fx:id="modelo"/>
-                        <TableColumn text="Fecha Entrada" fx:id="fechaEntrada"/>
-                        <TableColumn text="Tipo" fx:id="tipo"/>
-                        <TableColumn text="Status" fx:id="concesionario"/>
-                        <TableColumn text="Acciones" fx:id="acciones"/>
+                        <TableColumn fx:id="imagen" prefWidth="201.59996032714844" text="Imagen" />
+                        <TableColumn fx:id="modelo" prefWidth="148.0" text="Modelo" />
+                        <TableColumn fx:id="fechaEntrada" prefWidth="192.7999267578125" text="Fecha Entrada" />
+                        <TableColumn fx:id="tipo" prefWidth="145.5999755859375" text="Tipo" />
+                        <TableColumn fx:id="concesionario" prefWidth="149.59991455078125" text="Status" />
+                        <TableColumn fx:id="acciones" prefWidth="180.0" text="Acciones" />
                     </columns>
                   </TableView>
                </children>

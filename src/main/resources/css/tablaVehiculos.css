@@ -2,7 +2,7 @@
 
 /*Estilo de texto*/
 .table-view .column-header-background .label{
-    -fx-background-color: transparent;
+    -fx-background-color: white;
     -fx-text-fill: gray;
     -fx-text-allign:left;
     -fx-alignment: center-left;
@@ -11,11 +11,14 @@
 
 /* hacer transparente el fondo de los titulos*/
 .table-view .column-header-background {
-    -fx-background-color: transparent;
+    -fx-background-color: white;
+    -fx-border-color: white ;
+    -fx-padding: 1em 0.5em 1em 0.3em;
 }
 
 .table-view .column-header {
     -fx-background-color: transparent;
+
 }
 
 .table-view{
@@ -28,9 +31,8 @@
 
 /* formato para las celdas del tableview*/
 .table-cell {
-    -fx-border-color: gray transparent gray transparent;
-    /*-fx-font: 13px "Segoe UI";
-    //-fx-border-insets: 0;*/
+    -fx-border-color: gray transparent white transparent;
+    -fx-padding: 3em 0.5em 3em 0.3em;
 }
 
 /*divider transparente*/
@@ -40,15 +42,66 @@
 }
 
 /*busqueda transparente*/
-#busqueda .label{
- -fx-background-color: transparent;
-}
+
+
 
 .text-field{
-
 -fx-background-color: white;
 -fx-background-insets: 0, 0 0 1 0 ;
-    -fx-background-radius: 0 ;
+-fx-background-radius: 0 ;
+}
+
+
+/*scrollbar*/
+.scroll-bar:horizontal .track,
+.scroll-bar:vertical .track{
+    -fx-background-color :transparent;
+    -fx-border-color :transparent;
+    -fx-background-radius : 0.0em;
+    -fx-border-radius :2.0em;
+}
+
+
+.scroll-bar:horizontal .increment-button ,
+.scroll-bar:horizontal .decrement-button {
+    -fx-background-color :transparent;
+    -fx-background-radius : 0.0em;
+    -fx-padding :0.0 0.0 10.0 0.0;
+
+}
+
+.scroll-bar:vertical .increment-button ,
+.scroll-bar:vertical .decrement-button {
+    -fx-background-color :transparent;
+    -fx-background-radius : 0.0em;
+    -fx-padding :0.0 10.0 0.0 0.0;
+
+}
+
+ .scroll-bar .increment-arrow,
+ .scroll-bar .decrement-arrow{
+    -fx-shape : " ";
+    -fx-padding :0.15em 0.0;
+}
+
+ .scroll-bar:vertical .increment-arrow,
+ .scroll-bar:vertical .decrement-arrow{
+    -fx-shape : " ";
+    -fx-padding :0.0 0.15em;
+}
+
+.scroll-bar:horizontal .thumb,
+.scroll-bar:vertical .thumb {
+    -fx-background-color :derive(black,90.0%);
+    -fx-background-insets : 2.0, 0.0, 0.0;
+    -fx-background-radius : 2.0em;
+}
+
+.scroll-bar:horizontal .thumb:hover,
+.scroll-bar:vertical .thumb:hover {
+    -fx-background-color :derive(#4D4C4F,10.0%);
+    -fx-background-insets : 2.0, 0.0, 0.0;
+    -fx-background-radius : 2.0em;
 }
 
 

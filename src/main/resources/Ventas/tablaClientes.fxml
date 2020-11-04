@@ -5,7 +5,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="500.0" prefWidth="1000.0" stylesheets="@../css/tablaVehiculos.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Cochera.controllers.Ventas.ControladorClientes">
+<AnchorPane prefHeight="500.0" prefWidth="1700.0" stylesheets="@../css/tablaVehiculos.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Cochera.controllers.Ventas.ControladorClientes">
     <children>
         <SplitPane dividerPositions="0.30861723446893785" layoutX="-1.0" prefHeight="500.0" prefWidth="1000.0">
             <items>

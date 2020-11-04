@@ -2,6 +2,7 @@ package Cochera.controllers.Ventas;
 
 import Cochera.dao.VehiculoVenderDAO;
 import Cochera.models.Vehiculo.VehiculoVender;
+import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
@@ -32,7 +33,7 @@ public class ControladorVehiculos {
     @FXML
     private TableColumn<VehiculoVender, Integer> concesionario;
     @FXML
-    private TableColumn<VehiculoVender, Void> acciones;
+    private TableColumn<VehiculoVender, VehiculoVender> acciones;
     @FXML
     private TextField tfModelo;
     @FXML
@@ -74,7 +75,7 @@ public class ControladorVehiculos {
                 protected void updateItem(Integer item, boolean empty) {
                     super.updateItem(item, empty);
 
-                    if (empty) {
+                    if (empty) { // En caso de que nos filtren tenemos que setear a null para no mostrar
                         setText(null);
                         return;
                     }
@@ -90,6 +91,24 @@ public class ControladorVehiculos {
                 }
             });
 
+
+            acciones.setCellValueFactory(dato -> new ReadOnlyObjectWrapper(dato.getValue()));
+            acciones.setCellFactory(dato -> new TableCell<>() {
+                private final Button lupa = new Button("Lupa");
+
+                @Override
+                protected void updateItem(VehiculoVender vehiculo, boolean empty) {
+                    super.updateItem(vehiculo, empty);
+
+                    if (empty) {
+                        setGraphic(null);
+                        return;
+                    }
+
+                    setGraphic(lupa);
+                    lupa.setOnAction(event -> mostrarModal(vehiculo));
+                }
+            });
 
 
 
@@ -111,5 +130,9 @@ public class ControladorVehiculos {
         tfModelo.setText("");
         tabla.getSortOrder().clear();
         listaFiltrable.setPredicate(mostrar -> true);
+    }
+
+    private void mostrarModal(VehiculoVender vehiculo) {
+        System.out.println(vehiculo);
     }
 }

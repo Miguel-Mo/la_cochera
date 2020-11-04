@@ -65,6 +65,7 @@ public class ControladorVehiculos {
             // Finalmente seteamos la lista para mostrarla en la tabla
             tabla.setItems(listaVehiculos);
 
+            // TODO: Mostrar imagenes
             imagen.setCellValueFactory(dato -> dato.getValue().getImageView().imageProperty());
             imagen.setSortable(false);
 
@@ -142,7 +143,7 @@ public class ControladorVehiculos {
     @FXML
     private void filtrar(ActionEvent actionEvent) {
         String modelo = tfModelo.getText().trim();
-
+// TODO: Filtrar bien por varios campos
 
         if (modelo.length() > 0)
             listaFiltrable.setPredicate(vehiculo -> vehiculo.getModelo().toLowerCase().contains(modelo.toLowerCase()));
@@ -156,5 +157,6 @@ public class ControladorVehiculos {
 
     private void mostrarModal(VehiculoVender vehiculo) {
         System.out.println(vehiculo);
+        // TODO : Mostrar modal
     }
 }

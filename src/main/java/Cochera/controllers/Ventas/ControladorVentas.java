@@ -51,6 +51,6 @@ public class ControladorVentas {
         }
 
         FXMLLoader tablaFX = new FXMLLoader(getClass().getResource(ruta));
-        contenido.getChildren().add(tablaFX.load());
+        contenido.getChildren().add(tablaFX.load()); // TODO: ¿Elimina la anterior tabla y la sustituye? Probablemente no. ARREGLAR!
     }
 }

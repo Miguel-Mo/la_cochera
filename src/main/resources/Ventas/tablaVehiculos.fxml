@@ -1,16 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <AnchorPane prefHeight="539.0" prefWidth="1700.0" stylesheets="@../css/tablaVehiculos.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Cochera.controllers.Ventas.ControladorVehiculos">
    <children>
@@ -23,21 +15,21 @@
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Label>
-                  <Label layoutX="29.0" layoutY="94.0" text="Modelo:" />
-                  <Label layoutX="28.0" layoutY="158.0" text="Fecha Entrada:" />
-                  <Label layoutX="27.0" layoutY="378.0" text="Estado:" />
-                  <DatePicker fx:id="fDesde" layoutX="24.0" layoutY="215.0" prefHeight="25.0" prefWidth="150.0" />
-                  <TextField id="tfModelo" fx:id="fModelo" layoutX="29.0" layoutY="111.0" />
-                  <Button id="bFiltrar" fx:id="bFiltrar" layoutX="24.0" layoutY="463.0" mnemonicParsing="false" onAction="#filtrar" prefHeight="26.0" prefWidth="70.0" text="Filtrar" />
-                  <Button id="bLimpiar" fx:id="bLimpiar" layoutX="108.0" layoutY="463.0" mnemonicParsing="false" onAction="#limpiar" prefHeight="26.0" prefWidth="70.0" text="Limpiar" />
-                  <Label layoutX="27.0" layoutY="308.0" prefWidth="24.0" text="Tipo" />
-                  <ComboBox fx:id="fTipo" layoutX="27.0" layoutY="335.0" prefWidth="150.0" />
-                  <Label layoutX="30.0" layoutY="42.0" text="Marca" />
-                  <TextField id="tfModelo" fx:id="fMarca" layoutX="33.0" layoutY="59.0" />
-                  <DatePicker fx:id="fHasta" layoutX="29.0" layoutY="277.0" prefHeight="25.0" prefWidth="146.0" />
-                  <Label layoutX="29.0" layoutY="183.0" text="Desde:" />
-                  <Label layoutX="30.0" layoutY="252.0" text="Hasta:" />
-                  <ComboBox fx:id="fEstado" layoutX="27.0" layoutY="404.0" prefWidth="150.0" />
+                  <Label layoutX="31.0" layoutY="113.0" prefHeight="17.0" prefWidth="70.0" text="Modelo" />
+                  <Label layoutX="32.0" layoutY="186.0" prefHeight="17.0" prefWidth="146.0" text="Fecha Entrada" />
+                  <Label layoutX="33.0" layoutY="368.0" text="Estado:" />
+                  <DatePicker fx:id="fDesde" layoutX="76.0" layoutY="214.0" prefHeight="25.0" prefWidth="108.0" />
+                  <TextField id="tfModelo" fx:id="fModelo" layoutX="30.0" layoutY="136.0" prefHeight="25.0" prefWidth="150.0" />
+                  <Button id="bFiltrar" fx:id="bFiltrar" layoutX="33.0" layoutY="463.0" mnemonicParsing="false" onAction="#filtrar" prefHeight="26.0" prefWidth="70.0" text="Filtrar" />
+                  <Button id="bLimpiar" fx:id="bLimpiar" layoutX="112.0" layoutY="463.0" mnemonicParsing="false" onAction="#limpiar" prefHeight="26.0" prefWidth="70.0" text="Limpiar" />
+                  <Label layoutX="34.0" layoutY="297.0" prefHeight="17.0" prefWidth="27.0" text="Tipo" />
+                  <ComboBox fx:id="fTipo" layoutX="33.0" layoutY="323.0" prefHeight="25.0" prefWidth="150.0" />
+                  <Label layoutX="32.0" layoutY="46.0" text="Marca" />
+                  <TextField id="tfModelo" fx:id="fMarca" layoutX="30.0" layoutY="70.0" prefHeight="25.0" prefWidth="150.0" />
+                  <DatePicker fx:id="fHasta" layoutX="76.0" layoutY="251.0" prefHeight="25.0" prefWidth="108.0" />
+                  <Label layoutX="32.0" layoutY="218.0" text="Desde" />
+                  <Label layoutX="32.0" layoutY="255.0" prefHeight="17.0" prefWidth="34.0" text="Hasta" />
+                  <ComboBox fx:id="fEstado" layoutX="33.0" layoutY="394.0" prefHeight="25.0" prefWidth="150.0" />
                </children></AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="498.0" prefWidth="1046.0" style="-fx-background-color: white;">
                <children>

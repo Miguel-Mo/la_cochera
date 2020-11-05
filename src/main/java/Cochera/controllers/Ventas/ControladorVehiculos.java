@@ -158,7 +158,7 @@ public class ControladorVehiculos {
         });
 
 
-        acciones.setCellValueFactory(dato -> new ReadOnlyObjectWrapper(dato.getValue()));
+        acciones.setCellValueFactory(dato -> new ReadOnlyObjectWrapper<>(dato.getValue()));
         acciones.setSortable(false);
         acciones.setCellFactory(dato -> new TableCell<>() {
             private final Button lupa = new Button("Lupa");

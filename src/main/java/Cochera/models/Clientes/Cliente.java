@@ -29,6 +29,8 @@ public class Cliente {
         dni = new SimpleStringProperty(rs.getString(tabla + ".dni"));
         email = new SimpleStringProperty(rs.getString(tabla + ".email"));
 
+        fechaRegistro = new SimpleObjectProperty<>(new Date(rs.getTimestamp(tabla + ".fechaRegistro").getTime()));
+
         id = rs.getInt(tabla + ".id");
     }
 
@@ -158,8 +160,8 @@ public class Cliente {
                 '}';
     }
 
-    public ObservableValue<String> clienteProperty() {
-        return new SimpleStringProperty(nombre + " "+apellidos);
+    public StringProperty clienteProperty() {
+        return new SimpleStringProperty(nombre.getValue() + " "+apellidos.getValue());
 
     }
 }

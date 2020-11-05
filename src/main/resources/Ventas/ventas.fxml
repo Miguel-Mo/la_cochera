@@ -12,8 +12,8 @@
    <top>
       <AnchorPane id="toptop" prefHeight="200.0" prefWidth="1177.0" BorderPane.alignment="CENTER">
          <children>
-            <Line endX="956.0" endY="-1.0000152587890625" layoutX="286.0" layoutY="93.0" startX="272.0" startY="-1.0000076293945312" stroke="#e76f51" strokeWidth="5.0" />
-            <Button fx:id="vehiculos" layoutX="515.0" layoutY="65.0" mnemonicParsing="false" onAction="#cambiarVentana" prefHeight="53.0" prefWidth="52.0">
+            <Line endX="1111.0" endY="-1.0" layoutX="286.0" layoutY="93.0" startX="135.0" startY="-1.0" stroke="#e76f51" strokeWidth="5.0" />
+            <Button fx:id="vehiculos" layoutX="353.0" layoutY="62.0" mnemonicParsing="false" onAction="#cambiarVentana" prefHeight="53.0" prefWidth="52.0">
                <graphic>
                   <ImageView fitHeight="54.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -22,7 +22,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="clientes" layoutX="904.0" layoutY="64.0" mnemonicParsing="false" onAction="#cambiarVentana" prefHeight="53.0" prefWidth="52.0">
+            <Button fx:id="clientes" layoutX="875.0" layoutY="62.0" mnemonicParsing="false" onAction="#cambiarVentana" prefHeight="53.0" prefWidth="52.0">
                <graphic>
                   <ImageView fitHeight="54.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -31,7 +31,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="propuestas" layoutX="1242.0" layoutY="65.0" mnemonicParsing="false" onAction="#cambiarVentana" prefHeight="53.0" prefWidth="52.0">
+            <Button fx:id="propuestas" layoutX="1377.0" layoutY="62.0" mnemonicParsing="false" onAction="#cambiarVentana" prefHeight="53.0" prefWidth="52.0">
                <graphic>
                   <ImageView fitHeight="54.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true">
                      <image>

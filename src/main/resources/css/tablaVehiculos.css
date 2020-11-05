@@ -6,6 +6,7 @@
     -fx-text-fill: gray;
     -fx-text-allign:left;
     -fx-alignment: center-left;
+     -fx-font-size: 12pt;
 }
 
 
@@ -29,7 +30,6 @@
 
 .table-view .column-header {
     -fx-background-color: transparent;
-
 }
 
 .table-view{
@@ -42,8 +42,10 @@
 
 /* formato para las celdas del tableview*/
 .table-cell {
-    -fx-border-color: gray transparent white transparent;
+-fx-background-color: white;
+    -fx-border-color: #ACACAC transparent white transparent;
     -fx-padding: 3em 0.5em 3em 0.3em;
+     -fx-font-size: 12pt;
 }
 
 /*divider transparente*/
@@ -103,18 +105,24 @@
 
 .scroll-bar:horizontal .thumb,
 .scroll-bar:vertical .thumb {
-    -fx-background-color :derive(black,90.0%);
+    -fx-background-color :derive(#e76f51,20.0%);
     -fx-background-insets : 2.0, 0.0, 0.0;
     -fx-background-radius : 2.0em;
 }
 
 .scroll-bar:horizontal .thumb:hover,
 .scroll-bar:vertical .thumb:hover {
-    -fx-background-color :derive(#4D4C4F,10.0%);
-    -fx-background-insets : 2.0, 0.0, 0.0;
+    -fx-background-insets : 1.0, 0.0, 0.0;
     -fx-background-radius : 2.0em;
 }
 
 
+/*hacer que la barra horizontal no se vea*/
+.table-view .scroll-bar:horizontal .increment-arrow,
+.table-view .scroll-bar:horizontal .decrement-arrow,
+.table-view .scroll-bar:horizontal .increment-button,
+.table-view .scroll-bar:horizontal .decrement-button {
+-fx-padding:0;
+}
 
 

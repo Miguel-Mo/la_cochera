@@ -1,9 +1,7 @@
 package Cochera.controllers.Ventas;
 
 import Cochera.dao.ClienteDAO;
-import Cochera.dao.VehiculoVenderDAO;
 import Cochera.models.Clientes.Cliente;
-import Cochera.models.Vehiculo.VehiculoVender;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
@@ -13,12 +11,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.paint.Color;
 
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.prefs.Preferences;
 
 public class ControladorClientes {
 
@@ -26,7 +22,7 @@ public class ControladorClientes {
     private TableView<Cliente> tabla;
 
     @FXML
-    public TableColumn<Cliente,String> cliente;
+    public TableColumn<Cliente,String> nombreCliente;
     @FXML
     public TableColumn <Cliente,Date>fechaRegistro;
     @FXML
@@ -43,8 +39,6 @@ public class ControladorClientes {
 
     @FXML
     private void initialize() {
-        Preferences usuarioActivo = Preferences.userRoot();
-        String clienteID = usuarioActivo.get("clienteID",null);
 
         try (ClienteDAO dao = new ClienteDAO()) {
             // Envolvemos los datos de la base de datos en una lista que nos permita filtrar
@@ -58,8 +52,10 @@ public class ControladorClientes {
             // Finalmente seteamos la lista para mostrarla en la tabla
             tabla.setItems(listaClientes);
 
-            cliente.setCellValueFactory(dato -> dato.getValue().clienteProperty());
+            nombreCliente.setCellValueFactory(dato -> dato.getValue().clienteProperty());
             telefono.setCellValueFactory(dato -> dato.getValue().telefonoProperty());
+
+
 
             fechaRegistro.setCellValueFactory(dato -> dato.getValue().fechaRegistroProperty());
             fechaRegistro.setCellFactory(dato -> new TableCell<>() {

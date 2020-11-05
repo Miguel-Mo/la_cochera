@@ -15,12 +15,12 @@
                     </AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="498.0" prefWidth="1046.0" style="-fx-background-color: white;">
                     <children>
-                        <TableView layoutX="197.0" layoutY="45.0" prefHeight="493.0" prefWidth="1016.0">
+                        <TableView fx:id="tabla" layoutX="105.0" layoutY="45.0" prefHeight="494.0" prefWidth="1108.0">
                             <columns>
-                                <TableColumn fx:id="cliente" prefWidth="296.00001525878906" text="Cliente" />
-                                <TableColumn fx:id="fechaRegistro" prefWidth="318.4000244140625" text="Fecha de Registro" />
-                                <TableColumn fx:id="telefono" prefWidth="179.2000732421875" text="Teléfono" />
-                                <TableColumn fx:id="acciones" prefWidth="220.79986572265625" text="Acciones" />
+                                <TableColumn fx:id="nombreCliente" prefWidth="468.0000457763672" text="Cliente" />
+                                <TableColumn fx:id="fechaRegistro" prefWidth="262.39996337890625" text="Fecha de Registro" />
+                                <TableColumn fx:id="telefono" prefWidth="188.79986572265625" text="Teléfono" />
+                                <TableColumn fx:id="acciones" prefWidth="187.99993896484375" text="Acciones" />
                             </columns>
                         </TableView>
                   <Pane layoutX="349.0" layoutY="-1.0" prefHeight="30.0" prefWidth="860.0">

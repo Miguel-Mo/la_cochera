@@ -33,15 +33,15 @@
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="498.0" prefWidth="1046.0" style="-fx-background-color: white;">
                <children>
 
-                  <TableView fx:id="tabla" layoutX="197.0" layoutY="45.0" prefHeight="493.0" prefWidth="1016.0">
+                  <TableView fx:id="tabla" layoutX="105.0" layoutY="45.0" prefHeight="494.0" prefWidth="1108.0">
                     <columns>
                         <TableColumn fx:id="imagen" prefWidth="176.7999725341797" text="Imagen" />
                         <TableColumn fx:id="marca" prefWidth="126.4000244140625" text="Marca" />
                         <TableColumn fx:id="modelo" prefWidth="123.20001220703125" text="Modelo" />
                         <TableColumn fx:id="fechaEntrada" prefWidth="192.7999267578125" text="Fecha Entrada" />
                         <TableColumn fx:id="tipo" prefWidth="145.5999755859375" text="Tipo" />
-                        <TableColumn fx:id="concesionario" prefWidth="149.59991455078125" text="Status" />
-                        <TableColumn fx:id="acciones" prefWidth="180.0" text="Acciones" />
+                        <TableColumn fx:id="concesionario" prefWidth="178.0" text="Estado" />
+                        <TableColumn fx:id="acciones" prefWidth="162.0" text="Acciones" />
 
                     </columns>
                   </TableView>

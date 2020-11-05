@@ -138,23 +138,4 @@ public class VehiculoVender extends Vehiculo {
     public ImageView getImageView() {
         return imageView;
     }
-
-    @Override
-    public String toString() {
-        return "VehiculoVender{" +
-                "precio=" + precio.getValue() +
-                ", vendido=" + vendido.getValue() +
-                ", segundaMano=" + segundaMano.getValue() +
-                ", tiempoUsado=" + tiempoUsado.getValue() +
-                ", imagen=" + imagen.getValue() +
-                ", id=" + id +
-                ", vehiculoID=" + vehiculoID +
-                ", vehiculoID=" + vehiculoID +
-                ", concesionarioID=" + concesionarioID +
-                ", potencia=" + potencia.getValue() +
-                ", marca=" + marca.getValue() +
-                ", modelo=" + modelo.getValue() +
-                ", fechaRegistro=" + fechaRegistro.toString() +
-                '}';
-    }
 }

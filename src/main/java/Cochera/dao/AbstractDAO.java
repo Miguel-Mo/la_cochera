@@ -8,8 +8,10 @@ import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.HashMap;
 import Cochera.Configuracion;
+import Cochera.models.Vehiculo.TipoVehiculo;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.FloatProperty;
+import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.StringProperty;
 
 public abstract class AbstractDAO<T> implements AutoCloseable {
@@ -72,13 +74,16 @@ public abstract class AbstractDAO<T> implements AutoCloseable {
 
             variable.setAccessible(true);
             Object estado = variable.get(objeto);
+            String clase = estado.getClass().getCanonicalName();
             String tipo = Arrays.stream(estado.getClass().getName().split("\\.")).reduce((primero, ultimo) -> ultimo).get();
 
             switch (tipo) {
                 case "SimpleStringProperty": ps.setString(parameterIndex,((StringProperty) estado).getValue());break;
                 case "SimpleBooleanProperty": ps.setBoolean(parameterIndex,((BooleanProperty) estado).getValue());break;
                 case "SimpleFloatProperty": ps.setFloat(parameterIndex,((FloatProperty) estado).getValue());break;
+                case "SimpleIntegerProperty": ps.setInt(parameterIndex,((IntegerProperty) estado).getValue());break;
                 case "Integer": ps.setInt(parameterIndex,((Integer) estado));break;
+                case "TipoVehiculo": ps.setInt(parameterIndex,(((TipoVehiculo) estado).getId()));break;
             }
 
             parameterIndex++;

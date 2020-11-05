@@ -100,13 +100,6 @@ public class Concesionario {
 
     @Override
     public String toString() {
-        return "Concesionario{" +
-                "ciudad=" + ciudad +
-                ", provincia=" + provincia +
-                ", direccion=" + direccion +
-                ", cp=" + cp +
-                ", id=" + id +
-                ", TABLA='" + TABLA + '\'' +
-                '}';
+        return ciudad.getValue();
     }
 }

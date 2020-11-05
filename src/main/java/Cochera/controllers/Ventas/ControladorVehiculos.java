@@ -1,12 +1,14 @@
 package Cochera.controllers.Ventas;
 
 import Cochera.controllers.AutoRoot;
+import Cochera.controllers.Ventas.Modales.ControladorMCreacion;
 import Cochera.dao.TipoVehiculosDAO;
 import Cochera.dao.VehiculoVenderDAO;
 import Cochera.models.Vehiculo.TipoVehiculo;
 import Cochera.models.Vehiculo.VehiculoVender;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
@@ -108,6 +110,9 @@ public class ControladorVehiculos implements AutoRoot {
             // Envolvemos los datos de la base de datos en una lista que nos permita filtrar
             // Lo mantenemos en el estado porque es este tipo de lista la que nos permitirá filtrar por campo en el método correcpondiente
             listaFiltrable = new FilteredList<>(dao.read(), mostrarTodoAlInicio -> true);
+
+            // Actualizamos la tabla cuando haya algún cambio. TODO: Por el momento no lo hay porque no va la actualización
+            listaFiltrable.addListener((ListChangeListener.Change<? extends VehiculoVender> change) -> tabla.refresh());
 
             // Volvemos a envolver para darle la capacidad de ordenarse
             SortedList<VehiculoVender> listaVehiculos = new SortedList<>(listaFiltrable);
@@ -263,13 +268,22 @@ public class ControladorVehiculos implements AutoRoot {
         modal.initOwner(root.getScene().getWindow());
         modal.initModality(Modality.WINDOW_MODAL);
         modal.initStyle(StageStyle.UNDECORATED);
-        modal.alwaysOnTopProperty();
         modal.setResizable(false);
 
         root.setStyle("-fx-opacity: 0.4");
-        ((AutoRoot) modalFX.getController()).setRoot(root);
+        ControladorMCreacion controlador = modalFX.getController();
+        controlador.setRoot(root);
+        controlador.setLista(listaFiltrable);
+        controlador.setControladorVehiculos(this);
 
         modal.showAndWait();
+    }
+
+    // TODO : Borrar esto cuando vaya el refresco de la tabla
+    public void cerrarModal(ControladorMCreacion c) {
+        c.getBtnCancelar().fire();
+        iniciarTabla();
+        iniciarColumnas();
     }
 
     private void mostrarModal(VehiculoVender vehiculo) {

@@ -15,6 +15,7 @@ public abstract class Vehiculo {
     protected ObjectProperty<Date> fechaRegistro;
     protected IntegerProperty vehiculoID, concesionarioID;
     protected TipoVehiculo tipoVehiculo;
+    protected int tipoID;
 
     public Vehiculo() {  }
 
@@ -25,6 +26,7 @@ public abstract class Vehiculo {
         concesionarioID = new SimpleIntegerProperty(rs.getInt(tabla + ".concesionarioID"));
 
         tipoVehiculo = new TipoVehiculo(rs);
+        tipoID = tipoVehiculo.getId();
 
         potencia = new SimpleStringProperty(rs.getString(tabla + ".potencia"));
         marca = new SimpleStringProperty(rs.getString(tabla + ".marca"));
@@ -34,6 +36,7 @@ public abstract class Vehiculo {
 
     public Vehiculo(HashMap<String,Object> datos) {
         tipoVehiculo = (TipoVehiculo) datos.get("tipo");
+        tipoID = tipoVehiculo.getId();
 
         concesionarioID = new SimpleIntegerProperty((int) datos.get("concesionarioID"));
 

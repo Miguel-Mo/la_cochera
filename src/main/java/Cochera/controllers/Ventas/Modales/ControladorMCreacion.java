@@ -1,12 +1,14 @@
 package Cochera.controllers.Ventas.Modales;
 
 import Cochera.controllers.AutoRoot;
+import Cochera.controllers.Ventas.ControladorVehiculos;
 import Cochera.dao.ConcesionarioDAO;
 import Cochera.dao.TipoVehiculosDAO;
 import Cochera.dao.VehiculoVenderDAO;
 import Cochera.models.Concesionarios.Concesionario;
 import Cochera.models.Vehiculo.TipoVehiculo;
 import Cochera.models.Vehiculo.VehiculoVender;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
@@ -45,6 +47,9 @@ public class ControladorMCreacion implements AutoRoot {
 
     private Parent root;
 
+    private FilteredList<VehiculoVender> listaFiltrable;
+    private ControladorVehiculos controladorVehiculos;
+
 
     @FXML
     private void initialize() {
@@ -82,15 +87,15 @@ public class ControladorMCreacion implements AutoRoot {
             datos.put("potencia",potencia.getText());
             datos.put("concesionarioID",concesionarioRegistro.getValue().getId());
             datos.put("precio",precio.getText());
-            datos.put("tipoVehiculo",tipoVehiculo.getValue());
+            datos.put("tipo",tipoVehiculo.getValue());
             datos.put("tswitch",tswitch.isSelected());
             if (tswitch.isSelected()) datos.put("tiempoUsado",antiguedad.getText());
 
-            VehiculoVender vehiculo = new VehiculoVender(datos);
+            dao.create(new VehiculoVender(datos));
+//            VehiculoVender vehiculoCreado = dao.read(dao.create(vehiculo));
+//            listaFiltrable.getSource().add(vehiculoCreado);
 
-            dao.create(vehiculo);
-
-            btnCancelar.fire();
+            controladorVehiculos.cerrarModal(this);
 
         } catch (Exception e){
             e.printStackTrace();
@@ -161,5 +166,17 @@ public class ControladorMCreacion implements AutoRoot {
     @Override
     public void setRoot(Parent root) {
         this.root = root;
+    }
+
+    public void setControladorVehiculos(ControladorVehiculos c) {
+        controladorVehiculos = c;
+    }
+
+    public Button getBtnCancelar() {
+        return btnCancelar;
+    }
+
+    public void setLista(FilteredList<VehiculoVender> lista) {
+        listaFiltrable = lista;
     }
 }

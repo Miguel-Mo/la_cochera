@@ -1,6 +1,7 @@
 package Cochera.controllers.Ventas;
 
 import Cochera.dao.VehiculoVenderDAO;
+import Cochera.models.Vehiculo.TipoVehiculo;
 import Cochera.models.Vehiculo.VehiculoVender;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.ObservableList;
@@ -22,6 +23,7 @@ import java.util.prefs.Preferences;
 public class ControladorVehiculos {
 
 
+    // Estado de la tabla
     @FXML
     private TableView<VehiculoVender> tabla;
     @FXML
@@ -38,20 +40,38 @@ public class ControladorVehiculos {
     private TableColumn<VehiculoVender, Integer> concesionario;
     @FXML
     private TableColumn<VehiculoVender, VehiculoVender> acciones;
-    @FXML
-    private TextField tfModelo;
-    @FXML
-    private TextField tfFecha;
-    @FXML
-    private TextField tfEstado;
 
-    FilteredList<VehiculoVender> listaFiltrable;
+    // Estado para el filtro
+    @FXML
+    private DatePicker fDesde;
+    @FXML
+    private DatePicker fHasta;
+    @FXML
+    private TextField fModelo;
+    @FXML
+    private ComboBox<TipoVehiculo> fTipo;
+    @FXML
+    private TextField fMarca;
+    @FXML
+    private ComboBox<String> fEstado;
+
+    // Lista de vehiculos que permite hacer búsquedas para filtrar
+    private FilteredList<VehiculoVender> listaFiltrable;
 
     public ControladorVehiculos() {
     }
 
     @FXML
     private void initialize() {
+        inicarFiltros();
+        inicarTabla();
+    }
+
+    private void inicarFiltros() {
+
+    }
+
+    private void inicarTabla() {
         Preferences usuarioActivo = Preferences.userRoot();
         String concesionarioID = usuarioActivo.get("concesionarioID",null);
 
@@ -145,15 +165,31 @@ public class ControladorVehiculos {
 
     @FXML
     private void filtrar(ActionEvent actionEvent) {
-        String modelo = tfModelo.getText().trim();
-        // TODO: Filtrar bien por varios campos
+        String marca = fMarca.getText().trim();
+        String modelo = fModelo.getText().trim();
+        TipoVehiculo tipo = fTipo.getValue();
 
-        if (modelo.length() > 0)
-            listaFiltrable.setPredicate(vehiculo -> vehiculo.getModelo().toLowerCase().contains(modelo.toLowerCase()));
+
+        listaFiltrable.setPredicate(vehiculo -> {
+            boolean resultado = true;
+
+            if (marca.length() > 0)
+                resultado = vehiculo.getMarca().toLowerCase().contains(marca.toLowerCase());
+            if (modelo.length() > 0)
+                resultado = vehiculo.getModelo().toLowerCase().contains(modelo.toLowerCase());
+
+            return resultado;
+        });
     }
 
     public void limpiar(ActionEvent actionEvent) {
-        tfModelo.setText("");
+        fModelo.setText("");
+        fMarca.setText("");
+        fEstado.setValue("");
+        fTipo.setValue(null);
+        fDesde.setValue(null);
+        fHasta.setValue(null);
+
         tabla.getSortOrder().clear();
         listaFiltrable.setPredicate(mostrar -> true);
     }

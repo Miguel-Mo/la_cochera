@@ -1,9 +1,11 @@
 package Cochera.controllers.Ventas;
 
+import Cochera.dao.TipoVehiculosDAO;
 import Cochera.dao.VehiculoVenderDAO;
 import Cochera.models.Vehiculo.TipoVehiculo;
 import Cochera.models.Vehiculo.VehiculoVender;
-import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.beans.property.*;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
@@ -12,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
+import javafx.util.StringConverter;
 
 import javax.swing.text.html.ImageView;
 import java.sql.SQLException;
@@ -53,10 +56,11 @@ public class ControladorVehiculos {
     @FXML
     private TextField fMarca;
     @FXML
-    private ComboBox<String> fEstado;
+    private ComboBox<EstadoVehiculo> fEstado;
 
     // Lista de vehiculos que permite hacer búsquedas para filtrar
     private FilteredList<VehiculoVender> listaFiltrable;
+    private String concesionarioActual;
 
     public ControladorVehiculos() {
     }
@@ -68,12 +72,18 @@ public class ControladorVehiculos {
     }
 
     private void inicarFiltros() {
+        try(TipoVehiculosDAO dao = new TipoVehiculosDAO()) {
+            fTipo.setItems(dao.read());
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
 
+        fEstado.setItems(EstadoVehiculo.obtenerEstados());
     }
 
     private void inicarTabla() {
         Preferences usuarioActivo = Preferences.userRoot();
-        String concesionarioID = usuarioActivo.get("concesionarioID",null);
+        concesionarioActual = usuarioActivo.get("concesionarioID",null);
 
         try (VehiculoVenderDAO dao = new VehiculoVenderDAO()) {
             // Envolvemos los datos de la base de datos en una lista que nos permita filtrar
@@ -126,7 +136,7 @@ public class ControladorVehiculos {
                     }
 
                     // Si el concesionarioID del vehiculo coincide con el del usuario logueado es que son el mismo
-                    if (item.equals(Integer.valueOf(concesionarioID))) {
+                    if (item.equals(Integer.valueOf(concesionarioActual))) {
                         setText("Concesionario Actual");
                         setTextFill(Color.valueOf("#3CC13B"));
                     } else { // si no, es que son concesionarios diferentes
@@ -162,30 +172,40 @@ public class ControladorVehiculos {
             throwables.printStackTrace();
         }
     }
-
     @FXML
     private void filtrar(ActionEvent actionEvent) {
         String marca = fMarca.getText().trim();
         String modelo = fModelo.getText().trim();
         TipoVehiculo tipo = fTipo.getValue();
+        EstadoVehiculo estado = fEstado.getValue();
 
 
         listaFiltrable.setPredicate(vehiculo -> {
-            boolean resultado = true;
+            boolean resMarca = true;
+            boolean resModelo = true;
+            boolean resTipo = true;
+            boolean resEstado = true;
+            boolean resFecha = true;
+
 
             if (marca.length() > 0)
-                resultado = vehiculo.getMarca().toLowerCase().contains(marca.toLowerCase());
+                resMarca = vehiculo.getMarca().toLowerCase().contains(marca.toLowerCase());
             if (modelo.length() > 0)
-                resultado = vehiculo.getModelo().toLowerCase().contains(modelo.toLowerCase());
+                resModelo = vehiculo.getModelo().toLowerCase().contains(modelo.toLowerCase());
+            if (tipo != null)
+                resTipo = vehiculo.getTipoVehiculo().getDescripcion().equals(tipo.getDescripcion());
+            if (estado != null)
+                resEstado = estado.isEnConcesionario() == (vehiculo.getConcesionarioID() == Integer.parseInt(concesionarioActual));
 
-            return resultado;
+
+            return resMarca && resModelo && resTipo && resEstado && resFecha;
         });
     }
 
     public void limpiar(ActionEvent actionEvent) {
         fModelo.setText("");
         fMarca.setText("");
-        fEstado.setValue("");
+        fEstado.setValue(null);
         fTipo.setValue(null);
         fDesde.setValue(null);
         fHasta.setValue(null);
@@ -197,5 +217,33 @@ public class ControladorVehiculos {
     private void mostrarModal(VehiculoVender vehiculo) {
         System.out.println(vehiculo);
         // TODO : Mostrar modal
+    }
+}
+
+class EstadoVehiculo {
+    private StringProperty texto;
+    private BooleanProperty enConcesionario;
+
+    public EstadoVehiculo(String texto, boolean enConcesionario) {
+        this.texto = new SimpleStringProperty(texto);
+        this.enConcesionario = new SimpleBooleanProperty(enConcesionario);
+    }
+
+    public static ObservableList<EstadoVehiculo> obtenerEstados() {
+        ObservableList<EstadoVehiculo> lista = FXCollections.observableArrayList();
+
+        lista.add(new EstadoVehiculo("Mismo Concesionario", true));
+        lista.add(new EstadoVehiculo("Distinto Concesionario", false));
+
+        return lista;
+    }
+
+    public boolean isEnConcesionario() {
+        return enConcesionario.get();
+    }
+
+    @Override
+    public String toString() {
+        return texto.getValue();
     }
 }

@@ -29,4 +29,9 @@ public class TipoVehiculo {
     public StringProperty descripcionProperty() {
         return descripcion;
     }
+
+    @Override
+    public String toString() {
+        return descripcion.getValue();
+    }
 }

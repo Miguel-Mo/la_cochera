@@ -2,11 +2,18 @@
 .button{
     -fx-text-fill: BLACK;
     -fx-alignment: center;
-    -fx-background-color: orange;
+    -fx-background-color: #E76F51;
+}
+
+.button:hover{
+    -fx-border-color: transparent;
+    -fx-background-radius: 5em;
+    -fx-border-radius: 5em;
+    -fx-background-size: 90%;
 }
 
 #btnCancelar{
--fx-background-color: gray;
+-fx-background-color: #ACACAC;
 }
 
 
@@ -14,12 +21,12 @@
     -fx-background-color: white;
     -fx-background-radius: 18 18 18 18;
     -fx-border-radius: 18 18 18 18;
-    -fx-border-color: #818181;
-    -fx-border-width: 4
+    -fx-border-color: #ACACAC;
+    -fx-border-width: 5;
 }
 
 #pane_cont{
 -fx-background-color:white;
--fx-background-radius: 0 0 18 18;
-    -fx-border-radius: 0 0 18 18;
+-fx-background-radius: 18 18 18 18;
+    -fx-border-radius: 18 18 18 18;
 }

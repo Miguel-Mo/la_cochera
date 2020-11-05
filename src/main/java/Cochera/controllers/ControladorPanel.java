@@ -6,8 +6,10 @@ import Cochera.utils.Vistas.VentanaCustom;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.layout.Pane;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.util.prefs.Preferences;
 
@@ -40,6 +42,7 @@ public class ControladorPanel extends VentanaCustom {
         try {
             FXMLLoader ventas = new FXMLLoader(getClass().getResource("/Ventas/ventas.fxml"));
             root.getChildren().add(ventas.load());
+            ((ControladorVentas) ventas.getController()).setRoot(parent);
         } catch (IOException e) {
             e.printStackTrace();
         }

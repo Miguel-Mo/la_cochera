@@ -1,5 +1,6 @@
 package Cochera.controllers.Ventas;
 
+import Cochera.controllers.AutoRoot;
 import Cochera.dao.ClienteDAO;
 import Cochera.models.Clientes.Cliente;
 import javafx.beans.property.ReadOnlyObjectWrapper;
@@ -7,6 +8,7 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -16,7 +18,9 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class ControladorClientes {
+public class ControladorClientes implements AutoRoot {
+
+    private Parent root;
 
     @FXML
     private TableView<Cliente> tabla;
@@ -114,5 +118,10 @@ public class ControladorClientes {
     private void mostrarModal(Cliente cliente) {
         System.out.println(cliente);
         // TODO : Mostrar modal
+    }
+
+    @Override
+    public void setRoot(Parent root) {
+        this.root = root;
     }
 }

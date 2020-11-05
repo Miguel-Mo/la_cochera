@@ -1,5 +1,6 @@
 package Cochera.controllers.Ventas.Modales;
 
+import Cochera.controllers.AutoRoot;
 import Cochera.dao.ConcesionarioDAO;
 import Cochera.dao.TipoVehiculosDAO;
 import Cochera.dao.VehiculoVenderDAO;
@@ -8,13 +9,15 @@ import Cochera.models.Vehiculo.TipoVehiculo;
 import Cochera.models.Vehiculo.VehiculoVender;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 import org.controlsfx.control.ToggleSwitch;
 
 import java.sql.SQLException;
 import java.util.HashMap;
 
-public class ControladorMCreacion {
+public class ControladorMCreacion implements AutoRoot {
 
     @FXML
     private TextField marcaVehiculo;
@@ -37,18 +40,19 @@ public class ControladorMCreacion {
     @FXML
     private ToggleSwitch tswitch;
 
-
+    private Parent root;
 
 
     @FXML
-    private void initialize(){
-        try(TipoVehiculosDAO dao=new TipoVehiculosDAO()){
+    private void initialize() {
+
+        try(TipoVehiculosDAO dao=new TipoVehiculosDAO()) {
             tipoVehiculo.setItems(dao.read());
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        try(ConcesionarioDAO daoR=new ConcesionarioDAO()){
+        try(ConcesionarioDAO daoR=new ConcesionarioDAO()) {
             concesionarioRegistro.setItems(daoR.read());
         } catch (SQLException e) {
             e.printStackTrace();
@@ -59,6 +63,9 @@ public class ControladorMCreacion {
 
     @FXML
     public void guardar(ActionEvent actionEvent){
+
+        if (!checkCampos()) return;
+
         try(VehiculoVenderDAO dao = new VehiculoVenderDAO()){
 
             HashMap<String,Object> datos=new HashMap<>();
@@ -72,17 +79,57 @@ public class ControladorMCreacion {
             datos.put("tipoVehiculo",tipoVehiculo.getValue());
             datos.put("tswitch",tswitch.isSelected());
 
-            VehiculoVender vehiculo =new VehiculoVender(datos);
+            VehiculoVender vehiculo = new VehiculoVender(datos);
 
             dao.create(vehiculo);
 
-        }catch (SQLException throwables){
+        } catch (Exception ignored){ }
+    }
 
+    private boolean checkCampos() {
+        boolean resultado = true;
+
+        if (marcaVehiculo.getText().trim().length() == 0) {
+            resultado = false;
         }
+
+        if (modeloVehiculo.getText().trim().length() == 0) {
+            resultado = false;
+        }
+
+        if (potencia.getText().trim().length() == 0) {
+            resultado = false;
+        }
+
+        if (concesionarioRegistro.getValue() == null) {
+            resultado = false;
+        }
+
+        if (tswitch.isSelected() && antiguedad.getText().trim().length() == 0) {
+            resultado = false;
+        }
+
+        if (precio.getText().length() == 0) {
+            resultado = false;
+        }
+
+        if (tipoVehiculo.getValue() == null) {
+            resultado = false;
+        }
+
+        return resultado;
     }
 
 
     @FXML
     public void cerrar(ActionEvent actionEvent) {
+        Stage stage = (Stage) ((Button)actionEvent.getSource()).getScene().getWindow();
+        root.setStyle("-fx-opacity: 1");
+        stage.close();
+    }
+
+    @Override
+    public void setRoot(Parent root) {
+        this.root = root;
     }
 }

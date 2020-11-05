@@ -1,5 +1,6 @@
 package Cochera.controllers.Ventas;
 
+import Cochera.controllers.AutoRoot;
 import Cochera.dao.TipoVehiculosDAO;
 import Cochera.dao.VehiculoVenderDAO;
 import Cochera.models.Vehiculo.TipoVehiculo;
@@ -11,11 +12,19 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import javax.swing.*;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -23,8 +32,12 @@ import java.time.ZoneId;
 import java.util.Date;
 import java.util.prefs.Preferences;
 
-public class ControladorVehiculos {
+public class ControladorVehiculos implements AutoRoot {
 
+
+    @FXML
+    private AnchorPane parent;
+    private Parent root;
 
     // Estado de la tabla
     @FXML
@@ -241,9 +254,32 @@ public class ControladorVehiculos {
         listaFiltrable.setPredicate(mostrar -> true);
     }
 
+    @FXML
+    private void mostrarModalCreacion() throws IOException {
+        Stage modal = new Stage();
+        FXMLLoader modalFX = new FXMLLoader(getClass().getResource("/Ventas/Modales/FormNuevoVehiculo.fxml"));
+
+        modal.setScene(new Scene(modalFX.load()));
+        modal.initOwner(root.getScene().getWindow());
+        modal.initModality(Modality.WINDOW_MODAL);
+        modal.initStyle(StageStyle.UNDECORATED);
+        modal.alwaysOnTopProperty();
+        modal.setResizable(false);
+
+        root.setStyle("-fx-opacity: 0.4");
+        ((AutoRoot) modalFX.getController()).setRoot(root);
+
+        modal.showAndWait();
+    }
+
     private void mostrarModal(VehiculoVender vehiculo) {
         System.out.println(vehiculo);
         // TODO : Mostrar modal
+    }
+
+    @Override
+    public void setRoot(Parent root) {
+        this.root = root;
     }
 }
 

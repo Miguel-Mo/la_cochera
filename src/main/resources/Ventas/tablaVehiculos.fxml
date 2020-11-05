@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="539.0" prefWidth="1700.0" stylesheets="@../css/tablaVehiculos.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Cochera.controllers.Ventas.ControladorVehiculos">
+<AnchorPane fx:id="parent" prefHeight="539.0" prefWidth="1700.0" stylesheets="@../css/tablaVehiculos.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Cochera.controllers.Ventas.ControladorVehiculos">
    <children>
       <SplitPane dividerPositions="0.1313" layoutX="-1.0" prefHeight="539.0" prefWidth="1800.0">
         <items>
@@ -48,7 +48,7 @@
                   </TableView>
                   <Pane id="botonera" layoutX="349.0" layoutY="-1.0" prefHeight="30.0" prefWidth="860.0">
                      <children>
-                        <Button layoutX="664.0" layoutY="-2.0" mnemonicParsing="false" text="Registrar Nuevo Clientes" />
+                        <Button onAction="#mostrarModalCreacion" layoutX="664.0" layoutY="-2.0" mnemonicParsing="false" text="Registrar Nuevo Clientes" />
                      </children>
                   </Pane>
                </children>

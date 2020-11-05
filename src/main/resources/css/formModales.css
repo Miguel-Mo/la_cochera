@@ -11,9 +11,11 @@
 
 
 #root_pane{
--fx-background-color: white;
--fx-background-radius: 0 0 18 18;
-    -fx-border-radius: 0 0 18 18;
+    -fx-background-color: white;
+    -fx-background-radius: 18 18 18 18;
+    -fx-border-radius: 18 18 18 18;
+    -fx-border-color: #818181;
+    -fx-border-width: 4
 }
 
 #pane_cont{

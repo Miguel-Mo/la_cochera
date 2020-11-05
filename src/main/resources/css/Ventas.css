@@ -15,16 +15,38 @@
 }
 
 
-/*TODO seleccionado en diferente color*/
+
 #toptop .button:hover{
-    -fx-background-insets : -4.0, 0.0, 0.0;
+    -fx-border-color: transparent;
+    -fx-border-radius: 5em;
+    -fx-background-size: 90%;
+}
+
+/*TODO seleccionado en diferente color*/
+.activo{
+   -fx-border-color: #E76F51;
+    -fx-border-width: 2;
+    -fx-background-color: white;
 }
 
 
 
-/*TODO no funciona la insercion de imagen debido a la necesidad de una id y de alguna manera esta jodiendo el action del boton*/
-#compra {
-    -fx-background-image : url('../icons/caja.png');
+#vehiculos {
+    -fx-background-image : url('../icons/coche.png');
+    -fx-background-color: transparent;
+    -fx-background-size: 80%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+#clientes {
+    -fx-background-image : url('../icons/cliente.png');
+    -fx-background-color: transparent;
+    -fx-background-size: 80%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+#propuestas {
+    -fx-background-image : url('../icons/paquete.png');
     -fx-background-color: transparent;
     -fx-background-size: 80%;
     -fx-background-repeat: no-repeat;

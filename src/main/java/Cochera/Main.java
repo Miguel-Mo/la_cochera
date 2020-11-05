@@ -124,6 +124,7 @@ public class Main extends Application {
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+
         Preferences usuarioActivo = Preferences.userRoot();
         usuarioActivo.put("concesionarioID", Integer.toString(usuario.getConcesionarioID()));
         usuarioActivo.put("tipo",usuario.getTipo());

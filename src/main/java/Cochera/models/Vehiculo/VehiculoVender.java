@@ -50,7 +50,7 @@ public class VehiculoVender extends Vehiculo {
     public VehiculoVender(HashMap<String,Object> datos) {
         super(datos);
 
-        precio = new SimpleFloatProperty((Float) datos.get("precio"));
+        precio = new SimpleFloatProperty(Float.parseFloat((String) datos.get("precio")));
 
         vendido = datos.containsKey("vendido") ?
                 new SimpleBooleanProperty((Boolean) datos.get("vendido")) : new SimpleBooleanProperty(false);

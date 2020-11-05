@@ -20,6 +20,9 @@ import java.util.HashMap;
 public class ControladorMCreacion implements AutoRoot {
 
     @FXML
+    private Label lantiguedad;
+
+    @FXML
     private TextField marcaVehiculo;
     @FXML
     private TextField potencia;
@@ -57,12 +60,16 @@ public class ControladorMCreacion implements AutoRoot {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        lantiguedad.visibleProperty().bind(tswitch.selectedProperty());
+        antiguedad.visibleProperty().bind(tswitch.selectedProperty());
     }
 
 
 
     @FXML
-    public void guardar(ActionEvent actionEvent){
+    public void guardar(ActionEvent actionEvent) {
+        resetError();
 
         if (!checkCampos()) return;
 
@@ -74,16 +81,20 @@ public class ControladorMCreacion implements AutoRoot {
             datos.put("modelo",modeloVehiculo.getText());
             datos.put("potencia",potencia.getText());
             datos.put("concesionarioID",concesionarioRegistro.getValue().getId());
-            datos.put("tiempoUsado",antiguedad.getText());
             datos.put("precio",precio.getText());
             datos.put("tipoVehiculo",tipoVehiculo.getValue());
             datos.put("tswitch",tswitch.isSelected());
+            if (tswitch.isSelected()) datos.put("tiempoUsado",antiguedad.getText());
 
             VehiculoVender vehiculo = new VehiculoVender(datos);
 
             dao.create(vehiculo);
 
-        } catch (Exception ignored){ }
+            btnCancelar.fire();
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     private boolean checkCampos() {
@@ -91,33 +102,52 @@ public class ControladorMCreacion implements AutoRoot {
 
         if (marcaVehiculo.getText().trim().length() == 0) {
             resultado = false;
+            marcaVehiculo.setStyle("-fx-border-color: RED");
         }
 
         if (modeloVehiculo.getText().trim().length() == 0) {
             resultado = false;
+            modeloVehiculo.setStyle("-fx-border-color: RED");
         }
 
         if (potencia.getText().trim().length() == 0) {
             resultado = false;
+            potencia.setStyle("-fx-border-color: RED");
         }
 
         if (concesionarioRegistro.getValue() == null) {
             resultado = false;
+            concesionarioRegistro.setStyle("-fx-border-color: RED");
         }
 
         if (tswitch.isSelected() && antiguedad.getText().trim().length() == 0) {
             resultado = false;
+            antiguedad.setStyle("-fx-border-color: RED");
         }
 
         if (precio.getText().length() == 0) {
             resultado = false;
+            precio.setStyle("-fx-border-color: RED");
         }
 
         if (tipoVehiculo.getValue() == null) {
             resultado = false;
+            tipoVehiculo.setStyle("-fx-border-color: RED");
         }
 
         return resultado;
+    }
+
+    private void resetError() {
+
+        marcaVehiculo.setStyle("-fx-border-color: transparent");
+        modeloVehiculo.setStyle("-fx-border-color: transparent");
+        potencia.setStyle("-fx-border-color: transparent");
+        concesionarioRegistro.setStyle("-fx-border-color: transparent");
+        antiguedad.setStyle("-fx-border-color: transparent");
+        precio.setStyle("-fx-border-color: transparent");
+        tipoVehiculo.setStyle("-fx-border-color: transparent");
+
     }
 
 

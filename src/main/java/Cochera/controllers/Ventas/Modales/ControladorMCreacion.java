@@ -16,7 +16,6 @@ import java.util.HashMap;
 
 public class ControladorMCreacion {
 
-
     @FXML
     private TextField marcaVehiculo;
     @FXML
@@ -43,7 +42,6 @@ public class ControladorMCreacion {
 
     @FXML
     private void initialize(){
-
         try(TipoVehiculosDAO dao=new TipoVehiculosDAO()){
             tipoVehiculo.setItems(dao.read());
         } catch (SQLException e) {
@@ -55,8 +53,6 @@ public class ControladorMCreacion {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-
     }
 
 

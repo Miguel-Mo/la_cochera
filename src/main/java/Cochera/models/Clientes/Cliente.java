@@ -2,9 +2,11 @@ package Cochera.models.Clientes;
 
 import Cochera.dao.ClienteDAO;
 import javafx.beans.property.*;
+import javafx.beans.value.ObservableValue;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.HashMap;
 
 public class Cliente {
@@ -95,6 +97,18 @@ public class Cliente {
         this.telefono.set(telefono);
     }
 
+    public Date getFechaRegistro() {
+        return fechaRegistro.get();
+    }
+
+    public ObjectProperty<Date> fechaRegistroProperty() {
+        return fechaRegistro;
+    }
+
+    public void setFechaRegistro(Date fechaRegistro) {
+        this.fechaRegistro.set(fechaRegistro);
+    }
+
     public String getDni() {
         return dni.get();
     }
@@ -114,6 +128,8 @@ public class Cliente {
     public StringProperty emailProperty() {
         return email;
     }
+
+    protected ObjectProperty<Date> fechaRegistro;
 
     public void setEmail(String email) {
         this.email.set(email);
@@ -140,5 +156,10 @@ public class Cliente {
                 ", email=" + email +
                 ", id=" + id +
                 '}';
+    }
+
+    public ObservableValue<String> clienteProperty() {
+        return new SimpleStringProperty(nombre + " "+apellidos);
+
     }
 }

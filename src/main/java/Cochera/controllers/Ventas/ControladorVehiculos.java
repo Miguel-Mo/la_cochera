@@ -14,13 +14,13 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
-import javafx.util.StringConverter;
 
-import javax.swing.text.html.ImageView;
+import javax.swing.*;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
-import java.util.function.Predicate;
 import java.util.prefs.Preferences;
 
 public class ControladorVehiculos {
@@ -58,8 +58,14 @@ public class ControladorVehiculos {
     @FXML
     private ComboBox<EstadoVehiculo> fEstado;
 
-    // Lista de vehiculos que permite hacer búsquedas para filtrar
+    /**
+     * Lista de vehiculos que permite hacer búsquedas para filtrar
+     */
     private FilteredList<VehiculoVender> listaFiltrable;
+
+    /**
+     * Almacenamos el ID del concesionario del usuario logueado
+     */
     private String concesionarioActual;
 
     public ControladorVehiculos() {
@@ -67,11 +73,12 @@ public class ControladorVehiculos {
 
     @FXML
     private void initialize() {
-        inicarFiltros();
-        inicarTabla();
+        iniciarFiltros();
+        iniciarTabla();
+        iniciarColumnas();
     }
 
-    private void inicarFiltros() {
+    private void iniciarFiltros() {
         try(TipoVehiculosDAO dao = new TipoVehiculosDAO()) {
             fTipo.setItems(dao.read());
         } catch (SQLException throwables) {
@@ -81,9 +88,8 @@ public class ControladorVehiculos {
         fEstado.setItems(EstadoVehiculo.obtenerEstados());
     }
 
-    private void inicarTabla() {
-        Preferences usuarioActivo = Preferences.userRoot();
-        concesionarioActual = usuarioActivo.get("concesionarioID",null);
+    private void iniciarTabla() {
+        concesionarioActual = Preferences.userRoot().get("concesionarioID",null);
 
         try (VehiculoVenderDAO dao = new VehiculoVenderDAO()) {
             // Envolvemos los datos de la base de datos en una lista que nos permita filtrar
@@ -96,88 +102,102 @@ public class ControladorVehiculos {
 
             // Finalmente seteamos la lista para mostrarla en la tabla
             tabla.setItems(listaVehiculos);
-
-            // TODO: Mostrar imagenes
-            imagen.setCellValueFactory(dato -> dato.getValue().getImageView().imageProperty());
-            imagen.setSortable(false);
-
-            marca.setCellValueFactory(dato -> dato.getValue().marcaProperty());
-            modelo.setCellValueFactory(dato -> dato.getValue().modeloProperty());
-
-            fechaEntrada.setCellValueFactory(dato -> dato.getValue().fechaRegistroProperty());
-            fechaEntrada.setCellFactory(dato -> new TableCell<>() {
-                private final SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-
-                @Override
-                protected void updateItem(Date fecha, boolean empty) {
-                    super.updateItem(fecha, empty);
-
-                    if (empty) { // En caso de que nos filtren tenemos que setear a null para no mostrar
-                        setText(null);
-                        return;
-                    }
-
-                    setText(format.format(fecha));
-                }
-            });
-
-
-            tipo.setCellValueFactory(dato -> dato.getValue().getTipoVehiculo().descripcionProperty());
-
-            concesionario.setCellValueFactory(dato -> dato.getValue().concesionarioIDProperty().asObject());
-            concesionario.setCellFactory(dato -> new TableCell<>() {
-                @Override
-                protected void updateItem(Integer item, boolean empty) {
-                    super.updateItem(item, empty);
-
-                    if (empty) {
-                        setText(null);
-                        return;
-                    }
-
-                    // Si el concesionarioID del vehiculo coincide con el del usuario logueado es que son el mismo
-                    if (item.equals(Integer.valueOf(concesionarioActual))) {
-                        setText("Concesionario Actual");
-                        setTextFill(Color.valueOf("#3CC13B"));
-                    } else { // si no, es que son concesionarios diferentes
-                        setText("Otro Concesionario");
-                        setTextFill(Color.valueOf("#F3BD32"));
-                    }
-                }
-            });
-
-
-            acciones.setCellValueFactory(dato -> new ReadOnlyObjectWrapper(dato.getValue()));
-            acciones.setSortable(false);
-            acciones.setCellFactory(dato -> new TableCell<>() {
-                private final Button lupa = new Button("Lupa");
-
-                @Override
-                protected void updateItem(VehiculoVender vehiculo, boolean empty) {
-                    super.updateItem(vehiculo, empty);
-
-                    if (empty) {
-                        setGraphic(null);
-                        return;
-                    }
-
-                    setGraphic(lupa);
-                    lupa.setOnAction(event -> mostrarModal(vehiculo));
-                }
-            });
-
-
-
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
     }
+
+    private void iniciarColumnas() {
+        // TODO: Mostrar imagenes
+        imagen.setCellValueFactory(dato -> dato.getValue().getImageView().imageProperty());
+        imagen.setSortable(false);
+
+        marca.setCellValueFactory(dato -> dato.getValue().marcaProperty());
+        modelo.setCellValueFactory(dato -> dato.getValue().modeloProperty());
+
+        fechaEntrada.setCellValueFactory(dato -> dato.getValue().fechaRegistroProperty());
+        fechaEntrada.setCellFactory(dato -> new TableCell<>() {
+            private final SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+
+            @Override
+            protected void updateItem(Date fecha, boolean empty) {
+                super.updateItem(fecha, empty);
+
+                if (empty) { // En caso de que nos filtren tenemos que setear a null para no mostrar
+                    setText(null);
+                    return;
+                }
+
+                setText(format.format(fecha));
+            }
+        });
+
+
+        tipo.setCellValueFactory(dato -> dato.getValue().getTipoVehiculo().descripcionProperty());
+
+        concesionario.setCellValueFactory(dato -> dato.getValue().concesionarioIDProperty().asObject());
+        concesionario.setCellFactory(dato -> new TableCell<>() {
+            @Override
+            protected void updateItem(Integer item, boolean empty) {
+                super.updateItem(item, empty);
+
+                if (empty) {
+                    setText(null);
+                    return;
+                }
+
+                // Si el concesionarioID del vehiculo coincide con el del usuario logueado es que son el mismo
+                if (item.equals(Integer.valueOf(concesionarioActual))) {
+                    setText("Concesionario Actual");
+                    setTextFill(Color.valueOf("#3CC13B"));
+                } else { // si no, es que son concesionarios diferentes
+                    setText("Otro Concesionario");
+                    setTextFill(Color.valueOf("#F3BD32"));
+                }
+            }
+        });
+
+
+        acciones.setCellValueFactory(dato -> new ReadOnlyObjectWrapper(dato.getValue()));
+        acciones.setSortable(false);
+        acciones.setCellFactory(dato -> new TableCell<>() {
+            private final Button lupa = new Button("Lupa");
+
+            @Override
+            protected void updateItem(VehiculoVender vehiculo, boolean empty) {
+                super.updateItem(vehiculo, empty);
+
+                if (empty) {
+                    setGraphic(null);
+                    return;
+                }
+
+                setGraphic(lupa);
+                lupa.setOnAction(event -> mostrarModal(vehiculo));
+            }
+        });
+    }
+
     @FXML
     private void filtrar(ActionEvent actionEvent) {
         String marca = fMarca.getText().trim();
         String modelo = fModelo.getText().trim();
         TipoVehiculo tipo = fTipo.getValue();
         EstadoVehiculo estado = fEstado.getValue();
+
+        LocalDate desde = fDesde.getValue();
+        LocalDate hasta = fHasta.getValue();
+
+
+        // Hacemos un pequeño control de errores para obligar a seleccionar un Desde y Hasta si se ha escogido solo uno
+        if ((desde != null && hasta == null) || (desde == null && hasta != null)) {
+            fDesde.setStyle("-fx-border-color: red");
+            fHasta.setStyle("-fx-border-color: red");
+            return;
+        } else {
+            fDesde.setStyle("-fx-border-color: transparent");
+            fHasta.setStyle("-fx-border-color: transparent");
+        }
 
 
         listaFiltrable.setPredicate(vehiculo -> {
@@ -196,6 +216,10 @@ public class ControladorVehiculos {
                 resTipo = vehiculo.getTipoVehiculo().getDescripcion().equals(tipo.getDescripcion());
             if (estado != null)
                 resEstado = estado.isEnConcesionario() == (vehiculo.getConcesionarioID() == Integer.parseInt(concesionarioActual));
+            if (desde != null) {
+                LocalDate fecha = vehiculo.getFechaRegistro().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                resFecha = fecha.isAfter(desde) && fecha.isBefore(hasta);
+            }
 
 
             return resMarca && resModelo && resTipo && resEstado && resFecha;
@@ -207,8 +231,11 @@ public class ControladorVehiculos {
         fMarca.setText("");
         fEstado.setValue(null);
         fTipo.setValue(null);
+
         fDesde.setValue(null);
         fHasta.setValue(null);
+        fDesde.setStyle("-fx-border-color: transparent");
+        fHasta.setStyle("-fx-border-color: transparent");
 
         tabla.getSortOrder().clear();
         listaFiltrable.setPredicate(mostrar -> true);
@@ -220,6 +247,10 @@ public class ControladorVehiculos {
     }
 }
 
+
+/**
+ * Clase interna para envovler si un vehículo está o no en el mismo concesionario que el usuario logueado.
+ */
 class EstadoVehiculo {
     private StringProperty texto;
     private BooleanProperty enConcesionario;
@@ -229,6 +260,10 @@ class EstadoVehiculo {
         this.enConcesionario = new SimpleBooleanProperty(enConcesionario);
     }
 
+    /**
+     * Método que usamos para crear las dos opciones que hay que mostrar en el ComboBox de 'Estado'
+     * @return
+     */
     public static ObservableList<EstadoVehiculo> obtenerEstados() {
         ObservableList<EstadoVehiculo> lista = FXCollections.observableArrayList();
 

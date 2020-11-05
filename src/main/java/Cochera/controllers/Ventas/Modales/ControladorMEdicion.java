@@ -93,22 +93,8 @@ public class ControladorMEdicion {
 
 
         }
-
-
-
     }
-
-
-
-
     @FXML
     public void cerrar(ActionEvent actionEvent) {}
-
-
-
-
-
-
-
 
 }

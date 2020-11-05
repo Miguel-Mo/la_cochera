@@ -8,12 +8,18 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -113,6 +119,25 @@ public class ControladorClientes implements AutoRoot {
 
     public void limpiar(ActionEvent actionEvent) {
 
+    }
+
+
+    @FXML
+    private void mostrarModalCreacion() throws IOException {
+        Stage modal = new Stage();
+        FXMLLoader modalFX = new FXMLLoader(getClass().getResource("/Ventas/Modales/FormNuevoCliente.fxml"));
+
+        modal.setScene(new Scene(modalFX.load()));
+        modal.initOwner(root.getScene().getWindow());
+        modal.initModality(Modality.WINDOW_MODAL);
+        modal.initStyle(StageStyle.UNDECORATED);
+        modal.alwaysOnTopProperty();
+        modal.setResizable(false);
+
+        root.setStyle("-fx-opacity: 0.4");
+        ((AutoRoot) modalFX.getController()).setRoot(root);
+
+        modal.showAndWait();
     }
 
     private void mostrarModal(Cliente cliente) {

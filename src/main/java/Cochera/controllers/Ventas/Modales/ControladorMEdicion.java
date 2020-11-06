@@ -50,8 +50,6 @@ public class ControladorMEdicion implements AutoRoot {
 
     @FXML
     private void initialize(){
-        prohibirEdicion();
-
         try(TipoVehiculosDAO dao=new TipoVehiculosDAO()) {
             tipoVehiculo.setItems(dao.read());
         } catch (SQLException e) {
@@ -69,22 +67,25 @@ public class ControladorMEdicion implements AutoRoot {
     }
 
     private void prohibirEdicion() {
-        marcaVehiculo.setEditable(false);
-        potencia.setEditable(false);
-        precio.setEditable(false);
-        modeloVehiculo.setEditable(false);
-        antiguedad.setEditable(false);
-
-        tipoVehiculo.setEditable(false);
-        tipoVehiculo.setEditable(false);
+        marcaVehiculo.setDisable(true);
+        potencia.setDisable(true);
+        precio.setDisable(true);
+        modeloVehiculo.setDisable(true);
+        antiguedad.setDisable(true);
+        tswitch.setDisable(true);
+        tipoVehiculo.setDisable(true);
+        tipoVehiculo.setDisable(true);
     }
 
     private void permitirEdicion() {
-        marcaVehiculo.setEditable(true);
-        potencia.setEditable(true);
-        precio.setEditable(true);
-        modeloVehiculo.setEditable(true);
-        antiguedad.setEditable(true);
+        marcaVehiculo.setDisable(false);
+        potencia.setDisable(false);
+        precio.setDisable(false);
+        modeloVehiculo.setDisable(false);
+        antiguedad.setDisable(false);
+        tswitch.setDisable(false);
+        tipoVehiculo.setDisable(false);
+        tipoVehiculo.setDisable(false);
     }
 
 
@@ -107,6 +108,7 @@ public class ControladorMEdicion implements AutoRoot {
                 vehiculo.setPrecio(Float.parseFloat(precio.getText()));
                 vehiculo.setTipoVehiculo(tipoVehiculo.getValue());
                 if (!tswitch.isSelected()) vehiculo.setTiempoUsado(null);
+                else vehiculo.setTiempoUsado(antiguedad.getText());
                 vehiculo.setSegundaMano(tswitch.isSelected());
 
                 dao.update(vehiculo);
@@ -146,7 +148,7 @@ public class ControladorMEdicion implements AutoRoot {
             concesionarioRegistro.setStyle("-fx-border-color: RED");
         }
 
-        if (tswitch.isSelected() && antiguedad.getText().trim().length() == 0) {
+        if (tswitch.isSelected() && antiguedad.getText().trim().isEmpty()) {
             resultado = false;
             antiguedad.setStyle("-fx-border-color: RED");
         }
@@ -191,6 +193,7 @@ public class ControladorMEdicion implements AutoRoot {
     public void setVehiculo(VehiculoVender vehiculo) {
         this.vehiculo = vehiculo;
         establecerVehiculo();
+        prohibirEdicion();
     }
 
     private void establecerVehiculo() {
@@ -204,5 +207,6 @@ public class ControladorMEdicion implements AutoRoot {
         tipoVehiculo.setValue(vehiculo.getTipoVehiculo());
         modeloVehiculo.setText(vehiculo.getModelo());
         antiguedad.setText(vehiculo.getTiempoUsado());
+        tswitch.setSelected(vehiculo.isSegundaMano());
     }
 }

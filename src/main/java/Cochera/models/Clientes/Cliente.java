@@ -13,7 +13,7 @@ import java.util.HashMap;
 public class Cliente {
 
     private FloatProperty presupuesto;
-    private StringProperty nombre,apellidos,telefono,dni,email;
+    private StringProperty nombre,apellidos,telefono,dni,email,descripcionVehiculo;
     private int id;
 
     public Cliente() { }
@@ -29,27 +29,22 @@ public class Cliente {
         telefono = new SimpleStringProperty(rs.getString(tabla + ".telefono"));
         dni = new SimpleStringProperty(rs.getString(tabla + ".dni"));
         email = new SimpleStringProperty(rs.getString(tabla + ".email"));
+        descripcionVehiculo = new SimpleStringProperty(rs.getString(tabla + ".descripcionVehiculo"));
 
         fechaRegistro = new SimpleObjectProperty<>(new Date(rs.getTimestamp(tabla + ".fechaRegistro").getTime()));
 
         id = rs.getInt(tabla + ".id");
     }
 
-    public Cliente(HashMap<String,Object> datos) {
+    public Cliente(HashMap<String,String> datos) {
 
-        presupuesto = new SimpleFloatProperty((Float) datos.get("presupuesto"));
-
-        nombre = datos.containsKey("nombre") ?
-                new SimpleStringProperty((String) datos.get("nombre")) : new SimpleStringProperty(null);
-        apellidos = datos.containsKey("apellidos") ?
-                new SimpleStringProperty((String) datos.get("apellidos")) : new SimpleStringProperty(null);
-        telefono = datos.containsKey("telefono") ?
-                new SimpleStringProperty((String) datos.get("telefono")) : new SimpleStringProperty(null);
-        dni = datos.containsKey("dni") ?
-                new SimpleStringProperty((String) datos.get("dni")) : new SimpleStringProperty(null);
-        email = datos.containsKey("email") ?
-                new SimpleStringProperty((String) datos.get("email")) : new SimpleStringProperty(null);
-
+        nombre = new SimpleStringProperty(datos.get("nombre"));
+        apellidos = new SimpleStringProperty(datos.get("apellidos"));
+        telefono = new SimpleStringProperty(datos.get("telefono"));
+        dni = new SimpleStringProperty(datos.get("dni"));
+        email = new SimpleStringProperty(datos.get("email"));
+        presupuesto = new SimpleFloatProperty(Float.parseFloat(datos.get("presupuesto")));
+        descripcionVehiculo = new SimpleStringProperty(datos.get("descripcion"));
     }
 
     public float getPresupuesto() {
@@ -146,23 +141,7 @@ public class Cliente {
         this.id = id;
     }
 
-
-
-    @Override
-    public String toString() {
-        return "Cliente{" +
-                "presupuesto=" + presupuesto +
-                ", nombre=" + nombre +
-                ", apellidos=" + apellidos +
-                ", telefono=" + telefono +
-                ", dni=" + dni +
-                ", email=" + email +
-                ", id=" + id +
-                '}';
-    }
-
     public StringProperty clienteProperty() {
         return new SimpleStringProperty(nombre.getValue() + " "+apellidos.getValue());
-
     }
 }

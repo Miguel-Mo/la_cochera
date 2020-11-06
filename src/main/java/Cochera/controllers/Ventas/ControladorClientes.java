@@ -1,6 +1,7 @@
 package Cochera.controllers.Ventas;
 
 import Cochera.controllers.AutoRoot;
+import Cochera.controllers.Ventas.ModalesCliente.ControladorMCreacion;
 import Cochera.dao.ClienteDAO;
 import Cochera.models.Clientes.Cliente;
 import javafx.beans.property.ReadOnlyObjectWrapper;
@@ -49,7 +50,11 @@ public class ControladorClientes implements AutoRoot {
 
     @FXML
     private void initialize() {
+        iniciarTabla();
+        iniciarColumnas();
+    }
 
+    private void iniciarTabla() {
         try (ClienteDAO dao = new ClienteDAO()) {
             // Envolvemos los datos de la base de datos en una lista que nos permita filtrar
             // Lo mantenemos en el estado porque es este tipo de lista la que nos permitirá filtrar por campo en el método correcpondiente
@@ -62,54 +67,56 @@ public class ControladorClientes implements AutoRoot {
             // Finalmente seteamos la lista para mostrarla en la tabla
             tabla.setItems(listaClientes);
 
-            nombreCliente.setCellValueFactory(dato -> dato.getValue().clienteProperty());
-            telefono.setCellValueFactory(dato -> dato.getValue().telefonoProperty());
-
-
-
-            fechaRegistro.setCellValueFactory(dato -> dato.getValue().fechaRegistroProperty());
-            fechaRegistro.setCellFactory(dato -> new TableCell<>() {
-                private final SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-
-                @Override
-                protected void updateItem(Date fecha, boolean empty) {
-                    super.updateItem(fecha, empty);
-
-                    if (empty) { // En caso de que nos filtren tenemos que setear a null para no mostrar
-                        setText(null);
-                        return;
-                    }
-
-                    setText(format.format(fecha));
-                }
-            });
-
-
-
-            acciones.setCellValueFactory(dato -> new ReadOnlyObjectWrapper(dato.getValue()));
-            acciones.setSortable(false);
-            acciones.setCellFactory(dato -> new TableCell<>() {
-                private final Button lupa = new Button("Lupa");
-
-                @Override
-                protected void updateItem(Cliente cliente, boolean empty) {
-                    super.updateItem(cliente, empty);
-
-                    if (empty) {
-                        setGraphic(null);
-                        return;
-                    }
-
-                    setGraphic(lupa);
-                    lupa.setOnAction(event -> mostrarModal(cliente));
-                }
-            });
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
     }
 
+    private void iniciarColumnas() {
+        nombreCliente.setCellValueFactory(dato -> dato.getValue().clienteProperty());
+        telefono.setCellValueFactory(dato -> dato.getValue().telefonoProperty());
+
+
+
+        fechaRegistro.setCellValueFactory(dato -> dato.getValue().fechaRegistroProperty());
+        fechaRegistro.setCellFactory(dato -> new TableCell<>() {
+            private final SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+
+            @Override
+            protected void updateItem(Date fecha, boolean empty) {
+                super.updateItem(fecha, empty);
+
+                if (empty) { // En caso de que nos filtren tenemos que setear a null para no mostrar
+                    setText(null);
+                    return;
+                }
+
+                setText(format.format(fecha));
+            }
+        });
+
+
+
+        acciones.setCellValueFactory(dato -> new ReadOnlyObjectWrapper<>(dato.getValue()));
+        acciones.setSortable(false);
+        acciones.setCellFactory(dato -> new TableCell<>() {
+            private final Button lupa = new Button("Lupa");
+
+            @Override
+            protected void updateItem(Cliente cliente, boolean empty) {
+                super.updateItem(cliente, empty);
+
+                if (empty) {
+                    setGraphic(null);
+                    return;
+                }
+
+                setGraphic(lupa);
+                lupa.setOnAction(event -> mostrarModal(cliente));
+            }
+        });
+    }
 
 
     @FXML
@@ -120,7 +127,6 @@ public class ControladorClientes implements AutoRoot {
     public void limpiar(ActionEvent actionEvent) {
 
     }
-
 
     @FXML
     private void mostrarModalCreacion() throws IOException {
@@ -135,9 +141,19 @@ public class ControladorClientes implements AutoRoot {
         modal.setResizable(false);
 
         root.setStyle("-fx-opacity: 0.4");
-        ((AutoRoot) modalFX.getController()).setRoot(root);
+        ControladorMCreacion controlador = modalFX.getController();
+        controlador.setRoot(root);
+        controlador.setLista(listaFiltrable);
+        controlador.setControlador(this);
 
         modal.showAndWait();
+    }
+
+    // TODO : Borrar esto cuando vaya el refresco de la tabla
+    public void cerrarModal(ControladorMCreacion c) {
+        c.getBtnCancelar().fire();
+        iniciarTabla();
+        iniciarColumnas();
     }
 
     private void mostrarModal(Cliente cliente) {

@@ -1,10 +1,14 @@
 package Cochera.controllers.Ventas.ModalesCliente;
 
 import Cochera.controllers.AutoRoot;
+import Cochera.controllers.Ventas.ControladorClientes;
+import Cochera.controllers.Ventas.ControladorVehiculos;
 import Cochera.dao.ClienteDAO;
 
 import Cochera.models.Clientes.Cliente;
 
+import Cochera.models.Vehiculo.VehiculoVender;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
@@ -25,8 +29,6 @@ public class ControladorMCreacion implements AutoRoot {
     @FXML
     private TextField dni;
     @FXML
-    private DatePicker FechaReg;
-    @FXML
     private TextField Presupuesto;
     @FXML
     private TextArea descripcion;
@@ -38,15 +40,14 @@ public class ControladorMCreacion implements AutoRoot {
     private Button btnCancelar;
 
     private Parent root;
-
+    private FilteredList<Cliente> listaFiltrable;
+    private ControladorClientes controladorClientes;
 
     @FXML
     private void initialize() {
 
 
     }
-
-
 
     @FXML
     public void guardar(ActionEvent actionEvent) {
@@ -56,22 +57,19 @@ public class ControladorMCreacion implements AutoRoot {
 
         try(ClienteDAO dao = new ClienteDAO()){
 
-            HashMap<String,Object> datos=new HashMap<>();
+            HashMap<String,String> datos= new HashMap<>();
 
             datos.put("nombre",Nombre.getText());
             datos.put("apellidos",Apellidos.getText());
             datos.put("telefono",Telefono.getText());
             datos.put("dni",dni.getText());
-            datos.put("FechaReg",FechaReg.getValue());
             datos.put("presupuesto",Presupuesto.getText());
             datos.put("descripcion",descripcion.getText());
             datos.put("email",Email.getText());
 
-            Cliente cliente = new Cliente(datos);
+            dao.create(new Cliente(datos));
 
-            dao.create(cliente);
-
-            btnCancelar.fire();
+            controladorClientes.cerrarModal(this);
 
         } catch (Exception e){
             e.printStackTrace();
@@ -101,11 +99,6 @@ public class ControladorMCreacion implements AutoRoot {
             dni.setStyle("-fx-border-color: RED");
         }
 
-        if (FechaReg.getValue() == null) {
-            resultado = false;
-            FechaReg.setStyle("-fx-border-color: RED");
-        }
-
         if (Presupuesto.getText().trim().length() == 0) {
             resultado = false;
             Presupuesto.setStyle("-fx-border-color: RED");
@@ -131,7 +124,6 @@ public class ControladorMCreacion implements AutoRoot {
         Apellidos.setStyle("-fx-border-color: transparent");
         Telefono.setStyle("-fx-border-color: transparent");
         dni.setStyle("-fx-border-color: transparent");
-        FechaReg.setStyle("-fx-border-color: transparent");
         Presupuesto.setStyle("-fx-border-color: transparent");
         descripcion.setStyle("-fx-border-color: transparent");
         Email.setStyle("-fx-border-color: transparent");
@@ -149,5 +141,17 @@ public class ControladorMCreacion implements AutoRoot {
     @Override
     public void setRoot(Parent root) {
         this.root = root;
+    }
+
+    public void setControlador(ControladorClientes c) {
+        controladorClientes = c;
+    }
+
+    public Button getBtnCancelar() {
+        return btnCancelar;
+    }
+
+    public void setLista(FilteredList<Cliente> lista) {
+        listaFiltrable = lista;
     }
 }

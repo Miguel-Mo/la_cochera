@@ -14,7 +14,7 @@ public class ClienteDAO extends AbstractDAO<Cliente> implements Crud<Cliente> {
 
     public ClienteDAO() throws SQLException {
         tabla = TABLA;
-        campos = new String[]{"nombre","apellidos","telefono","dni","email","presupuesto"};
+        campos = new String[]{"nombre","apellidos","telefono","dni","email","presupuesto","descripcionVehiculo"};
     }
 
     @Override

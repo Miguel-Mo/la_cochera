@@ -63,13 +63,12 @@ public class ControladorMEdicion {
         if(btnAceptar.getText().contentEquals("Guardar")){
             try(ClienteDAO dao = new ClienteDAO()){
 
-                HashMap<String,Object> datos=new HashMap<>();
+                HashMap<String,String> datos=new HashMap<>();
 
                 datos.put("nombre",Nombre.getText());
                 datos.put("apellidos",Apellidos.getText());
                 datos.put("telefono",Telefono.getText());
                 datos.put("dni",dni.getText());
-                datos.put("FechaReg",FechaReg.getValue());
                 datos.put("presupuesto",Presupuesto.getText());
                 datos.put("descripcion",descripcion.getText());
                 datos.put("email",Email.getText());
@@ -86,11 +85,9 @@ public class ControladorMEdicion {
             Apellidos.setEditable(true);
             Telefono.setEditable(true);
             dni.setEditable(true);
-            FechaReg.setEditable(true);
             Presupuesto.setEditable(true);
             descripcion.setEditable(true);
             Email.setEditable(true);
-
 
         }
     }

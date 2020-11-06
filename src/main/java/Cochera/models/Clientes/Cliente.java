@@ -149,6 +149,10 @@ public class Cliente {
         return descripcionVehiculo;
     }
 
+    public void setDescripcionVehiculo(String descripcionVehiculo) {
+        this.descripcionVehiculo.set(descripcionVehiculo);
+    }
+
     public StringProperty clienteProperty() {
         return new SimpleStringProperty(nombre.getValue() + " "+apellidos.getValue());
     }

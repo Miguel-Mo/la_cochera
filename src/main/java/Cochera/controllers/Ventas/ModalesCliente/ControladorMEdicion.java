@@ -80,7 +80,13 @@ public class ControladorMEdicion implements AutoRoot {
 
             try(ClienteDAO dao = new ClienteDAO()){
 
-
+                cliente.setApellidos(Apellidos.getText());
+                cliente.setDni(dni.getText());
+                cliente.setEmail(Email.getText());
+                cliente.setNombre(Nombre.getText());
+                cliente.setPresupuesto(Float.parseFloat(Presupuesto.getText()));
+                cliente.setTelefono(Telefono.getText());
+                cliente.setDescripcionVehiculo(descripcion.getText());
 
                 dao.update(cliente);
 

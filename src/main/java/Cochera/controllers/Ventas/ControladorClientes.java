@@ -3,8 +3,12 @@ package Cochera.controllers.Ventas;
 import Cochera.controllers.AutoRoot;
 import Cochera.controllers.Ventas.ModalesCliente.ControladorMCreacion;
 import Cochera.dao.ClienteDAO;
+import Cochera.dao.TipoVehiculosDAO;
 import Cochera.models.Clientes.Cliente;
+import Cochera.models.Vehiculo.TipoVehiculo;
+import Cochera.models.Vehiculo.VehiculoVender;
 import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.collections.ListChangeListener;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
@@ -12,10 +16,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -23,6 +24,8 @@ import javafx.stage.StageStyle;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 
 public class ControladorClientes implements AutoRoot {
@@ -43,6 +46,19 @@ public class ControladorClientes implements AutoRoot {
 
     FilteredList<Cliente> listaFiltrable;
 
+
+    // Estado para el filtro
+    @FXML
+    private DatePicker fDesde;
+    @FXML
+    private DatePicker fHasta;
+    @FXML
+    private TextField fNombre;
+    @FXML
+    private TextField fTelefono;
+
+
+
     public void ContraladorClientes(){
 
     }
@@ -54,11 +70,17 @@ public class ControladorClientes implements AutoRoot {
         iniciarColumnas();
     }
 
+
+
+
     private void iniciarTabla() {
         try (ClienteDAO dao = new ClienteDAO()) {
             // Envolvemos los datos de la base de datos en una lista que nos permita filtrar
             // Lo mantenemos en el estado porque es este tipo de lista la que nos permitirá filtrar por campo en el método correcpondiente
             listaFiltrable = new FilteredList<>(dao.read(), mostrarTodoAlInicio -> true);
+
+            // Actualizamos la tabla cuando haya algún cambio. TODO: Por el momento no lo hay porque no va la actualización
+            listaFiltrable.addListener((ListChangeListener.Change<? extends Cliente> change) -> tabla.refresh());
 
             // Volvemos a envolver para darle la capacidad de ordenarse
             SortedList<Cliente> listaClientes = new SortedList<>(listaFiltrable);
@@ -118,15 +140,64 @@ public class ControladorClientes implements AutoRoot {
         });
     }
 
-
     @FXML
     private void filtrar(ActionEvent actionEvent) {
+        String nombre = fNombre.getText().trim();
+        String telefono = fTelefono.getText().trim();
 
+        LocalDate desde = fDesde.getValue();
+        LocalDate hasta = fHasta.getValue();
+
+
+        // Hacemos un pequeño control de errores para obligar a seleccionar un Desde y Hasta si se ha escogido solo uno
+        if ((desde != null && hasta == null) || (desde == null && hasta != null)) {
+            fDesde.setStyle("-fx-border-color: red");
+            fHasta.setStyle("-fx-border-color: red");
+            return;
+        } else {
+            fDesde.setStyle("-fx-border-color: transparent");
+            fHasta.setStyle("-fx-border-color: transparent");
+        }
+
+
+        listaFiltrable.setPredicate(vehiculo -> {
+            boolean resMarca = true;
+            boolean resModelo = true;
+            boolean resTipo = true;
+            boolean resEstado = true;
+            boolean resFecha = true;
+
+
+            if (nombre.length() > 0)
+                resMarca = vehiculo.getNombre().toLowerCase().contains(nombre.toLowerCase());
+            if (telefono.length() > 0)
+                resModelo = vehiculo.getTelefono().toLowerCase().contains(telefono.toLowerCase());
+
+            if (desde != null) {
+                LocalDate fecha = vehiculo.getFechaRegistro().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                resFecha = fecha.isAfter(desde) && fecha.isBefore(hasta);
+            }
+
+
+            return resMarca && resModelo && resTipo && resEstado && resFecha;
+        });
     }
+
+
 
     public void limpiar(ActionEvent actionEvent) {
+        fNombre.setText("");
+        fTelefono.setText("");
 
+        fDesde.setValue(null);
+        fHasta.setValue(null);
+        fDesde.setStyle("-fx-border-color: transparent");
+        fHasta.setStyle("-fx-border-color: transparent");
+
+        tabla.getSortOrder().clear();
+        listaFiltrable.setPredicate(mostrar -> true);
     }
+
 
     @FXML
     private void mostrarModalCreacion() throws IOException {

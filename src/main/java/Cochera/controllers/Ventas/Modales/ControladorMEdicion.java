@@ -64,6 +64,10 @@ public class ControladorMEdicion implements AutoRoot {
 
         lantiguedad.visibleProperty().bind(tswitch.selectedProperty());
         antiguedad.visibleProperty().bind(tswitch.selectedProperty());
+
+
+
+
     }
 
     private void prohibirEdicion() {
@@ -75,6 +79,15 @@ public class ControladorMEdicion implements AutoRoot {
         tswitch.setDisable(true);
         tipoVehiculo.setDisable(true);
         concesionarioRegistro.setDisable(true);
+
+        marcaVehiculo.setStyle(" -fx-background-color: white , white , white;-fx-background-insets: 0 0 0 0, 0 0 0 0, 0 0 3 0;");
+        modeloVehiculo.setStyle(" -fx-background-color: white , white , white;-fx-background-insets: 0 0 0 0, 0 0 0 0, 0 0 3 0;");
+        potencia.setStyle(" -fx-background-color: white , white , white;-fx-background-insets: 0 0 0 0, 0 0 0 0, 0 0 3 0;");
+        concesionarioRegistro.setStyle(" -fx-background-color: white , white , white;-fx-background-insets: 0 0 0 0, 0 0 0 0, 0 0 3 0;");
+        antiguedad.setStyle(" -fx-background-color: white , white , white;-fx-background-insets: 0 0 0 0, 0 0 0 0, 0 0 3 0;");
+        precio.setStyle(" -fx-background-color: white , white , white;-fx-background-insets: 0 0 0 0, 0 0 0 0, 0 0 3 0;");
+        tipoVehiculo.setStyle(" -fx-background-color: white , white , white;-fx-background-insets: 0 0 0 0, 0 0 0 0, 0 0 3 0;");
+
     }
 
     private void permitirEdicion() {

@@ -28,5 +28,5 @@
 #pane_cont{
 -fx-background-color:white;
 -fx-background-radius: 18 18 18 18;
-    -fx-border-radius: 18 18 18 18;
+  -fx-border-radius: 18 18 18 18;
 }

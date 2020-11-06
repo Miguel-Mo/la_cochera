@@ -10,7 +10,7 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="500.0" stylesheets="@/css/formModales.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Cochera.controllers.Ventas.ModalesCliente.ControladorMCreacion">
     <children>
-        <Pane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <Pane id="root_pane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
                 <Label layoutX="50.0" layoutY="37.0" text="Nombre" />
                 <TextField fx:id="Nombre" layoutX="50.0" layoutY="55.0" prefHeight="25.0" prefWidth="174.0" />
@@ -28,8 +28,8 @@
                 <TextField fx:id="Presupuesto" layoutX="50.0" layoutY="220.0" prefWidth="174.0" />
                 <Label layoutX="50.0" layoutY="270.0" text="Descripción del coche deseado" />
                 <TextArea fx:id="descripcion" layoutX="52.0" layoutY="288.0" prefHeight="172.0" prefWidth="396.0" />
-                <Button fx:id="btnAceptar" layoutX="314.0" layoutY="535.0" mnemonicParsing="false" text="Aceptar" onAction="#guardar" />
-                <Button fx:id="btnCancelar" layoutX="117.0" layoutY="535.0" mnemonicParsing="false" text="Cancelar" onAction="#cerrar" />
+                <Button fx:id="btnAceptar" layoutX="303.0" layoutY="519.0" mnemonicParsing="false" onAction="#guardar" prefHeight="41.0" prefWidth="91.0" text="Aceptar" />
+                <Button fx:id="btnCancelar" layoutX="123.0" layoutY="519.0" mnemonicParsing="false" onAction="#cerrar" prefHeight="41.0" prefWidth="91.0" text="Cancelar" />
                 
             </children>
         </Pane>

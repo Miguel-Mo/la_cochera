@@ -74,7 +74,7 @@ public class ControladorMEdicion implements AutoRoot {
         antiguedad.setDisable(true);
         tswitch.setDisable(true);
         tipoVehiculo.setDisable(true);
-        tipoVehiculo.setDisable(true);
+        concesionarioRegistro.setDisable(true);
     }
 
     private void permitirEdicion() {
@@ -85,7 +85,7 @@ public class ControladorMEdicion implements AutoRoot {
         antiguedad.setDisable(false);
         tswitch.setDisable(false);
         tipoVehiculo.setDisable(false);
-        tipoVehiculo.setDisable(false);
+        concesionarioRegistro.setDisable(false);
     }
 
 

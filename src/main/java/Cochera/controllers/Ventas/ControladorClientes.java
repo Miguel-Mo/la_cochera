@@ -2,6 +2,7 @@ package Cochera.controllers.Ventas;
 
 import Cochera.controllers.AutoRoot;
 import Cochera.controllers.Ventas.ModalesCliente.ControladorMCreacion;
+import Cochera.controllers.Ventas.ModalesCliente.ControladorMEdicion;
 import Cochera.dao.ClienteDAO;
 import Cochera.models.Clientes.Cliente;
 import javafx.beans.property.ReadOnlyObjectWrapper;
@@ -157,8 +158,26 @@ public class ControladorClientes implements AutoRoot {
     }
 
     private void mostrarModal(Cliente cliente) {
-        System.out.println(cliente);
-        // TODO : Mostrar modal
+        Stage modal = new Stage();
+        FXMLLoader modalFX = new FXMLLoader(getClass().getResource("/Ventas/Modales/FormClienteLupa.fxml"));
+
+        try {
+            modal.setScene(new Scene(modalFX.load()));
+            modal.initOwner(root.getScene().getWindow());
+            modal.initModality(Modality.WINDOW_MODAL);
+            modal.initStyle(StageStyle.UNDECORATED);
+            modal.setResizable(false);
+
+            root.setStyle("-fx-opacity: 0.4");
+            ControladorMEdicion controlador = modalFX.getController();
+            controlador.setRoot(root);
+            controlador.setCliente(cliente);
+
+            modal.showAndWait();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

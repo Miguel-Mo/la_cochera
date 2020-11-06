@@ -1,5 +1,6 @@
 package Cochera.controllers.Ventas.ModalesCliente;
 
+import Cochera.controllers.AutoRoot;
 import Cochera.dao.ClienteDAO;
 import Cochera.dao.VehiculoVenderDAO;
 import Cochera.models.Clientes.Cliente;
@@ -8,13 +9,15 @@ import Cochera.models.Vehiculo.TipoVehiculo;
 import Cochera.models.Vehiculo.VehiculoVender;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 import org.controlsfx.control.ToggleSwitch;
 
 import java.sql.SQLException;
 import java.util.HashMap;
 
-public class ControladorMEdicion {
+public class ControladorMEdicion implements AutoRoot {
 
     @FXML
     private TextField Nombre;
@@ -37,60 +40,140 @@ public class ControladorMEdicion {
     @FXML
     private Button btnCancelar;
 
+    private Parent root;
+    private Cliente cliente;
 
     @FXML
-    private void initialize(){
+    private void initialize() {
+        prohibirEdicion();
+    }
 
-        Nombre.setEditable(false);
-        Apellidos.setEditable(false);
-        Telefono.setEditable(false);
-        dni.setEditable(false);
-        FechaReg.setEditable(false);
-        Presupuesto.setEditable(false);
-        descripcion.setEditable(false);
-        Email.setEditable(false);
+    private void prohibirEdicion() {
+        Nombre.setDisable(true);
+        Apellidos.setDisable(true);
+        Telefono.setDisable(true);
+        dni.setDisable(true);
+        Presupuesto.setDisable(true);
+        descripcion.setDisable(true);
+        Email.setDisable(true);
+    }
 
-
+    private void permitirEdicion() {
+        Nombre.setDisable(false);
+        Apellidos.setDisable(false);
+        Telefono.setDisable(false);
+        dni.setDisable(false);
+        Presupuesto.setDisable(false);
+        descripcion.setDisable(false);
+        Email.setDisable(false);
     }
 
 
     @FXML
     public void editar(ActionEvent actionEvent){
+        resetError();
 
-        btnAceptar.setText("Guardar");
+        Button boton = (Button) actionEvent.getSource();
 
+        if(boton.getText().equals("Guardar")) {
+            if (!checkCampos()) return;
 
-        if(btnAceptar.getText().contentEquals("Guardar")){
             try(ClienteDAO dao = new ClienteDAO()){
 
-                HashMap<String,String> datos=new HashMap<>();
 
-                datos.put("nombre",Nombre.getText());
-                datos.put("apellidos",Apellidos.getText());
-                datos.put("telefono",Telefono.getText());
-                datos.put("dni",dni.getText());
-                datos.put("presupuesto",Presupuesto.getText());
-                datos.put("descripcion",descripcion.getText());
-                datos.put("email",Email.getText());
 
-                Cliente cliente =new Cliente(datos);
+                dao.update(cliente);
 
-                dao.create(cliente);
+                btnCancelar.fire();
 
             }catch (SQLException throwables){
-
+                throwables.printStackTrace();
             }
-        }else if(btnAceptar.getText().contentEquals("Editar")){
-            Nombre.setEditable(true);
-            Apellidos.setEditable(true);
-            Telefono.setEditable(true);
-            dni.setEditable(true);
-            Presupuesto.setEditable(true);
-            descripcion.setEditable(true);
-            Email.setEditable(true);
 
+        } else if(boton.getText().contentEquals("Editar")){
+            permitirEdicion();
+            boton.setText("Guardar");
         }
     }
+
+    private boolean checkCampos() {
+        boolean resultado = true;
+
+        if (Nombre.getText().trim().length() == 0) {
+            resultado = false;
+            Nombre.setStyle("-fx-border-color: RED");
+        }
+
+        if (Apellidos.getText().trim().length() == 0) {
+            resultado = false;
+            Apellidos.setStyle("-fx-border-color: RED");
+        }
+
+        if (Telefono.getText().trim().length() == 0) {
+            resultado = false;
+            Telefono.setStyle("-fx-border-color: RED");
+        }
+
+        if (dni.getText().trim().length() == 0) {
+            resultado = false;
+            dni.setStyle("-fx-border-color: RED");
+        }
+
+        if (Presupuesto.getText().trim().length() == 0) {
+            resultado = false;
+            Presupuesto.setStyle("-fx-border-color: RED");
+        }
+
+        if (descripcion.getText().length() == 0) {
+            resultado = false;
+            descripcion.setStyle("-fx-border-color: RED");
+        }
+
+        if (Email.getText().length() == 0) {
+            resultado = false;
+            Email.setStyle("-fx-border-color: RED");
+        }
+
+        return resultado;
+    }
+
+    private void resetError() {
+
+        Nombre.setStyle("-fx-border-color: transparent");
+        Apellidos.setStyle("-fx-border-color: transparent");
+        Telefono.setStyle("-fx-border-color: transparent");
+        dni.setStyle("-fx-border-color: transparent");
+        Presupuesto.setStyle("-fx-border-color: transparent");
+        descripcion.setStyle("-fx-border-color: transparent");
+        Email.setStyle("-fx-border-color: transparent");
+
+    }
+
     @FXML
-    public void cerrar(ActionEvent actionEvent) {}
+    public void cerrar(ActionEvent actionEvent) {
+        Stage stage = (Stage) ((Button)actionEvent.getSource()).getScene().getWindow();
+        root.setStyle("-fx-opacity: 1");
+        stage.close();
+    }
+
+    @Override
+    public void setRoot(Parent root) {
+        this.root = root;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+        establecerCliente();
+    }
+
+    private void establecerCliente() {
+        Nombre.setText(cliente.getNombre());
+        Apellidos.setText(cliente.getApellidos());
+        Telefono.setText(cliente.getTelefono());
+        dni.setText(cliente.getDni());
+        Presupuesto.setText(String.valueOf(cliente.getPresupuesto()));
+        descripcion.setText(cliente.getDescripcionVehiculo());
+        Email.setText(cliente.getEmail());
+    }
+
 }

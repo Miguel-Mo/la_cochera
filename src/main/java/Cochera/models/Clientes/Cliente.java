@@ -141,6 +141,14 @@ public class Cliente {
         this.id = id;
     }
 
+    public String getDescripcionVehiculo() {
+        return descripcionVehiculo.get();
+    }
+
+    public StringProperty descripcionVehiculoProperty() {
+        return descripcionVehiculo;
+    }
+
     public StringProperty clienteProperty() {
         return new SimpleStringProperty(nombre.getValue() + " "+apellidos.getValue());
     }

@@ -2,6 +2,7 @@ package Cochera.controllers.Ventas;
 
 import Cochera.controllers.AutoRoot;
 import Cochera.controllers.Ventas.Modales.ControladorMCreacion;
+import Cochera.controllers.Ventas.Modales.ControladorMEdicion;
 import Cochera.dao.TipoVehiculosDAO;
 import Cochera.dao.VehiculoVenderDAO;
 import Cochera.models.Vehiculo.TipoVehiculo;
@@ -287,8 +288,26 @@ public class ControladorVehiculos implements AutoRoot {
     }
 
     private void mostrarModal(VehiculoVender vehiculo) {
-        System.out.println(vehiculo);
-        // TODO : Mostrar modal
+        Stage modal = new Stage();
+        FXMLLoader modalFX = new FXMLLoader(getClass().getResource("/Ventas/Modales/FormVehiculoLupa.fxml"));
+
+        try {
+            modal.setScene(new Scene(modalFX.load()));
+            modal.initOwner(root.getScene().getWindow());
+            modal.initModality(Modality.WINDOW_MODAL);
+            modal.initStyle(StageStyle.UNDECORATED);
+            modal.setResizable(false);
+
+            root.setStyle("-fx-opacity: 0.4");
+            ControladorMEdicion controlador = modalFX.getController();
+            controlador.setRoot(root);
+            controlador.setVehiculo(vehiculo);
+
+            modal.showAndWait();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

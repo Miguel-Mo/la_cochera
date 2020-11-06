@@ -92,6 +92,7 @@ public class ControladorMCreacion implements AutoRoot {
             if (tswitch.isSelected()) datos.put("tiempoUsado",antiguedad.getText());
 
             dao.create(new VehiculoVender(datos));
+            //TODO : Problemas Wildcard
 //            VehiculoVender vehiculoCreado = dao.read(dao.create(vehiculo));
 //            listaFiltrable.getSource().add(vehiculoCreado);
 

@@ -28,11 +28,11 @@
                         <Button id="bLimpiar" fx:id="bLimpiar" layoutX="116.0" layoutY="323.0" mnemonicParsing="false" onAction="#limpiar" prefHeight="26.0" prefWidth="70.0" text="Limpiar" />
                         <Label layoutX="31.0" layoutY="239.0" prefHeight="18.0" prefWidth="55.0" text="Telefono" />
                         <Label layoutX="30.0" layoutY="52.0" text="Nombre" />
-                        <TextField id="tfModelo" fx:id="fNombre" layoutX="30.0" layoutY="70.0" prefHeight="25.0" prefWidth="150.0" />
+                        <TextField fx:id="fNombre" layoutX="30.0" layoutY="70.0" prefHeight="25.0" prefWidth="150.0" />
                         <DatePicker fx:id="fHasta" layoutX="73.0" layoutY="182.0" prefHeight="25.0" prefWidth="108.0" />
                         <Label layoutX="29.0" layoutY="149.0" text="Desde" />
                         <Label layoutX="29.0" layoutY="186.0" prefHeight="17.0" prefWidth="34.0" text="Hasta" />
-                  <TextField layoutX="31.0" layoutY="257.0" />
+                        <TextField fx:id="fTelefono" layoutX="31.0" layoutY="257.0" />
                     </children>
                     </AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="498.0" prefWidth="1046.0" style="-fx-background-color: white;">

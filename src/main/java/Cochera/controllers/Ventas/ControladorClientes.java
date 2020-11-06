@@ -161,26 +161,23 @@ public class ControladorClientes implements AutoRoot {
         }
 
 
-        listaFiltrable.setPredicate(vehiculo -> {
-            boolean resMarca = true;
-            boolean resModelo = true;
-            boolean resTipo = true;
-            boolean resEstado = true;
+        listaFiltrable.setPredicate(cliente -> {
+            boolean resNombre = true;
+            boolean resTelefono = true;
             boolean resFecha = true;
 
 
             if (nombre.length() > 0)
-                resMarca = vehiculo.getNombre().toLowerCase().contains(nombre.toLowerCase());
+                resNombre = cliente.getNombre().toLowerCase().contains(nombre.toLowerCase());
             if (telefono.length() > 0)
-                resModelo = vehiculo.getTelefono().toLowerCase().contains(telefono.toLowerCase());
-
+                resTelefono = cliente.getTelefono().toLowerCase().contains(telefono.toLowerCase());
             if (desde != null) {
-                LocalDate fecha = vehiculo.getFechaRegistro().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                LocalDate fecha = cliente.getFechaRegistro().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
                 resFecha = fecha.isAfter(desde) && fecha.isBefore(hasta);
             }
 
 
-            return resMarca && resModelo && resTipo && resEstado && resFecha;
+            return resNombre && resTelefono && resFecha;
         });
     }
 

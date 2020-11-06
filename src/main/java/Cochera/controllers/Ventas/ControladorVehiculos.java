@@ -20,13 +20,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-import javax.swing.*;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -180,7 +180,12 @@ public class ControladorVehiculos implements AutoRoot {
         acciones.setCellValueFactory(dato -> new ReadOnlyObjectWrapper<>(dato.getValue()));
         acciones.setSortable(false);
         acciones.setCellFactory(dato -> new TableCell<>() {
-            private final Button lupa = new Button("Lupa");
+
+            //Creating a graphic (image)
+            Image img = new Image("/icons/lupa.png");
+            ImageView view = new ImageView(img);
+
+            private final Button lupa = new Button();
 
             @Override
             protected void updateItem(VehiculoVender vehiculo, boolean empty) {
@@ -191,6 +196,10 @@ public class ControladorVehiculos implements AutoRoot {
                     return;
                 }
 
+                lupa.setStyle(" -fx-background-color: white , white , white;-fx-background-insets: 0 0 0 0, 0 0 0 0, 0 0 3 0;");
+
+
+                lupa.setGraphic(view);
                 setGraphic(lupa);
                 lupa.setOnAction(event -> mostrarModal(vehiculo));
             }

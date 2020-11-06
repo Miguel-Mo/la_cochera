@@ -10,7 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import java.io.IOException;
 
-public class ControladorVentas {
+public class ControladorVentas{
 
     private Parent root;
 

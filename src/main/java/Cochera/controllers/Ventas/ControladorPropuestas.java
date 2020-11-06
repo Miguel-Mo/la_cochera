@@ -1,4 +1,11 @@
 package Cochera.controllers.Ventas;
 
-public class ControladorPropuestas {
+import Cochera.controllers.AutoRoot;
+import javafx.scene.Parent;
+
+public class ControladorPropuestas implements AutoRoot {
+    @Override
+    public void setRoot(Parent root) {
+
+    }
 }

@@ -198,6 +198,11 @@ public class ControladorVehiculos implements AutoRoot {
 
                 lupa.setStyle(" -fx-background-color: white , white , white;-fx-background-insets: 0 0 0 0, 0 0 0 0, 0 0 3 0;");
 
+                //TODO HOVER DE LUPA
+                if(lupa.isHover()){
+                    lupa.setStyle(" -fx-background-color: red , white , white;-fx-background-insets: 0 0 0 0, 0 0 0 0, 0 0 3 0;");
+                }
+
 
                 lupa.setGraphic(view);
                 setGraphic(lupa);

@@ -56,7 +56,7 @@
                   </TableView>
                   <Pane id="botonera" layoutX="349.0" layoutY="-1.0" prefHeight="30.0" prefWidth="860.0">
                      <children>
-                        <Button layoutX="664.0" layoutY="1.0" mnemonicParsing="false" onAction="#mostrarModalCreacion" text="Registrar Nuevo Clientes" />
+                        <Button layoutX="664.0" layoutY="1.0" mnemonicParsing="false" onAction="#mostrarModalCreacion" text="Registrar Nuevo Vehiculo" />
                      </children>
                   </Pane>
                </children>

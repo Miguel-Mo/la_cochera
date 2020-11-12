@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 
-<Scene stylesheets="@/css/panel.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Cochera.controllers.ControladorPanel">
+<Scene stylesheets="@/css/panel.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Cochera.Controllers.ControladorPanel">
    <!-- El prefHeight y prefWidth tiene que coincidir con las mismas que el fx:id="parent" de login.fxml -->
    <BorderPane fx:id="parent" prefHeight="510.0" prefWidth="842.0">
       <center>

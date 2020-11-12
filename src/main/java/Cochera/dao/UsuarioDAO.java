@@ -1,6 +1,7 @@
 package Cochera.dao;
 
 import Cochera.models.Usuario.Usuario;
+import Cochera.utils.Conversor;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,7 +20,7 @@ public class UsuarioDAO extends AbstractDAO<Usuario> {
 
         try (PreparedStatement pst = conexion.prepareStatement("SELECT * FROM usuarios WHERE BINARY login = ? AND BINARY password = ?")) {
             pst.setString(1, username);
-            pst.setString(2,password);
+            pst.setString(2, Conversor.sha256(password));
             ResultSet rs = pst.executeQuery();
 
             if (rs.isBeforeFirst()) { // Si existe una línea que coincida en la BD, podremos pasar a crear el Usuario

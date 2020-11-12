@@ -8,6 +8,7 @@ import Cochera.DAO.VehiculoVenderDAO;
 import Cochera.Models.Concesionarios.Concesionario;
 import Cochera.Models.Vehiculo.TipoVehiculo;
 import Cochera.Models.Vehiculo.VehiculoVender;
+import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -48,7 +49,6 @@ public class ControladorMCreacion implements AutoRoot {
     private Parent root;
 
     private FilteredList<VehiculoVender> listaFiltrable;
-    private ControladorVehiculos controladorVehiculos;
 
 
     @FXML
@@ -91,12 +91,13 @@ public class ControladorMCreacion implements AutoRoot {
             datos.put("tswitch",tswitch.isSelected());
             if (tswitch.isSelected()) datos.put("tiempoUsado",antiguedad.getText());
 
-            dao.create(new VehiculoVender(datos));
-            //TODO : Problemas Wildcard
-//            VehiculoVender vehiculoCreado = dao.read(dao.create(vehiculo));
-//            listaFiltrable.getSource().add(vehiculoCreado);
+            // Creamos el vehiculo en la base de datos y lo añadimos a la lista
+            VehiculoVender vehiculo = new VehiculoVender(datos);
+            VehiculoVender vehiculoCreado = dao.read(dao.create(vehiculo));
+            ObservableList<VehiculoVender> listaObs = (ObservableList<VehiculoVender>) listaFiltrable.getSource();
 
-            controladorVehiculos.cerrarModal(this);
+            listaObs.add(vehiculoCreado);
+            btnCancelar.fire();
 
         } catch (Exception e){
             e.printStackTrace();
@@ -167,14 +168,6 @@ public class ControladorMCreacion implements AutoRoot {
     @Override
     public void setRoot(Parent root) {
         this.root = root;
-    }
-
-    public void setControladorVehiculos(ControladorVehiculos c) {
-        controladorVehiculos = c;
-    }
-
-    public Button getBtnCancelar() {
-        return btnCancelar;
     }
 
     public void setLista(FilteredList<VehiculoVender> lista) {

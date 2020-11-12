@@ -112,7 +112,7 @@ public class ControladorVehiculos implements AutoRoot {
             // Lo mantenemos en el estado porque es este tipo de lista la que nos permitirá filtrar por campo en el método correcpondiente
             listaFiltrable = new FilteredList<>(dao.read(), mostrarTodoAlInicio -> true);
 
-            // Actualizamos la tabla cuando haya algún cambio. TODO: Por el momento no lo hay porque no va la actualización
+            // Actualizamos la tabla cuando haya algún cambio.
             listaFiltrable.addListener((ListChangeListener.Change<? extends VehiculoVender> change) -> tabla.refresh());
 
             // Volvemos a envolver para darle la capacidad de ordenarse
@@ -289,16 +289,8 @@ public class ControladorVehiculos implements AutoRoot {
         ControladorMCreacion controlador = modalFX.getController();
         controlador.setRoot(root);
         controlador.setLista(listaFiltrable);
-        controlador.setControladorVehiculos(this);
 
         modal.showAndWait();
-    }
-
-    // TODO : Borrar esto cuando vaya el refresco de la tabla
-    public void cerrarModal(ControladorMCreacion c) {
-        c.getBtnCancelar().fire();
-        iniciarTabla();
-        iniciarColumnas();
     }
 
     private void mostrarModal(VehiculoVender vehiculo) {

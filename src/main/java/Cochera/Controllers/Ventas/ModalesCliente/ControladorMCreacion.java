@@ -6,6 +6,8 @@ import Cochera.DAO.ClienteDAO;
 
 import Cochera.Models.Clientes.Cliente;
 
+import Cochera.Models.Vehiculo.VehiculoVender;
+import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -44,7 +46,6 @@ public class ControladorMCreacion implements AutoRoot {
     @FXML
     private void initialize() {
 
-
     }
 
     @FXML
@@ -65,9 +66,12 @@ public class ControladorMCreacion implements AutoRoot {
             datos.put("descripcion",descripcion.getText());
             datos.put("email",Email.getText());
 
-            dao.create(new Cliente(datos));
+            // Creamos el cliente en la base de datos y lo añadimos a la lista
+            Cliente clienteCreado = dao.read(dao.create(new Cliente(datos)));
+            ObservableList<Cliente> listaObs = (ObservableList<Cliente>) listaFiltrable.getSource();
 
-            controladorClientes.cerrarModal(this);
+            listaObs.add(clienteCreado);
+            btnCancelar.fire();
 
         } catch (Exception e){
             e.printStackTrace();
@@ -128,7 +132,6 @@ public class ControladorMCreacion implements AutoRoot {
 
     }
 
-
     @FXML
     public void cerrar(ActionEvent actionEvent) {
         Stage stage = (Stage) ((Button)actionEvent.getSource()).getScene().getWindow();
@@ -139,14 +142,6 @@ public class ControladorMCreacion implements AutoRoot {
     @Override
     public void setRoot(Parent root) {
         this.root = root;
-    }
-
-    public void setControlador(ControladorClientes c) {
-        controladorClientes = c;
-    }
-
-    public Button getBtnCancelar() {
-        return btnCancelar;
     }
 
     public void setLista(FilteredList<Cliente> lista) {

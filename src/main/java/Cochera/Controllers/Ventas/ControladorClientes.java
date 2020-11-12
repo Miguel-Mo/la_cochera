@@ -56,11 +56,9 @@ public class ControladorClientes implements AutoRoot {
     private TextField fTelefono;
 
 
-
     public void ContraladorClientes(){
 
     }
-
 
     @FXML
     private void initialize() {
@@ -68,16 +66,13 @@ public class ControladorClientes implements AutoRoot {
         iniciarColumnas();
     }
 
-
-
-
     private void iniciarTabla() {
         try (ClienteDAO dao = new ClienteDAO()) {
             // Envolvemos los datos de la base de datos en una lista que nos permita filtrar
             // Lo mantenemos en el estado porque es este tipo de lista la que nos permitirá filtrar por campo en el método correcpondiente
             listaFiltrable = new FilteredList<>(dao.read(), mostrarTodoAlInicio -> true);
 
-            // Actualizamos la tabla cuando haya algún cambio. TODO: Por el momento no lo hay porque no va la actualización
+            // Actualizamos la tabla cuando haya algún cambio.
             listaFiltrable.addListener((ListChangeListener.Change<? extends Cliente> change) -> tabla.refresh());
 
             // Volvemos a envolver para darle la capacidad de ordenarse
@@ -178,8 +173,6 @@ public class ControladorClientes implements AutoRoot {
         });
     }
 
-
-
     public void limpiar(ActionEvent actionEvent) {
         fNombre.setText("");
         fTelefono.setText("");
@@ -192,7 +185,6 @@ public class ControladorClientes implements AutoRoot {
         tabla.getSortOrder().clear();
         listaFiltrable.setPredicate(mostrar -> true);
     }
-
 
     @FXML
     private void mostrarModalCreacion() throws IOException {
@@ -210,16 +202,8 @@ public class ControladorClientes implements AutoRoot {
         ControladorMCreacion controlador = modalFX.getController();
         controlador.setRoot(root);
         controlador.setLista(listaFiltrable);
-        controlador.setControlador(this);
 
         modal.showAndWait();
-    }
-
-    // TODO : Borrar esto cuando vaya el refresco de la tabla
-    public void cerrarModal(ControladorMCreacion c) {
-        c.getBtnCancelar().fire();
-        iniciarTabla();
-        iniciarColumnas();
     }
 
     private void mostrarModal(Cliente cliente) {

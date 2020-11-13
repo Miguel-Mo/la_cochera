@@ -3,6 +3,7 @@ package Cochera.Controllers.Ventas.Clientes;
 import Cochera.Controllers.AutoRoot;
 import Cochera.Controllers.Ventas.Clientes.ModalesCliente.ControladorMCreacion;
 import Cochera.Controllers.Ventas.Clientes.ModalesCliente.ControladorMEdicion;
+import Cochera.Controllers.Ventas.DataTable;
 import Cochera.DAO.ClienteDAO;
 import Cochera.Models.Clientes.Cliente;
 import javafx.beans.property.ReadOnlyObjectWrapper;
@@ -27,16 +28,11 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 
-public class ControladorClientes implements AutoRoot {
-
-    private Parent root;
-
-    // Tabla
-    @FXML private TableView<Cliente> tabla;
+public class ControladorClientes extends DataTable<Cliente> {
 
     // Columnas
     @FXML private TableColumn<Cliente,String> nombreCliente;
-    @FXML private TableColumn <Cliente,Date>fechaRegistro;
+    @FXML private TableColumn <Cliente,Date> fechaRegistro;
     @FXML private TableColumn<Cliente,String> telefono;
     @FXML private TableColumn <Cliente,Cliente> acciones;
 
@@ -46,36 +42,12 @@ public class ControladorClientes implements AutoRoot {
     @FXML private TextField fNombre;
     @FXML private TextField fTelefono;
 
-    private FilteredList<Cliente> listaFiltrable;
-
     public void ContraladorClientes() { }
 
-    @FXML
-    private void initialize() {
-        iniciarTabla();
+    @Override
+    protected void initialize() {
+        super.initialize();
         iniciarColumnas();
-    }
-
-    private void iniciarTabla() {
-        try (ClienteDAO dao = new ClienteDAO()) {
-            // Envolvemos los datos de la base de datos en una lista que nos permita filtrar
-            // Lo mantenemos en el estado porque es este tipo de lista la que nos permitirá filtrar por campo en el método correcpondiente
-            listaFiltrable = new FilteredList<>(dao.read(), mostrarTodoAlInicio -> true);
-
-            // Actualizamos la tabla cuando haya algún cambio.
-            listaFiltrable.addListener((ListChangeListener.Change<? extends Cliente> change) -> tabla.refresh());
-
-            // Volvemos a envolver para darle la capacidad de ordenarse
-            SortedList<Cliente> listaClientes = new SortedList<>(listaFiltrable);
-            listaClientes.comparatorProperty().bind(tabla.comparatorProperty());
-
-            // Finalmente seteamos la lista para mostrarla en la tabla
-            tabla.setItems(listaClientes);
-
-
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
     }
 
     private void iniciarColumnas() {
@@ -137,10 +109,9 @@ public class ControladorClientes implements AutoRoot {
         LocalDate desde = fDesde.getValue();
         LocalDate hasta = fHasta.getValue();
 
-
         // Hacemos un pequeño control de errores para obligar a seleccionar un Desde y Hasta si se ha escogido solo uno
         if ((desde != null && hasta == null) || (desde == null && hasta != null)) {
-            fDesde.setStyle("-fx-border-color: red");
+            fDesde.setStyle("-fx-border-color: #ff0000");
             fHasta.setStyle("-fx-border-color: red");
             return;
         } else {
@@ -169,7 +140,8 @@ public class ControladorClientes implements AutoRoot {
         });
     }
 
-    public void limpiar(ActionEvent actionEvent) {
+    @FXML
+    private void limpiar(ActionEvent actionEvent) {
         fNombre.setText("");
         fTelefono.setText("");
 
@@ -202,6 +174,7 @@ public class ControladorClientes implements AutoRoot {
         modal.showAndWait();
     }
 
+    @FXML
     private void mostrarModal(Cliente cliente) {
         Stage modal = new Stage();
         FXMLLoader modalFX = new FXMLLoader(getClass().getResource("/Ventas/Modales/FormClienteLupa.fxml"));
@@ -223,10 +196,5 @@ public class ControladorClientes implements AutoRoot {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    @Override
-    public void setRoot(Parent root) {
-        this.root = root;
     }
 }

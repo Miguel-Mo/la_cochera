@@ -1,6 +1,7 @@
 package Cochera.Models.Vehiculo;
 
 import Cochera.DAO.VehiculoDAO;
+import Cochera.Models.Modelo;
 import javafx.beans.property.*;
 
 import java.sql.ResultSet;
@@ -8,7 +9,7 @@ import java.sql.SQLException;
 import java.util.Date;
 import java.util.HashMap;
 
-public abstract class Vehiculo {
+public abstract class Vehiculo extends Modelo {
 
     protected StringProperty potencia, marca, modelo;
     protected ObjectProperty<Date> fechaRegistro;

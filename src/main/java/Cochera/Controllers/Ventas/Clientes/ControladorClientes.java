@@ -15,10 +15,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-
 import java.io.IOException;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -30,35 +31,24 @@ public class ControladorClientes implements AutoRoot {
 
     private Parent root;
 
-    @FXML
-    private TableView<Cliente> tabla;
+    // Tabla
+    @FXML private TableView<Cliente> tabla;
 
-    @FXML
-    public TableColumn<Cliente,String> nombreCliente;
-    @FXML
-    public TableColumn <Cliente,Date>fechaRegistro;
-    @FXML
-    public TableColumn<Cliente,String> telefono;
-    @FXML
-    public TableColumn <Cliente,Cliente> acciones;
+    // Columnas
+    @FXML private TableColumn<Cliente,String> nombreCliente;
+    @FXML private TableColumn <Cliente,Date>fechaRegistro;
+    @FXML private TableColumn<Cliente,String> telefono;
+    @FXML private TableColumn <Cliente,Cliente> acciones;
 
-    FilteredList<Cliente> listaFiltrable;
+    // Filtro
+    @FXML private DatePicker fDesde;
+    @FXML private DatePicker fHasta;
+    @FXML private TextField fNombre;
+    @FXML private TextField fTelefono;
 
+    private FilteredList<Cliente> listaFiltrable;
 
-    // Estado para el filtro
-    @FXML
-    private DatePicker fDesde;
-    @FXML
-    private DatePicker fHasta;
-    @FXML
-    private TextField fNombre;
-    @FXML
-    private TextField fTelefono;
-
-
-    public void ContraladorClientes(){
-
-    }
+    public void ContraladorClientes() { }
 
     @FXML
     private void initialize() {
@@ -92,8 +82,6 @@ public class ControladorClientes implements AutoRoot {
         nombreCliente.setCellValueFactory(dato -> dato.getValue().clienteProperty());
         telefono.setCellValueFactory(dato -> dato.getValue().telefonoProperty());
 
-
-
         fechaRegistro.setCellValueFactory(dato -> dato.getValue().fechaRegistroProperty());
         fechaRegistro.setCellFactory(dato -> new TableCell<>() {
             private final SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
@@ -111,12 +99,12 @@ public class ControladorClientes implements AutoRoot {
             }
         });
 
-
-
         acciones.setCellValueFactory(dato -> new ReadOnlyObjectWrapper<>(dato.getValue()));
         acciones.setSortable(false);
         acciones.setCellFactory(dato -> new TableCell<>() {
+
             private final Button lupa = new Button("Lupa");
+            private final ImageView iconoLupa = new ImageView("/icons/lupa.png");
 
             @Override
             protected void updateItem(Cliente cliente, boolean empty) {
@@ -127,6 +115,14 @@ public class ControladorClientes implements AutoRoot {
                     return;
                 }
 
+                lupa.setStyle(" -fx-background-color: white , white , white;-fx-background-insets: 0 0 0 0, 0 0 0 0, 0 0 3 0;");
+
+                //TODO HOVER DE LUPA
+                if(lupa.isHover()){
+                    lupa.setStyle(" -fx-background-color: red , white , white;-fx-background-insets: 0 0 0 0, 0 0 0 0, 0 0 3 0;");
+                }
+
+                lupa.setGraphic(iconoLupa);
                 setGraphic(lupa);
                 lupa.setOnAction(event -> mostrarModal(cliente));
             }

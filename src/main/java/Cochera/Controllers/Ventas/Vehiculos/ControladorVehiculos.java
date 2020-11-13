@@ -37,42 +37,27 @@ import java.util.prefs.Preferences;
 
 public class ControladorVehiculos implements AutoRoot {
 
-
-    @FXML
-    private AnchorPane parent;
     private Parent root;
 
-    // Estado de la tabla
-    @FXML
-    private TableView<VehiculoVender> tabla;
-    @FXML
-    private TableColumn<VehiculoVender, Image> imagen;
-    @FXML
-    private TableColumn<VehiculoVender, String> marca;
-    @FXML
-    private TableColumn<VehiculoVender, String> modelo;
-    @FXML
-    private TableColumn<VehiculoVender, Date> fechaEntrada;
-    @FXML
-    private TableColumn<VehiculoVender, String> tipo;
-    @FXML
-    private TableColumn<VehiculoVender, Integer> concesionario;
-    @FXML
-    private TableColumn<VehiculoVender, VehiculoVender> acciones;
+    // Tabla
+    @FXML private TableView<VehiculoVender> tabla;
 
-    // Estado para el filtro
-    @FXML
-    private DatePicker fDesde;
-    @FXML
-    private DatePicker fHasta;
-    @FXML
-    private TextField fModelo;
-    @FXML
-    private ComboBox<TipoVehiculo> fTipo;
-    @FXML
-    private TextField fMarca;
-    @FXML
-    private ComboBox<EstadoVehiculo> fEstado;
+    // Columnas
+    @FXML private TableColumn<VehiculoVender, Image> imagen;
+    @FXML private TableColumn<VehiculoVender, String> marca;
+    @FXML private TableColumn<VehiculoVender, String> modelo;
+    @FXML private TableColumn<VehiculoVender, Date> fechaEntrada;
+    @FXML private TableColumn<VehiculoVender, String> tipo;
+    @FXML private TableColumn<VehiculoVender, Integer> concesionario;
+    @FXML private TableColumn<VehiculoVender, VehiculoVender> acciones;
+
+    // Filtros
+    @FXML private DatePicker fDesde;
+    @FXML private DatePicker fHasta;
+    @FXML private TextField fModelo;
+    @FXML private ComboBox<TipoVehiculo> fTipo;
+    @FXML private TextField fMarca;
+    @FXML private ComboBox<EstadoVehiculo> fEstado;
 
     /**
      * Lista de vehiculos que permite hacer búsquedas para filtrar
@@ -84,8 +69,7 @@ public class ControladorVehiculos implements AutoRoot {
      */
     private String concesionarioActual;
 
-    public ControladorVehiculos() {
-    }
+    public ControladorVehiculos() { }
 
     @FXML
     private void initialize() {
@@ -151,7 +135,6 @@ public class ControladorVehiculos implements AutoRoot {
             }
         });
 
-
         tipo.setCellValueFactory(dato -> dato.getValue().getTipoVehiculo().descripcionProperty());
 
         concesionario.setCellValueFactory(dato -> dato.getValue().concesionarioIDProperty().asObject());
@@ -175,7 +158,6 @@ public class ControladorVehiculos implements AutoRoot {
                 }
             }
         });
-
 
         acciones.setCellValueFactory(dato -> new ReadOnlyObjectWrapper<>(dato.getValue()));
         acciones.setSortable(false);

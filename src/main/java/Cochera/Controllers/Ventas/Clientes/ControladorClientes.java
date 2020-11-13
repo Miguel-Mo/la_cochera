@@ -1,8 +1,8 @@
-package Cochera.Controllers.Ventas;
+package Cochera.Controllers.Ventas.Clientes;
 
 import Cochera.Controllers.AutoRoot;
-import Cochera.Controllers.Ventas.ModalesCliente.ControladorMCreacion;
-import Cochera.Controllers.Ventas.ModalesCliente.ControladorMEdicion;
+import Cochera.Controllers.Ventas.Clientes.ModalesCliente.ControladorMCreacion;
+import Cochera.Controllers.Ventas.Clientes.ModalesCliente.ControladorMEdicion;
 import Cochera.DAO.ClienteDAO;
 import Cochera.Models.Clientes.Cliente;
 import javafx.beans.property.ReadOnlyObjectWrapper;

@@ -1,7 +1,6 @@
-package Cochera.Controllers.Ventas.ModalesVehiculo;
+package Cochera.Controllers.Ventas.Vehiculos.ModalesVehiculo;
 
 import Cochera.Controllers.AutoRoot;
-import Cochera.Controllers.Ventas.ControladorVehiculos;
 import Cochera.DAO.ConcesionarioDAO;
 import Cochera.DAO.TipoVehiculosDAO;
 import Cochera.DAO.VehiculoVenderDAO;

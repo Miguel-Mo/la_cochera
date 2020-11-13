@@ -74,7 +74,6 @@ public abstract class AbstractDAO<T> implements AutoCloseable {
 
             variable.setAccessible(true);
             Object estado = variable.get(objeto);
-            String clase = estado.getClass().getCanonicalName();
             String tipo = Arrays.stream(estado.getClass().getName().split("\\.")).reduce((primero, ultimo) -> ultimo).get();
 
             switch (tipo) {

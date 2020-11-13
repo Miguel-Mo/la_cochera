@@ -1,4 +1,4 @@
-package Cochera.Controllers.Ventas;
+package Cochera.Controllers.Ventas.Propuestas;
 
 import Cochera.Controllers.AutoRoot;
 import javafx.scene.Parent;

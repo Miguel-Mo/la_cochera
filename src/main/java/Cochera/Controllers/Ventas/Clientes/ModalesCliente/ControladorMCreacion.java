@@ -1,12 +1,11 @@
-package Cochera.Controllers.Ventas.ModalesCliente;
+package Cochera.Controllers.Ventas.Clientes.ModalesCliente;
 
 import Cochera.Controllers.AutoRoot;
-import Cochera.Controllers.Ventas.ControladorClientes;
+import Cochera.Controllers.Ventas.Clientes.ControladorClientes;
 import Cochera.DAO.ClienteDAO;
 
 import Cochera.Models.Clientes.Cliente;
 
-import Cochera.Models.Vehiculo.VehiculoVender;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;

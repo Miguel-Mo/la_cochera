@@ -1,4 +1,4 @@
-package Cochera.Controllers.Ventas.ModalesCliente;
+package Cochera.Controllers.Ventas.Clientes.ModalesCliente;
 
 import Cochera.Controllers.AutoRoot;
 import Cochera.DAO.ClienteDAO;

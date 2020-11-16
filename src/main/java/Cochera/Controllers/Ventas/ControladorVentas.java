@@ -1,7 +1,6 @@
 package Cochera.Controllers.Ventas;
 
-import Cochera.Controllers.AutoRoot;
-import Cochera.Controllers.ControladorPanel;
+import Cochera.Controllers.DataTable;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -40,7 +39,7 @@ public class ControladorVentas{
 
         FXMLLoader tablaFX = new FXMLLoader(getClass().getResource(ruta));
         contenido.getChildren().add(tablaFX.load()); // TODO: ¿Elimina la anterior tabla y la sustituye? Probablemente no. ARREGLAR!
-        ((AutoRoot) tablaFX.getController()).setRoot(root);
+        ((DataTable) tablaFX.getController()).setRoot(root);
     }
 
     public void setRoot(Parent root){
@@ -50,7 +49,7 @@ public class ControladorVentas{
         try {
             FXMLLoader vehiculosFX = new FXMLLoader(getClass().getResource("/Ventas/tablaVehiculos.fxml"));
             contenido.getChildren().add(vehiculosFX.load());
-            ((AutoRoot) vehiculosFX.getController()).setRoot(root);
+            ((DataTable) vehiculosFX.getController()).setRoot(root);
         } catch (IOException e) {
             e.printStackTrace();
         }

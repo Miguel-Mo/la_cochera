@@ -19,7 +19,7 @@ import java.lang.reflect.ParameterizedType;
 import java.util.Arrays;
 
 
-public abstract class DataTable<T extends Modelo> implements AutoRoot {
+public abstract class DataTable<T extends Modelo> {
 
     private final String claseGenerica;
 
@@ -110,7 +110,6 @@ public abstract class DataTable<T extends Modelo> implements AutoRoot {
         return modal;
     }
 
-    @Override
     public void setRoot(Parent root) {
         this.root = root;
     }

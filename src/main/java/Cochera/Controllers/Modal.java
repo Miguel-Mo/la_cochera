@@ -14,7 +14,7 @@ import java.lang.reflect.ParameterizedType;
 import java.sql.SQLException;
 import java.util.Arrays;
 
-public abstract class Modal<T extends Modelo> implements AutoRoot {
+public abstract class Modal<T extends Modelo> {
 
     private final String claseGenerica;
 
@@ -97,7 +97,6 @@ public abstract class Modal<T extends Modelo> implements AutoRoot {
         stage.close();
     }
 
-    @Override
     public void setRoot(Parent root) {
         this.root = root;
     }

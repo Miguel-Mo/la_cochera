@@ -1,18 +1,10 @@
 package Cochera.Controllers.Ventas.Clientes;
 
-import Cochera.Controllers.AutoRoot;
 import Cochera.Controllers.Modal;
-import Cochera.DAO.ClienteDAO;
 import Cochera.Models.Clientes.Cliente;
-import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Parent;
 import javafx.scene.control.*;
-import javafx.stage.Stage;
 
-import java.sql.SQLException;
 import java.util.HashMap;
 
 public class ControladorModal extends Modal<Cliente> {

@@ -23,9 +23,9 @@ public class ControladorClientes extends DataTable<Cliente> {
 
     // Columnas
     @FXML private TableColumn<Cliente,String> nombreCliente;
-    @FXML private TableColumn <Cliente,Date> fechaRegistro;
+    @FXML private TableColumn<Cliente,Date> fechaRegistro;
     @FXML private TableColumn<Cliente,String> telefono;
-    @FXML private TableColumn <Cliente,Cliente> acciones;
+    @FXML private TableColumn<Cliente,Cliente> acciones;
 
     // Filtro
     @FXML private DatePicker fDesde;

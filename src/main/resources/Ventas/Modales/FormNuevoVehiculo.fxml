@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.Pane?>
 
 <?import org.controlsfx.control.ToggleSwitch?>
-<AnchorPane id="root_pane" prefHeight="352.0" prefWidth="501.0" stylesheets="@/css/formModales.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Cochera.Controllers.Ventas.Vehiculos.ControladorMCreacion">
+<AnchorPane id="root_pane" prefHeight="352.0" prefWidth="501.0" stylesheets="@/css/formModales.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Cochera.Controllers.Ventas.Vehiculos.ControladorModal">
    <children>
       <Pane id="pane_cont" prefHeight="352.0" prefWidth="501.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -20,7 +20,7 @@
             <ComboBox fx:id="concesionarioRegistro" layoutX="274.0" layoutY="162.0" prefWidth="174.0" />
             <Label layoutX="50.0" layoutY="202.0" text="Precio de compra" />
             <TextField fx:id="precio" layoutX="50.0" layoutY="220.0" prefWidth="174.0" />
-            <Button fx:id="btnAceptar" layoutX="295.0" layoutY="288.0" mnemonicParsing="false" onAction="#guardar" prefHeight="37.0" prefWidth="104.0" text="Crear" />
+            <Button fx:id="btnAceptar" layoutX="295.0" layoutY="288.0" mnemonicParsing="false" onAction="#nuevoEditar" prefHeight="37.0" prefWidth="104.0" text="Crear" />
             <Button fx:id="btnCancelar" layoutX="81.0" layoutY="288.0" mnemonicParsing="false" onAction="#cerrar" prefHeight="37.0" prefWidth="104.0" text="Cancelar" />
             <Label layoutX="50.0" layoutY="144.0" text="Tipo vehiculo" />
             <ComboBox fx:id="tipoVehiculo" layoutX="50.0" layoutY="162.0" prefWidth="174.0" />

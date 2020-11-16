@@ -1,7 +1,8 @@
 package Cochera.Controllers;
 
 import Cochera.DAO.Crud;
-import Cochera.Models.Clientes.Cliente;
+import Cochera.DAO.DAOFactory;
+import Cochera.Models.Modelo;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
@@ -9,12 +10,13 @@ import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
-
+import java.lang.reflect.ParameterizedType;
 import java.sql.SQLException;
+import java.util.Arrays;
 
-public abstract class Modal<T> implements AutoRoot {
+public abstract class Modal<T extends Modelo> implements AutoRoot {
 
-    private String claseGenerica;
+    private final String claseGenerica;
 
     protected Parent root;
     protected T objeto;
@@ -23,7 +25,8 @@ public abstract class Modal<T> implements AutoRoot {
     @FXML protected Button btnCancelar;
 
     public Modal() {
-        claseGenerica = ;
+        String rutaClase = ((ParameterizedType) this.getClass().getGenericSuperclass()).getActualTypeArguments()[0].getTypeName();
+        claseGenerica = Arrays.stream(rutaClase.split("\\.")).reduce((primero, ultimo) -> ultimo).get();
     }
 
     @FXML
@@ -55,7 +58,7 @@ public abstract class Modal<T> implements AutoRoot {
 
                 btnCancelar.fire();
 
-            } catch (SQLException throwables) {
+            } catch (Exception throwables) {
                 throwables.printStackTrace();
             }
 

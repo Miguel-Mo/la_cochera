@@ -15,12 +15,16 @@ import java.util.Arrays;
 
 public abstract class DataTable<T extends Modelo> implements AutoRoot {
 
-    protected Parent root;
+    private final String claseGenerica;
 
-    // Tabla
     @FXML protected TableView<T> tabla;
-
+    protected Parent root;
     protected FilteredList<T> listaFiltrable;
+
+    public DataTable() {
+        String rutaClase = ((ParameterizedType) this.getClass().getGenericSuperclass()).getActualTypeArguments()[0].getTypeName();
+        claseGenerica = Arrays.stream(rutaClase.split("\\.")).reduce((primero, ultimo) -> ultimo).get();
+    }
 
     @FXML
     protected void initialize() {
@@ -28,7 +32,7 @@ public abstract class DataTable<T extends Modelo> implements AutoRoot {
     }
 
     protected void iniciarTabla() {
-        try (Crud<T> dao = obtenerDao()) {
+        try (Crud<T> dao = DAOFactory.obtener(claseGenerica)) {
             // Envolvemos los datos de la base de datos en una lista que nos permita filtrar
             // Lo mantenemos en el estado porque es este tipo de lista la que nos permitirá filtrar por campo en el método correspondiente
             listaFiltrable = new FilteredList<T>(dao.read(), mostrarTodoAlInicio -> true);
@@ -45,18 +49,6 @@ public abstract class DataTable<T extends Modelo> implements AutoRoot {
 
         } catch (Exception throwables) {
             throwables.printStackTrace();
-        }
-    }
-
-    private Crud<T> obtenerDao() throws Exception {
-        String rutaClase = ((ParameterizedType) this.getClass().getGenericSuperclass()).getActualTypeArguments()[0].getTypeName();
-
-        String clase = Arrays.stream(rutaClase.split("\\.")).reduce((primero, ultimo) -> ultimo).get();
-
-        switch (clase) {
-            case "Cliente" : return (Crud<T>) new ClienteDAO();
-            case "VehiculoVender" : return (Crud<T>) new VehiculoVenderDAO();
-            default: throw new Exception("No existe un DAO marcado para " + clase);
         }
     }
 

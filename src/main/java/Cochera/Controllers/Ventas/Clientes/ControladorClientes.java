@@ -1,28 +1,18 @@
 package Cochera.Controllers.Ventas.Clientes;
 
-import Cochera.Controllers.AutoRoot;
-import Cochera.Controllers.Ventas.Clientes.ModalesCliente.ControladorMCreacion;
-import Cochera.Controllers.Ventas.Clientes.ModalesCliente.ControladorMEdicion;
-import Cochera.Controllers.Ventas.DataTable;
-import Cochera.DAO.ClienteDAO;
+import Cochera.Controllers.DataTable;
 import Cochera.Models.Clientes.Cliente;
 import javafx.beans.property.ReadOnlyObjectWrapper;
-import javafx.collections.ListChangeListener;
-import javafx.collections.transformation.FilteredList;
-import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -41,8 +31,6 @@ public class ControladorClientes extends DataTable<Cliente> {
     @FXML private DatePicker fHasta;
     @FXML private TextField fNombre;
     @FXML private TextField fTelefono;
-
-    public void ContraladorClientes() { }
 
     @Override
     protected void initialize() {
@@ -187,7 +175,7 @@ public class ControladorClientes extends DataTable<Cliente> {
             modal.setResizable(false);
 
             root.setStyle("-fx-opacity: 0.4");
-            ControladorMEdicion controlador = modalFX.getController();
+            ControladorModal controlador = modalFX.getController();
             controlador.setRoot(root);
             controlador.setCliente(cliente);
 

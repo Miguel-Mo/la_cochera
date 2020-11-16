@@ -14,16 +14,7 @@ public class ControladorVentas{
 
     private Parent root;
 
-    @FXML
-    private Pane contenido;
-    @FXML
-    private Button vehiculos;
-    @FXML
-    private Button clientes;
-    @FXML
-    private Button propuestas;
-    
-    private ControladorPanel panel;
+    @FXML private Pane contenido;
 
     @FXML
     private void initialize() { }

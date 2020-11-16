@@ -1,4 +1,4 @@
-package Cochera.Controllers.Ventas.Clientes.ModalesCliente;
+package Cochera.Controllers.Ventas.Clientes;
 
 import Cochera.Controllers.AutoRoot;
 import Cochera.DAO.ClienteDAO;
@@ -11,28 +11,17 @@ import javafx.stage.Stage;
 
 import java.sql.SQLException;
 
-public class ControladorMEdicion implements AutoRoot {
+public class ControladorModal implements AutoRoot {
 
-    @FXML
-    private TextField Nombre;
-    @FXML
-    private TextField Apellidos;
-    @FXML
-    private TextField Telefono;
-    @FXML
-    private TextField dni;
-    @FXML
-    private DatePicker FechaReg;
-    @FXML
-    private TextField Presupuesto;
-    @FXML
-    private TextArea descripcion;
-    @FXML
-    private TextField Email;
-    @FXML
-    private Button btnAceptar;
-    @FXML
-    private Button btnCancelar;
+    // Campos del formulario
+    @FXML private TextField Nombre;
+    @FXML private TextField Apellidos;
+    @FXML private TextField Telefono;
+    @FXML private TextField dni;
+    @FXML private TextField Presupuesto;
+    @FXML private TextArea descripcion;
+    @FXML private TextField Email;
+    @FXML private Button btnCancelar;
 
     private Parent root;
     private Cliente cliente;
@@ -43,6 +32,7 @@ public class ControladorMEdicion implements AutoRoot {
     }
 
     private void prohibirEdicion() {
+
         Nombre.setDisable(true);
         Apellidos.setDisable(true);
         Telefono.setDisable(true);
@@ -58,7 +48,6 @@ public class ControladorMEdicion implements AutoRoot {
         Presupuesto.setStyle(" -fx-background-color: white , white , white;-fx-background-insets: 0 0 0 0, 0 0 0 0, 0 0 3 0;");
         descripcion.setStyle(" -fx-background-color: white , white , white;-fx-background-insets: 0 0 0 0, 0 0 0 0, 0 0 3 0;");
         Email.setStyle(" -fx-background-color: white , white , white;-fx-background-insets: 0 0 0 0, 0 0 0 0, 0 0 3 0;");
-
 
     }
 

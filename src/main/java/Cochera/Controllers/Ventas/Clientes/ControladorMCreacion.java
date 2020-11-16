@@ -1,4 +1,4 @@
-package Cochera.Controllers.Ventas.Clientes.ModalesCliente;
+package Cochera.Controllers.Ventas.Clientes;
 
 import Cochera.Controllers.AutoRoot;
 import Cochera.Controllers.Ventas.Clientes.ControladorClientes;
@@ -18,29 +18,18 @@ import java.util.HashMap;
 
 public class ControladorMCreacion implements AutoRoot {
 
-
-    @FXML
-    private TextField Nombre;
-    @FXML
-    private TextField Apellidos;
-    @FXML
-    private TextField Telefono;
-    @FXML
-    private TextField dni;
-    @FXML
-    private TextField Presupuesto;
-    @FXML
-    private TextArea descripcion;
-    @FXML
-    private TextField Email;
-    @FXML
-    private Button btnAceptar;
-    @FXML
-    private Button btnCancelar;
+    // Campos del formulario
+    @FXML private TextField Nombre;
+    @FXML private TextField Apellidos;
+    @FXML private TextField Telefono;
+    @FXML private TextField dni;
+    @FXML private TextField Presupuesto;
+    @FXML private TextArea descripcion;
+    @FXML private TextField Email;
+    @FXML private Button btnCancelar;
 
     private Parent root;
     private FilteredList<Cliente> listaFiltrable;
-    private ControladorClientes controladorClientes;
 
     @FXML
     private void initialize() {

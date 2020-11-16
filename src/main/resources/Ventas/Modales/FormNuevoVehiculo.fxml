@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.Pane?>
 
 <?import org.controlsfx.control.ToggleSwitch?>
-<AnchorPane id="root_pane" prefHeight="352.0" prefWidth="501.0" stylesheets="@/css/formModales.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Cochera.Controllers.Ventas.Vehiculos.ModalesVehiculo.ControladorMCreacion">
+<AnchorPane id="root_pane" prefHeight="352.0" prefWidth="501.0" stylesheets="@/css/formModales.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Cochera.Controllers.Ventas.Vehiculos.ControladorMCreacion">
    <children>
       <Pane id="pane_cont" prefHeight="352.0" prefWidth="501.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>

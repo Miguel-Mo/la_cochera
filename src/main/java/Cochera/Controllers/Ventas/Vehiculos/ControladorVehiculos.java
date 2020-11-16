@@ -1,34 +1,23 @@
 package Cochera.Controllers.Ventas.Vehiculos;
 
-import Cochera.Controllers.AutoRoot;
-import Cochera.Controllers.Ventas.DataTable;
-import Cochera.Controllers.Ventas.Vehiculos.ModalesVehiculo.ControladorMCreacion;
-import Cochera.Controllers.Ventas.Vehiculos.ModalesVehiculo.ControladorMEdicion;
+import Cochera.Controllers.DataTable;
 import Cochera.DAO.TipoVehiculosDAO;
-import Cochera.DAO.VehiculoVenderDAO;
-import Cochera.Models.Clientes.Cliente;
 import Cochera.Models.Vehiculo.TipoVehiculo;
 import Cochera.Models.Vehiculo.VehiculoVender;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
-import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-
 import java.io.IOException;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;

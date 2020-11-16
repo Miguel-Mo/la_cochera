@@ -1,4 +1,4 @@
-package Cochera.Controllers.Ventas;
+package Cochera.Controllers;
 
 import Cochera.Controllers.AutoRoot;
 import Cochera.DAO.*;

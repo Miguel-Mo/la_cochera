@@ -63,10 +63,6 @@ public class ControladorMEdicion implements AutoRoot {
 
         lantiguedad.visibleProperty().bind(tswitch.selectedProperty());
         antiguedad.visibleProperty().bind(tswitch.selectedProperty());
-
-
-
-
     }
 
     private void prohibirEdicion() {
@@ -86,7 +82,6 @@ public class ControladorMEdicion implements AutoRoot {
         antiguedad.setStyle(" -fx-background-color: white , white , white;-fx-background-insets: 0 0 0 0, 0 0 0 0, 0 0 3 0;");
         precio.setStyle(" -fx-background-color: white , white , white;-fx-background-insets: 0 0 0 0, 0 0 0 0, 0 0 3 0;");
         tipoVehiculo.setStyle(" -fx-background-color: white , white , white;-fx-background-insets: 0 0 0 0, 0 0 0 0, 0 0 3 0;");
-
     }
 
     private void permitirEdicion() {

@@ -1,6 +1,7 @@
 package Cochera.Controllers.Ventas.Clientes;
 
 import Cochera.Controllers.DataTable;
+import Cochera.Controllers.Modal;
 import Cochera.Models.Clientes.Cliente;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.event.ActionEvent;
@@ -156,7 +157,7 @@ public class ControladorClientes extends DataTable<Cliente> {
             modal.setResizable(false);
 
             root.setStyle("-fx-opacity: 0.4");
-            ControladorModal controlador = modalFX.getController();
+            Modal<Cliente> controlador = modalFX.getController();
             controlador.setRoot(root);
             controlador.setLista(listaFiltrable);
 

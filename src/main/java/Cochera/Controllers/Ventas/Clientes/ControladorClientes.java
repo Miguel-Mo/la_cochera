@@ -33,6 +33,11 @@ public class ControladorClientes extends DataTable<Cliente> {
     @FXML private TextField fNombre;
     @FXML private TextField fTelefono;
 
+    public ControladorClientes() {
+        modalCreacionView = "/Ventas/Modales/FormNuevoCliente.fxml";
+        modalModificacionView = "/Ventas/Modales/FormClienteLupa.fxml";
+    }
+
     @Override
     protected void initialize() {
         super.initialize();
@@ -85,13 +90,13 @@ public class ControladorClientes extends DataTable<Cliente> {
 
                 lupa.setGraphic(iconoLupa);
                 setGraphic(lupa);
-                lupa.setOnAction(event -> mostrarModal(cliente));
+                lupa.setOnAction(event -> mostrarModalModificacion(cliente));
             }
         });
     }
 
     @FXML
-    private void filtrar(ActionEvent actionEvent) {
+    private void filtrar() {
         String nombre = fNombre.getText().trim();
         String telefono = fTelefono.getText().trim();
 
@@ -130,7 +135,7 @@ public class ControladorClientes extends DataTable<Cliente> {
     }
 
     @FXML
-    private void limpiar(ActionEvent actionEvent) {
+    private void limpiar() {
         fNombre.setText("");
         fTelefono.setText("");
 
@@ -141,55 +146,5 @@ public class ControladorClientes extends DataTable<Cliente> {
 
         tabla.getSortOrder().clear();
         listaFiltrable.setPredicate(mostrar -> true);
-    }
-
-    @FXML
-    private void mostrarModalCreacion() {
-        Stage modal = new Stage();
-        FXMLLoader modalFX = new FXMLLoader(getClass().getResource("/Ventas/Modales/FormNuevoCliente.fxml"));
-
-        try {
-            modal.setScene(new Scene(modalFX.load()));
-            modal.initOwner(root.getScene().getWindow());
-            modal.initModality(Modality.WINDOW_MODAL);
-            modal.initStyle(StageStyle.UNDECORATED);
-            modal.alwaysOnTopProperty();
-            modal.setResizable(false);
-
-            root.setStyle("-fx-opacity: 0.4");
-            Modal<Cliente> controlador = modalFX.getController();
-            controlador.setRoot(root);
-            controlador.setLista(listaFiltrable);
-
-            modal.showAndWait();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @FXML
-    private void mostrarModal(Cliente cliente) {
-        Stage modal = new Stage();
-        FXMLLoader modalFX = new FXMLLoader(getClass().getResource("/Ventas/Modales/FormClienteLupa.fxml"));
-
-        try {
-            modal.setScene(new Scene(modalFX.load()));
-            modal.initOwner(root.getScene().getWindow());
-            modal.initModality(Modality.WINDOW_MODAL);
-            modal.initStyle(StageStyle.UNDECORATED);
-            modal.alwaysOnTopProperty();
-            modal.setResizable(false);
-
-            root.setStyle("-fx-opacity: 0.4");
-            ControladorModal controlador = modalFX.getController();
-            controlador.setRoot(root);
-            controlador.setObjeto(cliente);
-
-            modal.showAndWait();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 }

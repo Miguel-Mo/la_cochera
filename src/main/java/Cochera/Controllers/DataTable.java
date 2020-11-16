@@ -1,14 +1,20 @@
 package Cochera.Controllers;
 
-import Cochera.Controllers.AutoRoot;
 import Cochera.DAO.*;
 import Cochera.Models.Modelo;
 import javafx.collections.ListChangeListener;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TableView;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+
+import java.io.IOException;
 import java.lang.reflect.ParameterizedType;
 import java.util.Arrays;
 
@@ -20,6 +26,9 @@ public abstract class DataTable<T extends Modelo> implements AutoRoot {
     @FXML protected TableView<T> tabla;
     protected Parent root;
     protected FilteredList<T> listaFiltrable;
+
+    protected String modalCreacionView;
+    protected String modalModificacionView;
 
     public DataTable() {
         String rutaClase = ((ParameterizedType) this.getClass().getGenericSuperclass()).getActualTypeArguments()[0].getTypeName();
@@ -50,6 +59,55 @@ public abstract class DataTable<T extends Modelo> implements AutoRoot {
         } catch (Exception throwables) {
             throwables.printStackTrace();
         }
+    }
+
+    @FXML
+    protected void mostrarModalCreacion() {
+        FXMLLoader modalFX = new FXMLLoader(getClass().getResource(modalCreacionView));
+
+        try {
+            Stage modal = generarModal(modalFX);
+            Modal<T> controlador = modalFX.getController();
+            controlador.setRoot(root);
+            controlador.setLista(listaFiltrable);
+
+            modal.showAndWait();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    protected void mostrarModalModificacion(T objeto) {
+        FXMLLoader modalFX = new FXMLLoader(getClass().getResource(modalModificacionView));
+
+        try {
+            Stage modal = generarModal(modalFX);
+            Modal<T> controlador = modalFX.getController();
+            controlador.setRoot(root);
+            controlador.setObjeto(objeto);
+
+            modal.showAndWait();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private Stage generarModal(FXMLLoader modalFX) throws IOException {
+        Stage modal = new Stage();
+
+        modal.setScene(new Scene(modalFX.load()));
+        modal.initOwner(root.getScene().getWindow());
+        modal.initModality(Modality.WINDOW_MODAL);
+        modal.initStyle(StageStyle.UNDECORATED);
+        modal.alwaysOnTopProperty();
+        modal.setResizable(false);
+
+        root.setStyle("-fx-opacity: 0.4");
+
+        return modal;
     }
 
     @Override

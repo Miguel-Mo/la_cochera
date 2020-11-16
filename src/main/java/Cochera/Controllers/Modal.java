@@ -70,11 +70,14 @@ public abstract class Modal<T extends Modelo> implements AutoRoot {
         }
     }
 
-
-    public void setObjeto(T objeto) {
+    protected void setObjeto(T objeto) {
         this.objeto = objeto;
         establecerObjeto(objeto);
         prohibirEdicion();
+    }
+
+    protected void setLista(FilteredList<T> lista) {
+        this.listaFiltrable = lista;
     }
 
     protected abstract void resetError();
@@ -87,7 +90,7 @@ public abstract class Modal<T extends Modelo> implements AutoRoot {
     protected abstract void prohibirEdicion();
     protected abstract void permitirEdicion();
 
-
+    @FXML
     protected void cerrar(ActionEvent actionEvent) {
         Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
         root.setStyle("-fx-opacity: 1");
@@ -97,9 +100,5 @@ public abstract class Modal<T extends Modelo> implements AutoRoot {
     @Override
     public void setRoot(Parent root) {
         this.root = root;
-    }
-
-    protected void setLista(FilteredList<T> lista) {
-        this.listaFiltrable = lista;
     }
 }

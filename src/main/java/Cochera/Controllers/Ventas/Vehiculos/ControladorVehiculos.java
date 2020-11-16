@@ -50,6 +50,8 @@ public class ControladorVehiculos extends DataTable<VehiculoVender> {
 
     public ControladorVehiculos() {
         concesionarioActual = Preferences.userRoot().get("concesionarioID",null);
+        modalCreacionView = "/Ventas/Modales/FormNuevoVehiculo.fxml";
+        modalModificacionView = "/Ventas/Modales/FormVehiculoLupa.fxml";
     }
 
     @Override
@@ -147,13 +149,13 @@ public class ControladorVehiculos extends DataTable<VehiculoVender> {
 
                 lupa.setGraphic(view);
                 setGraphic(lupa);
-                lupa.setOnAction(event -> mostrarModal(vehiculo));
+                lupa.setOnAction(event -> mostrarModalModificacion(vehiculo));
             }
         });
     }
 
     @FXML
-    private void filtrar(ActionEvent actionEvent) {
+    private void filtrar() {
         String marca = fMarca.getText().trim();
         String modelo = fModelo.getText().trim();
         TipoVehiculo tipo = fTipo.getValue();
@@ -200,7 +202,8 @@ public class ControladorVehiculos extends DataTable<VehiculoVender> {
         });
     }
 
-    public void limpiar(ActionEvent actionEvent) {
+    @FXML
+    private void limpiar() {
         fModelo.setText("");
         fMarca.setText("");
         fEstado.setValue(null);
@@ -213,49 +216,6 @@ public class ControladorVehiculos extends DataTable<VehiculoVender> {
 
         tabla.getSortOrder().clear();
         listaFiltrable.setPredicate(mostrar -> true);
-    }
-
-    @FXML
-    private void mostrarModalCreacion() throws IOException {
-        Stage modal = new Stage();
-        FXMLLoader modalFX = new FXMLLoader(getClass().getResource("/Ventas/Modales/FormNuevoVehiculo.fxml"));
-
-        modal.setScene(new Scene(modalFX.load()));
-        modal.initOwner(root.getScene().getWindow());
-        modal.initModality(Modality.WINDOW_MODAL);
-        modal.initStyle(StageStyle.UNDECORATED);
-        modal.setResizable(false);
-
-        root.setStyle("-fx-opacity: 0.4");
-        ControladorMCreacion controlador = modalFX.getController();
-        controlador.setRoot(root);
-        controlador.setLista(listaFiltrable);
-
-        modal.showAndWait();
-    }
-
-    @FXML
-    private void mostrarModal(VehiculoVender vehiculo) {
-        Stage modal = new Stage();
-        FXMLLoader modalFX = new FXMLLoader(getClass().getResource("/Ventas/Modales/FormVehiculoLupa.fxml"));
-
-        try {
-            modal.setScene(new Scene(modalFX.load()));
-            modal.initOwner(root.getScene().getWindow());
-            modal.initModality(Modality.WINDOW_MODAL);
-            modal.initStyle(StageStyle.UNDECORATED);
-            modal.setResizable(false);
-
-            root.setStyle("-fx-opacity: 0.4");
-            ControladorMEdicion controlador = modalFX.getController();
-            controlador.setRoot(root);
-            controlador.setVehiculo(vehiculo);
-
-            modal.showAndWait();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 }
 

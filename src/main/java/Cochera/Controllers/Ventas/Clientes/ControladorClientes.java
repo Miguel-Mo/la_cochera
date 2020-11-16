@@ -143,23 +143,28 @@ public class ControladorClientes extends DataTable<Cliente> {
     }
 
     @FXML
-    private void mostrarModalCreacion() throws IOException {
+    private void mostrarModalCreacion() {
         Stage modal = new Stage();
         FXMLLoader modalFX = new FXMLLoader(getClass().getResource("/Ventas/Modales/FormNuevoCliente.fxml"));
 
-        modal.setScene(new Scene(modalFX.load()));
-        modal.initOwner(root.getScene().getWindow());
-        modal.initModality(Modality.WINDOW_MODAL);
-        modal.initStyle(StageStyle.UNDECORATED);
-        modal.alwaysOnTopProperty();
-        modal.setResizable(false);
+        try {
+            modal.setScene(new Scene(modalFX.load()));
+            modal.initOwner(root.getScene().getWindow());
+            modal.initModality(Modality.WINDOW_MODAL);
+            modal.initStyle(StageStyle.UNDECORATED);
+            modal.alwaysOnTopProperty();
+            modal.setResizable(false);
 
-        root.setStyle("-fx-opacity: 0.4");
-        ControladorMCreacion controlador = modalFX.getController();
-        controlador.setRoot(root);
-        controlador.setLista(listaFiltrable);
+            root.setStyle("-fx-opacity: 0.4");
+            ControladorModal controlador = modalFX.getController();
+            controlador.setRoot(root);
+            controlador.setLista(listaFiltrable);
 
-        modal.showAndWait();
+            modal.showAndWait();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -172,12 +177,13 @@ public class ControladorClientes extends DataTable<Cliente> {
             modal.initOwner(root.getScene().getWindow());
             modal.initModality(Modality.WINDOW_MODAL);
             modal.initStyle(StageStyle.UNDECORATED);
+            modal.alwaysOnTopProperty();
             modal.setResizable(false);
 
             root.setStyle("-fx-opacity: 0.4");
             ControladorModal controlador = modalFX.getController();
             controlador.setRoot(root);
-            controlador.setCliente(cliente);
+            controlador.setObjeto(cliente);
 
             modal.showAndWait();
 

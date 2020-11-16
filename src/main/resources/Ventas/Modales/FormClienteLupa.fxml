@@ -25,7 +25,7 @@
                 <TextField fx:id="Presupuesto" layoutX="50.0" layoutY="165.0" prefWidth="174.0" />
                 <Label layoutX="50.0" layoutY="219.0" text="Descripción del coche deseado" />
                 <TextArea fx:id="descripcion" layoutX="52.0" layoutY="248.0" prefHeight="172.0" prefWidth="396.0" />
-                <Button fx:id="btnAceptar" layoutX="276.0" layoutY="448.0" mnemonicParsing="false" onAction="#editar" prefHeight="35.0" prefWidth="72.0" text="Editar" />
+                <Button fx:id="btnAceptar" layoutX="276.0" layoutY="448.0" mnemonicParsing="false" onAction="#nuevoEditar" prefHeight="35.0" prefWidth="72.0" text="Editar" />
                 <Button fx:id="btnCancelar" layoutX="161.0" layoutY="448.0" mnemonicParsing="false" onAction="#cerrar" prefHeight="35.0" prefWidth="72.0" text="Cancelar" />
 
 

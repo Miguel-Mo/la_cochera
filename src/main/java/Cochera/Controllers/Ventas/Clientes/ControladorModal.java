@@ -3,6 +3,8 @@ package Cochera.Controllers.Ventas.Clientes;
 import Cochera.Controllers.AutoRoot;
 import Cochera.DAO.ClienteDAO;
 import Cochera.Models.Clientes.Cliente;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
@@ -10,6 +12,7 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 
 public class ControladorModal implements AutoRoot {
 
@@ -25,10 +28,11 @@ public class ControladorModal implements AutoRoot {
 
     private Parent root;
     private Cliente cliente;
+    private FilteredList<Cliente> listaFiltrable;
 
     @FXML
     private void initialize() {
-        prohibirEdicion();
+
     }
 
     private void prohibirEdicion() {
@@ -61,37 +65,44 @@ public class ControladorModal implements AutoRoot {
         Email.setDisable(false);
     }
 
-
     @FXML
-    public void editar(ActionEvent actionEvent){
+    private void nuevoEditar(ActionEvent actionEvent) {
+
         resetError();
 
         Button boton = (Button) actionEvent.getSource();
 
-        if(boton.getText().equals("Guardar")) {
+        if (boton.getText().equals("Guardar") || boton.getText().equals("Crear")) {
             if (!checkCampos()) return;
 
-            try(ClienteDAO dao = new ClienteDAO()){
+            try (ClienteDAO dao = new ClienteDAO()) {
 
-                cliente.setApellidos(Apellidos.getText());
-                cliente.setDni(dni.getText());
-                cliente.setEmail(Email.getText());
-                cliente.setNombre(Nombre.getText());
-                cliente.setPresupuesto(Float.parseFloat(Presupuesto.getText()));
-                cliente.setTelefono(Telefono.getText());
-                cliente.setDescripcionVehiculo(descripcion.getText());
+                if (cliente == null) {
 
-                dao.update(cliente);
+                    // Creamos el objeto en la base de datos y lo añadimos a la lista
+                    Cliente clienteCreado = dao.read(dao.create(crearObjeto()));
+                    ObservableList<Cliente> listaObs = (ObservableList<Cliente>) listaFiltrable.getSource();
+
+                    listaObs.add(clienteCreado);
+
+                } else {
+
+                    actualizarObjeto();
+                    dao.update(cliente);
+
+                }
 
                 btnCancelar.fire();
 
-            }catch (SQLException throwables){
+            } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
 
-        } else if(boton.getText().contentEquals("Editar")){
+        } else if (boton.getText().contentEquals("Editar")) {
+
             permitirEdicion();
             boton.setText("Guardar");
+
         }
     }
 
@@ -148,24 +159,37 @@ public class ControladorModal implements AutoRoot {
 
     }
 
-    @FXML
-    public void cerrar(ActionEvent actionEvent) {
-        Stage stage = (Stage) ((Button)actionEvent.getSource()).getScene().getWindow();
-        root.setStyle("-fx-opacity: 1");
-        stage.close();
+    protected Cliente crearObjeto() {
+        HashMap<String, String> datos = new HashMap<>();
+
+        datos.put("nombre", Nombre.getText());
+        datos.put("apellidos", Apellidos.getText());
+        datos.put("telefono", Telefono.getText());
+        datos.put("dni", dni.getText());
+        datos.put("presupuesto", Presupuesto.getText());
+        datos.put("descripcion", descripcion.getText());
+        datos.put("email", Email.getText());
+
+        return new Cliente(datos);
     }
 
-    @Override
-    public void setRoot(Parent root) {
-        this.root = root;
+    protected void actualizarObjeto() {
+        cliente.setApellidos(Apellidos.getText());
+        cliente.setDni(dni.getText());
+        cliente.setEmail(Email.getText());
+        cliente.setNombre(Nombre.getText());
+        cliente.setPresupuesto(Float.parseFloat(Presupuesto.getText()));
+        cliente.setTelefono(Telefono.getText());
+        cliente.setDescripcionVehiculo(descripcion.getText());
     }
 
-    public void setCliente(Cliente cliente) {
+    public void setObjeto(Cliente cliente) {
         this.cliente = cliente;
-        establecerCliente();
+        establecerObjeto();
+        prohibirEdicion();
     }
 
-    private void establecerCliente() {
+    private void establecerObjeto() {
         Nombre.setText(cliente.getNombre());
         Apellidos.setText(cliente.getApellidos());
         Telefono.setText(cliente.getTelefono());
@@ -175,4 +199,19 @@ public class ControladorModal implements AutoRoot {
         Email.setText(cliente.getEmail());
     }
 
+    public void setLista(FilteredList<Cliente> lista) {
+        this.listaFiltrable = lista;
+    }
+
+    @FXML
+    public void cerrar(ActionEvent actionEvent) {
+        Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
+        root.setStyle("-fx-opacity: 1");
+        stage.close();
+    }
+
+    @Override
+    public void setRoot(Parent root) {
+        this.root = root;
+    }
 }

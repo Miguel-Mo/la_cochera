@@ -13,7 +13,6 @@ import javafx.scene.control.TableView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-
 import java.io.IOException;
 import java.lang.reflect.ParameterizedType;
 import java.util.Arrays;
@@ -95,7 +94,7 @@ public abstract class DataTable<T extends Modelo> {
         }
     }
 
-    private Stage generarModal(FXMLLoader modalFX) throws IOException {
+    protected Stage generarModal(FXMLLoader modalFX) throws IOException {
         Stage modal = new Stage();
 
         modal.setScene(new Scene(modalFX.load()));

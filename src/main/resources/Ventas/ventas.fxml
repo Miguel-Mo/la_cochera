@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Line?>
 
-<BorderPane id="#root_navegacion" prefHeight="641.0" prefWidth="1564.0" stylesheets="@../css/Ventas.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Cochera.controllers.Ventas.ControladorVentas">
+<BorderPane id="#root_navegacion" prefHeight="641.0" prefWidth="1564.0" stylesheets="@../css/Ventas.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Cochera.Controllers.Ventas.ControladorVentas">
    <top>
       <AnchorPane id="toptop" prefHeight="200.0" prefWidth="1177.0" BorderPane.alignment="CENTER">
          <children>

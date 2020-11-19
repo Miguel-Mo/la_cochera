@@ -1,61 +1,43 @@
-package Cochera.Controllers.Ventas.Vehiculos.ModalesVehiculo;
+package Cochera.Controllers.Ventas.Vehiculos;
 
-import Cochera.Controllers.AutoRoot;
+import Cochera.Controllers.Modal;
 import Cochera.DAO.ConcesionarioDAO;
 import Cochera.DAO.TipoVehiculosDAO;
-import Cochera.DAO.VehiculoVenderDAO;
 import Cochera.Models.Concesionarios.Concesionario;
 import Cochera.Models.Vehiculo.TipoVehiculo;
 import Cochera.Models.Vehiculo.VehiculoVender;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 import org.controlsfx.control.ToggleSwitch;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 
-public class ControladorMEdicion implements AutoRoot {
-    @FXML
-    private TextField marcaVehiculo;
-    @FXML
-    private TextField potencia;
-    @FXML
-    private ComboBox<Concesionario> concesionarioRegistro;
-    @FXML
-    private TextField precio;
-    @FXML
-    private Label lantiguedad;
-    @FXML
-    private Button btnCancelar;
-    @FXML
-    private ComboBox<TipoVehiculo> tipoVehiculo;
-    @FXML
-    private ToggleSwitch tswitch;
-    @FXML
-    private TextField modeloVehiculo;
-    @FXML
-    private TextField antiguedad;
-    @FXML
-    private Button btnEditar;
+public class ControladorModal extends Modal<VehiculoVender> {
 
-    private Parent root;
-    private VehiculoVender vehiculo;
-
+    // Campos del formulario
+    @FXML private TextField marcaVehiculo;
+    @FXML private TextField potencia;
+    @FXML private ComboBox<Concesionario> concesionarioRegistro;
+    @FXML private TextField precio;
+    @FXML private Label lantiguedad;
+    @FXML private ComboBox<TipoVehiculo> tipoVehiculo;
+    @FXML private ToggleSwitch tswitch;
+    @FXML private TextField modeloVehiculo;
+    @FXML private TextField antiguedad;
 
     @FXML
-    private void initialize(){
-        try(TipoVehiculosDAO dao=new TipoVehiculosDAO()) {
+    private void initialize() {
+        try (TipoVehiculosDAO dao = new TipoVehiculosDAO()) {
             tipoVehiculo.setItems(dao.read());
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        try(ConcesionarioDAO daoR=new ConcesionarioDAO()) {
+        try (ConcesionarioDAO daoR = new ConcesionarioDAO()) {
             concesionarioRegistro.setItems(daoR.read());
         } catch (SQLException e) {
             e.printStackTrace();
@@ -63,13 +45,10 @@ public class ControladorMEdicion implements AutoRoot {
 
         lantiguedad.visibleProperty().bind(tswitch.selectedProperty());
         antiguedad.visibleProperty().bind(tswitch.selectedProperty());
-
-
-
-
     }
 
-    private void prohibirEdicion() {
+    @Override
+    public void prohibirEdicion() {
         marcaVehiculo.setDisable(true);
         potencia.setDisable(true);
         precio.setDisable(true);
@@ -86,10 +65,10 @@ public class ControladorMEdicion implements AutoRoot {
         antiguedad.setStyle(" -fx-background-color: white , white , white;-fx-background-insets: 0 0 0 0, 0 0 0 0, 0 0 3 0;");
         precio.setStyle(" -fx-background-color: white , white , white;-fx-background-insets: 0 0 0 0, 0 0 0 0, 0 0 3 0;");
         tipoVehiculo.setStyle(" -fx-background-color: white , white , white;-fx-background-insets: 0 0 0 0, 0 0 0 0, 0 0 3 0;");
-
     }
 
-    private void permitirEdicion() {
+    @Override
+    public void permitirEdicion() {
         marcaVehiculo.setDisable(false);
         potencia.setDisable(false);
         precio.setDisable(false);
@@ -100,44 +79,8 @@ public class ControladorMEdicion implements AutoRoot {
         concesionarioRegistro.setDisable(false);
     }
 
-
-    @FXML
-    public void editar(ActionEvent actionEvent){
-        resetError();
-
-        Button boton = (Button) actionEvent.getSource();
-
-        if(boton.getText().equals("Guardar")) {
-            if (!checkCampos()) return;
-
-            try(VehiculoVenderDAO dao = new VehiculoVenderDAO()){
-
-                // Actualizamos el vehiculo con lo que nos da el usuario
-                vehiculo.setMarca(marcaVehiculo.getText());
-                vehiculo.setModelo(modeloVehiculo.getText());
-                vehiculo.setPotencia(potencia.getText());
-                vehiculo.setConcesionarioID(concesionarioRegistro.getValue().getId());
-                vehiculo.setPrecio(Float.parseFloat(precio.getText()));
-                vehiculo.setTipoVehiculo(tipoVehiculo.getValue());
-                if (!tswitch.isSelected()) vehiculo.setTiempoUsado(null);
-                else vehiculo.setTiempoUsado(antiguedad.getText());
-                vehiculo.setSegundaMano(tswitch.isSelected());
-
-                dao.update(vehiculo);
-
-                btnCancelar.fire();
-
-            }catch (SQLException throwables){
-                throwables.printStackTrace();
-            }
-
-        } else if(boton.getText().contentEquals("Editar")){
-            permitirEdicion();
-            boton.setText("Guardar");
-        }
-    }
-
-    private boolean checkCampos() {
+    @Override
+    public boolean checkCampos() {
         boolean resultado = true;
 
         if (marcaVehiculo.getText().trim().length() == 0) {
@@ -178,7 +121,8 @@ public class ControladorMEdicion implements AutoRoot {
         return resultado;
     }
 
-    private void resetError() {
+    @Override
+    public void resetError() {
 
         marcaVehiculo.setStyle("-fx-border-color: transparent");
         modeloVehiculo.setStyle("-fx-border-color: transparent");
@@ -190,28 +134,40 @@ public class ControladorMEdicion implements AutoRoot {
 
     }
 
-    @FXML
-    public void cerrar(ActionEvent actionEvent) {
-        Stage stage = (Stage) ((Button)actionEvent.getSource()).getScene().getWindow();
-        root.setStyle("-fx-opacity: 1");
-        stage.close();
+    @Override
+    protected VehiculoVender crearObjeto() {
+        HashMap<String, Object> datos = new HashMap<>();
+
+        datos.put("marca", marcaVehiculo.getText());
+        datos.put("modelo", modeloVehiculo.getText());
+        datos.put("potencia", potencia.getText());
+        datos.put("concesionarioID", concesionarioRegistro.getValue().getId());
+        datos.put("precio", precio.getText());
+        datos.put("tipo", tipoVehiculo.getValue());
+        datos.put("tswitch", tswitch.isSelected());
+        if (tswitch.isSelected()) datos.put("tiempoUsado", antiguedad.getText());
+
+        return new VehiculoVender(datos);
     }
 
     @Override
-    public void setRoot(Parent root) {
-        this.root = root;
+    protected void actualizarObjeto(VehiculoVender vehiculo) {
+        vehiculo.setMarca(marcaVehiculo.getText());
+        vehiculo.setModelo(modeloVehiculo.getText());
+        vehiculo.setPotencia(potencia.getText());
+        vehiculo.setConcesionarioID(concesionarioRegistro.getValue().getId());
+        vehiculo.setPrecio(Float.parseFloat(precio.getText()));
+        vehiculo.setTipoVehiculo(tipoVehiculo.getValue());
+        if (!tswitch.isSelected()) vehiculo.setTiempoUsado(null);
+        else vehiculo.setTiempoUsado(antiguedad.getText());
+        vehiculo.setSegundaMano(tswitch.isSelected());
     }
 
-    public void setVehiculo(VehiculoVender vehiculo) {
-        this.vehiculo = vehiculo;
-        establecerVehiculo();
-        prohibirEdicion();
-    }
-
-    private void establecerVehiculo() {
+    @Override
+    protected void establecerObjeto(VehiculoVender vehiculo) {
         marcaVehiculo.setText(vehiculo.getMarca());
         potencia.setText(vehiculo.getPotencia());
-        concesionarioRegistro.getItems().forEach(concesionario ->  {
+        concesionarioRegistro.getItems().forEach(concesionario -> {
             if (concesionario.getId() == vehiculo.getConcesionarioID())
                 concesionarioRegistro.setValue(concesionario);
         });

@@ -7,7 +7,6 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-
 import java.io.IOException;
 import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
@@ -44,58 +43,6 @@ public class Main extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        /* ZONA DE PRUEBAS */
-
-
-//      LECTURA
-//        try (ClienteDAO vdao = new ClienteDAO()) {
-//            ObservableList<Cliente> v = vdao.read();
-//            v.forEach(System.out::println);
-//        } catch (SQLException throwables) {
-//            throwables.printStackTrace();
-//        }
-
-        // ELIMINAR
-//        try (ClienteDAO vdao = new ClienteDAO()) {
-//            Cliente v = vdao.read(52);
-//            vdao.delete(v);
-//        } catch (SQLException throwables) {
-//            throwables.printStackTrace();
-//        }
-
-
-       // CREACION
-//        try {
-//            HashMap<String, Object> datos = new HashMap<>();
-//
-//            datos.put("id",1);
-//            datos.put("nombre","Vendedor");
-//            datos.put("apellidos","vendedor");
-//            datos.put("telefono","600600666");
-//            datos.put("dni","80180180S");
-//            datos.put("email","vendedor@prueba.com");
-//            datos.put("presupuesto",20000f);
-//
-//            Cliente vv = new Cliente(datos);
-//
-//            try (ClienteDAO vdao = new ClienteDAO()) {
-//                vdao.create(vv);
-//            }
-//
-//        } catch (SQLException throwables) {
-//            throwables.printStackTrace();
-//        }
-
-        // ACTUALIZAR
-//        try (ClienteDAO vdao = new ClienteDAO()) {
-//            Cliente v = vdao.read(53);
-//            v.setEmail("estoesunaPRUEBA@gmail.com");
-//            v.setPresupuesto(6000);
-//            vdao.update(v);
-//        } catch (SQLException throwables) {
-//            throwables.printStackTrace();
-//        }
     }
 
     public void iniciarPanel() {

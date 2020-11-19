@@ -1,5 +1,6 @@
 package Cochera.Models.Usuario;
 
+import Cochera.Models.Modelo;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -8,7 +9,7 @@ import javafx.beans.property.StringProperty;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public abstract class Usuario {
+public abstract class Usuario extends Modelo {
 
     private StringProperty login, tipo, nombre, apellidos, dni, email, telefono;
     private IntegerProperty salario;

@@ -1,32 +1,23 @@
 package Cochera.Controllers.Ventas.Vehiculos;
 
-import Cochera.Controllers.AutoRoot;
-import Cochera.Controllers.Ventas.Vehiculos.ModalesVehiculo.ControladorMCreacion;
-import Cochera.Controllers.Ventas.Vehiculos.ModalesVehiculo.ControladorMEdicion;
+import Cochera.Controllers.DataTable;
 import Cochera.DAO.TipoVehiculosDAO;
-import Cochera.DAO.VehiculoVenderDAO;
 import Cochera.Models.Vehiculo.TipoVehiculo;
 import Cochera.Models.Vehiculo.VehiculoVender;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
-import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-
 import java.io.IOException;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -35,12 +26,7 @@ import java.time.ZoneId;
 import java.util.Date;
 import java.util.prefs.Preferences;
 
-public class ControladorVehiculos implements AutoRoot {
-
-    private Parent root;
-
-    // Tabla
-    @FXML private TableView<VehiculoVender> tabla;
+public class ControladorVehiculos extends DataTable<VehiculoVender> {
 
     // Columnas
     @FXML private TableColumn<VehiculoVender, Image> imagen;
@@ -59,23 +45,20 @@ public class ControladorVehiculos implements AutoRoot {
     @FXML private TextField fMarca;
     @FXML private ComboBox<EstadoVehiculo> fEstado;
 
-    /**
-     * Lista de vehiculos que permite hacer búsquedas para filtrar
-     */
-    private FilteredList<VehiculoVender> listaFiltrable;
+    /** Almacenamos el ID del concesionario del usuario logueado */
+    private final String concesionarioActual;
 
-    /**
-     * Almacenamos el ID del concesionario del usuario logueado
-     */
-    private String concesionarioActual;
+    public ControladorVehiculos() {
+        concesionarioActual = Preferences.userRoot().get("concesionarioID",null);
+        modalCreacionView = "/Ventas/Modales/FormNuevoVehiculo.fxml";
+        modalModificacionView = "/Ventas/Modales/FormVehiculoLupa.fxml";
+    }
 
-    public ControladorVehiculos() { }
-
-    @FXML
-    private void initialize() {
-        iniciarFiltros();
-        iniciarTabla();
+    @Override
+    protected void initialize() {
+        super.initialize();
         iniciarColumnas();
+        iniciarFiltros();
     }
 
     private void iniciarFiltros() {
@@ -86,28 +69,6 @@ public class ControladorVehiculos implements AutoRoot {
         }
 
         fEstado.setItems(EstadoVehiculo.obtenerEstados());
-    }
-
-    private void iniciarTabla() {
-        concesionarioActual = Preferences.userRoot().get("concesionarioID",null);
-
-        try (VehiculoVenderDAO dao = new VehiculoVenderDAO()) {
-            // Envolvemos los datos de la base de datos en una lista que nos permita filtrar
-            // Lo mantenemos en el estado porque es este tipo de lista la que nos permitirá filtrar por campo en el método correcpondiente
-            listaFiltrable = new FilteredList<>(dao.read(), mostrarTodoAlInicio -> true);
-
-            // Actualizamos la tabla cuando haya algún cambio.
-            listaFiltrable.addListener((ListChangeListener.Change<? extends VehiculoVender> change) -> tabla.refresh());
-
-            // Volvemos a envolver para darle la capacidad de ordenarse
-            SortedList<VehiculoVender> listaVehiculos = new SortedList<>(listaFiltrable);
-            listaVehiculos.comparatorProperty().bind(tabla.comparatorProperty());
-
-            // Finalmente seteamos la lista para mostrarla en la tabla
-            tabla.setItems(listaVehiculos);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
     }
 
     private void iniciarColumnas() {
@@ -188,13 +149,13 @@ public class ControladorVehiculos implements AutoRoot {
 
                 lupa.setGraphic(view);
                 setGraphic(lupa);
-                lupa.setOnAction(event -> mostrarModal(vehiculo));
+                lupa.setOnAction(event -> mostrarModalModificacion(vehiculo));
             }
         });
     }
 
     @FXML
-    private void filtrar(ActionEvent actionEvent) {
+    private void filtrar() {
         String marca = fMarca.getText().trim();
         String modelo = fModelo.getText().trim();
         TipoVehiculo tipo = fTipo.getValue();
@@ -241,7 +202,8 @@ public class ControladorVehiculos implements AutoRoot {
         });
     }
 
-    public void limpiar(ActionEvent actionEvent) {
+    @FXML
+    private void limpiar() {
         fModelo.setText("");
         fMarca.setText("");
         fEstado.setValue(null);
@@ -255,62 +217,13 @@ public class ControladorVehiculos implements AutoRoot {
         tabla.getSortOrder().clear();
         listaFiltrable.setPredicate(mostrar -> true);
     }
-
-    @FXML
-    private void mostrarModalCreacion() throws IOException {
-        Stage modal = new Stage();
-        FXMLLoader modalFX = new FXMLLoader(getClass().getResource("/Ventas/Modales/FormNuevoVehiculo.fxml"));
-
-        modal.setScene(new Scene(modalFX.load()));
-        modal.initOwner(root.getScene().getWindow());
-        modal.initModality(Modality.WINDOW_MODAL);
-        modal.initStyle(StageStyle.UNDECORATED);
-        modal.setResizable(false);
-
-        root.setStyle("-fx-opacity: 0.4");
-        ControladorMCreacion controlador = modalFX.getController();
-        controlador.setRoot(root);
-        controlador.setLista(listaFiltrable);
-
-        modal.showAndWait();
-    }
-
-    private void mostrarModal(VehiculoVender vehiculo) {
-        Stage modal = new Stage();
-        FXMLLoader modalFX = new FXMLLoader(getClass().getResource("/Ventas/Modales/FormVehiculoLupa.fxml"));
-
-        try {
-            modal.setScene(new Scene(modalFX.load()));
-            modal.initOwner(root.getScene().getWindow());
-            modal.initModality(Modality.WINDOW_MODAL);
-            modal.initStyle(StageStyle.UNDECORATED);
-            modal.setResizable(false);
-
-            root.setStyle("-fx-opacity: 0.4");
-            ControladorMEdicion controlador = modalFX.getController();
-            controlador.setRoot(root);
-            controlador.setVehiculo(vehiculo);
-
-            modal.showAndWait();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    public void setRoot(Parent root) {
-        this.root = root;
-    }
 }
 
 
-/**
- * Clase interna para envovler si un vehículo está o no en el mismo concesionario que el usuario logueado.
- */
+/** Clase interna para envovler si un vehículo está o no en el mismo concesionario que el usuario logueado. */
 class EstadoVehiculo {
-    private StringProperty texto;
-    private BooleanProperty enConcesionario;
+    private final StringProperty texto;
+    private final BooleanProperty enConcesionario;
 
     public EstadoVehiculo(String texto, boolean enConcesionario) {
         this.texto = new SimpleStringProperty(texto);
@@ -319,7 +232,7 @@ class EstadoVehiculo {
 
     /**
      * Método que usamos para crear las dos opciones que hay que mostrar en el ComboBox de 'Estado'
-     * @return
+     * @return La lista a mostrar en el ComboBox
      */
     public static ObservableList<EstadoVehiculo> obtenerEstados() {
         ObservableList<EstadoVehiculo> lista = FXCollections.observableArrayList();

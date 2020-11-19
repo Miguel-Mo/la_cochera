@@ -1,12 +1,13 @@
 package Cochera.Models.Concesionarios;
 
+import Cochera.Models.Modelo;
 import javafx.beans.property.*;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 
-public class Concesionario {
+public class Concesionario extends Modelo {
 
     private StringProperty ciudad, provincia,direccion,cp;
     private int id;

@@ -83,6 +83,7 @@ public abstract class AbstractDAO<T> implements AutoCloseable {
                 case "SimpleIntegerProperty": ps.setInt(parameterIndex,((IntegerProperty) estado).getValue());break;
                 case "Integer": ps.setInt(parameterIndex,((Integer) estado));break;
                 case "TipoVehiculo": ps.setInt(parameterIndex,(((TipoVehiculo) estado).getId()));break;
+                default: throw new Exception("Tipo " + tipo + " no controlado");
             }
 
             parameterIndex++;

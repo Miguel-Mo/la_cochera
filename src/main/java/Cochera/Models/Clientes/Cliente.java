@@ -1,6 +1,7 @@
 package Cochera.Models.Clientes;
 
 import Cochera.DAO.ClienteDAO;
+import Cochera.Models.Modelo;
 import javafx.beans.property.*;
 
 import java.sql.ResultSet;
@@ -8,7 +9,7 @@ import java.sql.SQLException;
 import java.util.Date;
 import java.util.HashMap;
 
-public class Cliente {
+public class Cliente extends Modelo {
 
     private FloatProperty presupuesto;
     private StringProperty nombre,apellidos,telefono,dni,email,descripcionVehiculo;

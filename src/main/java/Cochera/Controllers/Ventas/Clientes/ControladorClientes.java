@@ -1,44 +1,23 @@
 package Cochera.Controllers.Ventas.Clientes;
 
-import Cochera.Controllers.AutoRoot;
-import Cochera.Controllers.Ventas.Clientes.ModalesCliente.ControladorMCreacion;
-import Cochera.Controllers.Ventas.Clientes.ModalesCliente.ControladorMEdicion;
-import Cochera.DAO.ClienteDAO;
+import Cochera.Controllers.DataTable;
 import Cochera.Models.Clientes.Cliente;
 import javafx.beans.property.ReadOnlyObjectWrapper;
-import javafx.collections.ListChangeListener;
-import javafx.collections.transformation.FilteredList;
-import javafx.collections.transformation.SortedList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import java.io.IOException;
-import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 
-public class ControladorClientes implements AutoRoot {
-
-    private Parent root;
-
-    // Tabla
-    @FXML private TableView<Cliente> tabla;
+public class ControladorClientes extends DataTable<Cliente> {
 
     // Columnas
     @FXML private TableColumn<Cliente,String> nombreCliente;
-    @FXML private TableColumn <Cliente,Date>fechaRegistro;
+    @FXML private TableColumn<Cliente,Date> fechaRegistro;
     @FXML private TableColumn<Cliente,String> telefono;
-    @FXML private TableColumn <Cliente,Cliente> acciones;
+    @FXML private TableColumn<Cliente,Cliente> acciones;
 
     // Filtro
     @FXML private DatePicker fDesde;
@@ -46,36 +25,15 @@ public class ControladorClientes implements AutoRoot {
     @FXML private TextField fNombre;
     @FXML private TextField fTelefono;
 
-    private FilteredList<Cliente> listaFiltrable;
-
-    public void ContraladorClientes() { }
-
-    @FXML
-    private void initialize() {
-        iniciarTabla();
-        iniciarColumnas();
+    public ControladorClientes() {
+        modalCreacionView = "/Ventas/Modales/FormNuevoCliente.fxml";
+        modalModificacionView = "/Ventas/Modales/FormClienteLupa.fxml";
     }
 
-    private void iniciarTabla() {
-        try (ClienteDAO dao = new ClienteDAO()) {
-            // Envolvemos los datos de la base de datos en una lista que nos permita filtrar
-            // Lo mantenemos en el estado porque es este tipo de lista la que nos permitirá filtrar por campo en el método correcpondiente
-            listaFiltrable = new FilteredList<>(dao.read(), mostrarTodoAlInicio -> true);
-
-            // Actualizamos la tabla cuando haya algún cambio.
-            listaFiltrable.addListener((ListChangeListener.Change<? extends Cliente> change) -> tabla.refresh());
-
-            // Volvemos a envolver para darle la capacidad de ordenarse
-            SortedList<Cliente> listaClientes = new SortedList<>(listaFiltrable);
-            listaClientes.comparatorProperty().bind(tabla.comparatorProperty());
-
-            // Finalmente seteamos la lista para mostrarla en la tabla
-            tabla.setItems(listaClientes);
-
-
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
+    @Override
+    protected void initialize() {
+        super.initialize();
+        iniciarColumnas();
     }
 
     private void iniciarColumnas() {
@@ -124,23 +82,22 @@ public class ControladorClientes implements AutoRoot {
 
                 lupa.setGraphic(iconoLupa);
                 setGraphic(lupa);
-                lupa.setOnAction(event -> mostrarModal(cliente));
+                lupa.setOnAction(event -> mostrarModalModificacion(cliente));
             }
         });
     }
 
     @FXML
-    private void filtrar(ActionEvent actionEvent) {
+    private void filtrar() {
         String nombre = fNombre.getText().trim();
         String telefono = fTelefono.getText().trim();
 
         LocalDate desde = fDesde.getValue();
         LocalDate hasta = fHasta.getValue();
 
-
         // Hacemos un pequeño control de errores para obligar a seleccionar un Desde y Hasta si se ha escogido solo uno
         if ((desde != null && hasta == null) || (desde == null && hasta != null)) {
-            fDesde.setStyle("-fx-border-color: red");
+            fDesde.setStyle("-fx-border-color: #ff0000");
             fHasta.setStyle("-fx-border-color: red");
             return;
         } else {
@@ -169,7 +126,8 @@ public class ControladorClientes implements AutoRoot {
         });
     }
 
-    public void limpiar(ActionEvent actionEvent) {
+    @FXML
+    private void limpiar() {
         fNombre.setText("");
         fTelefono.setText("");
 
@@ -180,53 +138,5 @@ public class ControladorClientes implements AutoRoot {
 
         tabla.getSortOrder().clear();
         listaFiltrable.setPredicate(mostrar -> true);
-    }
-
-    @FXML
-    private void mostrarModalCreacion() throws IOException {
-        Stage modal = new Stage();
-        FXMLLoader modalFX = new FXMLLoader(getClass().getResource("/Ventas/Modales/FormNuevoCliente.fxml"));
-
-        modal.setScene(new Scene(modalFX.load()));
-        modal.initOwner(root.getScene().getWindow());
-        modal.initModality(Modality.WINDOW_MODAL);
-        modal.initStyle(StageStyle.UNDECORATED);
-        modal.alwaysOnTopProperty();
-        modal.setResizable(false);
-
-        root.setStyle("-fx-opacity: 0.4");
-        ControladorMCreacion controlador = modalFX.getController();
-        controlador.setRoot(root);
-        controlador.setLista(listaFiltrable);
-
-        modal.showAndWait();
-    }
-
-    private void mostrarModal(Cliente cliente) {
-        Stage modal = new Stage();
-        FXMLLoader modalFX = new FXMLLoader(getClass().getResource("/Ventas/Modales/FormClienteLupa.fxml"));
-
-        try {
-            modal.setScene(new Scene(modalFX.load()));
-            modal.initOwner(root.getScene().getWindow());
-            modal.initModality(Modality.WINDOW_MODAL);
-            modal.initStyle(StageStyle.UNDECORATED);
-            modal.setResizable(false);
-
-            root.setStyle("-fx-opacity: 0.4");
-            ControladorMEdicion controlador = modalFX.getController();
-            controlador.setRoot(root);
-            controlador.setCliente(cliente);
-
-            modal.showAndWait();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    public void setRoot(Parent root) {
-        this.root = root;
     }
 }

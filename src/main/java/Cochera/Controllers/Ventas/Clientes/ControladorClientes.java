@@ -109,6 +109,7 @@ public class ControladorClientes extends DataTable<Cliente> {
 
         try {
             Stage modal = generarModal(modalFX);
+
             ControladorModal controlador = modalFX.getController();
             controlador.setRoot(root);
             controlador.setTipo(Modal.ELIMINAR);

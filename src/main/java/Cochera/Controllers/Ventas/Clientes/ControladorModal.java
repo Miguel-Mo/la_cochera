@@ -1,6 +1,9 @@
 package Cochera.Controllers.Ventas.Clientes;
 
 import Cochera.Controllers.Modal;
+import Cochera.DAO.ClienteDAO;
+import Cochera.DAO.Crud;
+import Cochera.DAO.DAOFactory;
 import Cochera.Models.Clientes.Cliente;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -144,5 +147,20 @@ public class ControladorModal extends Modal<Cliente> {
         presupuesto.setText(String.valueOf(cliente.getPresupuesto()));
         descripcion.setText(cliente.getDescripcionVehiculo());
         email.setText(cliente.getEmail());
+    }
+
+    public void eliminar() {
+        try (ClienteDAO dao = new ClienteDAO()) {
+
+            if (dao.delete(objeto)) {
+                listaFiltrable.getSource().remove(objeto);
+                btnCancelar.fire();
+            } else {
+
+            }
+
+        } catch (Exception throwables) {
+            throwables.printStackTrace();
+        }
     }
 }

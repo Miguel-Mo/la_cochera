@@ -76,19 +76,6 @@ public abstract class Modal<T extends Modelo> {
         }
     }
 
-    public void eliminar() {
-        try (Crud<T> dao = DAOFactory.obtener(claseGenerica)) {
-
-            if (dao.delete(objeto)) {
-                listaFiltrable.getSource().remove(objeto);
-                btnCancelar.fire();
-            }
-
-        } catch (Exception throwables) {
-            throwables.printStackTrace();
-        }
-    }
-
     protected abstract void resetError();
     protected abstract boolean checkCampos();
 

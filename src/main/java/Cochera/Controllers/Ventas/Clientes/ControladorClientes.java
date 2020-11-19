@@ -1,11 +1,17 @@
 package Cochera.Controllers.Ventas.Clientes;
 
 import Cochera.Controllers.DataTable;
+import Cochera.Controllers.Modal;
 import Cochera.Models.Clientes.Cliente;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -26,8 +32,8 @@ public class ControladorClientes extends DataTable<Cliente> {
     @FXML private TextField fTelefono;
 
     public ControladorClientes() {
-        modalCreacionView = "/Ventas/Modales/FormNuevoCliente.fxml";
-        modalModificacionView = "/Ventas/Modales/FormClienteLupa.fxml";
+        modalCreacionView = "/Ventas/Clientes/FormNuevoCliente.fxml";
+        modalModificacionView = "/Ventas/Clientes/FormClienteLupa.fxml";
     }
 
     @Override
@@ -64,6 +70,11 @@ public class ControladorClientes extends DataTable<Cliente> {
             private final Button lupa = new Button("Lupa");
             private final ImageView iconoLupa = new ImageView("/icons/lupa.png");
 
+            private final Button eliminar = new Button("Eliminar");
+            private final ImageView iconoPapelera = new ImageView("/icons/lupa.png");
+
+            private final HBox botonera = new HBox(lupa, eliminar);
+
             @Override
             protected void updateItem(Cliente cliente, boolean empty) {
                 super.updateItem(cliente, empty);
@@ -81,10 +92,34 @@ public class ControladorClientes extends DataTable<Cliente> {
                 }
 
                 lupa.setGraphic(iconoLupa);
-                setGraphic(lupa);
+                eliminar.setGraphic(iconoPapelera);
+
+
+                setGraphic(botonera);
+
                 lupa.setOnAction(event -> mostrarModalModificacion(cliente));
+                eliminar.setOnAction(event -> mostrarModalEliminacion(cliente));
             }
         });
+    }
+
+
+    private void mostrarModalEliminacion(Cliente cliente) {
+        FXMLLoader modalFX = new FXMLLoader(getClass().getResource("/Ventas/Clientes/Eliminar.fxml"));
+
+        try {
+            Stage modal = generarModal(modalFX);
+            ControladorModal controlador = modalFX.getController();
+            controlador.setRoot(root);
+            controlador.setTipo(Modal.ELIMINAR);
+            controlador.setObjeto(cliente);
+            controlador.setLista(listaFiltrable);
+
+            modal.showAndWait();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML

@@ -25,10 +25,10 @@ public class ControladorVentas{
 
         switch (botonPulsado.getId()) {
             case "vehiculos" :
-                ruta = "/Ventas/tablaVehiculos.fxml";
+                ruta = "/Ventas/Vehiculos/tablaVehiculos.fxml";
                 break;
             case "clientes":
-                ruta = "/Ventas/tablaClientes.fxml";
+                ruta = "/Ventas/Clientes/tablaClientes.fxml";
                 break;
             case "propuestas":
                 ruta = "/Ventas/tablaHistorialVentas.fxml";
@@ -47,7 +47,7 @@ public class ControladorVentas{
 
         // Tenemos que asegurarnos que root está disponible
         try {
-            FXMLLoader vehiculosFX = new FXMLLoader(getClass().getResource("/Ventas/tablaVehiculos.fxml"));
+            FXMLLoader vehiculosFX = new FXMLLoader(getClass().getResource("/Ventas/Vehiculos/tablaVehiculos.fxml"));
             contenido.getChildren().add(vehiculosFX.load());
             ((DataTable) vehiculosFX.getController()).setRoot(root);
         } catch (IOException e) {

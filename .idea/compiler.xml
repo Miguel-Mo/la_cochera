@@ -20,7 +20,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="11">
-      <module name="cochera" target="" />
+      <module name="cochera" target="11" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">

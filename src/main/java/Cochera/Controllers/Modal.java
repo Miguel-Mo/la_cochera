@@ -16,13 +16,19 @@ import java.util.Arrays;
 
 public abstract class Modal<T extends Modelo> {
 
+    public static final String ELIMINAR = "eleminar";
+    public static final String CREAR = "crear";
+    public static final String EDITAR = "editar";
+
     private final String claseGenerica;
+    private String tipo;
 
     protected Parent root;
     protected T objeto;
     protected FilteredList<T> listaFiltrable;
 
     @FXML protected Button btnCancelar;
+
 
     public Modal() {
         String rutaClase = ((ParameterizedType) this.getClass().getGenericSuperclass()).getActualTypeArguments()[0].getTypeName();
@@ -70,14 +76,17 @@ public abstract class Modal<T extends Modelo> {
         }
     }
 
-    protected void setObjeto(T objeto) {
-        this.objeto = objeto;
-        establecerObjeto(objeto);
-        prohibirEdicion();
-    }
+    public void eliminar() {
+        try (Crud<T> dao = DAOFactory.obtener(claseGenerica)) {
 
-    protected void setLista(FilteredList<T> lista) {
-        this.listaFiltrable = lista;
+            if (dao.delete(objeto)) {
+                listaFiltrable.getSource().remove(objeto);
+                btnCancelar.fire();
+            }
+
+        } catch (Exception throwables) {
+            throwables.printStackTrace();
+        }
     }
 
     protected abstract void resetError();
@@ -99,5 +108,22 @@ public abstract class Modal<T extends Modelo> {
 
     public void setRoot(Parent root) {
         this.root = root;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public void setObjeto(T objeto) {
+        this.objeto = objeto;
+
+        if (tipo == null || !tipo.equals(ELIMINAR)) {
+            establecerObjeto(objeto);
+            prohibirEdicion();
+        }
+    }
+
+    public void setLista(FilteredList<T> lista) {
+        this.listaFiltrable = lista;
     }
 }

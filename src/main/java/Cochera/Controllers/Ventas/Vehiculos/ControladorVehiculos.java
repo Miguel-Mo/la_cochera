@@ -7,18 +7,12 @@ import Cochera.Models.Vehiculo.VehiculoVender;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import java.io.IOException;
+
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -50,8 +44,8 @@ public class ControladorVehiculos extends DataTable<VehiculoVender> {
 
     public ControladorVehiculos() {
         concesionarioActual = Preferences.userRoot().get("concesionarioID",null);
-        modalCreacionView = "/Ventas/Modales/FormNuevoVehiculo.fxml";
-        modalModificacionView = "/Ventas/Modales/FormVehiculoLupa.fxml";
+        modalCreacionView = "/Ventas/Vehiculos/FormNuevoVehiculo.fxml";
+        modalModificacionView = "/Ventas/Vehiculos/FormVehiculoLupa.fxml";
     }
 
     @Override

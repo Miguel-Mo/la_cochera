@@ -1,6 +1,6 @@
 package Cochera.Controllers.Ventas.Vehiculos;
 
-import Cochera.Controllers.DataTable;
+import Cochera.Controllers.Base.DataTable;
 import Cochera.DAO.TipoVehiculosDAO;
 import Cochera.Models.Vehiculo.TipoVehiculo;
 import Cochera.Models.Vehiculo.VehiculoVender;

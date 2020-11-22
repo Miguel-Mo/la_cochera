@@ -1,4 +1,4 @@
-package Cochera.Controllers;
+package Cochera.Controllers.Base;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

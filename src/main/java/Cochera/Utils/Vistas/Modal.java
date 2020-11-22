@@ -1,8 +1,8 @@
 package Cochera.Utils.Vistas;
 
-import Cochera.Controllers.CMNuevoEditar;
-import Cochera.Controllers.CModal;
-import Cochera.Controllers.DataTable;
+import Cochera.Controllers.Base.CMNuevoEditar;
+import Cochera.Controllers.Base.CModal;
+import Cochera.Controllers.Base.DataTable;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Modality;

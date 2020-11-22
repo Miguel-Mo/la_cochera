@@ -1,6 +1,6 @@
 package Cochera.Controllers.Ventas.Clientes;
 
-import Cochera.Controllers.DataTable;
+import Cochera.Controllers.Base.DataTable;
 import Cochera.Models.Clientes.Cliente;
 import Cochera.Utils.Vistas.Modal;
 import javafx.beans.property.ReadOnlyObjectWrapper;

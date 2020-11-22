@@ -1,5 +1,6 @@
-package Cochera.Controllers;
+package Cochera.Controllers.Base;
 
+import Cochera.Controllers.Base.CModal;
 import Cochera.DAO.Crud;
 import Cochera.DAO.DAOFactory;
 import Cochera.Models.Modelo;

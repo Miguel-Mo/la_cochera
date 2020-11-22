@@ -1,6 +1,6 @@
 package Cochera.Controllers.Ventas;
 
-import Cochera.Controllers.DataTable;
+import Cochera.Controllers.Base.DataTable;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

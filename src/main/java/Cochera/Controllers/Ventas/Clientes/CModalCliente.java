@@ -1,6 +1,6 @@
 package Cochera.Controllers.Ventas.Clientes;
 
-import Cochera.Controllers.CMNuevoEditar;
+import Cochera.Controllers.Base.CMNuevoEditar;
 import Cochera.Models.Clientes.Cliente;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;

@@ -1,6 +1,6 @@
 package Cochera.Controllers.Ventas.Vehiculos;
 
-import Cochera.Controllers.CMNuevoEditar;
+import Cochera.Controllers.Base.CMNuevoEditar;
 import Cochera.DAO.ConcesionarioDAO;
 import Cochera.DAO.TipoVehiculosDAO;
 import Cochera.Models.Concesionarios.Concesionario;
@@ -13,9 +13,8 @@ import javafx.scene.control.TextField;
 import org.controlsfx.control.ToggleSwitch;
 
 import java.sql.SQLException;
-import java.util.HashMap;
 
-public class ControladorModalVehiculo extends CMNuevoEditar<VehiculoVender> {
+public class CModalVehiculo extends CMNuevoEditar<VehiculoVender> {
 
     // Campos del formulario
     @FXML private TextField marcaVehiculo;
@@ -28,12 +27,16 @@ public class ControladorModalVehiculo extends CMNuevoEditar<VehiculoVender> {
     @FXML private TextField modeloVehiculo;
     @FXML private TextField antiguedad;
 
-    public ControladorModalVehiculo(VehiculoVender objeto, boolean eliminar) {
+    public CModalVehiculo(VehiculoVender objeto, boolean eliminar) {
         super(objeto, eliminar);
     }
 
     @FXML
     protected void initialize() {
+
+
+
+
         try (TipoVehiculosDAO dao = new TipoVehiculosDAO()) {
             tipoVehiculo.setItems(dao.read());
         } catch (SQLException e) {

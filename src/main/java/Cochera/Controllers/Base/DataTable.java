@@ -1,4 +1,4 @@
-package Cochera.Controllers;
+package Cochera.Controllers.Base;
 
 import Cochera.DAO.*;
 import Cochera.Models.Modelo;

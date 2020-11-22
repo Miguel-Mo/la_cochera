@@ -1,15 +1,13 @@
 package Cochera.Controllers.Ventas.Clientes;
 
 import Cochera.Controllers.DataTable;
-import Cochera.Controllers.ControladorModal;
 import Cochera.Models.Clientes.Cliente;
+import Cochera.Utils.Vistas.Modal;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -30,11 +28,6 @@ public class ControladorClientes extends DataTable<Cliente> {
     @FXML private DatePicker fHasta;
     @FXML private TextField fNombre;
     @FXML private TextField fTelefono;
-
-    public ControladorClientes() {
-        modalCreacionView = "/Ventas/Clientes/FormNuevoCliente.fxml";
-        modalModificacionView = "/Ventas/Clientes/FormClienteLupa.fxml";
-    }
 
     @Override
     protected void initialize() {
@@ -97,21 +90,34 @@ public class ControladorClientes extends DataTable<Cliente> {
         });
     }
 
-
-    private void mostrarModalEliminacion(Cliente cliente) {
-        FXMLLoader modalFX = new FXMLLoader(getClass().getResource("/Ventas/Modales/Eliminar.fxml"));
-
+    @FXML
+    private void mostrarModalCreacion() {
         try {
-            Stage modal = generarModal(modalFX);
-
-            ControladorModalCliente controlador = modalFX.getController();
-            controlador.setRoot(root);
-            controlador.setTipo(ControladorModal.ELIMINAR);
-            controlador.setObjeto(cliente);
-            controlador.setLista(listaFiltrable);
-
+            Modal modal = new Modal(this,"/Ventas/Clientes/FormNuevoCliente.fxml");
+            modal.setControlador(new CMClienteNuevoEditar());
             modal.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
+    @FXML
+    private void mostrarModalModificacion(Cliente cliente) {
+        try {
+            Modal modal = new Modal(this,"/Ventas/Clientes/FormClienteLupa.fxml");
+            modal.setControlador(new CMClienteNuevoEditar(cliente));
+            modal.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void mostrarModalEliminacion(Cliente cliente) {
+        try {
+            Modal modal = new Modal(this,"/Ventas/Modales/Eliminar.fxml");
+            modal.setControlador(new CMClienteNuevoEditar(cliente));
+            modal.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -1,8 +1,7 @@
 package Cochera.Utils.Vistas;
 
-import Cochera.Controllers.ControladorModal;
+import Cochera.Controllers.CModal;
 import Cochera.Controllers.DataTable;
-import Cochera.Models.Modelo;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Modality;
@@ -11,13 +10,13 @@ import javafx.stage.StageStyle;
 
 import java.io.IOException;
 
-public class Modal<T extends Modelo> {
+public class Modal {
 
     private Stage modal;
-    private final DataTable<T> dataTable;
+    private final DataTable dataTable;
     private final FXMLLoader modalFX;
 
-    public Modal(DataTable<T> dataTable, String recurso) throws IOException {
+    public Modal(DataTable dataTable, String recurso) throws IOException {
         this.dataTable = dataTable;
         this.modalFX = new FXMLLoader(dataTable.getClass().getResource(recurso));
 
@@ -37,8 +36,9 @@ public class Modal<T extends Modelo> {
         dataTable.getRoot().setStyle("-fx-opacity: 0.4");
     }
 
-    public void setControlador(ControladorModal<T> controlador) {
+    public void setControlador(CModal controlador) {
         modalFX.setController(controlador);
+        controlador.setRoot(dataTable.getRoot());
     }
 
 

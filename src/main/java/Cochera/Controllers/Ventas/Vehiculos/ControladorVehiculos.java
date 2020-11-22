@@ -44,8 +44,6 @@ public class ControladorVehiculos extends DataTable<VehiculoVender> {
 
     public ControladorVehiculos() {
         concesionarioActual = Preferences.userRoot().get("concesionarioID",null);
-        modalCreacionView = "/Ventas/Vehiculos/FormNuevoVehiculo.fxml";
-        modalModificacionView = "/Ventas/Vehiculos/FormVehiculoLupa.fxml";
     }
 
     @Override
@@ -143,7 +141,6 @@ public class ControladorVehiculos extends DataTable<VehiculoVender> {
 
                 lupa.setGraphic(view);
                 setGraphic(lupa);
-                lupa.setOnAction(event -> mostrarModalModificacion(vehiculo));
             }
         });
     }

@@ -26,9 +26,6 @@ public abstract class DataTable<T extends Modelo> {
     protected Parent root;
     protected FilteredList<T> listaFiltrable;
 
-    protected String modalCreacionView;
-    protected String modalModificacionView;
-
     public DataTable() {
         String rutaClase = ((ParameterizedType) this.getClass().getGenericSuperclass()).getActualTypeArguments()[0].getTypeName();
         claseGenerica = Arrays.stream(rutaClase.split("\\.")).reduce((primero, ultimo) -> ultimo).get();
@@ -58,55 +55,6 @@ public abstract class DataTable<T extends Modelo> {
         } catch (Exception throwables) {
             throwables.printStackTrace();
         }
-    }
-
-    @FXML
-    protected void mostrarModalCreacion() {
-        FXMLLoader modalFX = new FXMLLoader(getClass().getResource(modalCreacionView));
-
-        try {
-            Stage modal = generarModal(modalFX);
-            ControladorModal<T> controlador = modalFX.getController();
-            controlador.setRoot(root);
-            controlador.setLista(listaFiltrable);
-
-            modal.showAndWait();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @FXML
-    protected void mostrarModalModificacion(T objeto) {
-        FXMLLoader modalFX = new FXMLLoader(getClass().getResource(modalModificacionView));
-
-        try {
-            Stage modal = generarModal(modalFX);
-            ControladorModal<T> controlador = modalFX.getController();
-            controlador.setRoot(root);
-            controlador.setObjeto(objeto);
-
-            modal.showAndWait();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    protected Stage generarModal(FXMLLoader modalFX) throws IOException {
-        Stage modal = new Stage();
-
-        modal.setScene(new Scene(modalFX.load()));
-        modal.initOwner(root.getScene().getWindow());
-        modal.initModality(Modality.WINDOW_MODAL);
-        modal.initStyle(StageStyle.UNDECORATED);
-        modal.alwaysOnTopProperty();
-        modal.setResizable(false);
-
-        root.setStyle("-fx-opacity: 0.4");
-
-        return modal;
     }
 
     public void setRoot(Parent root) {

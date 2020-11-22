@@ -7,30 +7,27 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
-import javafx.stage.Stage;
-import java.lang.reflect.ParameterizedType;
-import java.sql.SQLException;
-import java.util.Arrays;
 
-public abstract class ControladorModal<T extends Modelo> {
+public abstract class CMNuevoEditar<T extends Modelo> extends CModal<T> {
 
-    public static final String ELIMINAR = "eleminar";
-
-    private final String claseGenerica;
-    private String tipo;
-
-    protected Parent root;
     protected T objeto;
     protected FilteredList<T> listaFiltrable;
 
-    @FXML protected Button btnCancelar;
+    public CMNuevoEditar(T objeto) {
+        super();
+        this.objeto = objeto;
+    }
 
+    public CMNuevoEditar() {
+        this(null);
+    }
 
-    public ControladorModal() {
-        String rutaClase = ((ParameterizedType) this.getClass().getGenericSuperclass()).getActualTypeArguments()[0].getTypeName();
-        claseGenerica = Arrays.stream(rutaClase.split("\\.")).reduce((primero, ultimo) -> ultimo).get();
+    protected void initialize() {
+        if (objeto != null) {
+            establecerObjeto(objeto);
+            prohibirEdicion();
+        }
     }
 
     @FXML
@@ -83,30 +80,6 @@ public abstract class ControladorModal<T extends Modelo> {
 
     protected abstract void prohibirEdicion();
     protected abstract void permitirEdicion();
-
-    @FXML
-    protected void cerrar(ActionEvent actionEvent) {
-        Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
-        root.setStyle("-fx-opacity: 1");
-        stage.close();
-    }
-
-    public void setRoot(Parent root) {
-        this.root = root;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
-
-    public void setObjeto(T objeto) {
-        this.objeto = objeto;
-
-        if (tipo == null || !tipo.equals(ELIMINAR)) {
-            establecerObjeto(objeto);
-            prohibirEdicion();
-        }
-    }
 
     public void setLista(FilteredList<T> lista) {
         this.listaFiltrable = lista;

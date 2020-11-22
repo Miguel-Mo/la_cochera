@@ -1,7 +1,7 @@
 package Cochera.Controllers.Ventas.Clientes;
 
 import Cochera.Controllers.DataTable;
-import Cochera.Controllers.Modal;
+import Cochera.Controllers.ControladorModal;
 import Cochera.Models.Clientes.Cliente;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.fxml.FXML;
@@ -86,14 +86,8 @@ public class ControladorClientes extends DataTable<Cliente> {
 
                 lupa.setStyle(" -fx-background-color: white , white , white;-fx-background-insets: 0 0 0 0, 0 0 0 0, 0 0 3 0;");
 
-                //TODO HOVER DE LUPA
-                if(lupa.isHover()){
-                    lupa.setStyle(" -fx-background-color: red , white , white;-fx-background-insets: 0 0 0 0, 0 0 0 0, 0 0 3 0;");
-                }
-
                 lupa.setGraphic(iconoLupa);
                 eliminar.setGraphic(iconoPapelera);
-
 
                 setGraphic(botonera);
 
@@ -105,14 +99,14 @@ public class ControladorClientes extends DataTable<Cliente> {
 
 
     private void mostrarModalEliminacion(Cliente cliente) {
-        FXMLLoader modalFX = new FXMLLoader(getClass().getResource("/Ventas/Clientes/Eliminar.fxml"));
+        FXMLLoader modalFX = new FXMLLoader(getClass().getResource("/Ventas/Modales/Eliminar.fxml"));
 
         try {
             Stage modal = generarModal(modalFX);
 
-            ControladorModal controlador = modalFX.getController();
+            ControladorModalCliente controlador = modalFX.getController();
             controlador.setRoot(root);
-            controlador.setTipo(Modal.ELIMINAR);
+            controlador.setTipo(ControladorModal.ELIMINAR);
             controlador.setObjeto(cliente);
             controlador.setLista(listaFiltrable);
 

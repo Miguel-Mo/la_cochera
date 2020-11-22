@@ -66,7 +66,7 @@ public abstract class DataTable<T extends Modelo> {
 
         try {
             Stage modal = generarModal(modalFX);
-            Modal<T> controlador = modalFX.getController();
+            ControladorModal<T> controlador = modalFX.getController();
             controlador.setRoot(root);
             controlador.setLista(listaFiltrable);
 
@@ -83,7 +83,7 @@ public abstract class DataTable<T extends Modelo> {
 
         try {
             Stage modal = generarModal(modalFX);
-            Modal<T> controlador = modalFX.getController();
+            ControladorModal<T> controlador = modalFX.getController();
             controlador.setRoot(root);
             controlador.setObjeto(objeto);
 
@@ -111,5 +111,13 @@ public abstract class DataTable<T extends Modelo> {
 
     public void setRoot(Parent root) {
         this.root = root;
+    }
+
+    public Parent getRoot() {
+        return root;
+    }
+
+    public FilteredList<T> getListaFiltrable() {
+        return listaFiltrable;
     }
 }

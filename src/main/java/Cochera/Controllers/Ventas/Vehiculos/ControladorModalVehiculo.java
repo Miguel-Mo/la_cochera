@@ -1,13 +1,11 @@
 package Cochera.Controllers.Ventas.Vehiculos;
 
-import Cochera.Controllers.Modal;
 import Cochera.DAO.ConcesionarioDAO;
 import Cochera.DAO.TipoVehiculosDAO;
 import Cochera.Models.Concesionarios.Concesionario;
 import Cochera.Models.Vehiculo.TipoVehiculo;
 import Cochera.Models.Vehiculo.VehiculoVender;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -16,7 +14,7 @@ import org.controlsfx.control.ToggleSwitch;
 import java.sql.SQLException;
 import java.util.HashMap;
 
-public class ControladorModal extends Modal<VehiculoVender> {
+public class ControladorModalVehiculo extends Cochera.Controllers.ControladorModal<VehiculoVender> {
 
     // Campos del formulario
     @FXML private TextField marcaVehiculo;

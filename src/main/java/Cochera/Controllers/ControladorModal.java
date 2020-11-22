@@ -14,11 +14,9 @@ import java.lang.reflect.ParameterizedType;
 import java.sql.SQLException;
 import java.util.Arrays;
 
-public abstract class Modal<T extends Modelo> {
+public abstract class ControladorModal<T extends Modelo> {
 
     public static final String ELIMINAR = "eleminar";
-    public static final String CREAR = "crear";
-    public static final String EDITAR = "editar";
 
     private final String claseGenerica;
     private String tipo;
@@ -30,7 +28,7 @@ public abstract class Modal<T extends Modelo> {
     @FXML protected Button btnCancelar;
 
 
-    public Modal() {
+    public ControladorModal() {
         String rutaClase = ((ParameterizedType) this.getClass().getGenericSuperclass()).getActualTypeArguments()[0].getTypeName();
         claseGenerica = Arrays.stream(rutaClase.split("\\.")).reduce((primero, ultimo) -> ultimo).get();
     }

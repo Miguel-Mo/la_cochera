@@ -1,19 +1,16 @@
 package Cochera.Controllers.Ventas.Clientes;
 
-import Cochera.Controllers.Modal;
+import Cochera.Controllers.ControladorModal;
 import Cochera.DAO.ClienteDAO;
-import Cochera.DAO.Crud;
-import Cochera.DAO.DAOFactory;
 import Cochera.Models.Clientes.Cliente;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 import java.util.HashMap;
 
-public class ControladorModal extends Modal<Cliente> {
+public class ControladorModalCliente extends ControladorModal<Cliente> {
 
-    // Campos del formulario
+    // Campos del formulario nuevoEditar
     @FXML private TextField nombre;
     @FXML private TextField apellidos;
     @FXML private TextField telefono;
@@ -21,6 +18,8 @@ public class ControladorModal extends Modal<Cliente> {
     @FXML private TextField presupuesto;
     @FXML private TextArea descripcion;
     @FXML private TextField email;
+
+    // Campos modal eliminar
 
     @FXML
     private void initialize() {

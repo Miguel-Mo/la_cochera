@@ -1,5 +1,6 @@
 package Cochera.Utils.Vistas;
 
+import Cochera.Controllers.CMNuevoEditar;
 import Cochera.Controllers.CModal;
 import Cochera.Controllers.DataTable;
 import javafx.fxml.FXMLLoader;
@@ -39,6 +40,12 @@ public class Modal {
     public void setControlador(CModal controlador) {
         modalFX.setController(controlador);
         controlador.setRoot(dataTable.getRoot());
+    }
+
+    public void setControlador(CMNuevoEditar controlador) {
+        modalFX.setController(controlador);
+        controlador.setRoot(dataTable.getRoot());
+        controlador.setLista(dataTable.getListaFiltrable());
     }
 
 

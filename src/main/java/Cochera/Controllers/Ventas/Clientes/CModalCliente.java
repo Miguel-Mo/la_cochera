@@ -8,7 +8,7 @@ import javafx.scene.control.*;
 
 import java.util.HashMap;
 
-public class CMClienteNuevoEditar extends CMNuevoEditar<Cliente> {
+public class CModalCliente extends CMNuevoEditar<Cliente> {
 
     // Campos del formulario nuevoEditar
     @FXML private TextField nombre;
@@ -19,47 +19,17 @@ public class CMClienteNuevoEditar extends CMNuevoEditar<Cliente> {
     @FXML private TextArea descripcion;
     @FXML private TextField email;
 
-    public CMClienteNuevoEditar(Cliente cliente) {
+    public CModalCliente(Cliente cliente) {
         super(cliente);
     }
 
-    public CMClienteNuevoEditar() {
+    public CModalCliente() {
         super();
     }
 
     @FXML
     protected void initialize() {
         super.initialize();
-    }
-
-    @Override
-    public void prohibirEdicion() {
-        nombre.setDisable(true);
-        apellidos.setDisable(true);
-        telefono.setDisable(true);
-        dni.setDisable(true);
-        presupuesto.setDisable(true);
-        descripcion.setDisable(true);
-        email.setDisable(true);
-
-        nombre.setStyle(" -fx-background-color: white , white , white;-fx-background-insets: 0 0 0 0, 0 0 0 0, 0 0 3 0;");
-        apellidos.setStyle(" -fx-background-color: white , white , white;-fx-background-insets: 0 0 0 0, 0 0 0 0, 0 0 3 0;");
-        telefono.setStyle(" -fx-background-color: white , white , white;-fx-background-insets: 0 0 0 0, 0 0 0 0, 0 0 3 0;");
-        dni.setStyle(" -fx-background-color: white , white , white;-fx-background-insets: 0 0 0 0, 0 0 0 0, 0 0 3 0;");
-        presupuesto.setStyle(" -fx-background-color: white , white , white;-fx-background-insets: 0 0 0 0, 0 0 0 0, 0 0 3 0;");
-        descripcion.setStyle(" -fx-background-color: white , white , white;-fx-background-insets: 0 0 0 0, 0 0 0 0, 0 0 3 0;");
-        email.setStyle(" -fx-background-color: white , white , white;-fx-background-insets: 0 0 0 0, 0 0 0 0, 0 0 3 0;");
-    }
-
-    @Override
-    public void permitirEdicion() {
-        nombre.setDisable(false);
-        apellidos.setDisable(false);
-        telefono.setDisable(false);
-        dni.setDisable(false);
-        presupuesto.setDisable(false);
-        descripcion.setDisable(false);
-        email.setDisable(false);
     }
 
     @Override
@@ -105,19 +75,6 @@ public class CMClienteNuevoEditar extends CMNuevoEditar<Cliente> {
     }
 
     @Override
-    public void resetError() {
-
-        nombre.setStyle("-fx-border-color: transparent");
-        apellidos.setStyle("-fx-border-color: transparent");
-        telefono.setStyle("-fx-border-color: transparent");
-        dni.setStyle("-fx-border-color: transparent");
-        presupuesto.setStyle("-fx-border-color: transparent");
-        descripcion.setStyle("-fx-border-color: transparent");
-        email.setStyle("-fx-border-color: transparent");
-
-    }
-
-    @Override
     public Cliente crearObjeto() {
         HashMap<String, String> datos = new HashMap<>();
 
@@ -152,20 +109,5 @@ public class CMClienteNuevoEditar extends CMNuevoEditar<Cliente> {
         presupuesto.setText(String.valueOf(cliente.getPresupuesto()));
         descripcion.setText(cliente.getDescripcionVehiculo());
         email.setText(cliente.getEmail());
-    }
-
-    public void eliminar() {
-        try (ClienteDAO dao = new ClienteDAO()) {
-
-            if (dao.delete(objeto)) {
-                listaFiltrable.getSource().remove(objeto);
-                btnCancelar.fire();
-            } else {
-
-            }
-
-        } catch (Exception throwables) {
-            throwables.printStackTrace();
-        }
     }
 }

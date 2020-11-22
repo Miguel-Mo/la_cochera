@@ -1,17 +1,14 @@
 package Cochera.Controllers;
 
-import Cochera.DAO.ClienteDAO;
 import Cochera.DAO.Crud;
 import Cochera.DAO.DAOFactory;
-import Cochera.Models.Clientes.Cliente;
 import Cochera.Models.Modelo;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
-
+import javafx.scene.control.Control;
 import java.lang.reflect.ParameterizedType;
 import java.util.Arrays;
 import java.util.List;
@@ -22,29 +19,35 @@ public abstract class CMNuevoEditar<T extends Modelo> extends CModal {
 
     private final T objeto;
     private FilteredList<T> listaFiltrable;
-    private List<Node> camposFormulario;
 
-    public CMNuevoEditar(List<Node> camposFormulario, T objeto) {
-        this(objeto);
-        this.camposFormulario = camposFormulario;
-    }
+    protected boolean eliminar;
+    @FXML protected Button btnEliminar;
 
-    public CMNuevoEditar(T objeto) {
+    private List<? extends Control> camposFormulario;
+
+    public CMNuevoEditar(T objeto, boolean eliminar) {
         String rutaClase = ((ParameterizedType) this.getClass().getGenericSuperclass()).getActualTypeArguments()[0].getTypeName();
         claseGenerica = Arrays.stream(rutaClase.split("\\.")).reduce((primero, ultimo) -> ultimo).get();
 
         this.objeto = objeto;
+        this.eliminar = eliminar;
     }
 
     public CMNuevoEditar() {
-        this(null);
+        this(null,false);
     }
 
-    protected void initialize() {
-        if (camposFormulario != null) {
-            establecerObjeto(objeto);
-            prohibirEdicion();
+    protected void initialize(List<? extends Control> camposFormulario) {
+        super.initialize();
+
+        if (eliminar) {
+            btnEliminar.setOnAction(actionEvent -> eliminar());
+            return;
         }
+
+        this.camposFormulario = camposFormulario;
+        establecerObjeto(objeto);
+        prohibirEdicion();
     }
 
     @FXML
@@ -57,17 +60,19 @@ public abstract class CMNuevoEditar<T extends Modelo> extends CModal {
 
             try (Crud<T> dao = DAOFactory.obtener(claseGenerica)) {
 
-                if (objeto == null) {
+                actualizarObjeto(objeto);
+
+                if (objeto.getId() == 0) {
 
                     // Creamos el objeto en la base de datos y lo añadimos a la lista
-                    T objetoCreado = dao.read(dao.create(crearObjeto()));
+                    T objetoCreado = dao.read(dao.create(objeto));
                     ObservableList<T> listaObs = (ObservableList<T>) listaFiltrable.getSource();
 
                     listaObs.add(objetoCreado);
 
                 } else {
 
-                    actualizarObjeto(objeto);
+                    // Actualizamos la base de datos
                     dao.update(objeto);
 
                 }
@@ -87,9 +92,9 @@ public abstract class CMNuevoEditar<T extends Modelo> extends CModal {
     }
 
     public void eliminar() {
-        try (ClienteDAO dao = new ClienteDAO()) {
+        try (Crud<T> dao = DAOFactory.obtener(claseGenerica)) {
 
-            if (dao.delete((Cliente) objeto)) {
+            if (dao.delete(objeto)) {
                 listaFiltrable.getSource().remove(objeto);
                 btnCancelar.fire();
             } else {
@@ -102,7 +107,6 @@ public abstract class CMNuevoEditar<T extends Modelo> extends CModal {
     }
 
     protected abstract boolean checkCampos();
-    protected abstract T crearObjeto();
     protected abstract void actualizarObjeto(T objeto);
     protected abstract void establecerObjeto(T objeto);
 

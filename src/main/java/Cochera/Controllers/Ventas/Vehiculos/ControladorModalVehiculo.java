@@ -28,8 +28,8 @@ public class ControladorModalVehiculo extends CMNuevoEditar<VehiculoVender> {
     @FXML private TextField modeloVehiculo;
     @FXML private TextField antiguedad;
 
-    public ControladorModalVehiculo(VehiculoVender objeto) {
-        super(objeto);
+    public ControladorModalVehiculo(VehiculoVender objeto, boolean eliminar) {
+        super(objeto, eliminar);
     }
 
     @FXML
@@ -135,22 +135,6 @@ public class ControladorModalVehiculo extends CMNuevoEditar<VehiculoVender> {
         precio.setStyle("-fx-border-color: transparent");
         tipoVehiculo.setStyle("-fx-border-color: transparent");
 
-    }
-
-    @Override
-    protected VehiculoVender crearObjeto() {
-        HashMap<String, Object> datos = new HashMap<>();
-
-        datos.put("marca", marcaVehiculo.getText());
-        datos.put("modelo", modeloVehiculo.getText());
-        datos.put("potencia", potencia.getText());
-        datos.put("concesionarioID", concesionarioRegistro.getValue().getId());
-        datos.put("precio", precio.getText());
-        datos.put("tipo", tipoVehiculo.getValue());
-        datos.put("tswitch", tswitch.isSelected());
-        if (tswitch.isSelected()) datos.put("tiempoUsado", antiguedad.getText());
-
-        return new VehiculoVender(datos);
     }
 
     @Override

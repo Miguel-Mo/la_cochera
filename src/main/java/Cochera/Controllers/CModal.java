@@ -9,7 +9,13 @@ import javafx.stage.Stage;
 public abstract class CModal {
 
     protected Parent root;
+
     @FXML protected Button btnCancelar;
+
+    @FXML
+    protected void initialize() {
+        btnCancelar.setOnAction(this::cerrar);
+    }
 
     @FXML
     protected void cerrar(ActionEvent actionEvent) {

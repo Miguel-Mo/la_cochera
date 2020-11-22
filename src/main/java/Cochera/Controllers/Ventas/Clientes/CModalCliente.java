@@ -1,12 +1,13 @@
 package Cochera.Controllers.Ventas.Clientes;
 
 import Cochera.Controllers.CMNuevoEditar;
-import Cochera.DAO.ClienteDAO;
 import Cochera.Models.Clientes.Cliente;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class CModalCliente extends CMNuevoEditar<Cliente> {
 
@@ -19,8 +20,14 @@ public class CModalCliente extends CMNuevoEditar<Cliente> {
     @FXML private TextArea descripcion;
     @FXML private TextField email;
 
-    public CModalCliente(Cliente cliente) {
-        super(cliente);
+    private final List<TextInputControl> campos = new ArrayList<>() {
+        {
+            add(nombre); add(apellidos); add(telefono); add(dni); add(presupuesto); add(descripcion); add(email);
+        }
+    };
+
+    public CModalCliente(Cliente cliente, boolean eliminar) {
+        super(cliente,eliminar);
     }
 
     public CModalCliente() {
@@ -29,68 +36,26 @@ public class CModalCliente extends CMNuevoEditar<Cliente> {
 
     @FXML
     protected void initialize() {
-        super.initialize();
+        super.initialize(campos);
     }
 
     @Override
     public boolean checkCampos() {
-        boolean resultado = true;
+        AtomicBoolean resultado = new AtomicBoolean(true);
 
-        if (nombre.getText().trim().length() == 0) {
-            resultado = false;
-            nombre.setStyle("-fx-border-color: RED");
-        }
+        campos.forEach(campo -> {
+            if (campo.getText().trim().length() == 0) {
+                resultado.set(false);
+                campo.setStyle("-fx-border-color: RED");
+            }
+        });
 
-        if (apellidos.getText().trim().length() == 0) {
-            resultado = false;
-            apellidos.setStyle("-fx-border-color: RED");
-        }
-
-        if (telefono.getText().trim().length() == 0) {
-            resultado = false;
-            telefono.setStyle("-fx-border-color: RED");
-        }
-
-        if (dni.getText().trim().length() == 0) {
-            resultado = false;
-            dni.setStyle("-fx-border-color: RED");
-        }
-
-        if (presupuesto.getText().trim().length() == 0) {
-            resultado = false;
-            presupuesto.setStyle("-fx-border-color: RED");
-        }
-
-        if (descripcion.getText().length() == 0) {
-            resultado = false;
-            descripcion.setStyle("-fx-border-color: RED");
-        }
-
-        if (email.getText().length() == 0) {
-            resultado = false;
-            email.setStyle("-fx-border-color: RED");
-        }
-
-        return resultado;
-    }
-
-    @Override
-    public Cliente crearObjeto() {
-        HashMap<String, String> datos = new HashMap<>();
-
-        datos.put("nombre", nombre.getText());
-        datos.put("apellidos", apellidos.getText());
-        datos.put("telefono", telefono.getText());
-        datos.put("dni", dni.getText());
-        datos.put("presupuesto", presupuesto.getText());
-        datos.put("descripcion", descripcion.getText());
-        datos.put("email", email.getText());
-
-        return new Cliente(datos);
+        return resultado.get();
     }
 
     @Override
     public void actualizarObjeto(Cliente cliente) {
+
         cliente.setApellidos(apellidos.getText());
         cliente.setDni(dni.getText());
         cliente.setEmail(email.getText());
@@ -98,10 +63,12 @@ public class CModalCliente extends CMNuevoEditar<Cliente> {
         cliente.setPresupuesto(Float.parseFloat(presupuesto.getText()));
         cliente.setTelefono(telefono.getText());
         cliente.setDescripcionVehiculo(descripcion.getText());
+
     }
 
     @Override
     public void establecerObjeto(Cliente cliente) {
+
         nombre.setText(cliente.getNombre());
         apellidos.setText(cliente.getApellidos());
         telefono.setText(cliente.getTelefono());
@@ -109,5 +76,6 @@ public class CModalCliente extends CMNuevoEditar<Cliente> {
         presupuesto.setText(String.valueOf(cliente.getPresupuesto()));
         descripcion.setText(cliente.getDescripcionVehiculo());
         email.setText(cliente.getEmail());
+
     }
 }

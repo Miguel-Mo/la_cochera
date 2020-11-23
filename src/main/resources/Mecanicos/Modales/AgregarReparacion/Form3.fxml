@@ -13,15 +13,13 @@
             <children>
                 <Label layoutX="221.0" layoutY="14.0" text="Reparacion" />
                 <Label layoutX="52.0" layoutY="108.0" text="Presupesto Estimado" />
-                <TextField fx:id="potencia" layoutX="52.0" layoutY="126.0" prefHeight="25.0" prefWidth="174.0" />
-                <Label fx:id="lantiguedad" layoutX="276.0" layoutY="108.0" text="Tipo de vehículo" />
+                <TextField id="tfPresupuestoEstimado" fx:id="potencia" layoutX="52.0" layoutY="126.0" prefHeight="25.0" prefWidth="174.0" />
                 <Label layoutX="52.0" layoutY="44.0" text="Mecánico" />
-                <ComboBox layoutX="276.0" layoutY="126.0" prefHeight="25.0" prefWidth="174.0" />
-            <ComboBox layoutX="52.0" layoutY="61.0" prefHeight="25.0" prefWidth="174.0" />
+            <ComboBox id="cbMecanico" layoutX="52.0" layoutY="61.0" prefHeight="25.0" prefWidth="174.0" />
             <Label layoutX="276.0" layoutY="44.0" text="Tiempo Estimado" />
-            <TextField layoutX="276.0" layoutY="61.0" />
-            <TextArea layoutX="52.0" layoutY="185.0" prefHeight="71.0" prefWidth="416.0" />
-            <TextArea layoutX="52.0" layoutY="285.0" prefHeight="71.0" prefWidth="416.0" />
+            <TextField id="tfTiempoEstimado" layoutX="276.0" layoutY="61.0" />
+            <TextArea id="taProblema" layoutX="52.0" layoutY="185.0" prefHeight="71.0" prefWidth="416.0" />
+            <TextArea id="taComponentes" layoutX="52.0" layoutY="285.0" prefHeight="71.0" prefWidth="416.0" />
             <Label layoutX="52.0" layoutY="162.0" text="Problema" />
             <Label layoutX="52.0" layoutY="268.0" text="Componentes" />
             </children>

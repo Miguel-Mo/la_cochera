@@ -10,13 +10,13 @@
         <Pane id="pane_cont" prefHeight="352.0" prefWidth="501.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
                 <Label layoutX="226.0" layoutY="38.0" text="Cliente" />
-                <TextField fx:id="marcaVehiculo" layoutX="52.0" layoutY="105.0" prefHeight="25.0" prefWidth="174.0" />
+                <TextField id="tfNombre" fx:id="marcaVehiculo" layoutX="52.0" layoutY="105.0" prefHeight="25.0" prefWidth="174.0" />
                 <Label layoutX="52.0" layoutY="142.0" text="E-mail" />
-                <TextField fx:id="potencia" layoutX="52.0" layoutY="160.0" prefHeight="25.0" prefWidth="174.0" />
+                <TextField id="tfEmail" fx:id="potencia" layoutX="52.0" layoutY="160.0" prefHeight="25.0" prefWidth="174.0" />
                 <Label layoutX="276.0" layoutY="87.0" text="Apellidos" />
-                <TextField fx:id="modeloVehiculo" layoutX="276.0" layoutY="105.0" prefHeight="25.0" prefWidth="174.0" />
+                <TextField id="tfApellidos" fx:id="modeloVehiculo" layoutX="276.0" layoutY="105.0" prefHeight="25.0" prefWidth="174.0" />
                 <Label fx:id="lantiguedad" layoutX="276.0" layoutY="142.0" text="Telefono" />
-                <TextField fx:id="antiguedad" layoutX="276.0" layoutY="161.0" prefHeight="25.0" prefWidth="174.0" />
+                <TextField id="tfTelefono" fx:id="antiguedad" layoutX="276.0" layoutY="161.0" prefHeight="25.0" prefWidth="174.0" />
             <Label layoutX="52.0" layoutY="87.0" text="Nombre" />
             </children>
         </Pane>

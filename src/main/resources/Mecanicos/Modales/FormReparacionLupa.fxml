@@ -13,25 +13,25 @@
         <Pane id="pane_cont" prefHeight="463.0" prefWidth="501.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
                 <Label layoutX="50.0" layoutY="37.0" text="Marca" />
-                <TextField fx:id="marcaVehiculo" layoutX="50.0" layoutY="55.0" prefHeight="25.0" prefWidth="174.0" />
+                <TextField id="tfMarca" fx:id="marcaVehiculo" layoutX="50.0" layoutY="55.0" prefHeight="25.0" prefWidth="174.0" />
                 <Label layoutX="50.0" layoutY="144.0" text="Mecanico" />
-                <TextField fx:id="potencia" layoutX="50.0" layoutY="164.0" prefHeight="25.0" prefWidth="174.0" />
+                <TextField id="tfMecanico" fx:id="potencia" layoutX="50.0" layoutY="164.0" prefHeight="25.0" prefWidth="174.0" />
                 <Label layoutX="274.0" layoutY="144.0" text="Tiempo Estimado" />
                 <Label layoutX="50.0" layoutY="202.0" text="Presupuesto estimado" />
-                <TextField fx:id="precio" layoutX="50.0" layoutY="220.0" prefWidth="174.0" />
-                <Button fx:id="btnCancelar" layoutX="121.0" layoutY="448.0" mnemonicParsing="false" onAction="#cerrar" prefHeight="37.0" prefWidth="104.0" text="Cancelar" />
+                <TextField id="tfPresupuestoEstimado" fx:id="precio" layoutX="50.0" layoutY="220.0" prefWidth="174.0" />
+                <Button id="btnCancelar" fx:id="btnCancelar" layoutX="121.0" layoutY="448.0" mnemonicParsing="false" onAction="#cerrar" prefHeight="37.0" prefWidth="104.0" text="Cancelar" />
                 <Label layoutX="50.0" layoutY="90.0" text="Tipo vehiculo" />
-                <ComboBox fx:id="tipoVehiculo" layoutX="50.0" layoutY="108.0" prefWidth="174.0" />
+                <ComboBox id="cbTipoVehiculo" fx:id="tipoVehiculo" layoutX="50.0" layoutY="108.0" prefWidth="174.0" />
                 <Label layoutX="274.0" layoutY="37.0" text="Modelo Vehículo" />
-                <TextField fx:id="modeloVehiculo" layoutX="274.0" layoutY="55.0" prefHeight="25.0" prefWidth="174.0" />
+                <TextField id="tfModelo" fx:id="modeloVehiculo" layoutX="274.0" layoutY="55.0" prefHeight="25.0" prefWidth="174.0" />
                 <Label fx:id="lantiguedad" layoutX="274.0" layoutY="92.0" text="Matricula" />
-                <TextField fx:id="antiguedad" layoutX="274.0" layoutY="111.0" prefHeight="25.0" prefWidth="174.0" />
-                <Button fx:id="btnEditar" layoutX="271.0" layoutY="448.0" mnemonicParsing="false" onAction="#nuevoEditar" prefHeight="37.0" prefWidth="104.0" text="Editar" />
-            <TextField layoutX="274.0" layoutY="164.0" prefHeight="25.0" prefWidth="174.0" />
+                <TextField id="tfMtaricula" fx:id="antiguedad" layoutX="274.0" layoutY="111.0" prefHeight="25.0" prefWidth="174.0" />
+                <Button id="btnEditar" fx:id="btnEditar" layoutX="271.0" layoutY="448.0" mnemonicParsing="false" onAction="#nuevoEditar" prefHeight="37.0" prefWidth="104.0" text="Editar" />
+            <TextField id="tfTiempoEstimado" layoutX="274.0" layoutY="164.0" prefHeight="25.0" prefWidth="174.0" />
             <Label layoutX="50.0" layoutY="271.0" text="Descripción" />
             <Label layoutX="50.0" layoutY="357.0" text="Componentes" />
-            <TextArea layoutX="50.0" layoutY="288.0" prefHeight="57.0" prefWidth="416.0" />
-            <TextArea layoutX="50.0" layoutY="374.0" prefHeight="57.0" prefWidth="416.0" />
+            <TextArea id="taDescripcion" layoutX="50.0" layoutY="288.0" prefHeight="57.0" prefWidth="416.0" />
+            <TextArea id="tsComponentes" layoutX="50.0" layoutY="374.0" prefHeight="57.0" prefWidth="416.0" />
             </children>
         </Pane>
     </children>

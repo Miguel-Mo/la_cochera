@@ -20,21 +20,24 @@ public class Modal {
     public Modal(DataTable dataTable, String recurso) throws IOException {
         this.dataTable = dataTable;
         this.modalFX = new FXMLLoader(dataTable.getClass().getResource(recurso));
-
-        iniciarVentana();
     }
 
-    private void iniciarVentana() throws IOException {
+    private void iniciarVentana()  {
         modal = new Stage();
 
-        modal.setScene(new Scene(modalFX.load()));
-        modal.initOwner(dataTable.getRoot().getScene().getWindow());
-        modal.initModality(Modality.WINDOW_MODAL);
-        modal.initStyle(StageStyle.UNDECORATED);
-        modal.alwaysOnTopProperty();
-        modal.setResizable(false);
+        try {
+            modal.setScene(new Scene(modalFX.load()));
+            modal.initOwner(dataTable.getRoot().getScene().getWindow());
+            modal.initModality(Modality.WINDOW_MODAL);
+            modal.initStyle(StageStyle.UNDECORATED);
+            modal.alwaysOnTopProperty();
+            modal.setResizable(false);
 
-        dataTable.getRoot().setStyle("-fx-opacity: 0.4");
+            dataTable.getRoot().setStyle("-fx-opacity: 0.4");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void setControlador(CModal controlador) {
@@ -50,6 +53,7 @@ public class Modal {
 
 
     public void showAndWait() {
+        iniciarVentana();
         modal.showAndWait();
     }
 }

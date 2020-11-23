@@ -12,7 +12,6 @@ public abstract class CModal {
 
     @FXML protected Button btnCancelar;
 
-    @FXML
     protected void initialize() {
         btnCancelar.setOnAction(this::cerrar);
     }

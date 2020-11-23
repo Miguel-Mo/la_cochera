@@ -4,6 +4,7 @@ import Cochera.Controllers.Base.DataTable;
 import Cochera.DAO.TipoVehiculosDAO;
 import Cochera.Models.Vehiculo.TipoVehiculo;
 import Cochera.Models.Vehiculo.VehiculoVender;
+import Cochera.Utils.Vistas.Modal;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,8 +12,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -46,6 +49,7 @@ public class ControladorVehiculos extends DataTable<VehiculoVender> {
         concesionarioActual = Preferences.userRoot().get("concesionarioID",null);
     }
 
+    @FXML
     @Override
     protected void initialize() {
         super.initialize();
@@ -116,11 +120,13 @@ public class ControladorVehiculos extends DataTable<VehiculoVender> {
         acciones.setSortable(false);
         acciones.setCellFactory(dato -> new TableCell<>() {
 
-            //Creating a graphic (image)
-            Image img = new Image("/icons/lupa.png");
-            ImageView view = new ImageView(img);
+            private final Button lupa = new Button("Lupa");
+            private final ImageView iconoLupa = new ImageView("/icons/lupa.png");
 
-            private final Button lupa = new Button();
+            private final Button eliminar = new Button("Eliminar");
+            private final ImageView iconoPapelera = new ImageView("/icons/lupa.png");
+
+            private final HBox botonera = new HBox(lupa, eliminar);
 
             @Override
             protected void updateItem(VehiculoVender vehiculo, boolean empty) {
@@ -138,11 +144,48 @@ public class ControladorVehiculos extends DataTable<VehiculoVender> {
                     lupa.setStyle(" -fx-background-color: red , white , white;-fx-background-insets: 0 0 0 0, 0 0 0 0, 0 0 3 0;");
                 }
 
+                lupa.setGraphic(iconoLupa);
+                eliminar.setGraphic(iconoPapelera);
 
-                lupa.setGraphic(view);
-                setGraphic(lupa);
+                setGraphic(botonera);
+
+                lupa.setOnAction(event -> mostrarModalModificacion(vehiculo));
+                eliminar.setOnAction(event -> mostrarModalEliminacion(vehiculo));
             }
         });
+    }
+
+    @FXML
+    private void mostrarModalCreacion() {
+        try {
+            Modal modal = new Modal(this,"/Ventas/Vehiculos/FormNuevoVehiculo.fxml");
+            modal.setControlador(new CModalVehiculo());
+            modal.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void mostrarModalModificacion(VehiculoVender vehiculo) {
+        try {
+            Modal modal = new Modal(this,"/Ventas/Vehiculos/FormVehiculoLupa.fxml");
+            modal.setControlador(new CModalVehiculo(vehiculo, false));
+            modal.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void mostrarModalEliminacion(VehiculoVender vehiculo) {
+        try {
+            Modal modal = new Modal(this,"/Ventas/Modales/Eliminar.fxml");
+            modal.setControlador(new CModalVehiculo(vehiculo, true));
+            modal.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML

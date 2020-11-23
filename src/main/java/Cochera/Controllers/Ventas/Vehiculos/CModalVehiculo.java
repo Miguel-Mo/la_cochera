@@ -7,12 +7,15 @@ import Cochera.Models.Concesionarios.Concesionario;
 import Cochera.Models.Vehiculo.TipoVehiculo;
 import Cochera.Models.Vehiculo.VehiculoVender;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import org.controlsfx.control.ToggleSwitch;
 
+import java.net.URL;
 import java.sql.SQLException;
+import java.util.ResourceBundle;
 
 public class CModalVehiculo extends CMNuevoEditar<VehiculoVender> {
 
@@ -31,11 +34,20 @@ public class CModalVehiculo extends CMNuevoEditar<VehiculoVender> {
         super(objeto, eliminar);
     }
 
+    public CModalVehiculo() {
+        super();
+    }
+
     @FXML
-    protected void initialize() {
+    @Override
+    public void initialize() {
+        System.out.println("Llamada");
+        if (eliminar) {
+            super.initialize();
+            return;
+        }
 
-
-
+        super.initialize();
 
         try (TipoVehiculosDAO dao = new TipoVehiculosDAO()) {
             tipoVehiculo.setItems(dao.read());

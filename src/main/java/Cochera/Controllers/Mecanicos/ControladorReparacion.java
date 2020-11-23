@@ -1,4 +1,4 @@
 package Cochera.Controllers.Mecanicos;
 
-public class ControladorMecanicos {
+public class ControladorReparacion {
 }

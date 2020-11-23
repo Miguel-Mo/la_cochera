@@ -92,35 +92,23 @@ public class ControladorClientes extends DataTable<Cliente> {
 
     @FXML
     private void mostrarModalCreacion() {
-        try {
-            Modal modal = new Modal(this,"/Ventas/Clientes/FormNuevoCliente.fxml");
-            modal.setControlador(new CModalCliente());
-            modal.showAndWait();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Modal modal = new Modal(this,"/Ventas/Clientes/FormNuevoCliente.fxml");
+        modal.setControlador(new CModalCliente());
+        modal.showAndWait();
     }
 
     @FXML
     private void mostrarModalModificacion(Cliente cliente) {
-        try {
-            Modal modal = new Modal(this,"/Ventas/Clientes/FormClienteLupa.fxml");
-            modal.setControlador(new CModalCliente(cliente, false));
-            modal.showAndWait();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Modal modal = new Modal(this,"/Ventas/Clientes/FormClienteLupa.fxml");
+        modal.setControlador(new CModalCliente(cliente, false));
+        modal.showAndWait();
     }
 
     @FXML
     private void mostrarModalEliminacion(Cliente cliente) {
-        try {
-            Modal modal = new Modal(this,"/Ventas/Modales/Eliminar.fxml");
-            modal.setControlador(new CModalCliente(cliente, true));
-            modal.showAndWait();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Modal modal = new Modal(this,"/Ventas/Modales/Eliminar.fxml");
+        modal.setControlador(new CModalCliente(cliente, true));
+        modal.showAndWait();
     }
 
     @FXML

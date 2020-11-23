@@ -17,7 +17,7 @@ public class Modal {
     private final DataTable dataTable;
     private final FXMLLoader modalFX;
 
-    public Modal(DataTable dataTable, String recurso) throws IOException {
+    public Modal(DataTable dataTable, String recurso) {
         this.dataTable = dataTable;
         this.modalFX = new FXMLLoader(dataTable.getClass().getResource(recurso));
     }

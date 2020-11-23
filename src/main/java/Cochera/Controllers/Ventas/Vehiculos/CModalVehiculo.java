@@ -8,13 +8,13 @@ import Cochera.Models.Vehiculo.TipoVehiculo;
 import Cochera.Models.Vehiculo.VehiculoVender;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import org.controlsfx.control.ToggleSwitch;
 
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class CModalVehiculo extends CMNuevoEditar<VehiculoVender> {
@@ -30,6 +30,13 @@ public class CModalVehiculo extends CMNuevoEditar<VehiculoVender> {
     @FXML private TextField modeloVehiculo;
     @FXML private TextField antiguedad;
 
+    private final List<Control> campos = new ArrayList<>() {
+        {
+            add(marcaVehiculo); add(potencia); add(concesionarioRegistro); add(precio); add(lantiguedad);
+            add(tipoVehiculo); add(tswitch); add(modeloVehiculo); add(antiguedad);
+        }
+    };
+
     public CModalVehiculo(VehiculoVender objeto, boolean eliminar) {
         super(objeto, eliminar);
     }
@@ -41,13 +48,9 @@ public class CModalVehiculo extends CMNuevoEditar<VehiculoVender> {
     @FXML
     @Override
     public void initialize() {
-        System.out.println("Llamada");
-        if (eliminar) {
-            super.initialize();
-            return;
-        }
+        super.initialize(campos);
 
-        super.initialize();
+        if (eliminar) return;
 
         try (TipoVehiculosDAO dao = new TipoVehiculosDAO()) {
             tipoVehiculo.setItems(dao.read());
@@ -63,38 +66,6 @@ public class CModalVehiculo extends CMNuevoEditar<VehiculoVender> {
 
         lantiguedad.visibleProperty().bind(tswitch.selectedProperty());
         antiguedad.visibleProperty().bind(tswitch.selectedProperty());
-    }
-
-    @Override
-    public void prohibirEdicion() {
-        marcaVehiculo.setDisable(true);
-        potencia.setDisable(true);
-        precio.setDisable(true);
-        modeloVehiculo.setDisable(true);
-        antiguedad.setDisable(true);
-        tswitch.setDisable(true);
-        tipoVehiculo.setDisable(true);
-        concesionarioRegistro.setDisable(true);
-
-        marcaVehiculo.setStyle(" -fx-background-color: white , white , white;-fx-background-insets: 0 0 0 0, 0 0 0 0, 0 0 3 0;");
-        modeloVehiculo.setStyle(" -fx-background-color: white , white , white;-fx-background-insets: 0 0 0 0, 0 0 0 0, 0 0 3 0;");
-        potencia.setStyle(" -fx-background-color: white , white , white;-fx-background-insets: 0 0 0 0, 0 0 0 0, 0 0 3 0;");
-        concesionarioRegistro.setStyle(" -fx-background-color: white , white , white;-fx-background-insets: 0 0 0 0, 0 0 0 0, 0 0 3 0;");
-        antiguedad.setStyle(" -fx-background-color: white , white , white;-fx-background-insets: 0 0 0 0, 0 0 0 0, 0 0 3 0;");
-        precio.setStyle(" -fx-background-color: white , white , white;-fx-background-insets: 0 0 0 0, 0 0 0 0, 0 0 3 0;");
-        tipoVehiculo.setStyle(" -fx-background-color: white , white , white;-fx-background-insets: 0 0 0 0, 0 0 0 0, 0 0 3 0;");
-    }
-
-    @Override
-    public void permitirEdicion() {
-        marcaVehiculo.setDisable(false);
-        potencia.setDisable(false);
-        precio.setDisable(false);
-        modeloVehiculo.setDisable(false);
-        antiguedad.setDisable(false);
-        tswitch.setDisable(false);
-        tipoVehiculo.setDisable(false);
-        concesionarioRegistro.setDisable(false);
     }
 
     @Override
@@ -137,19 +108,6 @@ public class CModalVehiculo extends CMNuevoEditar<VehiculoVender> {
         }
 
         return resultado;
-    }
-
-    @Override
-    public void resetError() {
-
-        marcaVehiculo.setStyle("-fx-border-color: transparent");
-        modeloVehiculo.setStyle("-fx-border-color: transparent");
-        potencia.setStyle("-fx-border-color: transparent");
-        concesionarioRegistro.setStyle("-fx-border-color: transparent");
-        antiguedad.setStyle("-fx-border-color: transparent");
-        precio.setStyle("-fx-border-color: transparent");
-        tipoVehiculo.setStyle("-fx-border-color: transparent");
-
     }
 
     @Override

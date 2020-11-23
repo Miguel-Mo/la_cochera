@@ -3,6 +3,9 @@ package Cochera.Utils;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Conversor {
 
@@ -27,4 +30,20 @@ public class Conversor {
         }
         return hexString.toString();
     }
+
+
+    private static final SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+    public static Date stringToDate(String fecha){
+
+        try {
+            return format.parse(fecha);
+        } catch (ParseException e) {
+            return null;
+        }
+
+
+    }
+
+
+
 }

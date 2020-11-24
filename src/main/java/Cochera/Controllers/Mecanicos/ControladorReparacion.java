@@ -7,6 +7,7 @@ import Cochera.Models.Reparaciones.Reparacion;
 import Cochera.Models.Usuario.Mecanico;
 import Cochera.Models.Vehiculo.TipoVehiculo;
 import javafx.beans.property.*;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -54,7 +55,7 @@ public class ControladorReparacion extends DataTable<Reparacion> {
     private void iniciarColumnas() {
         marca.setCellValueFactory(dato -> dato.getValue().getVehiculoReparar().marcaProperty());
         modelo.setCellValueFactory(dato -> dato.getValue().getVehiculoReparar().modeloProperty());
-        tiempoEstimado.setCellValueFactory(dato -> dato.getValue().tiempoEstimadoProperty()); //get time?¿
+        tiempoEstimado.setCellValueFactory(dato -> (ObservableValue<Time>) dato.getValue().getTiempoEstimado());
         estado.setCellValueFactory(dato -> dato.getValue().estadoProperty());
 
         acciones.setCellValueFactory(dato -> new ReadOnlyObjectWrapper<>(dato.getValue()));
@@ -115,11 +116,11 @@ public class ControladorReparacion extends DataTable<Reparacion> {
 
 
             if (nombreMecanico.length() > 0)
-                resNombreMecanico = reparacion.getMecanico.getNombre().toLowerCase().contains(nombreMecanico.toLowerCase());
+                resNombreMecanico = reparacion.getMecanico().getNombre().toLowerCase().contains(nombreMecanico.toLowerCase());
             if (marca.length() > 0)
-                resMarca = reparacion.getVehiculo.getMarca().toLowerCase().contains(nombreMecanico.toLowerCase());
+                resMarca = reparacion.getVehiculoReparar().getMarca().toLowerCase().contains(marca.toLowerCase());
             if (modelo.length() > 0)
-                resNombreMecanico = reparacion.getVehiculo.getModelo().toLowerCase().contains(nombreMecanico.toLowerCase());
+                resNombreMecanico = reparacion.getVehiculoReparar().getModelo().toLowerCase().contains(modelo.toLowerCase());
             if (estado != null)
                 resEstado = reparacion.getEstado().equals(estado);
 

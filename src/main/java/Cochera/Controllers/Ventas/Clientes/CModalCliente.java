@@ -20,13 +20,9 @@ public class CModalCliente extends CMNuevoEditar<Cliente> {
     @FXML private TextArea descripcion;
     @FXML private TextField email;
 
-    private final List<TextInputControl> campos = new ArrayList<>() {
-        {
-            add(nombre); add(apellidos); add(telefono); add(dni); add(presupuesto); add(descripcion); add(email);
-        }
-    };
+    private List<TextInputControl> campos;
 
-    public CModalCliente(Cliente cliente, boolean eliminar) {
+    public CModalCliente(Cliente cliente) {
         super(cliente);
     }
 
@@ -54,16 +50,12 @@ public class CModalCliente extends CMNuevoEditar<Cliente> {
     }
 
     @Override
-    public void actualizarObjeto(Cliente cliente) {
-
-        cliente.setApellidos(apellidos.getText());
-        cliente.setDni(dni.getText());
-        cliente.setEmail(email.getText());
-        cliente.setNombre(nombre.getText());
-        cliente.setPresupuesto(Float.parseFloat(presupuesto.getText()));
-        cliente.setTelefono(telefono.getText());
-        cliente.setDescripcionVehiculo(descripcion.getText());
-
+    protected void preEstablecerObjeto() {
+        campos = new ArrayList<>() {
+            {
+                add(nombre); add(apellidos); add(telefono); add(dni); add(presupuesto); add(descripcion); add(email);
+            }
+        };
     }
 
     @Override
@@ -76,6 +68,19 @@ public class CModalCliente extends CMNuevoEditar<Cliente> {
         presupuesto.setText(String.valueOf(cliente.getPresupuesto()));
         descripcion.setText(cliente.getDescripcionVehiculo());
         email.setText(cliente.getEmail());
+
+    }
+
+    @Override
+    public void actualizarObjeto(Cliente cliente) {
+
+        cliente.setApellidos(apellidos.getText());
+        cliente.setDni(dni.getText());
+        cliente.setEmail(email.getText());
+        cliente.setNombre(nombre.getText());
+        cliente.setPresupuesto(Float.parseFloat(presupuesto.getText()));
+        cliente.setTelefono(telefono.getText());
+        cliente.setDescripcionVehiculo(descripcion.getText());
 
     }
 }

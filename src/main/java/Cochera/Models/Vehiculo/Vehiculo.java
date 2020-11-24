@@ -7,7 +7,6 @@ import javafx.beans.property.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
-import java.util.HashMap;
 
 public abstract class Vehiculo extends Modelo {
 

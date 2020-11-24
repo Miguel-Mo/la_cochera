@@ -7,15 +7,26 @@ import javafx.beans.property.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
-import java.util.HashMap;
 
 public class Cliente extends Modelo {
 
-    private FloatProperty presupuesto;
-    private StringProperty nombre,apellidos,telefono,dni,email,descripcionVehiculo;
+    private final FloatProperty presupuesto;
+    private final StringProperty nombre,apellidos,telefono,dni,email,descripcionVehiculo;
+    private SimpleObjectProperty<Date> fechaRegistro;
     private int id;
 
-    public Cliente() { }
+    public Cliente() {
+
+        presupuesto = new SimpleFloatProperty();
+
+        nombre = new SimpleStringProperty();
+        apellidos = new SimpleStringProperty();
+        telefono = new SimpleStringProperty();
+        dni = new SimpleStringProperty();
+        email = new SimpleStringProperty();
+        descripcionVehiculo = new SimpleStringProperty();
+
+    }
 
     public Cliente(ResultSet rs) throws SQLException {
 
@@ -33,17 +44,6 @@ public class Cliente extends Modelo {
         fechaRegistro = new SimpleObjectProperty<>(new Date(rs.getTimestamp(tabla + ".fechaRegistro").getTime()));
 
         id = rs.getInt(tabla + ".id");
-    }
-
-    public Cliente(HashMap<String,String> datos) {
-
-        nombre = new SimpleStringProperty(datos.get("nombre"));
-        apellidos = new SimpleStringProperty(datos.get("apellidos"));
-        telefono = new SimpleStringProperty(datos.get("telefono"));
-        dni = new SimpleStringProperty(datos.get("dni"));
-        email = new SimpleStringProperty(datos.get("email"));
-        presupuesto = new SimpleFloatProperty(Float.parseFloat(datos.get("presupuesto")));
-        descripcionVehiculo = new SimpleStringProperty(datos.get("descripcion"));
     }
 
     public float getPresupuesto() {
@@ -125,8 +125,6 @@ public class Cliente extends Modelo {
     public StringProperty emailProperty() {
         return email;
     }
-
-    protected ObjectProperty<Date> fechaRegistro;
 
     public void setEmail(String email) {
         this.email.set(email);

@@ -48,28 +48,14 @@ public class Reparacion extends Modelo {
         clienteID=rs.getInt(tabla+".clienteID");
         vehiculoRepararID=rs.getInt(tabla+".vehiculoRepararID");*/
 
-
-        tiempoEstimado= new SimpleObjectProperty<Time>(rs.getTime());
-        tiempoReal= new SimpleObjectProperty<Time>(rs.getTime());
-
+        tiempoEstimado= new SimpleObjectProperty<Time>(rs.getTime(tabla+".tiempoEstimado"));
+        tiempoReal= new SimpleObjectProperty<Time>(rs.getTime(tabla+".tiempoReal"));
 
         presupuestoEstimado=new SimpleIntegerProperty(rs.getInt(tabla+".presupuestoEstimado"));
         presupuestoReal=new SimpleIntegerProperty(rs.getInt(tabla+".presupuestoReal"));
-
     }
 
-    public Reparacion(HashMap<String,String> datos){
 
-        tiempoEstimado= new SimpleObjectProperty<>(datos.get("tiempoEstimado"));
-        tiempoReal= new SimpleObjectProperty<>(datos.get("tiempoReal"));
-
-
-        presupuestoEstimado=new SimpleIntegerProperty(Integer.parseInt(datos.get("clienteID")) );
-        //new SimpleFloatProperty(Float.parseFloat(datos.get("presupuesto")));
-        presupuestoReal=new SimpleIntegerProperty(Integer.parseInt(datos.get("presupuesto")));
-
-
-    }
 
     public Time getTiempoEstimado() {
         return tiempoEstimado.get();

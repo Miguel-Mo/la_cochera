@@ -166,6 +166,7 @@ public class ControladorVehiculos extends DataTable<VehiculoVender> {
     private void mostrarModalModificacion(VehiculoVender vehiculo) {
         Modal modal = new Modal(this,"/Ventas/Vehiculos/FormVehiculoLupa.fxml");
         modal.setControlador(new CModalVehiculo(vehiculo));
+        modal.esVista();
         modal.showAndWait();
     }
 

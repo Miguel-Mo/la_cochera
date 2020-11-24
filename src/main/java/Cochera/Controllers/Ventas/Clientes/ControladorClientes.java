@@ -101,6 +101,7 @@ public class ControladorClientes extends DataTable<Cliente> {
     private void mostrarModalModificacion(Cliente cliente) {
         Modal modal = new Modal(this,"/Ventas/Clientes/FormClienteLupa.fxml");
         modal.setControlador(new CModalCliente(cliente));
+        modal.esVista();
         modal.showAndWait();
     }
 

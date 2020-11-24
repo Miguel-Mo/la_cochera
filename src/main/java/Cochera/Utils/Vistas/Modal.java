@@ -1,7 +1,6 @@
 package Cochera.Utils.Vistas;
 
 import Cochera.Controllers.Base.CMNuevoEditar;
-import Cochera.Controllers.Base.CModal;
 import Cochera.Controllers.Base.DataTable;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -16,10 +15,24 @@ public class Modal {
     private Stage modal;
     private final DataTable dataTable;
     private final FXMLLoader modalFX;
+    private boolean esVista;
 
     public Modal(DataTable dataTable, String recurso) {
         this.dataTable = dataTable;
         this.modalFX = new FXMLLoader(dataTable.getClass().getResource(recurso));
+    }
+
+    public void setControlador(CMNuevoEditar controlador) {
+        modalFX.setController(controlador);
+        controlador.setRoot(dataTable.getRoot());
+        controlador.setLista(dataTable.getListaFiltrable());
+    }
+
+
+    public void showAndWait() {
+        iniciarVentana();
+        if (esVista) ((CMNuevoEditar) modalFX.getController()).prohibirEdicion();
+        modal.showAndWait();
     }
 
     private void iniciarVentana()  {
@@ -40,20 +53,7 @@ public class Modal {
         }
     }
 
-    public void setControlador(CModal controlador) {
-        modalFX.setController(controlador);
-        controlador.setRoot(dataTable.getRoot());
-    }
-
-    public void setControlador(CMNuevoEditar controlador) {
-        modalFX.setController(controlador);
-        controlador.setRoot(dataTable.getRoot());
-        controlador.setLista(dataTable.getListaFiltrable());
-    }
-
-
-    public void showAndWait() {
-        iniciarVentana();
-        modal.showAndWait();
+    public void esVista() {
+        this.esVista = true;
     }
 }

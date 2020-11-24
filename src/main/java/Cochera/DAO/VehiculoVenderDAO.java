@@ -28,7 +28,7 @@ public class VehiculoVenderDAO extends AbstractDAO<VehiculoVender> implements Cr
                 // Creamos primero un Vehiculo en la tabla vehiculos
                 int vehiculoID = dao.create(vehiculo);
 
-                assert vehiculoID != 0; // Comprobamos que se ha creado el registro adecuadamente
+                if (vehiculoID == 0) return 0; // Comprobamos que se ha creado el registro adecuadamente
 
                 // Creamos en vehiculos_vender con FK el id obtenido del registro de vehiculos que acabamos de crear
                 vehiculo.setVehiculoID(vehiculoID);

@@ -27,11 +27,11 @@ public class CModalCliente extends CMNuevoEditar<Cliente> {
     };
 
     public CModalCliente(Cliente cliente, boolean eliminar) {
-        super(cliente,eliminar);
+        super(cliente);
     }
 
     public CModalCliente() {
-        super();
+        super(new Cliente());
     }
 
     @FXML

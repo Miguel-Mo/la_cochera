@@ -19,7 +19,15 @@ public class VehiculoVender extends Vehiculo {
     private int id, vehiculoID;
     private ImageView imageView;
 
-    public VehiculoVender() { }
+    public VehiculoVender() {
+        precio = new SimpleFloatProperty();
+
+        vendido = new SimpleBooleanProperty();
+        segundaMano = new SimpleBooleanProperty();
+
+        tiempoUsado = new SimpleStringProperty();
+        imagen = new SimpleStringProperty();
+    }
 
     public VehiculoVender(ResultSet rs) throws SQLException {
         super(rs);
@@ -44,22 +52,6 @@ public class VehiculoVender extends Vehiculo {
 
         id = rs.getInt(tabla + ".id");
         vehiculoID = rs.getInt(tabla + ".vehiculoID");
-    }
-
-    public VehiculoVender(HashMap<String,Object> datos) {
-        super(datos);
-
-        precio = new SimpleFloatProperty(Float.parseFloat((String) datos.get("precio")));
-
-        vendido = datos.containsKey("vendido") ?
-                new SimpleBooleanProperty((Boolean) datos.get("vendido")) : new SimpleBooleanProperty(false);
-        segundaMano = datos.containsKey("segundaMano") ?
-                new SimpleBooleanProperty((Boolean) datos.get("segundaMano")) : new SimpleBooleanProperty(false);
-
-        tiempoUsado = datos.containsKey("tiempoUsado") ?
-                new SimpleStringProperty((String) datos.get("tiempoUsado")) : new SimpleStringProperty(null);
-        imagen = datos.containsKey("imagen") ?
-                new SimpleStringProperty((String) datos.get("imagen")) : new SimpleStringProperty(null);
     }
 
     public float getPrecio() {
@@ -88,7 +80,6 @@ public class VehiculoVender extends Vehiculo {
     }
 
     public boolean isSegundaMano() {
-        if (segundaMano == null) return false;
         return segundaMano.get();
     }
 
@@ -101,7 +92,6 @@ public class VehiculoVender extends Vehiculo {
     }
 
     public String getTiempoUsado() {
-        if (tiempoUsado == null) return "";
         return tiempoUsado.get();
     }
 

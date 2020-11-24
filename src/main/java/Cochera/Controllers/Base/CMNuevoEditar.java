@@ -1,6 +1,5 @@
 package Cochera.Controllers.Base;
 
-import Cochera.Controllers.Base.CModal;
 import Cochera.DAO.Crud;
 import Cochera.DAO.DAOFactory;
 import Cochera.Models.Modelo;
@@ -10,12 +9,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Control;
-
-import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 public abstract class CMNuevoEditar<T extends Modelo> extends CModal {
 
@@ -24,39 +22,21 @@ public abstract class CMNuevoEditar<T extends Modelo> extends CModal {
     private final T objeto;
     private FilteredList<T> listaFiltrable;
 
-    protected boolean eliminar;
-
-    @FXML protected Button btnEliminar;
-    @FXML protected Button btnAceptar;
-
+    @FXML protected Button btnAccion;
     private List<Control> camposFormulario;
 
-    public CMNuevoEditar(T objeto, boolean eliminar) {
+    public CMNuevoEditar(T objeto) {
         String rutaClase = ((ParameterizedType) this.getClass().getGenericSuperclass()).getActualTypeArguments()[0].getTypeName();
         claseGenerica = Arrays.stream(rutaClase.split("\\.")).reduce((primero, ultimo) -> ultimo).get();
 
         this.objeto = objeto;
-        this.eliminar = eliminar;
-    }
-
-    public CMNuevoEditar(T objeto) {
-        this(objeto,false);
-    }
-
-    public CMNuevoEditar() {
-        this(null,false);
     }
 
     @Override
     protected void initialize() {
         super.initialize();
 
-        if (eliminar) {
-            btnEliminar.setOnAction(actionEvent -> eliminar());
-            return;
-        }
-
-        btnAceptar.setOnAction(this::nuevoEditar);
+        btnAccion.setOnAction(this::accionesBasicas);
 
         this.camposFormulario = new ArrayList<>();
         Arrays.stream(this.getClass().getDeclaredFields())
@@ -70,16 +50,25 @@ public abstract class CMNuevoEditar<T extends Modelo> extends CModal {
                     }
                 });
 
-        establecerObjeto(objeto);
-        prohibirEdicion();
+
+        if (!camposFormulario.stream().allMatch(Objects::isNull)) {
+            preEstablecerObjeto();
+            establecerObjeto(objeto);
+        }
     }
 
+    protected void preEstablecerObjeto() { }
+    protected abstract void establecerObjeto(T objeto);
+    protected abstract void actualizarObjeto(T objeto);
+    protected abstract boolean checkCampos();
+
     @FXML
-    protected void nuevoEditar(ActionEvent actionEvent) {
-        resetError();
+    protected void accionesBasicas(ActionEvent actionEvent) {
         Button boton = (Button) actionEvent.getSource();
 
         if (boton.getText().equals("Guardar") || boton.getText().equals("Crear")) {
+
+            resetError();
             if (!checkCampos()) return;
 
             try (Crud<T> dao = DAOFactory.obtener(claseGenerica)) {
@@ -112,36 +101,30 @@ public abstract class CMNuevoEditar<T extends Modelo> extends CModal {
             permitirEdicion();
             boton.setText("Guardar");
 
-        }
-    }
+        } else if (boton.getText().contentEquals("Eliminar")) {
 
-    public void eliminar() {
-        try (Crud<T> dao = DAOFactory.obtener(claseGenerica)) {
+            try (Crud<T> dao = DAOFactory.obtener(claseGenerica)) {
 
-            if (dao.delete(objeto)) {
-                listaFiltrable.getSource().remove(objeto);
-                btnCancelar.fire();
-            } else {
+                if (dao.delete(objeto)) {
+                    listaFiltrable.getSource().remove(objeto);
+                    btnCancelar.fire();
+                } else {
 
+                }
+
+            } catch (Exception throwables) {
+                throwables.printStackTrace();
             }
 
-        } catch (Exception throwables) {
-            throwables.printStackTrace();
         }
     }
-
-    protected abstract boolean checkCampos();
-    protected abstract void actualizarObjeto(T objeto);
-    protected abstract void establecerObjeto(T objeto);
 
     protected void resetError() {
         camposFormulario.forEach(campo -> campo.setStyle("-fx-border-color: transparent"));
     }
-
     protected void prohibirEdicion() {
         camposFormulario.forEach(campo -> campo.setDisable(true));
     }
-
     protected void permitirEdicion() {
         camposFormulario.forEach(campo -> campo.setDisable(false));
     }

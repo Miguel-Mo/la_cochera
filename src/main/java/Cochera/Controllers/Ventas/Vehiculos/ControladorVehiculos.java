@@ -165,14 +165,14 @@ public class ControladorVehiculos extends DataTable<VehiculoVender> {
     @FXML
     private void mostrarModalModificacion(VehiculoVender vehiculo) {
         Modal modal = new Modal(this,"/Ventas/Vehiculos/FormVehiculoLupa.fxml");
-        modal.setControlador(new CModalVehiculo(vehiculo, false));
+        modal.setControlador(new CModalVehiculo(vehiculo));
         modal.showAndWait();
     }
 
     @FXML
     private void mostrarModalEliminacion(VehiculoVender vehiculo) {
         Modal modal = new Modal(this,"/Ventas/Modales/Eliminar.fxml");
-        modal.setControlador(new CModalVehiculo(vehiculo, true));
+        modal.setControlador(new CModalVehiculo(vehiculo));
         modal.showAndWait();
     }
 

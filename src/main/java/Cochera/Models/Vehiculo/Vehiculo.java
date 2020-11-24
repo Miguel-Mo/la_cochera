@@ -17,7 +17,18 @@ public abstract class Vehiculo extends Modelo {
     protected TipoVehiculo tipoVehiculo;
     protected int tipoID;
 
-    public Vehiculo() {  }
+    public Vehiculo() {
+        potencia = new SimpleStringProperty();
+        marca = new SimpleStringProperty();
+        modelo = new SimpleStringProperty();
+
+        fechaRegistro = new SimpleObjectProperty<>();
+
+        vehiculoID = new SimpleIntegerProperty();
+        concesionarioID = new SimpleIntegerProperty();
+
+        tipoVehiculo = new TipoVehiculo();
+    }
 
     public Vehiculo(ResultSet rs) throws SQLException {
         String tabla = VehiculoDAO.TABLA;
@@ -34,23 +45,11 @@ public abstract class Vehiculo extends Modelo {
         fechaRegistro = new SimpleObjectProperty<>(new Date(rs.getTimestamp(tabla + ".fechaRegistro").getTime()));
     }
 
-    public Vehiculo(HashMap<String,Object> datos) {
-        tipoVehiculo = (TipoVehiculo) datos.get("tipo");
-        tipoID = tipoVehiculo.getId();
-
-        concesionarioID = new SimpleIntegerProperty((int) datos.get("concesionarioID"));
-
-        potencia = new SimpleStringProperty((String) datos.get("potencia"));
-        marca = new SimpleStringProperty((String) datos.get("marca"));
-        modelo = new SimpleStringProperty((String) datos.get("modelo"));
-    }
-
     public TipoVehiculo getTipoVehiculo() {
         return tipoVehiculo;
     }
 
     public String getPotencia() {
-        if (potencia == null) return "";
         return potencia.get();
     }
 
@@ -63,7 +62,6 @@ public abstract class Vehiculo extends Modelo {
     }
 
     public String getMarca() {
-        if (marca == null) return "";
         return marca.get();
     }
 
@@ -76,7 +74,6 @@ public abstract class Vehiculo extends Modelo {
     }
 
     public String getModelo() {
-        if (modelo == null) return "";
         return modelo.get();
     }
 
@@ -101,7 +98,6 @@ public abstract class Vehiculo extends Modelo {
     }
 
     public int getVehiculoID() {
-        if (vehiculoID == null) return 0;
         return vehiculoID.get();
     }
 
@@ -114,7 +110,6 @@ public abstract class Vehiculo extends Modelo {
     }
 
     public int getConcesionarioID() {
-        if (concesionarioID == null) return 0;
         return concesionarioID.get();
     }
 
@@ -128,5 +123,6 @@ public abstract class Vehiculo extends Modelo {
 
     public void setTipoVehiculo(TipoVehiculo tipoVehiculo) {
         this.tipoVehiculo = tipoVehiculo;
+        this.tipoID = tipoVehiculo.getId();
     }
 }

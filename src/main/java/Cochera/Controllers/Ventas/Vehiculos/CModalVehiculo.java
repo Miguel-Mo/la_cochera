@@ -7,31 +7,25 @@ import Cochera.Models.Concesionarios.Concesionario;
 import Cochera.Models.Vehiculo.TipoVehiculo;
 import Cochera.Models.Vehiculo.VehiculoVender;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import org.controlsfx.control.ToggleSwitch;
-
-import java.net.URL;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
 
 public class CModalVehiculo extends CMNuevoEditar<VehiculoVender> {
 
     // Campos del formulario
-    @FXML private TextField marcaVehiculo;
-    @FXML private TextField potencia;
-    @FXML private ComboBox<Concesionario> concesionarioRegistro;
-    @FXML private TextField precio;
-    @FXML private Label lantiguedad;
-    @FXML private ComboBox<TipoVehiculo> tipoVehiculo;
-    @FXML private ToggleSwitch tswitch;
-    @FXML private TextField modeloVehiculo;
-    @FXML private TextField antiguedad;
+    @FXML protected TextField marcaVehiculo;
+    @FXML protected TextField potencia;
+    @FXML protected ComboBox<Concesionario> concesionarioRegistro;
+    @FXML protected TextField precio;
+    @FXML protected Label lantiguedad;
+    @FXML protected ComboBox<TipoVehiculo> tipoVehiculo;
+    @FXML protected ToggleSwitch tswitch;
+    @FXML protected TextField modeloVehiculo;
+    @FXML protected TextField antiguedad;
 
-    public CModalVehiculo(VehiculoVender objeto, boolean eliminar) {
-        super(objeto, eliminar);
+    public CModalVehiculo(VehiculoVender vehiculoVender) {
+        super(vehiculoVender);
     }
 
     public CModalVehiculo() {
@@ -41,25 +35,53 @@ public class CModalVehiculo extends CMNuevoEditar<VehiculoVender> {
     @FXML
     @Override
     public void initialize() {
+        super.initialize();
+    }
 
-        if (!eliminar) {
-            try (TipoVehiculosDAO dao = new TipoVehiculosDAO()) {
-                tipoVehiculo.setItems(dao.read());
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-
-            try (ConcesionarioDAO daoR = new ConcesionarioDAO()) {
-                concesionarioRegistro.setItems(daoR.read());
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-
-            lantiguedad.visibleProperty().bind(tswitch.selectedProperty());
-            antiguedad.visibleProperty().bind(tswitch.selectedProperty());
+    @Override
+    protected void preEstablecerObjeto() {
+        try (TipoVehiculosDAO dao = new TipoVehiculosDAO()) {
+            tipoVehiculo.setItems(dao.read());
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
 
-        super.initialize();
+        try (ConcesionarioDAO daoR = new ConcesionarioDAO()) {
+            concesionarioRegistro.setItems(daoR.read());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        lantiguedad.visibleProperty().bind(tswitch.selectedProperty());
+        antiguedad.visibleProperty().bind(tswitch.selectedProperty());
+    }
+
+    @Override
+    protected void establecerObjeto(VehiculoVender vehiculo) {
+        marcaVehiculo.setText(vehiculo.getMarca());
+        potencia.setText(vehiculo.getPotencia());
+        concesionarioRegistro.getItems().forEach(concesionario -> {
+            if (concesionario.getId() == vehiculo.getConcesionarioID())
+                concesionarioRegistro.setValue(concesionario);
+        });
+        precio.setText(String.valueOf(vehiculo.getPrecio()));
+        tipoVehiculo.setValue(vehiculo.getTipoVehiculo());
+        modeloVehiculo.setText(vehiculo.getModelo());
+        antiguedad.setText(vehiculo.getTiempoUsado());
+        tswitch.setSelected(vehiculo.isSegundaMano());
+    }
+
+    @Override
+    protected void actualizarObjeto(VehiculoVender vehiculo) {
+        vehiculo.setMarca(marcaVehiculo.getText());
+        vehiculo.setModelo(modeloVehiculo.getText());
+        vehiculo.setPotencia(potencia.getText());
+        vehiculo.setConcesionarioID(concesionarioRegistro.getValue().getId());
+        vehiculo.setPrecio(Float.parseFloat(precio.getText()));
+        vehiculo.setTipoVehiculo(tipoVehiculo.getValue());
+        if (!tswitch.isSelected()) vehiculo.setTiempoUsado(null);
+        else vehiculo.setTiempoUsado(antiguedad.getText());
+        vehiculo.setSegundaMano(tswitch.isSelected());
     }
 
     @Override
@@ -102,33 +124,5 @@ public class CModalVehiculo extends CMNuevoEditar<VehiculoVender> {
         }
 
         return resultado;
-    }
-
-    @Override
-    protected void actualizarObjeto(VehiculoVender vehiculo) {
-        vehiculo.setMarca(marcaVehiculo.getText());
-        vehiculo.setModelo(modeloVehiculo.getText());
-        vehiculo.setPotencia(potencia.getText());
-        vehiculo.setConcesionarioID(concesionarioRegistro.getValue().getId());
-        vehiculo.setPrecio(Float.parseFloat(precio.getText()));
-        vehiculo.setTipoVehiculo(tipoVehiculo.getValue());
-        if (!tswitch.isSelected()) vehiculo.setTiempoUsado(null);
-        else vehiculo.setTiempoUsado(antiguedad.getText());
-        vehiculo.setSegundaMano(tswitch.isSelected());
-    }
-
-    @Override
-    protected void establecerObjeto(VehiculoVender vehiculo) {
-        marcaVehiculo.setText(vehiculo.getMarca());
-        potencia.setText(vehiculo.getPotencia());
-        concesionarioRegistro.getItems().forEach(concesionario -> {
-            if (concesionario.getId() == vehiculo.getConcesionarioID())
-                concesionarioRegistro.setValue(concesionario);
-        });
-        precio.setText(String.valueOf(vehiculo.getPrecio()));
-        tipoVehiculo.setValue(vehiculo.getTipoVehiculo());
-        modeloVehiculo.setText(vehiculo.getModelo());
-        antiguedad.setText(vehiculo.getTiempoUsado());
-        tswitch.setSelected(vehiculo.isSegundaMano());
     }
 }

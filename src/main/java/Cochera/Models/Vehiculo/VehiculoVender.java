@@ -63,6 +63,7 @@ public class VehiculoVender extends Vehiculo {
     }
 
     public float getPrecio() {
+        if (precio == null) return 0;
         return precio.get();
     }
 
@@ -87,6 +88,7 @@ public class VehiculoVender extends Vehiculo {
     }
 
     public boolean isSegundaMano() {
+        if (segundaMano == null) return false;
         return segundaMano.get();
     }
 
@@ -99,6 +101,7 @@ public class VehiculoVender extends Vehiculo {
     }
 
     public String getTiempoUsado() {
+        if (tiempoUsado == null) return "";
         return tiempoUsado.get();
     }
 

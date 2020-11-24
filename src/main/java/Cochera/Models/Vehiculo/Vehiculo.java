@@ -50,6 +50,7 @@ public abstract class Vehiculo extends Modelo {
     }
 
     public String getPotencia() {
+        if (potencia == null) return "";
         return potencia.get();
     }
 
@@ -62,6 +63,7 @@ public abstract class Vehiculo extends Modelo {
     }
 
     public String getMarca() {
+        if (marca == null) return "";
         return marca.get();
     }
 
@@ -74,6 +76,7 @@ public abstract class Vehiculo extends Modelo {
     }
 
     public String getModelo() {
+        if (modelo == null) return "";
         return modelo.get();
     }
 
@@ -98,6 +101,7 @@ public abstract class Vehiculo extends Modelo {
     }
 
     public int getVehiculoID() {
+        if (vehiculoID == null) return 0;
         return vehiculoID.get();
     }
 
@@ -110,6 +114,7 @@ public abstract class Vehiculo extends Modelo {
     }
 
     public int getConcesionarioID() {
+        if (concesionarioID == null) return 0;
         return concesionarioID.get();
     }
 

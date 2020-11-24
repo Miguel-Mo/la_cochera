@@ -36,7 +36,7 @@ public class CModalCliente extends CMNuevoEditar<Cliente> {
 
     @FXML
     protected void initialize() {
-        super.initialize(campos);
+        super.initialize();
     }
 
     @Override

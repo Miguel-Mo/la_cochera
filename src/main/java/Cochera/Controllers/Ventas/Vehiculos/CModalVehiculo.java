@@ -30,42 +30,36 @@ public class CModalVehiculo extends CMNuevoEditar<VehiculoVender> {
     @FXML private TextField modeloVehiculo;
     @FXML private TextField antiguedad;
 
-    private final List<Control> campos = new ArrayList<>() {
-        {
-            add(marcaVehiculo); add(potencia); add(concesionarioRegistro); add(precio); add(lantiguedad);
-            add(tipoVehiculo); add(tswitch); add(modeloVehiculo); add(antiguedad);
-        }
-    };
-
     public CModalVehiculo(VehiculoVender objeto, boolean eliminar) {
         super(objeto, eliminar);
     }
 
     public CModalVehiculo() {
-        super();
+        super(new VehiculoVender());
     }
 
     @FXML
     @Override
     public void initialize() {
-        super.initialize(campos);
 
-        if (eliminar) return;
+        if (!eliminar) {
+            try (TipoVehiculosDAO dao = new TipoVehiculosDAO()) {
+                tipoVehiculo.setItems(dao.read());
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
 
-        try (TipoVehiculosDAO dao = new TipoVehiculosDAO()) {
-            tipoVehiculo.setItems(dao.read());
-        } catch (SQLException e) {
-            e.printStackTrace();
+            try (ConcesionarioDAO daoR = new ConcesionarioDAO()) {
+                concesionarioRegistro.setItems(daoR.read());
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+            lantiguedad.visibleProperty().bind(tswitch.selectedProperty());
+            antiguedad.visibleProperty().bind(tswitch.selectedProperty());
         }
 
-        try (ConcesionarioDAO daoR = new ConcesionarioDAO()) {
-            concesionarioRegistro.setItems(daoR.read());
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        lantiguedad.visibleProperty().bind(tswitch.selectedProperty());
-        antiguedad.visibleProperty().bind(tswitch.selectedProperty());
+        super.initialize();
     }
 
     @Override

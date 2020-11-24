@@ -10,7 +10,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Control;
+
+import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -22,9 +25,11 @@ public abstract class CMNuevoEditar<T extends Modelo> extends CModal {
     private FilteredList<T> listaFiltrable;
 
     protected boolean eliminar;
-    @FXML protected Button btnEliminar;
 
-    private List<? extends Control> camposFormulario;
+    @FXML protected Button btnEliminar;
+    @FXML protected Button btnAceptar;
+
+    private List<Control> camposFormulario;
 
     public CMNuevoEditar(T objeto, boolean eliminar) {
         String rutaClase = ((ParameterizedType) this.getClass().getGenericSuperclass()).getActualTypeArguments()[0].getTypeName();
@@ -34,11 +39,16 @@ public abstract class CMNuevoEditar<T extends Modelo> extends CModal {
         this.eliminar = eliminar;
     }
 
+    public CMNuevoEditar(T objeto) {
+        this(objeto,false);
+    }
+
     public CMNuevoEditar() {
         this(null,false);
     }
 
-    protected void initialize(List<? extends Control> camposFormulario) {
+    @Override
+    protected void initialize() {
         super.initialize();
 
         if (eliminar) {
@@ -46,7 +56,20 @@ public abstract class CMNuevoEditar<T extends Modelo> extends CModal {
             return;
         }
 
-        this.camposFormulario = camposFormulario;
+        btnAceptar.setOnAction(this::nuevoEditar);
+
+        this.camposFormulario = new ArrayList<>();
+        Arrays.stream(this.getClass().getDeclaredFields())
+                .filter(field -> field.isAnnotationPresent(FXML.class))
+                .forEach(field -> {
+                    try {
+                        field.setAccessible(true);
+                        camposFormulario.add((Control) field.get(this));
+                    } catch (IllegalAccessException e) {
+                        e.printStackTrace();
+                    }
+                });
+
         establecerObjeto(objeto);
         prohibirEdicion();
     }

@@ -16,11 +16,12 @@
                     <children>
                         <TableView layoutX="105.0" layoutY="45.0" prefHeight="494.0" prefWidth="1108.0">
                             <columns>
-                                <TableColumn prefWidth="234.3999481201172" text="Coche vendido" />
-                                <TableColumn prefWidth="206.4000244140625" text="Fecha Limite" />
-                                <TableColumn prefWidth="327.20001220703125" text="Cliente" />
-                                <TableColumn prefWidth="183.19989013671875" text="Precio" />
-                                <TableColumn prefWidth="153.5999755859375" text="Status" />
+                                <TableColumn fx:id="cocheVendido" prefWidth="234.3999481201172" text="Cliente" />
+                                <TableColumn fx:id="fechaLimite" prefWidth="160.79998779296875" text="Marca" />
+                                <TableColumn fx:id="cliente" prefWidth="215.20001220703125" text="Modelo" />
+                                <TableColumn fx:id="precio" prefWidth="223.1998291015625" text="Cliente" />
+                        <TableColumn prefWidth="138.39996337890625" text="Precio" />
+                                <TableColumn fx:id="acciones" prefWidth="211.199951171875" text="Status" />
                             </columns>
                         </TableView>
                   <Pane id="botonera" layoutX="349.0" layoutY="-1.0" prefHeight="30.0" prefWidth="860.0">

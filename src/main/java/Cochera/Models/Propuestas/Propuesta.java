@@ -1,14 +1,18 @@
 package Cochera.Models.Propuestas;
 
 import Cochera.DAO.PropuestaDAO;
+import Cochera.Models.Modelo;
 import javafx.beans.property.*;
+import Cochera.Utils.*;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 
-public class Propuesta {
+public class Propuesta extends Modelo {
 
 //"cocheVendido","fechaLimite","cliente","precio","status"
     private FloatProperty presupuesto;
@@ -16,6 +20,8 @@ public class Propuesta {
     private StringProperty cliente,status;
     private IntegerProperty clienteID,vendedorID,vehiculoVenderID;
     private int id;
+
+
 
 
     public Propuesta(){    }
@@ -35,11 +41,11 @@ public class Propuesta {
         vehiculoVenderID = new SimpleIntegerProperty(rs.getInt(tabla + ".vehiculoVenderID"));
     }
 
-    public Propuesta(HashMap<String,String> datos) {
+    public Propuesta(HashMap<String,String> datos){
 
         presupuesto = new SimpleFloatProperty(Float.parseFloat(datos.get(".presupuesto")));
-        fechaLimite = new SimpleObjectProperty(datos.get(".fechaLimite"));
-        fechaFin = new SimpleObjectProperty(datos.get(".fechaFin"));
+        fechaFin = new SimpleObjectProperty<>(Conversor.stringToDate(datos.get(".fechaFin")));
+        fechaLimite = new SimpleObjectProperty<>(Conversor.stringToDate(datos.get(".fechaLimite")));
         cliente = new SimpleStringProperty(datos.get(".cliente") );
         status = new SimpleStringProperty(datos.get(".estado"));
         clienteID = new SimpleIntegerProperty(Integer.parseInt(datos.get("clienteID")) );

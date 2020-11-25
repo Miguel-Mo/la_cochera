@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane id="root_pane" prefHeight="370.0" prefWidth="501.0" stylesheets="@/css/formModales.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Cochera.Controllers.Ventas.Vehiculos.ControladorModal">
+    <children>
+        <Pane id="pane_cont" prefHeight="352.0" prefWidth="501.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <Label layoutX="221.0" layoutY="14.0" text="Reparacion" />
+                <Label layoutX="52.0" layoutY="108.0" text="Presupesto Estimado" />
+                <TextField id="tfPresupuestoEstimado" fx:id="potencia" layoutX="52.0" layoutY="126.0" prefHeight="25.0" prefWidth="174.0" />
+                <Label layoutX="52.0" layoutY="44.0" text="Mecánico" />
+            <ComboBox id="cbMecanico" layoutX="52.0" layoutY="61.0" prefHeight="25.0" prefWidth="174.0" />
+            <Label layoutX="276.0" layoutY="44.0" text="Tiempo Estimado" />
+            <TextField id="tfTiempoEstimado" layoutX="276.0" layoutY="61.0" />
+            <TextArea id="taProblema" layoutX="52.0" layoutY="185.0" prefHeight="71.0" prefWidth="416.0" />
+            <TextArea id="taComponentes" layoutX="52.0" layoutY="285.0" prefHeight="71.0" prefWidth="416.0" />
+            <Label layoutX="52.0" layoutY="162.0" text="Problema" />
+            <Label layoutX="52.0" layoutY="268.0" text="Componentes" />
+            </children>
+        </Pane>
+    </children>
+</AnchorPane>

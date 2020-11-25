@@ -1,6 +1,6 @@
 package Cochera.Models.Vehiculo;
 
-import Cochera.DAO.VehiculoDAO;
+import Cochera.DAO.vehiculos.VehiculoDAO;
 import Cochera.Models.Modelo;
 import javafx.beans.property.*;
 

@@ -1,5 +1,7 @@
 package Cochera.DAO;
 
+import Cochera.DAO.base.AbstractDAO;
+import Cochera.DAO.base.Crud;
 import Cochera.Models.Propuestas.Propuesta;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -8,7 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class PropuestaDAO extends AbstractDAO<Propuesta> implements Crud<Propuesta>{
+public class PropuestaDAO extends AbstractDAO<Propuesta> implements Crud<Propuesta> {
 
     public static final String TABLA = "propuesta_venta";
 

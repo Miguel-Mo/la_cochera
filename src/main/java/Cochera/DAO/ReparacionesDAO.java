@@ -1,8 +1,8 @@
 package Cochera.DAO;
 
-import Cochera.Models.Clientes.Cliente;
+import Cochera.DAO.base.AbstractDAO;
+import Cochera.DAO.base.Crud;
 import Cochera.Models.Reparaciones.Reparacion;
-import Cochera.Models.Vehiculo.Vehiculo;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 

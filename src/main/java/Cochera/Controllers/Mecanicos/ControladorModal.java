@@ -1,18 +1,5 @@
 package Cochera.Controllers.Mecanicos;
 
-import Cochera.DAO.ConcesionarioDAO;
-import Cochera.DAO.TipoVehiculosDAO;
-import Cochera.Models.Concesionarios.Concesionario;
-import Cochera.Models.Reparaciones.Reparacion;
-import Cochera.Models.Vehiculo.TipoVehiculo;
-import Cochera.Models.Vehiculo.VehiculoVender;
-import javafx.fxml.FXML;
-import javafx.scene.control.*;
-import org.controlsfx.control.ToggleSwitch;
-
-import java.sql.SQLException;
-import java.util.HashMap;
-
 public class ControladorModal  {
     /*
 

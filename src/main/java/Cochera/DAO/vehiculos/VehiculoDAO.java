@@ -1,5 +1,6 @@
-package Cochera.DAO;
+package Cochera.DAO.vehiculos;
 
+import Cochera.DAO.base.AbstractDAO;
 import Cochera.Models.Vehiculo.Vehiculo;
 
 import java.sql.PreparedStatement;

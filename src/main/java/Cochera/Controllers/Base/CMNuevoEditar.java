@@ -1,7 +1,7 @@
 package Cochera.Controllers.Base;
 
-import Cochera.DAO.Crud;
-import Cochera.DAO.DAOFactory;
+import Cochera.DAO.base.Crud;
+import Cochera.DAO.base.DAOFactory;
 import Cochera.Models.Modelo;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;

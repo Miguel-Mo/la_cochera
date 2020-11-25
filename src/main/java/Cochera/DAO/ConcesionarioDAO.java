@@ -1,5 +1,6 @@
 package Cochera.DAO;
 
+import Cochera.DAO.base.AbstractDAO;
 import Cochera.Models.Concesionarios.Concesionario;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

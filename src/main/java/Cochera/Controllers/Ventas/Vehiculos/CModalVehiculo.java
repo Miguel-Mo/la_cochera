@@ -1,9 +1,9 @@
 package Cochera.Controllers.Ventas.Vehiculos;
 
 import Cochera.Controllers.Base.CMNuevoEditar;
-import Cochera.DAO.CombustibleVehiculoDAO;
+import Cochera.DAO.vehiculos.CombustibleVehiculoDAO;
 import Cochera.DAO.ConcesionarioDAO;
-import Cochera.DAO.TipoVehiculosDAO;
+import Cochera.DAO.vehiculos.TipoVehiculosDAO;
 import Cochera.Models.Concesionarios.Concesionario;
 import Cochera.Models.Vehiculo.CombustibleVehiculo;
 import Cochera.Models.Vehiculo.TipoVehiculo;

@@ -1,5 +1,6 @@
-package Cochera.DAO;
+package Cochera.DAO.vehiculos;
 
+import Cochera.DAO.base.AbstractDAO;
 import Cochera.Models.Vehiculo.TipoVehiculo;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

@@ -1,15 +1,10 @@
 package Cochera.Models.Vehiculo;
 
-import Cochera.DAO.VehiculoVenderDAO;
+import Cochera.DAO.vehiculos.VehiculoVenderDAO;
 import javafx.beans.property.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
-import java.io.ByteArrayInputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Base64;
-import java.util.HashMap;
 
 public class VehiculoVender extends Vehiculo {
 

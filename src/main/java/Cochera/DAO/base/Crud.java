@@ -1,4 +1,4 @@
-package Cochera.DAO;
+package Cochera.DAO.base;
 
 import javafx.collections.ObservableList;
 

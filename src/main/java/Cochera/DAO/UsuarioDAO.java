@@ -1,5 +1,6 @@
 package Cochera.DAO;
 
+import Cochera.DAO.base.AbstractDAO;
 import Cochera.Models.Usuario.Usuario;
 import Cochera.utils.Conversor;
 

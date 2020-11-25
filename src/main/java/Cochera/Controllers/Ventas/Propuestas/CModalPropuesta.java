@@ -2,24 +2,17 @@ package Cochera.Controllers.Ventas.Propuestas;
 
 import Cochera.Controllers.Base.CMNuevoEditar;
 import Cochera.DAO.ClienteDAO;
-import Cochera.DAO.ConcesionarioDAO;
-import Cochera.DAO.TipoVehiculosDAO;
-import Cochera.DAO.VehiculoVenderDAO;
+import Cochera.DAO.vehiculos.VehiculoVenderDAO;
 import Cochera.Models.Clientes.Cliente;
 import Cochera.Models.Propuestas.Propuesta;
-import Cochera.Models.Vehiculo.Vehiculo;
 import Cochera.Models.Vehiculo.VehiculoVender;
 import Cochera.utils.Conversor;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import org.controlsfx.control.SearchableComboBox;
 
 import java.sql.SQLException;
-import java.time.Instant;
-import java.time.ZoneId;
-import java.util.Date;
 import java.util.prefs.Preferences;
 
 public class CModalPropuesta extends CMNuevoEditar<Propuesta> {

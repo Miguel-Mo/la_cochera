@@ -1,4 +1,10 @@
-package Cochera.DAO;
+package Cochera.DAO.base;
+
+import Cochera.DAO.ClienteDAO;
+import Cochera.DAO.PropuestaDAO;
+import Cochera.DAO.ReparacionesDAO;
+import Cochera.DAO.base.Crud;
+import Cochera.DAO.vehiculos.VehiculoVenderDAO;
 
 public class DAOFactory {
 

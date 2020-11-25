@@ -1,19 +1,15 @@
 package Cochera.Controllers.Base;
 
-import Cochera.DAO.*;
+import Cochera.DAO.base.Crud;
+import Cochera.DAO.base.DAOFactory;
 import Cochera.Models.Modelo;
 import javafx.collections.ListChangeListener;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.TableView;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import java.io.IOException;
+
 import java.lang.reflect.ParameterizedType;
 import java.util.Arrays;
 

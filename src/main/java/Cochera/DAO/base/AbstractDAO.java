@@ -1,4 +1,4 @@
-package Cochera.DAO;
+package Cochera.DAO.base;
 
 import java.lang.reflect.Field;
 import java.sql.*;

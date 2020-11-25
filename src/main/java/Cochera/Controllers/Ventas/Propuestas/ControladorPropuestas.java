@@ -1,9 +1,12 @@
 package Cochera.Controllers.Ventas.Propuestas;
 
 import Cochera.Controllers.Base.DataTable;
+import Cochera.Controllers.Ventas.Clientes.CModalCliente;
 import Cochera.Models.Propuestas.Propuesta;
 import Cochera.utils.vistas.Boton;
+import Cochera.utils.vistas.Modal;
 import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -77,14 +80,38 @@ public class ControladorPropuestas extends DataTable<Propuesta> {
                 // LUPA
                 lupa.ajustarImg(55);
                 lupa.establecerTooltip("Mostrar Detalles");
+                lupa.setOnAction(event -> mostrarModalModificacion(propuesta));
 
 
                 // ELIMINAR
                 eliminar.ajustarImg(55);
                 eliminar.establecerTooltip("Eliminar Vehículo");
+                eliminar.setOnAction(event -> mostrarModalEliminacion(propuesta));
 
                 setGraphic(botonera);
             }
         });
+    }
+
+    @FXML
+    private void mostrarModalCreacion() {
+        Modal modal = new Modal(this,"/Ventas/Propuestas/FormNuevaPropuesta.fxml");
+        modal.setControlador(new CModalPropuesta());
+        modal.showAndWait();
+    }
+
+    @FXML
+    private void mostrarModalModificacion(Propuesta propuesta) {
+        Modal modal = new Modal(this,"/Ventas/Propuestas/FormPropuestaLupa.fxml");
+        modal.setControlador(new CModalPropuesta(propuesta));
+        modal.esVista();
+        modal.showAndWait();
+    }
+
+    @FXML
+    private void mostrarModalEliminacion(Propuesta propuesta) {
+        Modal modal = new Modal(this, "/Modales/Eliminar.fxml");
+        modal.setControlador(new CModalPropuesta(propuesta));
+        modal.showAndWait();
     }
 }

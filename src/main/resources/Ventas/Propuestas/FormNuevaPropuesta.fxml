@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import Cochera.utils.vistas.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import org.controlsfx.control.*?>
+
+<AnchorPane prefHeight="390.0" prefWidth="500.0" stylesheets="@/css/formModales.css"
+            xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+
+    <Pane id="root_pane" prefHeight="425.0" prefWidth="500.0" style="-fx-background-color: white;"
+          AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+          AnchorPane.topAnchor="0.0">
+
+        <Label layoutX="56.0" layoutY="53.0" prefHeight="25.0" prefWidth="103.0" text="Cliente">
+            <font>
+                <Font size="15.0"/>
+            </font>
+        </Label>
+        <SearchableComboBox fx:id="cbCliente" layoutX="56.0" layoutY="87.0" prefHeight="25.0" prefWidth="387.0"/>
+
+        <Label layoutX="56.0" layoutY="130.0" prefHeight="20.0" prefWidth="103.0" text="Vehiculo">
+            <font>
+                <Font size="15.0"/>
+            </font>
+        </Label>
+        <SearchableComboBox fx:id="cbVehiculo" layoutX="57.0" layoutY="163.0" prefHeight="25.0" prefWidth="387.0"/>
+
+        <Label layoutX="56.0" layoutY="202.0" text="Presupuesto">
+            <font>
+                <Font size="14.0"/>
+            </font>
+        </Label>
+        <TextField fx:id="tfPresupuesto" layoutX="56.0" layoutY="233.0" prefHeight="25.0" prefWidth="165.0"/>
+
+        <Label layoutX="280.0" layoutY="202.0" text="Fecha de validez">
+            <font>
+                <Font size="14.0"/>
+            </font>
+        </Label>
+        <DatePicker fx:id="dpFechaValidez" layoutX="280.0" layoutY="233.0" prefHeight="25.0" prefWidth="165.0"/>
+
+
+        <Boton fx:id="btnAccion" layoutX="272.0" layoutY="303.0" mnemonicParsing="false" prefHeight="41.0"
+               prefWidth="91.0" text="Crear"/>
+        <Boton fx:id="btnCancelar" layoutX="145.0" layoutY="303.0" mnemonicParsing="false" prefHeight="41.0"
+               prefWidth="91.0" text="Cancelar"/>
+    </Pane>
+</AnchorPane>

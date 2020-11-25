@@ -107,7 +107,7 @@ public class ControladorClientes extends DataTable<Cliente> {
 
     @FXML
     private void mostrarModalEliminacion(Cliente cliente) {
-        Modal modal = new Modal(this,"/Ventas/Modales/Eliminar.fxml");
+        Modal modal = new Modal(this, "/Modales/Eliminar.fxml");
         modal.setControlador(new CModalCliente(cliente));
         modal.showAndWait();
     }

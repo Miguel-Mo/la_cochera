@@ -124,4 +124,8 @@ public abstract class Vehiculo extends Modelo {
         this.tipoVehiculo = tipoVehiculo;
         this.tipoID = tipoVehiculo.getId();
     }
+
+    public StringProperty marcaModeloProperty() {
+        return new SimpleStringProperty(marca.get() + " " + modelo.get());
+    }
 }

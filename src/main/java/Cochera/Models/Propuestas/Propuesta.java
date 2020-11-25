@@ -1,7 +1,10 @@
 package Cochera.Models.Propuestas;
 
 import Cochera.DAO.PropuestaDAO;
+import Cochera.Models.Clientes.Cliente;
 import Cochera.Models.Modelo;
+import Cochera.Models.Usuario.Vendedor;
+import Cochera.Models.Vehiculo.VehiculoVender;
 import javafx.beans.property.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,9 +17,12 @@ public class Propuesta extends Modelo {
     private final ObjectProperty<Date> fechaLimite,fechaInicio,fechaFin;
     private final StringProperty estado;
     private final IntegerProperty clienteID,vendedorID,vehiculoVenderID;
+    private VehiculoVender vehiculoVender;
+    private Cliente cliente;
+    private Vendedor vendedor;
     private int id;
 
-    public Propuesta(){
+    public Propuesta() {
 
         presupuesto = new SimpleFloatProperty();
 
@@ -50,6 +56,10 @@ public class Propuesta extends Modelo {
         clienteID = new SimpleIntegerProperty(rs.getInt(tabla + ".clienteID"));
         vendedorID = new SimpleIntegerProperty(rs.getInt(tabla + ".vendedorID"));
         vehiculoVenderID = new SimpleIntegerProperty(rs.getInt(tabla + ".vehiculoVenderID"));
+
+        cliente = new Cliente(rs);
+        vendedor = new Vendedor(rs);
+        vehiculoVender = new VehiculoVender(rs);
 
         id = rs.getInt(tabla + ".id");
 
@@ -157,5 +167,17 @@ public class Propuesta extends Modelo {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public VehiculoVender getVehiculoVender() {
+        return vehiculoVender;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public Vendedor getVendedor() {
+        return vendedor;
     }
 }

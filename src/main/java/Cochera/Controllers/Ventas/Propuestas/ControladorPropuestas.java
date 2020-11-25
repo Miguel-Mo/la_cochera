@@ -14,8 +14,8 @@ import java.util.Date;
 public class ControladorPropuestas extends DataTable<Propuesta> {
 
     // Columnas
-    public TableColumn<Propuesta,Integer> cocheVendido;
-    public TableColumn<Propuesta,Integer> cliente;
+    public TableColumn<Propuesta,String> cocheVendido;
+    public TableColumn<Propuesta,String> cliente;
     public TableColumn<Propuesta,Date> fechaLimite;
     public TableColumn<Propuesta,Float> precio;
     public TableColumn<Propuesta,String> estado;
@@ -33,8 +33,8 @@ public class ControladorPropuestas extends DataTable<Propuesta> {
     }
 
     private void iniciarColumnas() {
-        cocheVendido.setCellValueFactory(dato -> dato.getValue().vehiculoVenderIDProperty().asObject());
-        cliente.setCellValueFactory(dato -> dato.getValue().clienteIDProperty().asObject());
+        cocheVendido.setCellValueFactory(dato -> dato.getValue().getVehiculoVender().marcaModeloProperty());
+        cliente.setCellValueFactory(dato -> dato.getValue().getCliente().clienteProperty());
 
         fechaLimite.setCellValueFactory(dato -> dato.getValue().fechaLimiteProperty());
         fechaLimite.setCellFactory(dato -> new TableCell<>() {

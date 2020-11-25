@@ -20,7 +20,7 @@
                     <TableColumn fx:id="cocheVendido" prefWidth="235" text="Vehículo"/>
                     <TableColumn fx:id="cliente" prefWidth="215" text="Cliente"/>
                     <TableColumn fx:id="fechaLimite" prefWidth="160" text="Fecha Límite"/>
-                    <TableColumn fx:id="precio" prefWidth="225" text="Precio"/>
+                    <TableColumn fx:id="precio" prefWidth="140" text="Precio"/>
                     <TableColumn fx:id="estado" prefWidth="140" text="Estado"/>
                     <TableColumn fx:id="acciones" prefWidth="210" text="Status"/>
                 </columns>

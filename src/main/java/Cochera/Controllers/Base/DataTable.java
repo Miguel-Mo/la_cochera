@@ -40,7 +40,7 @@ public abstract class DataTable<T extends Modelo> {
         try (Crud<T> dao = DAOFactory.obtener(claseGenerica)) {
             // Envolvemos los datos de la base de datos en una lista que nos permita filtrar
             // Lo mantenemos en el estado porque es este tipo de lista la que nos permitirá filtrar por campo en el método correspondiente
-            listaFiltrable = new FilteredList<T>(dao.read(), mostrarTodoAlInicio -> true);
+            listaFiltrable = new FilteredList<>(dao.read(), mostrarTodoAlInicio -> true);
 
             // Actualizamos la tabla cuando haya algún cambio.
             listaFiltrable.addListener((ListChangeListener.Change<? extends T> change) -> tabla.refresh());

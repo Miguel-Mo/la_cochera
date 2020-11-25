@@ -10,11 +10,11 @@ import java.sql.SQLException;
 
 public class PropuestaDAO extends AbstractDAO<Propuesta> implements Crud<Propuesta>{
 
-    public static final String TABLA = "propuesta";
+    public static final String TABLA = "propuesta_venta";
 
     public PropuestaDAO() throws SQLException {
         tabla = TABLA;
-        campos = new String[]{"cocheVendido","fechaLimite","cliente","precio","status"};
+        campos = new String[]{"clienteID","vendedorID","vehiculoVenderID","estado","fechaFin","fechaLimite","presupuesto"};
     }
 
     @Override

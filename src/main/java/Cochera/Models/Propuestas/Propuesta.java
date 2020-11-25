@@ -5,31 +5,53 @@ import Cochera.Models.Modelo;
 import javafx.beans.property.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.Date;
 
 public class Propuesta extends Modelo {
 
-    private FloatProperty presupuesto;
-    private ObjectProperty<Date> fechaLimite,fechaInicio,fechaFin;
-    private StringProperty cliente,status;
-    private IntegerProperty clienteID,vendedorID,vehiculoVenderID;
+    private final FloatProperty presupuesto;
+    private final ObjectProperty<Date> fechaLimite,fechaInicio,fechaFin;
+    private final StringProperty estado;
+    private final IntegerProperty clienteID,vendedorID,vehiculoVenderID;
     private int id;
 
-    public Propuesta(){    }
+    public Propuesta(){
+
+        presupuesto = new SimpleFloatProperty();
+
+        fechaLimite = new SimpleObjectProperty<>();
+        fechaInicio = new SimpleObjectProperty<>();
+        fechaFin = new SimpleObjectProperty<>();
+
+        estado = new SimpleStringProperty();
+
+        clienteID = new SimpleIntegerProperty();
+        vendedorID = new SimpleIntegerProperty();
+        vehiculoVenderID = new SimpleIntegerProperty();
+
+    }
 
     public Propuesta(ResultSet rs) throws SQLException {
 
         String tabla = PropuestaDAO.TABLA;
 
         presupuesto = new SimpleFloatProperty(rs.getFloat(tabla + ".presupuesto"));
+
         fechaLimite = new SimpleObjectProperty<>(new Date(rs.getTimestamp(tabla + ".fechaLimite").getTime()));
         fechaInicio = new SimpleObjectProperty<>(new Date(rs.getTimestamp(tabla + ".fechaInicio").getTime()));
-        fechaFin = new SimpleObjectProperty<>(new Date(rs.getTimestamp(tabla + ".fechaFin").getTime()));
-        cliente = new SimpleStringProperty(rs.getString(tabla + ".cliente"));
-        status = new SimpleStringProperty(rs.getString(tabla + ".status"));
+
+        Timestamp tiempo = rs.getTimestamp(tabla + ".fechaFin");
+        fechaFin = tiempo == null ? new SimpleObjectProperty<>():
+            new SimpleObjectProperty<>(new Date(tiempo.getTime()));
+
+        estado = new SimpleStringProperty(rs.getString(tabla + ".estado"));
+
         clienteID = new SimpleIntegerProperty(rs.getInt(tabla + ".clienteID"));
         vendedorID = new SimpleIntegerProperty(rs.getInt(tabla + ".vendedorID"));
         vehiculoVenderID = new SimpleIntegerProperty(rs.getInt(tabla + ".vehiculoVenderID"));
+
+        id = rs.getInt(tabla + ".id");
 
     }
 
@@ -81,28 +103,16 @@ public class Propuesta extends Modelo {
         this.fechaFin.set(fechaFin);
     }
 
-    public String getCliente() {
-        return cliente.get();
+    public String getEstado() {
+        return estado.get();
     }
 
-    public StringProperty clienteProperty() {
-        return cliente;
+    public StringProperty estadoProperty() {
+        return estado;
     }
 
-    public void setCliente(String cliente) {
-        this.cliente.set(cliente);
-    }
-
-    public String getStatus() {
-        return status.get();
-    }
-
-    public StringProperty statusProperty() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status.set(status);
+    public void setEstado(String estado) {
+        this.estado.set(estado);
     }
 
     public int getClienteID() {

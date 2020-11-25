@@ -31,7 +31,7 @@ public class ControladorVentas{
                 ruta = "/Ventas/Clientes/tablaClientes.fxml";
                 break;
             case "propuestas":
-                ruta = "/Ventas/Propuestas/tablaHistorialVentas.fxml";
+                ruta = "/Ventas/Propuestas/tablaPropuestas.fxml";
                 break;
             default:
                 throw new IllegalStateException("No existe acción para: " + botonPulsado.getId());

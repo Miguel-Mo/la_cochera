@@ -6,6 +6,7 @@ public class DAOFactory {
         switch (clase) {
             case "Cliente" : return (Crud<T>) new ClienteDAO();
             case "VehiculoVender" : return (Crud<T>) new VehiculoVenderDAO();
+            case "Propuesta" : return (Crud<T>) new PropuestaDAO();
             default: throw new Exception("No existe un DAO marcado para " + clase);
         }
     }

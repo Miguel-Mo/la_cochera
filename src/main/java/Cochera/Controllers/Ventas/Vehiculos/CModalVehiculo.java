@@ -17,15 +17,18 @@ public class CModalVehiculo extends CMNuevoEditar<VehiculoVender> {
 
     // Campos del formulario
     @FXML protected TextField marcaVehiculo;
-    @FXML protected TextField potencia;
-    @FXML protected ComboBox<Concesionario> concesionarioRegistro;
-    @FXML protected TextField precio;
-    @FXML protected Label lantiguedad;
-    @FXML protected ComboBox<TipoVehiculo> tipoVehiculo;
-    @FXML protected ComboBox<CombustibleVehiculo> combustible;
-    @FXML protected ToggleSwitch tswitch;
     @FXML protected TextField modeloVehiculo;
+
+    @FXML protected TextField potencia;
+    @FXML protected ToggleSwitch tswitch;
+    @FXML protected Label lantiguedad;
     @FXML protected TextField antiguedad;
+
+    @FXML protected ComboBox<TipoVehiculo> tipoVehiculo;
+    @FXML protected ComboBox<Concesionario> concesionarioRegistro;
+
+    @FXML protected TextField precio;
+    @FXML protected ComboBox<CombustibleVehiculo> combustible;
     @FXML protected TextField kmRecorridos;
 
     public CModalVehiculo(VehiculoVender vehiculoVender) {
@@ -102,17 +105,18 @@ public class CModalVehiculo extends CMNuevoEditar<VehiculoVender> {
     public boolean checkCampos() {
         boolean resultado = true;
 
-        if (marcaVehiculo.getText().trim().length() == 0) {
+        if (marcaVehiculo.getText() == null || marcaVehiculo.getText().trim().length() == 0) {
             resultado = false;
             marcaVehiculo.setStyle("-fx-border-color: RED");
         }
 
-        if (modeloVehiculo.getText().trim().length() == 0) {
+
+        if (modeloVehiculo.getText() == null) {
             resultado = false;
             modeloVehiculo.setStyle("-fx-border-color: RED");
         }
 
-        if (potencia.getText().trim().length() == 0) {
+        if (potencia.getText() == null) {
             resultado = false;
             potencia.setStyle("-fx-border-color: RED");
         }
@@ -122,7 +126,7 @@ public class CModalVehiculo extends CMNuevoEditar<VehiculoVender> {
             concesionarioRegistro.setStyle("-fx-border-color: RED");
         }
 
-        if (tswitch.isSelected() && antiguedad.getText().trim().isEmpty()) {
+        if (tswitch.isSelected() && antiguedad.getText() == null) {
             resultado = false;
             antiguedad.setStyle("-fx-border-color: RED");
         }
@@ -146,6 +150,7 @@ public class CModalVehiculo extends CMNuevoEditar<VehiculoVender> {
             resultado = false;
             kmRecorridos.setStyle("-fx-border-color: RED");
         }
+
         return resultado;
     }
 }

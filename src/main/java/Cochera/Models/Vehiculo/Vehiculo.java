@@ -15,7 +15,7 @@ public abstract class Vehiculo extends Modelo {
     protected IntegerProperty vehiculoID, concesionarioID;
     protected TipoVehiculo tipoVehiculo;
     protected CombustibleVehiculo combustibleVehiculo;
-    protected int tipoID, tipoCombID;
+    protected int tipoID, combustibleID;
 
     public Vehiculo() {
         potencia = new SimpleStringProperty();
@@ -40,7 +40,7 @@ public abstract class Vehiculo extends Modelo {
         tipoVehiculo = new TipoVehiculo(rs);
         combustibleVehiculo = new CombustibleVehiculo(rs);
         tipoID = tipoVehiculo.getId();
-        tipoCombID = combustibleVehiculo.getId();
+        combustibleID = combustibleVehiculo.getId();
 
         potencia = new SimpleStringProperty(rs.getString(tabla + ".potencia"));
         marca = new SimpleStringProperty(rs.getString(tabla + ".marca"));
@@ -50,7 +50,10 @@ public abstract class Vehiculo extends Modelo {
 
     public CombustibleVehiculo getCombustibleVehiculo() {return combustibleVehiculo;}
 
-    public void setCombustibleVehiculo(CombustibleVehiculo combustibleVehiculo) {this.combustibleVehiculo = combustibleVehiculo;}
+    public void setCombustibleVehiculo(CombustibleVehiculo combustibleVehiculo) {
+        this.combustibleID = combustibleVehiculo.getId();
+        this.combustibleVehiculo = combustibleVehiculo;
+    }
 
     public TipoVehiculo getTipoVehiculo() {
         return tipoVehiculo;

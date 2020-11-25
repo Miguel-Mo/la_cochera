@@ -14,7 +14,7 @@ public class VehiculoVenderDAO extends AbstractDAO<VehiculoVender> implements Cr
 
     public VehiculoVenderDAO() throws SQLException {
         tabla = TABLA;
-        campos = new String[]{"precio","vendido","segundaMano","tiempoUsado","imagen","vehiculoID","kmRecorridos"};
+        campos = new String[]{"precio","vendido","segundaMano","tiempoUsado","vehiculoID","kmRecorridos"};
         relaciones.put("vehiculos", "vehiculoID");
     }
 

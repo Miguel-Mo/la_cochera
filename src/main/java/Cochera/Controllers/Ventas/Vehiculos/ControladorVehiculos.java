@@ -196,7 +196,7 @@ public class ControladorVehiculos extends DataTable<VehiculoVender> {
         LocalDate desde = fDesde.getValue();
         LocalDate hasta = fHasta.getValue();
 
-        int kmdesde= Integer.parseInt(fKmDesde.getText());
+        int kmdesde= fKmDesde.getText().trim().isEmpty() ? 0 : Integer.parseInt(fKmDesde.getText());
 
         // Hacemos un pequeño control de errores para obligar a seleccionar un Desde y Hasta si se ha escogido solo uno
         if ((desde != null && hasta == null) || (desde == null && hasta != null)) {
@@ -226,7 +226,7 @@ public class ControladorVehiculos extends DataTable<VehiculoVender> {
             if (tipo != null)
                 resTipo = vehiculo.getTipoVehiculo().getDescripcion().equals(tipo.getDescripcion());
             if (tipoCombustible != null)
-                resTipoComb = vehiculo.getTipoVehiculo().getDescripcion().equals(tipoCombustible.getDescripcion());
+                resTipoComb = vehiculo.getCombustibleVehiculo().getDescripcion().equals(tipoCombustible.getDescripcion());
             if (estado != null)
                 resEstado = estado.isEnConcesionario() == (vehiculo.getConcesionarioID() == Integer.parseInt(concesionarioActual));
             if (desde != null) {

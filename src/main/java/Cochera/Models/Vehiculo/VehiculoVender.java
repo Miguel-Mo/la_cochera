@@ -13,12 +13,11 @@ import java.util.HashMap;
 
 public class VehiculoVender extends Vehiculo {
 
-    private FloatProperty precio;
-    private BooleanProperty vendido, segundaMano;
-    private StringProperty tiempoUsado, imagen; // En caso de que guardemos la ruta o codificada en base64
+    private final FloatProperty precio;
+    private final BooleanProperty vendido, segundaMano;
+    private final StringProperty tiempoUsado;
     private int id, vehiculoID;
-    private ImageView imageView;
-    private IntegerProperty kmRecorridos;
+    private final IntegerProperty kmRecorridos;
 
     public VehiculoVender() {
         precio = new SimpleFloatProperty();
@@ -27,7 +26,6 @@ public class VehiculoVender extends Vehiculo {
         segundaMano = new SimpleBooleanProperty();
 
         tiempoUsado = new SimpleStringProperty();
-        imagen = new SimpleStringProperty();
 
         kmRecorridos= new SimpleIntegerProperty();
     }
@@ -43,17 +41,8 @@ public class VehiculoVender extends Vehiculo {
         segundaMano = new SimpleBooleanProperty(rs.getBoolean(tabla + ".segundaMano"));
 
         tiempoUsado = new SimpleStringProperty(rs.getString(tabla + ".tiempoUsado"));
-        imagen = new SimpleStringProperty(rs.getString(tabla + ".imagen"));
 
         kmRecorridos = new SimpleIntegerProperty(rs.getInt(tabla + ".kmRecorridos"));
-
-        try {
-            Image in = new Image(new ByteArrayInputStream(Base64.getDecoder().decode(rs.getString(tabla + ".imagen"))));
-            imageView = new ImageView(in);
-        } catch (Exception e) {
-            imageView = new ImageView();
-        }
-
 
         id = rs.getInt(tabla + ".id");
         vehiculoID = rs.getInt(tabla + ".vehiculoID");
@@ -120,14 +109,6 @@ public class VehiculoVender extends Vehiculo {
         this.tiempoUsado.set(tiempoUsado);
     }
 
-    public StringProperty imagenProperty() {
-        return imagen;
-    }
-
-    public void setImagen(String imagen) {
-        this.imagen.set(imagen);
-    }
-
     public int getId() {
         return id;
     }
@@ -142,10 +123,6 @@ public class VehiculoVender extends Vehiculo {
 
     public void setVehiculoID(int vehiculoID) {
         this.vehiculoID = vehiculoID;
-    }
-
-    public ImageView getImageView() {
-        return imageView;
     }
 
     @Override

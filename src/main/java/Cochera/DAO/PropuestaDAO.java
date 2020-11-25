@@ -38,14 +38,15 @@ public class PropuestaDAO extends AbstractDAO<Propuesta> implements Crud<Propues
         ObservableList<Propuesta> propuestas = FXCollections.observableArrayList();
 
         // TODO: Esto está muy mal
-        final String SQL = "SELECT propuesta_venta.*, cliente.*, vendedores.`*`,usuarios.*,vehiculos_vender.*,vehiculos.*,tipos_vehiculos.*\n" +
+        final String SQL = "SELECT propuesta_venta.*, cliente.*, vendedores.`*`,usuarios.*,vehiculos_vender.*,vehiculos.*,tipos_vehiculos.*,combustible_vehiculos.*\n" +
                 "FROM propuesta_venta\n" +
                 "LEFT JOIN cliente ON propuesta_venta.clienteID = cliente.id\n" +
                 "LEFT JOIN vendedores ON propuesta_venta.vendedorID = vendedores.id\n" +
                 "LEFT JOIN usuarios ON vendedores.usuarioID = usuarios.id\n" +
                 "LEFT JOIN vehiculos_vender ON propuesta_venta.vehiculoVenderID = vehiculos_vender.id\n" +
                 "LEFT JOIN vehiculos ON vehiculos_vender.vehiculoID = vehiculos.id\n" +
-                "LEFT JOIN tipos_vehiculos ON vehiculos.tipoID = tipos_vehiculos.id ";
+                "LEFT JOIN tipos_vehiculos ON vehiculos.tipoID = tipos_vehiculos.id " +
+                "LEFT JOIN combustible_vehiculos ON vehiculos.combustibleID = combustible_vehiculos.id";
 
         try (PreparedStatement pst = conexion.prepareStatement(SQL)) {
 

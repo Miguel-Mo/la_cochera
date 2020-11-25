@@ -82,8 +82,8 @@ public class ControladorVehiculos extends DataTable<VehiculoVender> {
 
     private void iniciarColumnas() {
         // TODO: Mostrar imagenes
-        imagen.setCellValueFactory(dato -> dato.getValue().getImageView().imageProperty());
-        imagen.setSortable(false);
+//        imagen.setCellValueFactory(dato -> dato.getValue().getImageView().imageProperty());
+//        imagen.setSortable(false);
 
         marca.setCellValueFactory(dato -> dato.getValue().marcaProperty());
         modelo.setCellValueFactory(dato -> dato.getValue().modeloProperty());

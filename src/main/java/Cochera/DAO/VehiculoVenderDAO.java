@@ -47,9 +47,11 @@ public class VehiculoVenderDAO extends AbstractDAO<VehiculoVender> implements Cr
     public ObservableList<VehiculoVender> read() {
         ObservableList<VehiculoVender> vehiculos = FXCollections.observableArrayList();
 
-        String sql = "SELECT vehiculos_vender.*, vehiculos.*, tipos_vehiculos.* FROM vehiculos_vender\n" +
-                "LEFT JOIN vehiculos  ON vehiculos_vender.vehiculoID = vehiculos.id\n" +
-                "LEFT JOIN tipos_vehiculos  ON vehiculos.tipoID = tipos_vehiculos.id";
+        String sql = "SELECT vehiculos_vender.*, vehiculos.*, tipos_vehiculos.*,combustible_vehiculos.* " +
+                "FROM vehiculos_vender \n" +
+                "LEFT JOIN vehiculos  ON vehiculos_vender.vehiculoID = vehiculos.id \n" +
+                "LEFT JOIN tipos_vehiculos  ON vehiculos.tipoID = tipos_vehiculos.id \n" +
+                "LEFT JOIN combustible_vehiculos ON vehiculos.combustibleID=combustible_vehiculos.id";
 
         try (PreparedStatement pst = conexion.prepareStatement(sql)) {
 
@@ -69,9 +71,11 @@ public class VehiculoVenderDAO extends AbstractDAO<VehiculoVender> implements Cr
     public VehiculoVender read(int id) {
         VehiculoVender vehiculo = null;
 
-        String sql = "SELECT vehiculos_vender.*, vehiculos.*, tipos_vehiculos.* FROM vehiculos_vender\n" +
-                "LEFT JOIN vehiculos  ON vehiculos_vender.vehiculoID = vehiculos.id\n" +
-                "LEFT JOIN tipos_vehiculos  ON vehiculos.tipoID = tipos_vehiculos.id WHERE vehiculos_vender.id=?";
+        String sql = "SELECT vehiculos_vender.*, vehiculos.*, tipos_vehiculos.*,combustible_vehiculos.* " +
+                "FROM vehiculos_vender \n" +
+                "LEFT JOIN vehiculos  ON vehiculos_vender.vehiculoID = vehiculos.id \n" +
+                "LEFT JOIN tipos_vehiculos  ON vehiculos.tipoID = tipos_vehiculos.id \n" +
+                "LEFT JOIN combustible_vehiculos ON vehiculos.combustibleID=combustible_vehiculos.id WHERE vehiculos_vender.id=?";
 
         try (PreparedStatement pst = conexion.prepareStatement(sql)) {
 

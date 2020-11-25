@@ -1,5 +1,6 @@
 package Cochera.Controllers;
 
+import Cochera.Controllers.Mecanicos.ControladorReparacion;
 import Cochera.Controllers.Ventas.ControladorVentas;
 import Cochera.Models.Usuario.Usuario;
 import Cochera.Utils.Vistas.VentanaCustom;
@@ -47,6 +48,13 @@ public class ControladorPanel extends VentanaCustom {
     }
 
     private void iniciarMecanico() {
+        try {
+            FXMLLoader TablaMecanicos  = new FXMLLoader(getClass().getResource("/Mecanicos/TablaMecanicos.fxml"));
+            root.getChildren().add(TablaMecanicos.load());
+            ((ControladorReparacion) TablaMecanicos.getController()).setRoot(parent);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 

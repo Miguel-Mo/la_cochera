@@ -39,9 +39,18 @@ public class ReparacionesDAO extends AbstractDAO<Reparacion> implements Crud<Rep
 
     @Override
     public ObservableList<Reparacion> read() {
+
+        final String SQL="SELECT reparaciones.*,cliente.*,mecanicos.*,vehiculos_reparar.*,usuarios.*,vehiculos.*,tipos_vehiculos.* \n" +
+                "                FROM reparaciones\n" +
+                "                left join cliente on reparaciones.clienteID=cliente.id\n" +
+                "                left join mecanicos on reparaciones.mecanicoID=mecanicos.id\n" +
+                "                left join vehiculos_reparar on reparaciones.vehiculoRepararID=vehiculos_reparar.id\n" +
+                "                left join usuarios on mecanicos.usuarioID=usuarios.id\n" +
+                "                left join vehiculos on vehiculos_reparar.vehiculoID=vehiculos.id\n" +
+                "                left join tipos_vehiculos on vehiculos.tipoID=tipos_vehiculos.id";
         ObservableList<Reparacion> reparaciones = FXCollections.observableArrayList();
 
-        try (PreparedStatement pst = conexion.prepareStatement(super.querySelect())) {
+        try (PreparedStatement pst = conexion.prepareStatement(SQL)) {
 
             ResultSet rs = pst.executeQuery();
             while (rs.next())

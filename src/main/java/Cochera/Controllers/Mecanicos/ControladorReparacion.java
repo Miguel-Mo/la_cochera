@@ -1,27 +1,16 @@
 package Cochera.Controllers.Mecanicos;
 
 import Cochera.Controllers.DataTable;
-import Cochera.DAO.TipoVehiculosDAO;
-import Cochera.Models.Clientes.Cliente;
 import Cochera.Models.Reparaciones.Reparacion;
-import Cochera.Models.Usuario.Mecanico;
-import Cochera.Models.Vehiculo.TipoVehiculo;
 import javafx.beans.property.*;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Time;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class ControladorReparacion extends DataTable<Reparacion> {
 
@@ -33,9 +22,9 @@ public class ControladorReparacion extends DataTable<Reparacion> {
     @FXML private TableColumn<Reparacion,Reparacion> acciones;
 
     // Filtro
-    @FXML private TextField tfNombreMecanico;
-    @FXML private TextField tfMarca;
-    @FXML private TextField tfModelo;
+    @FXML private TextField tfFiltroNombreMecanico;
+    @FXML private TextField tfFiltroMarca;
+    @FXML private TextField tfFiltroModelo;
     @FXML private ComboBox<String> cbEstado;
 
 
@@ -55,7 +44,7 @@ public class ControladorReparacion extends DataTable<Reparacion> {
     private void iniciarColumnas() {
         marca.setCellValueFactory(dato -> dato.getValue().getVehiculoReparar().marcaProperty());
         modelo.setCellValueFactory(dato -> dato.getValue().getVehiculoReparar().modeloProperty());
-        tiempoEstimado.setCellValueFactory(dato -> (ObservableValue<Time>) dato.getValue().getTiempoEstimado());
+        //tiempoEstimado.setCellValueFactory(dato -> (ObservableValue<Time>) dato.getValue().getTiempoEstimado());
         estado.setCellValueFactory(dato -> dato.getValue().estadoProperty());
 
         acciones.setCellValueFactory(dato -> new ReadOnlyObjectWrapper<>(dato.getValue()));
@@ -103,9 +92,9 @@ public class ControladorReparacion extends DataTable<Reparacion> {
 
     @FXML
     private void filtrar() {
-        String marca = tfMarca.getText().trim();
-        String modelo = tfModelo.getText().trim();
-        String nombreMecanico = tfNombreMecanico.getText().trim();
+        String marca = tfFiltroMarca.getText().trim();
+        String modelo = tfFiltroModelo.getText().trim();
+        String nombreMecanico = tfFiltroNombreMecanico.getText().trim();
         String estado = cbEstado.getValue();
 
         listaFiltrable.setPredicate(reparacion -> {
@@ -130,9 +119,9 @@ public class ControladorReparacion extends DataTable<Reparacion> {
 
     @FXML
     private void limpiar() {
-        tfNombreMecanico.setText("");
-        tfModelo.setText("");
-        tfMarca.setText("");
+        tfFiltroNombreMecanico.setText("");
+        tfFiltroModelo.setText("");
+        tfFiltroMarca.setText("");
         cbEstado.setValue(null);
 
         tabla.getSortOrder().clear();

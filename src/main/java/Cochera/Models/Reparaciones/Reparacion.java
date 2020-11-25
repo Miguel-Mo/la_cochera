@@ -29,9 +29,9 @@ public class Reparacion extends Modelo {
     Cliente cliente;
     VehiculoReparar vehiculoReparar;
 
-    public static final String PENDIENTE="Pendiente";
-    public static final String ENPROCESO="En proceso";
-    public static final String FINALIZADO="Finalizado";
+    public static final String PENDIENTE="pendiente";
+    public static final String ENPROCESO="en proceso";
+    public static final String FINALIZADO="finalizado";
 
     public Reparacion(){  }
 
@@ -50,6 +50,8 @@ public class Reparacion extends Modelo {
 
         tiempoEstimado= new SimpleObjectProperty<Time>(rs.getTime(tabla+".tiempoEstimado"));
         tiempoReal= new SimpleObjectProperty<Time>(rs.getTime(tabla+".tiempoReal"));
+
+        estado=new SimpleStringProperty(rs.getString(tabla+".estado"));
 
         presupuestoEstimado=new SimpleIntegerProperty(rs.getInt(tabla+".presupuestoEstimado"));
         presupuestoReal=new SimpleIntegerProperty(rs.getInt(tabla+".presupuestoReal"));

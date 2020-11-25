@@ -12,7 +12,8 @@ public class VehiculoReparar extends Vehiculo{
 
     public VehiculoReparar(ResultSet rs) throws SQLException {
         super(rs);
-        descripcion = new SimpleStringProperty(rs.getString("descripcion"));
-        vehiculoID = rs.getInt("vehiculos_id");
+        String tabla="vehiculos_reparar";
+        descripcion = new SimpleStringProperty(rs.getString(tabla+ ".descripcion"));
+        vehiculoID = rs.getInt(tabla+ ".vehiculoId");
     }
 }

@@ -13,9 +13,11 @@ public class Mecanico extends Usuario {
     private int usuarioID;
     public Mecanico(ResultSet datos) throws SQLException {
         super(datos);
-
         esJefe =new SimpleBooleanProperty(datos.getBoolean("esJefe"));
         usuarioID = datos.getInt("usuarioID");
+    }
 
+    public void setEsJefe(boolean esJefe) {
+        this.esJefe.set(esJefe);
     }
 }

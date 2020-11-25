@@ -4,6 +4,7 @@ import Cochera.Controllers.Base.DataTable;
 import Cochera.DAO.TipoVehiculosDAO;
 import Cochera.Models.Vehiculo.TipoVehiculo;
 import Cochera.Models.Vehiculo.VehiculoVender;
+import Cochera.Utils.Vistas.Boton;
 import Cochera.Utils.Vistas.Modal;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
@@ -11,6 +12,8 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Cursor;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -18,6 +21,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
+import java.awt.*;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -123,11 +127,8 @@ public class ControladorVehiculos extends DataTable<VehiculoVender> {
         acciones.setSortable(false);
         acciones.setCellFactory(dato -> new TableCell<>() {
 
-            private final Button lupa = new Button();
-            private final ImageView iconoLupa = new ImageView("/icons/lupa.png");
-
-            private final Button eliminar = new Button();
-            private final ImageView iconoPapelera = new ImageView("/icons/lupa.png");
+            private final Boton lupa = new Boton(new ImageView("/icons/lupa.png"));
+            private final Boton eliminar = new Boton(new ImageView("/icons/delete.png"));
 
             private final HBox botonera = new HBox(lupa, eliminar);
 
@@ -141,30 +142,14 @@ public class ControladorVehiculos extends DataTable<VehiculoVender> {
                 }
 
                 // LUPA
-                lupa.setGraphic(iconoLupa);
-                lupa.setStyle("-fx-background-color: white; -fx-background-insets: 0;");
-                lupa.addEventHandler(MouseEvent.MOUSE_ENTERED, e -> setCursor(Cursor.HAND));
-                lupa.addEventHandler(MouseEvent.MOUSE_EXITED, e -> setCursor(Cursor.DEFAULT));
-
-                Tooltip tooltip = new Tooltip("Mostrar Detalles");
-                tooltip.setShowDelay(Duration.seconds(0.5));
-                tooltip.setStyle("-fx-background-color: white; -fx-text-fill: #E76F51;");
-                lupa.setTooltip(tooltip);
-
+                lupa.ajustarImg(55);
+                lupa.establecerTooltip("Mostrar Detalles");
                 lupa.setOnAction(event -> mostrarModalModificacion(vehiculo));
 
 
                 // ELIMINAR
-                eliminar.setGraphic(iconoPapelera);
-                eliminar.setStyle("-fx-background-color: white; -fx-background-insets: 0;");
-                eliminar.addEventHandler(MouseEvent.MOUSE_ENTERED, e -> setCursor(Cursor.HAND));
-                eliminar.addEventHandler(MouseEvent.MOUSE_EXITED, e -> setCursor(Cursor.DEFAULT));
-
-                Tooltip tooltipE = new Tooltip("Eliminar Vehículo");
-                tooltipE.setShowDelay(Duration.seconds(0.5));
-                tooltipE.setStyle("-fx-background-color: white; -fx-text-fill: #E76F51;");
-                eliminar.setTooltip(tooltipE);
-
+                eliminar.ajustarImg(55);
+                eliminar.establecerTooltip("Eliminar Vehículo");
                 eliminar.setOnAction(event -> mostrarModalEliminacion(vehiculo));
 
                 setGraphic(botonera);

@@ -32,7 +32,13 @@
         <ComboBox fx:id="concesionarioRegistro" layoutX="274.0" layoutY="162.0" prefWidth="174.0"/>
 
         <Label layoutX="50.0" layoutY="202.0" text="Precio de compra"/>
-        <TextField fx:id="precio" layoutX="50.0" layoutY="220.0" prefWidth="174.0"/>
+        <TextField fx:id="precio" layoutX="50.0" layoutY="220.0" prefWidth="116.0"/>
+
+        <Label layoutX="137.0" layoutY="202.0" text="Combustible"/>
+        <TextField fx:id="combustible" layoutX="50.0" layoutY="220.0" prefWidth="116.0"/>
+
+        <Label layoutX="274.0" layoutY="202.0" text="Km recorridos"/>
+        <TextField fx:id="kmRecorridos" layoutX="50.0" layoutY="220.0" prefWidth="116.0"/>
 
 
         <Boton fx:id="btnAccion" layoutX="295.0" layoutY="288.0" mnemonicParsing="false"

@@ -12,7 +12,7 @@ public class VehiculoDAO extends AbstractDAO<Vehiculo> {
 
     public VehiculoDAO() throws SQLException {
         tabla = TABLA;
-        campos = new String[]{"potencia","marca","modelo","tipoID","concesionarioID"};
+        campos = new String[]{"potencia","marca","modelo","tipoID","concesionarioID","combustibleID"};
     }
 
 

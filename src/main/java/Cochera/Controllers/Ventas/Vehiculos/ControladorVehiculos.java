@@ -1,7 +1,9 @@
 package Cochera.Controllers.Ventas.Vehiculos;
 
 import Cochera.Controllers.Base.DataTable;
+import Cochera.DAO.CombustibleVehiculoDAO;
 import Cochera.DAO.TipoVehiculosDAO;
+import Cochera.Models.Vehiculo.CombustibleVehiculo;
 import Cochera.Models.Vehiculo.TipoVehiculo;
 import Cochera.Models.Vehiculo.VehiculoVender;
 import Cochera.utils.vistas.Boton;
@@ -26,6 +28,7 @@ import java.util.prefs.Preferences;
 
 public class ControladorVehiculos extends DataTable<VehiculoVender> {
 
+
     // Columnas
     @FXML private TableColumn<VehiculoVender, Image> imagen;
     @FXML private TableColumn<VehiculoVender, String> marca;
@@ -40,8 +43,10 @@ public class ControladorVehiculos extends DataTable<VehiculoVender> {
     @FXML private DatePicker fHasta;
     @FXML private TextField fModelo;
     @FXML private ComboBox<TipoVehiculo> fTipo;
+    @FXML private ComboBox<CombustibleVehiculo> fTipoComb;
     @FXML private TextField fMarca;
     @FXML private ComboBox<EstadoVehiculo> fEstado;
+    @FXML private TextField fKmDesde;
 
     /** Almacenamos el ID del concesionario del usuario logueado */
     private final String concesionarioActual;
@@ -64,6 +69,13 @@ public class ControladorVehiculos extends DataTable<VehiculoVender> {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+
+        try(CombustibleVehiculoDAO dao2 = new CombustibleVehiculoDAO()) {
+            fTipoComb.setItems(dao2.read());
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
 
         fEstado.setItems(EstadoVehiculo.obtenerEstados());
     }
@@ -178,11 +190,13 @@ public class ControladorVehiculos extends DataTable<VehiculoVender> {
         String marca = fMarca.getText().trim();
         String modelo = fModelo.getText().trim();
         TipoVehiculo tipo = fTipo.getValue();
+        CombustibleVehiculo tipoCombustible = fTipoComb.getValue();
         EstadoVehiculo estado = fEstado.getValue();
 
         LocalDate desde = fDesde.getValue();
         LocalDate hasta = fHasta.getValue();
 
+        int kmdesde= Integer.parseInt(fKmDesde.getText());
 
         // Hacemos un pequeño control de errores para obligar a seleccionar un Desde y Hasta si se ha escogido solo uno
         if ((desde != null && hasta == null) || (desde == null && hasta != null)) {
@@ -199,8 +213,10 @@ public class ControladorVehiculos extends DataTable<VehiculoVender> {
             boolean resMarca = true;
             boolean resModelo = true;
             boolean resTipo = true;
+            boolean resTipoComb = true;
             boolean resEstado = true;
             boolean resFecha = true;
+            boolean resKm = true;
 
 
             if (marca.length() > 0)
@@ -209,15 +225,20 @@ public class ControladorVehiculos extends DataTable<VehiculoVender> {
                 resModelo = vehiculo.getModelo().toLowerCase().contains(modelo.toLowerCase());
             if (tipo != null)
                 resTipo = vehiculo.getTipoVehiculo().getDescripcion().equals(tipo.getDescripcion());
+            if (tipoCombustible != null)
+                resTipoComb = vehiculo.getTipoVehiculo().getDescripcion().equals(tipoCombustible.getDescripcion());
             if (estado != null)
                 resEstado = estado.isEnConcesionario() == (vehiculo.getConcesionarioID() == Integer.parseInt(concesionarioActual));
             if (desde != null) {
                 LocalDate fecha = vehiculo.getFechaRegistro().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
                 resFecha = fecha.isAfter(desde) && fecha.isBefore(hasta);
             }
+            if(kmdesde != 0){
+                resKm=vehiculo.getKmRecorridos()>=kmdesde;
+            }
 
 
-            return resMarca && resModelo && resTipo && resEstado && resFecha;
+            return resMarca && resModelo && resTipo && resEstado && resFecha && resTipoComb && resKm;
         });
     }
 
@@ -227,6 +248,8 @@ public class ControladorVehiculos extends DataTable<VehiculoVender> {
         fMarca.setText("");
         fEstado.setValue(null);
         fTipo.setValue(null);
+        fTipoComb.setValue(null);
+        fKmDesde.setText("");
 
         fDesde.setValue(null);
         fHasta.setValue(null);

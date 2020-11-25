@@ -19,27 +19,36 @@
                 </font>
             </Label>
 
-            <Label layoutX="31.0" layoutY="113.0" prefHeight="17.0" prefWidth="70.0" text="Modelo"/>
-            <TextField id="tfModelo" fx:id="fModelo" layoutX="30.0" layoutY="136.0" prefHeight="25.0"
-                       prefWidth="150.0"/>
+            <Label layoutX="32.0" layoutY="36.0" text="Marca"/>
+            <TextField id="tfModelo" fx:id="fMarca" layoutX="30.0" layoutY="60.0" prefHeight="25.0" prefWidth="150.0"/>
 
-            <Label layoutX="32.0" layoutY="186.0" prefHeight="17.0" prefWidth="146.0" text="Fecha Entrada"/>
+            <Label layoutX="31.0" layoutY="103.0" prefHeight="17.0" prefWidth="70.0" text="Modelo"/>
+            <TextField id="tfModelo" fx:id="fModelo" layoutX="30.0" layoutY="126.0" prefHeight="25.0" prefWidth="150.0"/>
 
-            <Label layoutX="33.0" layoutY="368.0" text="Estado:"/>
-            <DatePicker fx:id="fDesde" layoutX="76.0" layoutY="214.0" prefHeight="25.0" prefWidth="108.0"/>
+            <Label layoutX="32.0" layoutY="176.0" prefHeight="17.0" prefWidth="146.0" text="Fecha Entrada"/>
+            <Label layoutX="32.0" layoutY="198.0" text="Desde"/>
+            <DatePicker fx:id="fDesde" layoutX="76.0" layoutY="194.0" prefHeight="25.0" prefWidth="108.0"/>
+            <Label layoutX="32.0" layoutY="235.0" prefHeight="17.0" prefWidth="34.0" text="Hasta"/>
+            <DatePicker fx:id="fHasta" layoutX="76.0" layoutY="231.0" prefHeight="25.0" prefWidth="108.0"/>
 
-            <Boton id="bFiltrar" layoutX="33.0" layoutY="463.0" mnemonicParsing="false" onAction="#filtrar"
-                    prefHeight="26.0" prefWidth="70.0" text="Filtrar"/>
-            <Boton id="bLimpiar" layoutX="112.0" layoutY="463.0" mnemonicParsing="false" onAction="#limpiar"
-                    prefHeight="26.0" prefWidth="70.0" text="Limpiar"/>
-            <Label layoutX="34.0" layoutY="297.0" prefHeight="17.0" prefWidth="27.0" text="Tipo"/>
-            <ComboBox fx:id="fTipo" layoutX="33.0" layoutY="323.0" prefHeight="25.0" prefWidth="150.0"/>
-            <Label layoutX="32.0" layoutY="46.0" text="Marca"/>
-            <TextField id="tfModelo" fx:id="fMarca" layoutX="30.0" layoutY="70.0" prefHeight="25.0" prefWidth="150.0"/>
-            <DatePicker fx:id="fHasta" layoutX="76.0" layoutY="251.0" prefHeight="25.0" prefWidth="108.0"/>
-            <Label layoutX="32.0" layoutY="218.0" text="Desde"/>
-            <Label layoutX="32.0" layoutY="255.0" prefHeight="17.0" prefWidth="34.0" text="Hasta"/>
-            <ComboBox fx:id="fEstado" layoutX="33.0" layoutY="394.0" prefHeight="25.0" prefWidth="150.0"/>
+            <Label layoutX="32.0" layoutY="271.0" prefHeight="17.0" prefWidth="146.0" text="Kilómetros"/>
+            <Label layoutX="32.0" layoutY="292.0" text="Desde"/>
+            <TextField fx:id="fKmDesde" layoutX="76.0" layoutY="288.0" prefHeight="25.0" prefWidth="108.0"/>
+
+
+            <Label layoutX="34.0" layoutY="327.0" prefHeight="17.0" prefWidth="27.0" text="Tipo"/>
+            <ComboBox fx:id="fTipo" layoutX="33.0" layoutY="343.0" prefHeight="25.0" prefWidth="150.0"/>
+
+            <Label layoutX="34.0" layoutY="374.0" prefHeight="17.0" prefWidth="107.0" text="Combustible"/>
+            <ComboBox fx:id="fTipoComb" layoutX="33.0" layoutY="390.0" prefHeight="25.0" prefWidth="150.0"/>
+
+            <Label layoutX="33.0" layoutY="418.0" text="Estado:"/>
+            <ComboBox fx:id="fEstado" layoutX="33.0" layoutY="434.0" prefHeight="25.0" prefWidth="150.0"/>
+
+            <Boton id="bFiltrar" layoutX="33.0" layoutY="483.0" mnemonicParsing="false" onAction="#filtrar"
+                   prefHeight="26.0" prefWidth="70.0" text="Filtrar"/>
+            <Boton id="bLimpiar" layoutX="112.0" layoutY="483.0" mnemonicParsing="false" onAction="#limpiar"
+                   prefHeight="26.0" prefWidth="70.0" text="Limpiar"/>
 
         </AnchorPane>
 

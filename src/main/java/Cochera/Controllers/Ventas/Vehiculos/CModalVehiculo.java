@@ -1,9 +1,11 @@
 package Cochera.Controllers.Ventas.Vehiculos;
 
 import Cochera.Controllers.Base.CMNuevoEditar;
+import Cochera.DAO.CombustibleVehiculoDAO;
 import Cochera.DAO.ConcesionarioDAO;
 import Cochera.DAO.TipoVehiculosDAO;
 import Cochera.Models.Concesionarios.Concesionario;
+import Cochera.Models.Vehiculo.CombustibleVehiculo;
 import Cochera.Models.Vehiculo.TipoVehiculo;
 import Cochera.Models.Vehiculo.VehiculoVender;
 import javafx.fxml.FXML;
@@ -20,9 +22,11 @@ public class CModalVehiculo extends CMNuevoEditar<VehiculoVender> {
     @FXML protected TextField precio;
     @FXML protected Label lantiguedad;
     @FXML protected ComboBox<TipoVehiculo> tipoVehiculo;
+    @FXML protected ComboBox<CombustibleVehiculo> combustible;
     @FXML protected ToggleSwitch tswitch;
     @FXML protected TextField modeloVehiculo;
     @FXML protected TextField antiguedad;
+    @FXML protected TextField kmRecorridos;
 
     public CModalVehiculo(VehiculoVender vehiculoVender) {
         super(vehiculoVender);
@@ -42,6 +46,12 @@ public class CModalVehiculo extends CMNuevoEditar<VehiculoVender> {
     protected void preEstablecerObjeto() {
         try (TipoVehiculosDAO dao = new TipoVehiculosDAO()) {
             tipoVehiculo.setItems(dao.read());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        try (CombustibleVehiculoDAO dao = new CombustibleVehiculoDAO()) {
+            combustible.setItems(dao.read());
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -66,8 +76,10 @@ public class CModalVehiculo extends CMNuevoEditar<VehiculoVender> {
         });
         precio.setText(String.valueOf(vehiculo.getPrecio()));
         tipoVehiculo.setValue(vehiculo.getTipoVehiculo());
+        combustible.setValue(vehiculo.getCombustibleVehiculo());
         modeloVehiculo.setText(vehiculo.getModelo());
         antiguedad.setText(vehiculo.getTiempoUsado());
+        kmRecorridos.setText(String.valueOf(vehiculo.getKmRecorridos()));
         tswitch.setSelected(vehiculo.isSegundaMano());
     }
 
@@ -79,6 +91,8 @@ public class CModalVehiculo extends CMNuevoEditar<VehiculoVender> {
         vehiculo.setConcesionarioID(concesionarioRegistro.getValue().getId());
         vehiculo.setPrecio(Float.parseFloat(precio.getText()));
         vehiculo.setTipoVehiculo(tipoVehiculo.getValue());
+        vehiculo.setCombustibleVehiculo(combustible.getValue());
+        vehiculo.setKmRecorridos(Integer.parseInt(kmRecorridos.getText()));
         if (!tswitch.isSelected()) vehiculo.setTiempoUsado(null);
         else vehiculo.setTiempoUsado(antiguedad.getText());
         vehiculo.setSegundaMano(tswitch.isSelected());
@@ -123,6 +137,15 @@ public class CModalVehiculo extends CMNuevoEditar<VehiculoVender> {
             tipoVehiculo.setStyle("-fx-border-color: RED");
         }
 
+        if (combustible.getValue() == null) {
+            resultado = false;
+            combustible.setStyle("-fx-border-color: RED");
+        }
+
+        if (kmRecorridos.getText().length() == 0) {
+            resultado = false;
+            kmRecorridos.setStyle("-fx-border-color: RED");
+        }
         return resultado;
     }
 }

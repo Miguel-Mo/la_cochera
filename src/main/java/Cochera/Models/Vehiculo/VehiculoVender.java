@@ -18,6 +18,7 @@ public class VehiculoVender extends Vehiculo {
     private StringProperty tiempoUsado, imagen; // En caso de que guardemos la ruta o codificada en base64
     private int id, vehiculoID;
     private ImageView imageView;
+    private IntegerProperty kmRecorridos;
 
     public VehiculoVender() {
         precio = new SimpleFloatProperty();
@@ -27,6 +28,8 @@ public class VehiculoVender extends Vehiculo {
 
         tiempoUsado = new SimpleStringProperty();
         imagen = new SimpleStringProperty();
+
+        kmRecorridos= new SimpleIntegerProperty();
     }
 
     public VehiculoVender(ResultSet rs) throws SQLException {
@@ -41,6 +44,8 @@ public class VehiculoVender extends Vehiculo {
 
         tiempoUsado = new SimpleStringProperty(rs.getString(tabla + ".tiempoUsado"));
         imagen = new SimpleStringProperty(rs.getString(tabla + ".imagen"));
+
+        kmRecorridos = new SimpleIntegerProperty(rs.getInt(tabla + ".kmRecorridos"));
 
         try {
             Image in = new Image(new ByteArrayInputStream(Base64.getDecoder().decode(rs.getString(tabla + ".imagen"))));
@@ -57,6 +62,18 @@ public class VehiculoVender extends Vehiculo {
     public float getPrecio() {
         if (precio == null) return 0;
         return precio.get();
+    }
+
+    public int getKmRecorridos() {
+        return kmRecorridos.get();
+    }
+
+    public IntegerProperty kmRecorridosProperty() {
+        return kmRecorridos;
+    }
+
+    public void setKmRecorridos(int kmRecorridos) {
+        this.kmRecorridos.set(kmRecorridos);
     }
 
     public FloatProperty precioProperty() {

@@ -11,7 +11,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="root_anchorpane" prefHeight="539.0" prefWidth="1700.0" stylesheets="@../../css/tablaVehiculos.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Cochera.Controllers.Ventas.Clientes.ControladorClientes">
+<AnchorPane id="root_anchorpane" prefHeight="539.0" prefWidth="1700.0" stylesheets="@../../css/tablas.css"
+            xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="Cochera.Controllers.Ventas.Clientes.ControladorClientes">
     <children>
         <SplitPane dividerPositions="0.1313" layoutX="-1.0" prefHeight="539.0" prefWidth="1800.0">
             <items>
@@ -19,37 +21,42 @@
                     <children>
                         <Label layoutX="26.0" prefHeight="27.0" prefWidth="100.0" text="BUSQUEDA">
                             <font>
-                                <Font name="System Bold" size="18.0" />
+                                <Font name="System Bold" size="18.0"/>
                             </font>
                         </Label>
-                        <Label layoutX="29.0" layoutY="117.0" prefHeight="17.0" prefWidth="146.0" text="Fecha Entrada" />
-                        <DatePicker fx:id="fDesde" layoutX="73.0" layoutY="145.0" prefHeight="25.0" prefWidth="108.0" />
-                        <Button id="bFiltrar" fx:id="bFiltrar" layoutX="28.0" layoutY="323.0" mnemonicParsing="false" onAction="#filtrar" prefHeight="26.0" prefWidth="70.0" text="Filtrar" />
-                        <Button id="bLimpiar" fx:id="bLimpiar" layoutX="116.0" layoutY="323.0" mnemonicParsing="false" onAction="#limpiar" prefHeight="26.0" prefWidth="70.0" text="Limpiar" />
-                        <Label layoutX="31.0" layoutY="239.0" prefHeight="18.0" prefWidth="55.0" text="Telefono" />
-                        <Label layoutX="30.0" layoutY="52.0" text="Nombre" />
-                        <TextField fx:id="fNombre" layoutX="30.0" layoutY="70.0" prefHeight="25.0" prefWidth="150.0" />
-                        <DatePicker fx:id="fHasta" layoutX="73.0" layoutY="182.0" prefHeight="25.0" prefWidth="108.0" />
-                        <Label layoutX="29.0" layoutY="149.0" text="Desde" />
-                        <Label layoutX="29.0" layoutY="186.0" prefHeight="17.0" prefWidth="34.0" text="Hasta" />
-                        <TextField fx:id="fTelefono" layoutX="31.0" layoutY="257.0" />
+                        <Label layoutX="29.0" layoutY="117.0" prefHeight="17.0" prefWidth="146.0" text="Fecha Entrada"/>
+                        <DatePicker fx:id="fDesde" layoutX="73.0" layoutY="145.0" prefHeight="25.0" prefWidth="108.0"/>
+                        <Button id="bFiltrar" fx:id="bFiltrar" layoutX="28.0" layoutY="323.0" mnemonicParsing="false"
+                                onAction="#filtrar" prefHeight="26.0" prefWidth="70.0" text="Filtrar"/>
+                        <Button id="bLimpiar" fx:id="bLimpiar" layoutX="116.0" layoutY="323.0" mnemonicParsing="false"
+                                onAction="#limpiar" prefHeight="26.0" prefWidth="70.0" text="Limpiar"/>
+                        <Label layoutX="31.0" layoutY="239.0" prefHeight="18.0" prefWidth="55.0" text="Telefono"/>
+                        <Label layoutX="30.0" layoutY="52.0" text="Nombre"/>
+                        <TextField fx:id="fNombre" layoutX="30.0" layoutY="70.0" prefHeight="25.0" prefWidth="150.0"/>
+                        <DatePicker fx:id="fHasta" layoutX="73.0" layoutY="182.0" prefHeight="25.0" prefWidth="108.0"/>
+                        <Label layoutX="29.0" layoutY="149.0" text="Desde"/>
+                        <Label layoutX="29.0" layoutY="186.0" prefHeight="17.0" prefWidth="34.0" text="Hasta"/>
+                        <TextField fx:id="fTelefono" layoutX="31.0" layoutY="257.0"/>
                     </children>
-                    </AnchorPane>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="498.0" prefWidth="1046.0" style="-fx-background-color: white;">
+                </AnchorPane>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="498.0" prefWidth="1046.0"
+                            style="-fx-background-color: white;">
                     <children>
                         <TableView fx:id="tabla" layoutX="105.0" layoutY="45.0" prefHeight="494.0" prefWidth="1108.0">
                             <columns>
-                                <TableColumn fx:id="nombreCliente" prefWidth="468.0000457763672" text="Cliente" />
-                                <TableColumn fx:id="fechaRegistro" prefWidth="262.39996337890625" text="Fecha de Registro" />
-                                <TableColumn fx:id="telefono" prefWidth="188.79986572265625" text="Teléfono" />
-                                <TableColumn fx:id="acciones" prefWidth="187.99993896484375" text="Acciones" />
+                                <TableColumn fx:id="nombreCliente" prefWidth="468.0000457763672" text="Cliente"/>
+                                <TableColumn fx:id="fechaRegistro" prefWidth="262.39996337890625"
+                                             text="Fecha de Registro"/>
+                                <TableColumn fx:id="telefono" prefWidth="188.79986572265625" text="Teléfono"/>
+                                <TableColumn fx:id="acciones" prefWidth="187.99993896484375" text="Acciones"/>
                             </columns>
                         </TableView>
-                  <Pane id="botonera" layoutX="349.0" layoutY="-1.0" prefHeight="30.0" prefWidth="860.0">
-                     <children>
-                        <Button layoutX="664.0" layoutY="1.0" mnemonicParsing="false" onAction="#mostrarModalCreacion" text="Crear Nuevo Cliente" />
-                     </children>
-                  </Pane>
+                        <Pane id="botonera" layoutX="349.0" layoutY="-1.0" prefHeight="30.0" prefWidth="860.0">
+                            <children>
+                                <Button layoutX="664.0" layoutY="1.0" mnemonicParsing="false"
+                                        onAction="#mostrarModalCreacion" text="Crear Nuevo Cliente"/>
+                            </children>
+                        </Pane>
                     </children>
                 </AnchorPane>
             </items>

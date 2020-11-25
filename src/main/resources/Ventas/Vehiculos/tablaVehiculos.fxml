@@ -1,77 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="parent" prefHeight="539.0" prefWidth="1700.0" stylesheets="@../../css/tablaVehiculos.css"
+<AnchorPane fx:id="parent" prefHeight="539.0" prefWidth="1700.0" stylesheets="@../../css/tablas.css"
             xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="Cochera.Controllers.Ventas.Vehiculos.ControladorVehiculos">
-    <children>
-        <SplitPane dividerPositions="0.1313" layoutX="-1.0" prefHeight="539.0" prefWidth="1800.0">
 
-            <AnchorPane id="busqueda_pane" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+    <SplitPane dividerPositions="0.1313" layoutX="-1.0" prefHeight="539.0" prefWidth="1800.0">
 
-                <Label layoutX="26.0" prefHeight="27.0" prefWidth="100.0" text="BUSQUEDA">
-                    <font>
-                        <Font name="System Bold" size="18.0"/>
-                    </font>
-                </Label>
+        <AnchorPane id="busqueda_pane" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
 
-                <Label layoutX="31.0" layoutY="113.0" prefHeight="17.0" prefWidth="70.0" text="Modelo"/>
-                <TextField id="tfModelo" fx:id="fModelo" layoutX="30.0" layoutY="136.0" prefHeight="25.0"
-                           prefWidth="150.0"/>
+            <Label layoutX="26.0" prefHeight="27.0" prefWidth="100.0" text="BUSQUEDA">
+                <font>
+                    <Font name="System Bold" size="18.0"/>
+                </font>
+            </Label>
 
-                <Label layoutX="32.0" layoutY="186.0" prefHeight="17.0" prefWidth="146.0" text="Fecha Entrada"/>
+            <Label layoutX="31.0" layoutY="113.0" prefHeight="17.0" prefWidth="70.0" text="Modelo"/>
+            <TextField id="tfModelo" fx:id="fModelo" layoutX="30.0" layoutY="136.0" prefHeight="25.0"
+                       prefWidth="150.0"/>
 
-                <Label layoutX="33.0" layoutY="368.0" text="Estado:"/>
-                <DatePicker fx:id="fDesde" layoutX="76.0" layoutY="214.0" prefHeight="25.0" prefWidth="108.0"/>
+            <Label layoutX="32.0" layoutY="186.0" prefHeight="17.0" prefWidth="146.0" text="Fecha Entrada"/>
 
-                <Button id="bFiltrar" layoutX="33.0" layoutY="463.0" mnemonicParsing="false" onAction="#filtrar"
-                        prefHeight="26.0" prefWidth="70.0" text="Filtrar"/>
-                <Button id="bLimpiar" layoutX="112.0" layoutY="463.0" mnemonicParsing="false"
-                        onAction="#limpiar" prefHeight="26.0" prefWidth="70.0" text="Limpiar"/>
-                <Label layoutX="34.0" layoutY="297.0" prefHeight="17.0" prefWidth="27.0" text="Tipo"/>
-                <ComboBox fx:id="fTipo" layoutX="33.0" layoutY="323.0" prefHeight="25.0" prefWidth="150.0"/>
-                <Label layoutX="32.0" layoutY="46.0" text="Marca"/>
-                <TextField id="tfModelo" fx:id="fMarca" layoutX="30.0" layoutY="70.0" prefHeight="25.0"
-                           prefWidth="150.0"/>
-                <DatePicker fx:id="fHasta" layoutX="76.0" layoutY="251.0" prefHeight="25.0" prefWidth="108.0"/>
-                <Label layoutX="32.0" layoutY="218.0" text="Desde"/>
-                <Label layoutX="32.0" layoutY="255.0" prefHeight="17.0" prefWidth="34.0" text="Hasta"/>
-                <ComboBox fx:id="fEstado" layoutX="33.0" layoutY="394.0" prefHeight="25.0" prefWidth="150.0"/>
-            </AnchorPane>
+            <Label layoutX="33.0" layoutY="368.0" text="Estado:"/>
+            <DatePicker fx:id="fDesde" layoutX="76.0" layoutY="214.0" prefHeight="25.0" prefWidth="108.0"/>
 
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="498.0" prefWidth="1046.0"
-                        style="-fx-background-color: white;">
+            <Button id="bFiltrar" layoutX="33.0" layoutY="463.0" mnemonicParsing="false" onAction="#filtrar"
+                    prefHeight="26.0" prefWidth="70.0" text="Filtrar"/>
+            <Button id="bLimpiar" layoutX="112.0" layoutY="463.0" mnemonicParsing="false" onAction="#limpiar"
+                    prefHeight="26.0" prefWidth="70.0" text="Limpiar"/>
+            <Label layoutX="34.0" layoutY="297.0" prefHeight="17.0" prefWidth="27.0" text="Tipo"/>
+            <ComboBox fx:id="fTipo" layoutX="33.0" layoutY="323.0" prefHeight="25.0" prefWidth="150.0"/>
+            <Label layoutX="32.0" layoutY="46.0" text="Marca"/>
+            <TextField id="tfModelo" fx:id="fMarca" layoutX="30.0" layoutY="70.0" prefHeight="25.0" prefWidth="150.0"/>
+            <DatePicker fx:id="fHasta" layoutX="76.0" layoutY="251.0" prefHeight="25.0" prefWidth="108.0"/>
+            <Label layoutX="32.0" layoutY="218.0" text="Desde"/>
+            <Label layoutX="32.0" layoutY="255.0" prefHeight="17.0" prefWidth="34.0" text="Hasta"/>
+            <ComboBox fx:id="fEstado" layoutX="33.0" layoutY="394.0" prefHeight="25.0" prefWidth="150.0"/>
 
-                <TableView fx:id="tabla" layoutX="105.0" layoutY="45.0" prefHeight="494.0" prefWidth="1108.0">
-                    <columns>
-                        <TableColumn fx:id="imagen" prefWidth="176.7999725341797" text="Imagen"/>
-                        <TableColumn fx:id="marca" prefWidth="126.4000244140625" text="Marca"/>
-                        <TableColumn fx:id="modelo" prefWidth="123.20001220703125" text="Modelo"/>
-                        <TableColumn fx:id="fechaEntrada" prefWidth="192.7999267578125" text="Fecha Entrada"/>
-                        <TableColumn fx:id="tipo" prefWidth="145.5999755859375" text="Tipo"/>
-                        <TableColumn fx:id="concesionario" prefWidth="178.0" text="Estado"/>
-                        <TableColumn fx:id="acciones" prefWidth="162.0" text="Acciones"/>
-                    </columns>
-                </TableView>
+        </AnchorPane>
 
-                <Pane id="botonera" layoutX="349.0" layoutY="-1.0" prefHeight="30.0" prefWidth="860.0">
-                    <Button layoutX="664.0" layoutY="1.0" mnemonicParsing="false"
-                            onAction="#mostrarModalCreacion" text="Registrar Nuevo Vehiculo"/>
-                </Pane>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="498.0" prefWidth="1046.0"
+                    style="-fx-background-color: white;">
 
-            </AnchorPane>
+            <TableView fx:id="tabla" layoutX="105.0" layoutY="45.0" prefHeight="494.0" prefWidth="1108.0">
+                <columns>
+                    <TableColumn fx:id="imagen" editable="false" prefWidth="200.0" sortable="false" text="Imagen"/>
+                    <TableColumn fx:id="marca" editable="false" prefWidth="130.0" text="Marca"/>
+                    <TableColumn fx:id="modelo" editable="false" prefWidth="125.0" text="Modelo"/>
+                    <TableColumn fx:id="fechaEntrada" editable="false" prefWidth="130.0" text="Fecha Entrada"/>
+                    <TableColumn fx:id="tipo" editable="false" prefWidth="150.0" text="Tipo"/>
+                    <TableColumn fx:id="concesionario" editable="false" prefWidth="180.0" text="Estado"/>
+                    <TableColumn fx:id="acciones" prefWidth="195.0" text="Acciones"/>
+                </columns>
+            </TableView>
 
-        </SplitPane>
-    </children>
+            <Pane id="botonera" layoutX="349.0" layoutY="-1.0" prefHeight="30.0" prefWidth="860.0">
+                <Button layoutX="664.0" layoutY="1.0" mnemonicParsing="false" onAction="#mostrarModalCreacion"
+                        text="Registrar Nuevo Vehiculo"/>
+            </Pane>
+
+        </AnchorPane>
+
+    </SplitPane>
 </AnchorPane>

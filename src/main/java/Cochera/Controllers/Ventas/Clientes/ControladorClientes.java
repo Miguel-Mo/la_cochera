@@ -77,7 +77,8 @@ public class ControladorClientes extends DataTable<Cliente> {
                     return;
                 }
 
-                lupa.setStyle(" -fx-background-color: white , white , white;-fx-background-insets: 0 0 0 0, 0 0 0 0, 0 0 3 0;");
+                lupa.setStyle("-fx-background-color: white , white , white;-fx-background-insets: 0 0 0 0, 0 0 0 0, 0 0 3 0;");
+                eliminar.setStyle("-fx-background-color: white , white , white;-fx-background-insets: 0 0 0 0, 0 0 0 0, 0 0 3 0;");
 
                 lupa.setGraphic(iconoLupa);
                 eliminar.setGraphic(iconoPapelera);

@@ -9,11 +9,14 @@ import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.Cursor;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -120,10 +123,10 @@ public class ControladorVehiculos extends DataTable<VehiculoVender> {
         acciones.setSortable(false);
         acciones.setCellFactory(dato -> new TableCell<>() {
 
-            private final Button lupa = new Button("Lupa");
+            private final Button lupa = new Button();
             private final ImageView iconoLupa = new ImageView("/icons/lupa.png");
 
-            private final Button eliminar = new Button("Eliminar");
+            private final Button eliminar = new Button();
             private final ImageView iconoPapelera = new ImageView("/icons/lupa.png");
 
             private final HBox botonera = new HBox(lupa, eliminar);
@@ -137,20 +140,34 @@ public class ControladorVehiculos extends DataTable<VehiculoVender> {
                     return;
                 }
 
-                lupa.setStyle(" -fx-background-color: white , white , white;-fx-background-insets: 0 0 0 0, 0 0 0 0, 0 0 3 0;");
-
-                //TODO HOVER DE LUPA
-                if(lupa.isHover()){
-                    lupa.setStyle(" -fx-background-color: red , white , white;-fx-background-insets: 0 0 0 0, 0 0 0 0, 0 0 3 0;");
-                }
-
+                // LUPA
                 lupa.setGraphic(iconoLupa);
-                eliminar.setGraphic(iconoPapelera);
+                lupa.setStyle("-fx-background-color: white; -fx-background-insets: 0;");
+                lupa.addEventHandler(MouseEvent.MOUSE_ENTERED, e -> setCursor(Cursor.HAND));
+                lupa.addEventHandler(MouseEvent.MOUSE_EXITED, e -> setCursor(Cursor.DEFAULT));
 
-                setGraphic(botonera);
+                Tooltip tooltip = new Tooltip("Mostrar Detalles");
+                tooltip.setShowDelay(Duration.seconds(0.5));
+                tooltip.setStyle("-fx-background-color: white; -fx-text-fill: #E76F51;");
+                lupa.setTooltip(tooltip);
 
                 lupa.setOnAction(event -> mostrarModalModificacion(vehiculo));
+
+
+                // ELIMINAR
+                eliminar.setGraphic(iconoPapelera);
+                eliminar.setStyle("-fx-background-color: white; -fx-background-insets: 0;");
+                eliminar.addEventHandler(MouseEvent.MOUSE_ENTERED, e -> setCursor(Cursor.HAND));
+                eliminar.addEventHandler(MouseEvent.MOUSE_EXITED, e -> setCursor(Cursor.DEFAULT));
+
+                Tooltip tooltipE = new Tooltip("Eliminar Vehículo");
+                tooltipE.setShowDelay(Duration.seconds(0.5));
+                tooltipE.setStyle("-fx-background-color: white; -fx-text-fill: #E76F51;");
+                eliminar.setTooltip(tooltipE);
+
                 eliminar.setOnAction(event -> mostrarModalEliminacion(vehiculo));
+
+                setGraphic(botonera);
             }
         });
     }

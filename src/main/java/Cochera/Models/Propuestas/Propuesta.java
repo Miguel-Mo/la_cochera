@@ -17,10 +17,16 @@ public class Propuesta extends Modelo {
     private final ObjectProperty<Date> fechaLimite,fechaInicio,fechaFin;
     private final StringProperty estado;
     private final IntegerProperty clienteID,vendedorID,vehiculoVenderID;
+
     private VehiculoVender vehiculoVender;
     private Cliente cliente;
     private Vendedor vendedor;
+
     private int id;
+
+    public static final String PENDIENTE = "pendiente";
+    public static final String ACEPTADA = "pendiente";
+    public static final String RECHAZADA = "pendiente";
 
     public Propuesta() {
 

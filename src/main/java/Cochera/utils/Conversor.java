@@ -1,10 +1,14 @@
 package Cochera.utils;
 
+import javafx.scene.control.DatePicker;
+
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.ZoneId;
 import java.util.Date;
 
 public class Conversor {
@@ -44,6 +48,8 @@ public class Conversor {
 
     }
 
-
+    public static Date datePickerToDate(DatePicker datePicker) {
+        return Date.from(Instant.from(datePicker.getValue().atStartOfDay(ZoneId.systemDefault())));
+    }
 
 }

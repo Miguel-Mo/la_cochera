@@ -3,6 +3,7 @@ package Cochera;
 import Cochera.Controllers.ControladorLogin;
 import Cochera.Controllers.ControladorPanel;
 import Cochera.Models.Usuario.Usuario;
+import Cochera.Models.Usuario.Vendedor;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -75,6 +76,7 @@ public class Main extends Application {
         Preferences usuarioActivo = Preferences.userRoot();
         usuarioActivo.put("concesionarioID", Integer.toString(usuario.getConcesionarioID()));
         usuarioActivo.put("tipo",usuario.getTipo());
+        usuarioActivo.put("id",Integer.toString(usuario.getId()));
     }
 
     public void cerrarSesion()  {

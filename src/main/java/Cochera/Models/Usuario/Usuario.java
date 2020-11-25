@@ -11,8 +11,8 @@ import java.sql.SQLException;
 
 public abstract class Usuario extends Modelo {
 
-    private StringProperty login, tipo, nombre, apellidos, dni, email, telefono;
-    private IntegerProperty salario;
+    private final StringProperty login, tipo, nombre, apellidos, dni, email, telefono;
+    private final IntegerProperty salario;
     private int id, concesionarioID;
 
     public static final String VENDEDOR = "vendedor";

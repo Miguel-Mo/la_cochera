@@ -36,32 +36,27 @@ public class UsuarioDAO extends AbstractDAO<Usuario> {
 
 
     private ResultSet datosUsuario(ResultSet rs) {
-        //String sql="SELECT * FROM usuarios left join mecanicos on usuarios.id=mecanicos.usuarioID where usuarios.tipo=mecanico and usuarios.id="+datos.getInt("id");
-        //String sql="SELECT * FROM usuarios left join mecanicos on usuarios.id=mecanicos.usuarioID where usuarios.id=?");
+        String SQL_VEN = "SELECT usuarios.*,vendedores.* " +
+                "FROM usuarios left join vendedores on usuarios.id=vendedores.usuarioID where usuarios.id=?";
+
+        String SQL_MEC = "SELECT usuarios.*,mecanicos.* " +
+                "FROM usuarios left join mecanicos on usuarios.id=mecanicos.usuarioID where usuarios.id=?";
+
         try {
-            if (rs.getString("tipo").equals(Usuario.MECANICO)) {
-                PreparedStatement pst = conexion.prepareStatement("SELECT * FROM usuarios left join mecanicos on usuarios.id=mecanicos.usuarioID where usuarios.id=?");
-                pst.setInt(1, rs.getInt("id"));
+            final String SQL = rs.getString("tipo").equals(Usuario.MECANICO) ?
+                    SQL_MEC : SQL_VEN;
 
-                ResultSet resultSet= pst.executeQuery();
-                resultSet.next();
+            PreparedStatement pst = conexion.prepareStatement(SQL);
+            pst.setInt(1, rs.getInt("id"));
 
-                return resultSet;
+            ResultSet resultSet= pst.executeQuery();
+            resultSet.next();
 
-            }else if(rs.getString("tipo").equals(Usuario.VENDEDOR)){
-                PreparedStatement pst = conexion.prepareStatement("SELECT * FROM usuarios where usuarios.id=?");
-                pst.setInt(1, rs.getInt("id"));
+            return resultSet;
 
-                ResultSet resultSet= pst.executeQuery();
-                resultSet.next();
-
-                return resultSet;
-            }
         } catch (SQLException e) {
             e.printStackTrace();
-
+            return  null;
         }
-        return  null;
-
     }
 }

@@ -11,16 +11,20 @@ import java.sql.SQLException;
 
 public abstract class Usuario extends Modelo {
 
-    private final StringProperty login, tipo, nombre, apellidos, dni, email, telefono;
-    private final IntegerProperty salario;
-    private int id, concesionarioID;
+    protected final StringProperty login, tipo, nombre, apellidos, dni, email, telefono;
+    protected final IntegerProperty salario;
+    protected int concesionarioID;
+    private int id;
 
     public static final String VENDEDOR = "vendedor";
     public static final String MECANICO = "mecanico";
     public static final String JEFE = "jefe";
 
     public Usuario(ResultSet datos) throws SQLException {
+
         id = datos.getInt("id");
+        concesionarioID = datos.getInt("concesionarioID");
+
         login = new SimpleStringProperty(datos.getString("login"));
         tipo = new SimpleStringProperty(datos.getString("tipo"));
         nombre = new SimpleStringProperty(datos.getString("nombre"));
@@ -28,8 +32,9 @@ public abstract class Usuario extends Modelo {
         dni = new SimpleStringProperty(datos.getString("dni"));
         email = new SimpleStringProperty(datos.getString("email"));
         telefono = new SimpleStringProperty(datos.getString("telefono"));
+
         salario = new SimpleIntegerProperty(datos.getInt("salario"));
-        concesionarioID = datos.getInt("concesionarioID");
+
     }
 
     public static Usuario obtener(ResultSet datos) throws SQLException {

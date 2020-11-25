@@ -153,4 +153,9 @@ public class Cliente extends Modelo {
     public StringProperty clienteProperty() {
         return new SimpleStringProperty(nombre.getValue() + " "+apellidos.getValue());
     }
+
+    @Override
+    public String toString() {
+        return nombre.get() + " " + apellidos.get();
+    }
 }

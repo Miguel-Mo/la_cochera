@@ -130,4 +130,9 @@ public class VehiculoVender extends Vehiculo {
     public ImageView getImageView() {
         return imageView;
     }
+
+    @Override
+    public String toString() {
+        return marca.get() + " " + modelo.get();
+    }
 }

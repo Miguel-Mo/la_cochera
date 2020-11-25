@@ -9,23 +9,31 @@ import Cochera.Models.Clientes.Cliente;
 import Cochera.Models.Propuestas.Propuesta;
 import Cochera.Models.Vehiculo.Vehiculo;
 import Cochera.Models.Vehiculo.VehiculoVender;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import org.controlsfx.control.SearchableComboBox;
 
 import java.sql.SQLException;
+import java.util.prefs.Preferences;
 
 public class CModalPropuesta extends CMNuevoEditar<Propuesta> {
 
-    // Campos del formulario nuevoEditar
+    // Campos del formulario nuevo
     @FXML private SearchableComboBox<Cliente> cbCliente;
     @FXML private SearchableComboBox<VehiculoVender> cbVehiculo;
     @FXML private TextField tfPresupuesto;
     @FXML private DatePicker dpFechaValidez;
 
+    // Campos del formulario editar
+
+    private int concesionarioVendedor;
+
     public CModalPropuesta(Propuesta propuesta) {
         super(propuesta);
+
+        concesionarioVendedor = Integer.parseInt(Preferences.userRoot().get("concesionarioID",null));
     }
 
     public CModalPropuesta() {
@@ -49,7 +57,9 @@ public class CModalPropuesta extends CMNuevoEditar<Propuesta> {
     @Override
     protected void preEstablecerObjeto() {
         try (VehiculoVenderDAO dao = new VehiculoVenderDAO()) {
-            cbVehiculo.setItems(dao.read());
+            cbVehiculo.setItems(dao.read().filtered(
+                    vehiculo -> !vehiculo.isVendido() && vehiculo.getConcesionarioID() == concesionarioVendedor
+            ));
         } catch (SQLException e) {
             e.printStackTrace();
         }

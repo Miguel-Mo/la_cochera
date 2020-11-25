@@ -2,14 +2,14 @@ package Cochera.Controllers.Ventas.Clientes;
 
 import Cochera.Controllers.Base.DataTable;
 import Cochera.Models.Clientes.Cliente;
-import Cochera.Utils.Vistas.Modal;
+import Cochera.utils.vistas.Boton;
+import Cochera.utils.vistas.Modal;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -60,11 +60,8 @@ public class ControladorClientes extends DataTable<Cliente> {
         acciones.setSortable(false);
         acciones.setCellFactory(dato -> new TableCell<>() {
 
-            private final Button lupa = new Button("Lupa");
-            private final ImageView iconoLupa = new ImageView("/icons/lupa.png");
-
-            private final Button eliminar = new Button("Eliminar");
-            private final ImageView iconoPapelera = new ImageView("/icons/lupa.png");
+            private final Boton lupa = new Boton(new ImageView("/icons/lupa.png"));
+            private final Boton eliminar = new Boton(new ImageView("/icons/delete.png"));
 
             private final HBox botonera = new HBox(lupa, eliminar);
 
@@ -77,16 +74,18 @@ public class ControladorClientes extends DataTable<Cliente> {
                     return;
                 }
 
-                lupa.setStyle("-fx-background-color: white , white , white;-fx-background-insets: 0 0 0 0, 0 0 0 0, 0 0 3 0;");
-                eliminar.setStyle("-fx-background-color: white , white , white;-fx-background-insets: 0 0 0 0, 0 0 0 0, 0 0 3 0;");
+                // LUPA
+                lupa.ajustarImg(55);
+                lupa.establecerTooltip("Mostrar Detalles");
+                lupa.setOnAction(event -> mostrarModalModificacion(cliente));
 
-                lupa.setGraphic(iconoLupa);
-                eliminar.setGraphic(iconoPapelera);
+
+                // ELIMINAR
+                eliminar.ajustarImg(55);
+                eliminar.establecerTooltip("Eliminar Vehículo");
+                eliminar.setOnAction(event -> mostrarModalEliminacion(cliente));
 
                 setGraphic(botonera);
-
-                lupa.setOnAction(event -> mostrarModalModificacion(cliente));
-                eliminar.setOnAction(event -> mostrarModalEliminacion(cliente));
             }
         });
     }

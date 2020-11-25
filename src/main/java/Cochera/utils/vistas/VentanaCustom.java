@@ -1,4 +1,4 @@
-package Cochera.Utils.Vistas;
+package Cochera.utils.vistas;
 
 import Cochera.Main;
 import javafx.event.ActionEvent;

@@ -2,7 +2,7 @@ package Cochera.Controllers;
 
 import Cochera.DAO.UsuarioDAO;
 import Cochera.Models.Usuario.Usuario;
-import Cochera.Utils.Vistas.VentanaCustom;
+import Cochera.utils.vistas.VentanaCustom;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

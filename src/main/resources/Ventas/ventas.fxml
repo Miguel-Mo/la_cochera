@@ -1,44 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
+<?import Cochera.utils.vistas.Boton?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.Line?>
-
-<BorderPane id="#root_navegacion" prefHeight="641.0" prefWidth="1564.0" stylesheets="@../css/Ventas.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Cochera.Controllers.Ventas.ControladorVentas">
-   <top>
-      <AnchorPane id="toptop" prefHeight="200.0" prefWidth="1177.0" BorderPane.alignment="CENTER">
-         <children>
-            <Line endX="1111.0" endY="-1.0" layoutX="286.0" layoutY="93.0" startX="135.0" startY="-1.0" stroke="#e76f51" strokeWidth="5.0" />
-            <Button fx:id="vehiculos" layoutX="358.0" layoutY="55.0" mnemonicParsing="false" onAction="#cambiarVentana" prefHeight="66.0" prefWidth="74.0">
-               <graphic>
-                  <ImageView fitHeight="54.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true" />
-               </graphic>
-            </Button>
-            <Button fx:id="clientes" layoutX="872.0" layoutY="56.0" mnemonicParsing="false" onAction="#cambiarVentana" prefHeight="66.0" prefWidth="74.0">
-               <graphic>
-                  <ImageView fitHeight="54.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../icons" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Button fx:id="propuestas" layoutX="1366.0" layoutY="55.0" mnemonicParsing="false" onAction="#cambiarVentana" prefHeight="66.0" prefWidth="74.0">
-               <graphic>
-                  <ImageView fitHeight="54.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true" />
-               </graphic></Button>
-            <Pane layoutX="-1.0" layoutY="-2.0" prefHeight="206.0" prefWidth="240.5" style="-fx-background-color: F0F0F0;" />
-         </children>
-      </AnchorPane>
-   </top>
-   <center>
-      <Pane id="root_pane" fx:id="contenido" prefHeight="400.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <children>
-            <Pane prefHeight="200.0" prefWidth="200.0" />
-         </children></Pane>
-   </center>
+<BorderPane id="#root_navegacion" prefHeight="641.0" prefWidth="1564.0" stylesheets="@../css/Ventas.css"
+            xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="Cochera.Controllers.Ventas.ControladorVentas">
+    <top>
+        <AnchorPane id="toptop" prefHeight="200.0" prefWidth="1177.0" BorderPane.alignment="CENTER">
+            <Line endX="1111.0" endY="-1.0" layoutX="286.0" layoutY="93.0" startX="135.0" startY="-1.0"
+                  stroke="#e76f51" strokeWidth="5.0"/>
+            <Boton fx:id="vehiculos" layoutX="358.0" layoutY="55.0" mnemonicParsing="false"
+                   onAction="#cambiarVentana" prefHeight="66.0" prefWidth="74.0">
+                <graphic>
+                    <ImageView fitHeight="54.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true"/>
+                </graphic>
+            </Boton>
+            <Boton fx:id="clientes" layoutX="872.0" layoutY="56.0" mnemonicParsing="false"
+                   onAction="#cambiarVentana" prefHeight="66.0" prefWidth="74.0">
+                <graphic>
+                    <ImageView fitHeight="54.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true">
+                        <Image url="@../icons"/>
+                    </ImageView>
+                </graphic>
+            </Boton>
+            <Boton fx:id="propuestas" layoutX="1366.0" layoutY="55.0" mnemonicParsing="false"
+                   onAction="#cambiarVentana" prefHeight="66.0" prefWidth="74.0">
+                <graphic>
+                    <ImageView fitHeight="54.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true"/>
+                </graphic>
+            </Boton>
+            <Pane layoutX="-1.0" layoutY="-2.0" prefHeight="206.0" prefWidth="240.5"
+                  style="-fx-background-color: F0F0F0;"/>
+        </AnchorPane>
+    </top>
+    <center>
+        <Pane id="root_pane" fx:id="contenido" prefHeight="400.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <Pane prefHeight="200.0" prefWidth="200.0"/>
+        </Pane>
+    </center>
 </BorderPane>

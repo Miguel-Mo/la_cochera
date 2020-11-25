@@ -7,6 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
+<?import Cochera.utils.vistas.Boton?>
 <AnchorPane prefHeight="516.0" prefWidth="500.0" stylesheets="@/css/formModales.css"
             xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <Pane id="root_pane" prefHeight="534.0" prefWidth="500.0" style="-fx-background-color: white;"
@@ -34,9 +35,9 @@
         <Label layoutX="51.0" layoutY="215.0" text="Descripción del coche deseado"/>
         <TextArea fx:id="descripcion" layoutX="52.0" layoutY="239.0" prefHeight="172.0" prefWidth="396.0"/>
 
-        <Button fx:id="btnAccion" layoutX="303.0" layoutY="449.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="91.0"
-                text="Crear"/>
-        <Button fx:id="btnCancelar" layoutX="124.0" layoutY="449.0" mnemonicParsing="false"
+        <Boton fx:id="btnAccion" layoutX="303.0" layoutY="449.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="91.0"
+               text="Crear"/>
+        <Boton fx:id="btnCancelar" layoutX="124.0" layoutY="449.0" mnemonicParsing="false"
                 prefHeight="41.0" prefWidth="91.0" text="Cancelar"/>
     </Pane>
 </AnchorPane>

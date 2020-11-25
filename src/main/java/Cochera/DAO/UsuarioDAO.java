@@ -1,7 +1,7 @@
 package Cochera.DAO;
 
 import Cochera.Models.Usuario.Usuario;
-import Cochera.Utils.Conversor;
+import Cochera.utils.Conversor;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

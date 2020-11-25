@@ -7,6 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
+<?import Cochera.utils.vistas.Boton?>
 <AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@/css/formModales.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Ventas.Modales.FormPropuesta">
    <children>
       <Pane prefHeight="400.0" prefWidth="600.0">
@@ -19,8 +20,8 @@
             <Label layoutX="227.0" layoutY="25.0" text="PROPUESTA DE COMPRA" />
             <TextField layoutX="74.0" layoutY="81.0" prefHeight="25.0" prefWidth="441.0" />
             <TextField layoutX="74.0" layoutY="210.0" prefHeight="25.0" prefWidth="186.0" />
-            <Button id="btnCancelar" layoutX="294.0" layoutY="335.0" mnemonicParsing="false" text="Cancelar" />
-            <Button layoutX="458.0" layoutY="335.0" mnemonicParsing="false" text="Aceptar" />
+            <Boton id="btnCancelar" layoutX="294.0" layoutY="335.0" mnemonicParsing="false" text="Cancelar" />
+            <Boton layoutX="458.0" layoutY="335.0" mnemonicParsing="false" text="Aceptar" />
             <TextField layoutX="74.0" layoutY="142.0" prefHeight="25.0" prefWidth="441.0" />
          </children>
       </Pane>

@@ -3,8 +3,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
+<?import Cochera.utils.vistas.Boton?>
 
-<AnchorPane fx:id="parent" prefHeight="539.0" prefWidth="1700.0" stylesheets="@../../css/tablas.css"
+<AnchorPane prefHeight="539.0" prefWidth="1700.0" stylesheets="@../../css/tablas.css"
             xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="Cochera.Controllers.Ventas.Vehiculos.ControladorVehiculos">
 
@@ -27,9 +28,9 @@
             <Label layoutX="33.0" layoutY="368.0" text="Estado:"/>
             <DatePicker fx:id="fDesde" layoutX="76.0" layoutY="214.0" prefHeight="25.0" prefWidth="108.0"/>
 
-            <Button id="bFiltrar" layoutX="33.0" layoutY="463.0" mnemonicParsing="false" onAction="#filtrar"
+            <Boton id="bFiltrar" layoutX="33.0" layoutY="463.0" mnemonicParsing="false" onAction="#filtrar"
                     prefHeight="26.0" prefWidth="70.0" text="Filtrar"/>
-            <Button id="bLimpiar" layoutX="112.0" layoutY="463.0" mnemonicParsing="false" onAction="#limpiar"
+            <Boton id="bLimpiar" layoutX="112.0" layoutY="463.0" mnemonicParsing="false" onAction="#limpiar"
                     prefHeight="26.0" prefWidth="70.0" text="Limpiar"/>
             <Label layoutX="34.0" layoutY="297.0" prefHeight="17.0" prefWidth="27.0" text="Tipo"/>
             <ComboBox fx:id="fTipo" layoutX="33.0" layoutY="323.0" prefHeight="25.0" prefWidth="150.0"/>
@@ -58,8 +59,8 @@
             </TableView>
 
             <Pane id="botonera" layoutX="349.0" layoutY="-1.0" prefHeight="30.0" prefWidth="860.0">
-                <Button layoutX="664.0" layoutY="1.0" mnemonicParsing="false" onAction="#mostrarModalCreacion"
-                        text="Registrar Nuevo Vehiculo"/>
+                <Boton layoutX="664.0" layoutY="1.0" mnemonicParsing="false" onAction="#mostrarModalCreacion"
+                       text="Registrar Nuevo Vehiculo"/>
             </Pane>
 
         </AnchorPane>

@@ -1,18 +1,12 @@
 package Cochera.DAO;
 
 import java.lang.reflect.Field;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.Arrays;
 import java.util.HashMap;
 import Cochera.Configuracion;
 import Cochera.Models.Vehiculo.TipoVehiculo;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.FloatProperty;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
 
 public abstract class AbstractDAO<T> implements AutoCloseable {
     private static final String URL = "jdbc:mysql://localhost:" + Configuracion.PORT.dato + "/" + Configuracion.DB.dato
@@ -83,6 +77,11 @@ public abstract class AbstractDAO<T> implements AutoCloseable {
                 case "SimpleIntegerProperty": ps.setInt(parameterIndex,((IntegerProperty) estado).getValue());break;
                 case "Integer": ps.setInt(parameterIndex,((Integer) estado));break;
                 case "TipoVehiculo": ps.setInt(parameterIndex,(((TipoVehiculo) estado).getId()));break;
+                case "SimpleObjectProperty": // Estos casos son date en nuestro código. En otro, peta
+                    java.util.Date fecha = ((ObjectProperty<java.util.Date>) estado).getValue();
+                    if (fecha != null) ps.setDate(parameterIndex, new Date(fecha.getTime()));
+                    else  ps.setDate(parameterIndex,null);
+                    break;
                 default: throw new Exception("Tipo " + tipo + " no controlado");
             }
 

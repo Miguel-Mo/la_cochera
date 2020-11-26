@@ -85,6 +85,10 @@ public class CModalPropuesta extends CMNuevoEditar<Propuesta> {
     @Override
     public void establecerObjeto(Propuesta propuesta) {
 
+        cbVehiculo.setValue(propuesta.getVehiculoVender());
+        cbCliente.setValue(propuesta.getCliente());
+        tfPresupuesto.setText(String.valueOf(propuesta.getPresupuesto()));
+        //dpFechaValidez.setConverter(Conversor(propuesta.getFechaLimite()));
 
 
     }

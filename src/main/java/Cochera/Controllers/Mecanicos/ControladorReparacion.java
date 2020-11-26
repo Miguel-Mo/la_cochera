@@ -20,6 +20,8 @@ import java.util.ArrayList;
 import java.util.prefs.Preferences;
 
 public class ControladorReparacion extends DataTable<Reparacion> {
+//todo añadir boton eliminar
+    //todo añadir boton pausa durante ejecucion de reparacion
 
     // Columnas
     @FXML private TableColumn<Reparacion, String> marca;

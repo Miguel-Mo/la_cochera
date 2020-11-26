@@ -25,7 +25,7 @@ public class Reparacion extends Modelo {
     private VehiculoReparar vehiculoReparar;
 
     public static final String PENDIENTE="pendiente";
-    public static final String ENPROCESO="en proceso";
+    public static final String ENPROCESO="proceso";
     public static final String FINALIZADO="finalizado";
     public static final String AVISADO="avisado";
 

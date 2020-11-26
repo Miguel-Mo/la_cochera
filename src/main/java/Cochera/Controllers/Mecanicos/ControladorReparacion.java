@@ -90,12 +90,12 @@ public class ControladorReparacion extends DataTable<Reparacion> {
                     return;
                 }
 
-                if (!esJefe) {
+                // LUPA
+                lupa.ajustarImg(55);
+                lupa.establecerTooltip("Mostrar Detalles");
+                lupa.setOnAction(event -> mostrarModalLupa(reparacion));
 
-                    // LUPA
-                    lupa.ajustarImg(55);
-                    lupa.establecerTooltip("Mostrar Detalles");
-                    lupa.setOnAction(event -> mostrarModalLupa(reparacion));
+                if (!esJefe) {
 
                     // PLAY
                     play.ajustarImg(55);
@@ -120,11 +120,12 @@ public class ControladorReparacion extends DataTable<Reparacion> {
 
                 } else {
 
-                    // ELIMINAR
+                    //todo boton eliminar
+                   /* // ELIMINAR
                     eliminar.ajustarImg(55);
-                    eliminar.establecerTooltip("Eliminar Reparación");
+                    eliminar.establecerTooltip("Eliminar Reparación");*/
 
-                    setGraphic(eliminar);
+                    setGraphic(lupa);
 
                 }
             }

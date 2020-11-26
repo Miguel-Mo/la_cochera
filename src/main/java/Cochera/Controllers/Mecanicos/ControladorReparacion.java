@@ -64,6 +64,8 @@ public class ControladorReparacion extends DataTable<Reparacion> {
             cliente.setCellValueFactory(dato -> dato.getValue().getCliente().clienteProperty());
         }
 
+        //mecanico.setCellValueFactory(dato -> dato.getValue().getMecanico().nombreCompletoProperty());
+
         tiempoEstimado.setCellValueFactory(dato -> dato.getValue().tiempoEstimadoProperty());
 
         estado.setCellValueFactory(dato -> dato.getValue().estadoProperty());

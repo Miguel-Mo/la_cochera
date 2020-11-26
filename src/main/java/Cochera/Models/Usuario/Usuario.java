@@ -25,15 +25,15 @@ public abstract class Usuario extends Modelo {
         id = datos.getInt("id");
         concesionarioID = datos.getInt("concesionarioID");
 
-        login = new SimpleStringProperty(datos.getString("login"));
-        tipo = new SimpleStringProperty(datos.getString("tipo"));
-        nombre = new SimpleStringProperty(datos.getString("nombre"));
-        apellidos = new SimpleStringProperty(datos.getString("apellidos"));
-        dni = new SimpleStringProperty(datos.getString("dni"));
-        email = new SimpleStringProperty(datos.getString("email"));
-        telefono = new SimpleStringProperty(datos.getString("telefono"));
+        login = new SimpleStringProperty(datos.getString("usuarios.login"));
+        tipo = new SimpleStringProperty(datos.getString("usuarios.tipo"));
+        nombre = new SimpleStringProperty(datos.getString("usuarios.nombre"));
+        apellidos = new SimpleStringProperty(datos.getString("usuarios.apellidos"));
+        dni = new SimpleStringProperty(datos.getString("usuarios.dni"));
+        email = new SimpleStringProperty(datos.getString("usuarios.email"));
+        telefono = new SimpleStringProperty(datos.getString("usuarios.telefono"));
 
-        salario = new SimpleIntegerProperty(datos.getInt("salario"));
+        salario = new SimpleIntegerProperty(datos.getInt("usuarios.salario"));
 
     }
 

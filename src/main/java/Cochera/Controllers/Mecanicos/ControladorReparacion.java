@@ -20,8 +20,12 @@ import java.util.ArrayList;
 import java.util.prefs.Preferences;
 
 public class ControladorReparacion extends DataTable<Reparacion> {
+
 //todo añadir boton eliminar
     //todo añadir boton pausa durante ejecucion de reparacion
+    //todo clientes creado o cliente nuevo?
+
+    @FXML private Label lNombreMecanico;
 
     // Columnas
     @FXML private TableColumn<Reparacion, String> marca;
@@ -53,6 +57,8 @@ public class ControladorReparacion extends DataTable<Reparacion> {
 
         if (esJefe) iniciarFiltros();
         else listaFiltrable.setPredicate(reparacion -> reparacion.getMecanico().getId() == mecanicoID);
+
+        lNombreMecanico.setText(Main.usuario.getNombreCompleto());
     }
 
     private void iniciarColumnas() {

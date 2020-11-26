@@ -127,7 +127,10 @@ public class CModalReparacionNueva extends CModal {
         }
 
         cbTipoVehiculo.valueProperty().addListener((observableValue, antiguo, actual) -> {
-            mecanicos.setPredicate(mecanico -> mecanico.getEspecialidades().contains(actual.getDescripcion()));
+            mecanicos.setPredicate(mecanico ->
+                    mecanico.getEspecialidades().contains(actual.getDescripcion())
+                            && mecanico.getConcesionarioID() == concesionarioID
+            );
         });
     }
 

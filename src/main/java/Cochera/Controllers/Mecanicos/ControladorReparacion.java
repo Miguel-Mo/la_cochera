@@ -112,6 +112,8 @@ public class ControladorReparacion extends DataTable<Reparacion> {
                             break;
                     }
 
+                    play.setOnAction(event -> realizarAccion(event,reparacion));
+
                     setGraphic(botonera);
 
                 } else {

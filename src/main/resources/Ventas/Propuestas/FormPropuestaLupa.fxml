@@ -29,18 +29,25 @@
                 <Font size="14.0" />
             </font>
         </Label>
-        <TextField fx:id="tfPresupuesto" layoutX="56.0" layoutY="193.0" prefHeight="25.0" prefWidth="165.0" />
+        <TextField fx:id="tfPresupuesto" layoutX="56.0" layoutY="193.0" prefHeight="25.0" prefWidth="164.0" />
 
         <Label layoutX="281.0" layoutY="165.0" text="Fecha de validez">
             <font>
                 <Font size="14.0" />
             </font>
         </Label>
-        <DatePicker fx:id="dpFechaValidez" layoutX="281.0" layoutY="193.0" prefHeight="25.0" prefWidth="165.0" />
+        <DatePicker fx:id="dpFechaValidez" layoutX="281.0" layoutY="193.0" prefHeight="25.0" prefWidth="164.0" />
+
+        <Label layoutX="56.0" layoutY="227.0" prefHeight="25.0" prefWidth="51.0" text="Estado">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <ComboBox fx:id="estado" layoutX="56.0" layoutY="258.0" prefHeight="25.0" prefWidth="164.0" />
 
 
         <Boton fx:id="btnAccion" layoutX="273.0" layoutY="316.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="91.0" text="Editar" />
         <Boton fx:id="btnCancelar" layoutX="145.0" layoutY="316.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="91.0" text="Cancelar" />
-      <ComboBox layoutX="281.0" layoutY="245.0" prefHeight="25.0" prefWidth="165.0" />
+        
     </Pane>
 </AnchorPane>

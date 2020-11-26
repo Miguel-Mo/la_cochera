@@ -8,6 +8,7 @@ import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 
@@ -44,5 +45,9 @@ public class Conversor {
 
     public static Date datePickerToDate(DatePicker datePicker) {
         return Date.from(Instant.from(datePicker.getValue().atStartOfDay(ZoneId.systemDefault())));
+    }
+
+    public static LocalDate dateToDatePicker(Date fecha) {
+        return fecha.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
     }
 }

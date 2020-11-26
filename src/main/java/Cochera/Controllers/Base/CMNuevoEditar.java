@@ -120,7 +120,9 @@ public abstract class CMNuevoEditar<T extends Modelo> extends CModal {
     }
 
     protected void resetError() {
-        camposFormulario.forEach(campo -> campo.setStyle("-fx-border-color: transparent"));
+        camposFormulario.forEach(campo -> {
+            if (campo != null) campo.setStyle("-fx-border-color: transparent");
+        } );
     }
     public void prohibirEdicion() {
         camposFormulario.forEach(campo -> campo.setDisable(true));

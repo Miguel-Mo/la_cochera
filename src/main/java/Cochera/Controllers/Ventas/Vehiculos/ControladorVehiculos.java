@@ -30,7 +30,7 @@ public class ControladorVehiculos extends DataTable<VehiculoVender> {
 
 
     // Columnas
-    @FXML private TableColumn<VehiculoVender, Image> imagen;
+    @FXML private TableColumn<VehiculoVender, VehiculoVender> imagen;
     @FXML private TableColumn<VehiculoVender, String> marca;
     @FXML private TableColumn<VehiculoVender, String> modelo;
     @FXML private TableColumn<VehiculoVender, Date> fechaEntrada;
@@ -129,12 +129,26 @@ public class ControladorVehiculos extends DataTable<VehiculoVender> {
             }
         });
 
+        imagen.setCellValueFactory(dat -> new ReadOnlyObjectWrapper<>(dat.getValue()));
+        imagen.setSortable(false);
+        imagen.setCellFactory(dat -> new TableCell<>() {
+            private final Boton imagen =new Boton(new ImageView("/icons/car-96.png"));
+
+            @Override
+            protected void updateItem(VehiculoVender vehiculo, boolean empty) {
+                //IMAGEN
+                imagen.ajustarImg(100);
+                setGraphic(imagen);
+            }
+        });
+
         acciones.setCellValueFactory(dato -> new ReadOnlyObjectWrapper<>(dato.getValue()));
         acciones.setSortable(false);
         acciones.setCellFactory(dato -> new TableCell<>() {
 
             private final Boton lupa = new Boton(new ImageView("/icons/lupa.png"));
             private final Boton eliminar = new Boton(new ImageView("/icons/delete.png"));
+
 
             private final HBox botonera = new HBox(lupa, eliminar);
 
@@ -146,6 +160,7 @@ public class ControladorVehiculos extends DataTable<VehiculoVender> {
                     setGraphic(null);
                     return;
                 }
+
 
                 // LUPA
                 lupa.ajustarImg(55);

@@ -36,4 +36,14 @@ public class Boton extends Button {
         tooltip.setStyle("-fx-background-color: white; -fx-text-fill: #E76F51;");
         this.setTooltip(tooltip);
     }
+
+    public void establecerImagen(ImageView imagen, int ajuste) {
+        this.setStyle("-fx-background-color: white; -fx-background-insets: 0;");
+
+        this.imagen = imagen;
+        this.imagen.setPreserveRatio(true);
+        this.setGraphic(imagen);
+
+        ajustarImg(ajuste);
+    }
 }

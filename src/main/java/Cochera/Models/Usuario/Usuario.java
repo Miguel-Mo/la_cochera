@@ -157,4 +157,12 @@ public abstract class Usuario extends Modelo {
     public void setConcesionarioID(int concesionarioID) {
         this.concesionarioID = concesionarioID;
     }
+
+    public String getNombreCompleto() {
+        return nombre.get() + " " + apellidos.get();
+    }
+
+    public SimpleStringProperty nombreCompletoProperty() {
+        return new SimpleStringProperty(nombre.get() + " " + apellidos.get());
+    }
 }

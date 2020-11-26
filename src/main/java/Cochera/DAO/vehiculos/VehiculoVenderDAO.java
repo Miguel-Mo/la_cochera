@@ -16,7 +16,7 @@ public class VehiculoVenderDAO extends AbstractDAO<VehiculoVender> implements Cr
 
     public VehiculoVenderDAO() throws SQLException {
         tabla = TABLA;
-        campos = new String[]{"precio","vendido","segundaMano","tiempoUsado","vehiculoID","kmRecorridos"};
+        campos = new String[]{"precio","vendido","segundaMano","tiempoUsado","vehiculoID","kmRecorridos","combustibleID"};
         relaciones.put("vehiculos", "vehiculoID");
     }
 
@@ -53,7 +53,7 @@ public class VehiculoVenderDAO extends AbstractDAO<VehiculoVender> implements Cr
                 "FROM vehiculos_vender \n" +
                 "LEFT JOIN vehiculos  ON vehiculos_vender.vehiculoID = vehiculos.id \n" +
                 "LEFT JOIN tipos_vehiculos  ON vehiculos.tipoID = tipos_vehiculos.id \n" +
-                "LEFT JOIN combustible_vehiculos ON vehiculos.combustibleID=combustible_vehiculos.id";
+                "LEFT JOIN combustible_vehiculos ON vehiculos_vender.combustibleID=combustible_vehiculos.id";
 
         try (PreparedStatement pst = conexion.prepareStatement(sql)) {
 
@@ -77,7 +77,7 @@ public class VehiculoVenderDAO extends AbstractDAO<VehiculoVender> implements Cr
                 "FROM vehiculos_vender \n" +
                 "LEFT JOIN vehiculos  ON vehiculos_vender.vehiculoID = vehiculos.id \n" +
                 "LEFT JOIN tipos_vehiculos  ON vehiculos.tipoID = tipos_vehiculos.id \n" +
-                "LEFT JOIN combustible_vehiculos ON vehiculos.combustibleID=combustible_vehiculos.id WHERE vehiculos_vender.id=?";
+                "LEFT JOIN combustible_vehiculos ON vehiculos_vender.combustibleID=combustible_vehiculos.id WHERE vehiculos_vender.id=?";
 
         try (PreparedStatement pst = conexion.prepareStatement(sql)) {
 

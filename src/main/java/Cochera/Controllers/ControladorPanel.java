@@ -2,6 +2,8 @@ package Cochera.Controllers;
 
 import Cochera.Controllers.Mecanicos.ControladorReparacion;
 import Cochera.Controllers.Ventas.ControladorVentas;
+import Cochera.Main;
+import Cochera.Models.Usuario.Mecanico;
 import Cochera.Models.Usuario.Usuario;
 import Cochera.utils.vistas.VentanaCustom;
 import javafx.event.ActionEvent;
@@ -10,6 +12,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
+import java.util.Map;
 import java.util.prefs.Preferences;
 
 public class ControladorPanel extends VentanaCustom {
@@ -49,9 +52,10 @@ public class ControladorPanel extends VentanaCustom {
 
     private void iniciarMecanico() {
         try {
-            FXMLLoader TablaMecanicos  = new FXMLLoader(getClass().getResource("/Mecanicos/TablaMecanicos.fxml"));
-            root.getChildren().add(TablaMecanicos.load());
-            ((ControladorReparacion) TablaMecanicos.getController()).setRoot(parent);
+            String ruta = ((Mecanico)Main.usuario).isEsJefe() ? "/Mecanicos/TablaMecanicos.fxml" : "/Mecanicos/TablaJornadas.fxml";
+            FXMLLoader mecanicos  = new FXMLLoader(getClass().getResource(ruta));
+            root.getChildren().add(mecanicos.load());
+            ((ControladorReparacion) mecanicos.getController()).setRoot(parent);
         } catch (IOException e) {
             e.printStackTrace();
         }

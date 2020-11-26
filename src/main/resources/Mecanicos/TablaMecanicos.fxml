@@ -1,57 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.text.Font?>
+<?import Cochera.utils.vistas.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane id="root_anchorpane" prefHeight="683.0" prefWidth="1799.0" stylesheets="@../css/tablaVehiculos.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Cochera.Controllers.Mecanicos.ControladorReparacion">
-    <children>
-        <SplitPane dividerPositions="0.1313" layoutX="-1.0" prefHeight="683.0" prefWidth="1800.0">
-            <items>
-                <AnchorPane id="busqueda_pane" minHeight="0.0" minWidth="0.0" prefHeight="600.0" prefWidth="100.0">
-                    <children>
-                        <Label id="lNombreMecanico" layoutX="23.0" layoutY="109.0" prefHeight="27.0" prefWidth="100.0" text="Nombre">
-                            <font>
-                                <Font name="System Bold" size="18.0" />
-                            </font>
-                        </Label>
-                  <Label id="lPuestoMecanico" layoutX="23.0" layoutY="136.0" text="Puesto" />
-                  <Label layoutX="17.0" layoutY="176.0" text="Nombre Mecanico" />
-                  <Label layoutX="14.0" layoutY="224.0" text="Marca" />
-                  <TextField fx:id="tfFiltroNombreMecanico" layoutX="17.0" layoutY="193.0" />
-                  <TextField fx:id="tfFiltroMarca" layoutX="17.0" layoutY="241.0" />
-                  <Button fx:id="btnFiltrar" layoutX="90.0" layoutY="395.0" mnemonicParsing="false" text="Filtrar" onAction="#filtrar"/>
-                  <TextField fx:id="tfFiltroModelo" layoutX="17.0" layoutY="290.0" />
-                  <Label layoutX="17.0" layoutY="273.0" text="Modelo" />
-                  <Label layoutX="17.0" layoutY="326.0" text="Estado" />
-                  <ComboBox fx:id="cbEstado" layoutX="17.0" layoutY="343.0" prefWidth="150.0" />
-                    </children>
-                </AnchorPane>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="498.0" prefWidth="1046.0" style="-fx-background-color: white;">
-                    <children>
-                        <TableView fx:id="tabla" layoutX="101.0" layoutY="94.0" prefHeight="494.0" prefWidth="1108.0">
-                            <columns>
-                                <TableColumn fx:id="marca" prefWidth="211.0" text="Marca" />
-                                <TableColumn fx:id="modelo" prefWidth="325.0" text="Modelo" />
-                                <TableColumn fx:id="tiempoEstimado" prefWidth="218.0" text="Tiempo Estimado" />
-                                <TableColumn fx:id="estado" prefWidth="149.0" text="Estado" />
-                                <TableColumn fx:id="acciones" prefWidth="204.0" text="Acciones" />
-                            </columns>
-                        </TableView>
-                        <Pane id="botonera" layoutX="349.0" layoutY="40.0" prefHeight="30.0" prefWidth="860.0">
-                     <children>
-                        <Button id="btnNuevaReparacion" layoutX="593.0" layoutY="-2.0" mnemonicParsing="false" text="Agregar Nueva Reparación" />
-                     </children></Pane>
-                    </children>
-                </AnchorPane>
-            </items>
-        </SplitPane>
-    </children>
+<AnchorPane id="root_anchorpane" prefHeight="683.0" prefWidth="1799.0" stylesheets="@../css/tablas.css"
+            xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="Cochera.Controllers.Mecanicos.ControladorReparacion">
+
+    <SplitPane dividerPositions="0.1313" layoutX="-1.0" prefHeight="683.0" prefWidth="1800.0">
+
+        <AnchorPane id="busqueda_pane" minHeight="0.0" minWidth="0.0" prefHeight="600.0" prefWidth="100.0">
+
+
+            <Label id="lNombreMecanico" layoutX="32.0" layoutY="57.0" prefHeight="27.0" prefWidth="100.0" text="Nombre">
+                <font>
+                    <Font name="System Bold" size="18.0"/>
+                </font>
+            </Label>
+            <Label id="lPuestoMecanico" layoutX="33.0" layoutY="112.0" text="Puesto"/>
+
+            <Label layoutX="32.0" layoutY="158.0" text="Nombre Mecanico"/>
+            <TextField fx:id="tfFiltroNombreMecanico" layoutX="32.0" layoutY="184.0"/>
+
+            <Label layoutX="34.0" layoutY="218.0" text="Marca"/>
+            <TextField fx:id="tfFiltroMarca" layoutX="32.0" layoutY="245.0"/>
+
+            <Label layoutX="34.0" layoutY="283.0" text="Modelo"/>
+            <TextField fx:id="tfFiltroModelo" layoutX="33.0" layoutY="309.0"/>
+
+            <Label layoutX="33.0" layoutY="349.0" text="Estado"/>
+            <ComboBox fx:id="cbEstado" layoutX="32.0" layoutY="374.0" prefWidth="150.0"/>
+
+            <Boton layoutX="38.0" layoutY="440.0" mnemonicParsing="false" onAction="#filtrar" prefHeight="30.0"
+                   prefWidth="59.0" text="Filtrar"/>
+            <Boton layoutX="108.0" layoutY="440.0" mnemonicParsing="false" onAction="#limpiar" prefHeight="30.0"
+                   prefWidth="59.0" text="Limpiar"/>
+        </AnchorPane>
+
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="498.0" prefWidth="1046.0"
+                    style="-fx-background-color: white;">
+
+            <TableView fx:id="tabla" layoutX="101.0" layoutY="120.0" prefHeight="494.0" prefWidth="1108.0">
+                <columns>
+                    <TableColumn fx:id="marca" prefWidth="170.0" text="Marca"/>
+                    <TableColumn fx:id="modelo" prefWidth="170.0" text="Modelo"/>
+                    <TableColumn fx:id="mecanico" prefWidth="260.0" text="Mecánico"/>
+                    <TableColumn fx:id="tiempoEstimado" prefWidth="210.0" text="Tiempo Estimado"/>
+                    <TableColumn fx:id="estado" prefWidth="149.0" text="Estado"/>
+                    <TableColumn fx:id="acciones" prefWidth="204.0" text="Acciones"/>
+                </columns>
+            </TableView>
+
+            <Pane id="botonera" layoutX="349.0" layoutY="62.0" prefHeight="30.0" prefWidth="860.0">
+                <Boton layoutX="648.0" layoutY="-2.0" mnemonicParsing="false" onAction="#mostrarModalCreacion"
+                       text="Agregar Nueva Reparación"/>
+            </Pane>
+        </AnchorPane>
+    </SplitPane>
 </AnchorPane>

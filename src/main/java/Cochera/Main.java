@@ -15,7 +15,7 @@ import java.util.prefs.Preferences;
 public class Main extends Application {
 
     private Stage primaryStage;
-    private Usuario usuario;
+    public static Usuario usuario;
 
     @Override
     public void start(Stage primaryStage) {
@@ -71,7 +71,7 @@ public class Main extends Application {
     }
 
     public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+        Main.usuario = usuario;
 
         Preferences usuarioActivo = Preferences.userRoot();
         usuarioActivo.put("concesionarioID", Integer.toString(usuario.getConcesionarioID()));

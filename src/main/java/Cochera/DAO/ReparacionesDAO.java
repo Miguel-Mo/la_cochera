@@ -17,7 +17,7 @@ public class ReparacionesDAO extends AbstractDAO<Reparacion> implements Crud<Rep
 
     public ReparacionesDAO() throws SQLException{
         tabla=TABLA;
-        campos=new String[]{"mecanicoID","clienteID","vehiculoRepararID","tiempoEstimado","tiempoReal","presupuestoEstimado","presupuestoReal","componentes","fechaInicio","fechaFin","estado"};
+        campos=new String[]{"mecanicoID","clienteID","vehiculoRepararID","tiempoEstimado","tiempoReal","presupuestoEstimado","presupuestoReal","componentes","estado"};
     }
 
 
@@ -41,13 +41,14 @@ public class ReparacionesDAO extends AbstractDAO<Reparacion> implements Crud<Rep
     public ObservableList<Reparacion> read() {
 
         final String SQL="SELECT reparaciones.*,cliente.*,mecanicos.*,vehiculos_reparar.*,usuarios.*,vehiculos.*,tipos_vehiculos.* \n" +
-                "                FROM reparaciones\n" +
-                "                left join cliente on reparaciones.clienteID=cliente.id\n" +
-                "                left join mecanicos on reparaciones.mecanicoID=mecanicos.id\n" +
-                "                left join vehiculos_reparar on reparaciones.vehiculoRepararID=vehiculos_reparar.id\n" +
-                "                left join usuarios on mecanicos.usuarioID=usuarios.id\n" +
-                "                left join vehiculos on vehiculos_reparar.vehiculoID=vehiculos.id\n" +
-                "                left join tipos_vehiculos on vehiculos.tipoID=tipos_vehiculos.id";
+                " FROM reparaciones\n" +
+                " LEFT JOIN cliente on reparaciones.clienteID=cliente.id\n" +
+                " LEFT JOIN mecanicos on reparaciones.mecanicoID=mecanicos.id\n" +
+                " LEFT JOIN vehiculos_reparar on reparaciones.vehiculoRepararID=vehiculos_reparar.id\n" +
+                " LEFT JOIN usuarios on mecanicos.usuarioID=usuarios.id\n" +
+                " LEFT JOIN vehiculos on vehiculos_reparar.vehiculoID=vehiculos.id\n" +
+                " LEFT JOIN tipos_vehiculos on vehiculos.tipoID=tipos_vehiculos.id";
+
         ObservableList<Reparacion> reparaciones = FXCollections.observableArrayList();
 
         try (PreparedStatement pst = conexion.prepareStatement(SQL)) {
@@ -69,7 +70,16 @@ public class ReparacionesDAO extends AbstractDAO<Reparacion> implements Crud<Rep
     public Reparacion read(int id) {
         Reparacion reparacion = null;
 
-        try (PreparedStatement pst = conexion.prepareStatement(super.querySelectOne())) {
+        final String SQL="SELECT reparaciones.*,cliente.*,mecanicos.*,vehiculos_reparar.*,usuarios.*,vehiculos.*,tipos_vehiculos.* \n" +
+                "                FROM reparaciones\n" +
+                "                left join cliente on reparaciones.clienteID=cliente.id\n" +
+                "                left join mecanicos on reparaciones.mecanicoID=mecanicos.id\n" +
+                "                left join vehiculos_reparar on reparaciones.vehiculoRepararID=vehiculos_reparar.id\n" +
+                "                left join usuarios on mecanicos.usuarioID=usuarios.id\n" +
+                "                left join vehiculos on vehiculos_reparar.vehiculoID=vehiculos.id\n" +
+                "                left join tipos_vehiculos on vehiculos.tipoID=tipos_vehiculos.id where reparaciones.id=?";
+
+        try (PreparedStatement pst = conexion.prepareStatement(SQL)) {
 
             pst.setInt(1, id);
             ResultSet rs = pst.executeQuery();
@@ -101,7 +111,6 @@ public class ReparacionesDAO extends AbstractDAO<Reparacion> implements Crud<Rep
         }
     }
 
-
     public boolean delete(Reparacion reparacion) {
         try (PreparedStatement pst = conexion.prepareStatement(super.queryDelete())) {
             pst.setInt(1,reparacion.getId());
@@ -113,10 +122,29 @@ public class ReparacionesDAO extends AbstractDAO<Reparacion> implements Crud<Rep
         }
     }
 
+    public void comenzarTrabajo(Reparacion reparacion) {
 
+        final String SQL = "UPDATE reparaciones R SET R.fechaInicio = CURRENT_TIMESTAMP()," +
+                "R.estado='proceso' WHERE R.id = ?";
 
+        try (PreparedStatement pst = conexion.prepareStatement(SQL)) {
+            pst.setInt(1,reparacion.getId());
+            pst.executeUpdate();
+        } catch (Exception throwables) {
+            throwables.printStackTrace();
+        }
+    }
 
+    public void finalizarTrabajo(Reparacion reparacion) {
 
+        final String SQL = "UPDATE reparaciones R SET R.fechaFin = CURRENT_TIMESTAMP(), \n" +
+                "R.estado='finalizado', R.tiempoReal = TIMEDIFF(R.fechaFin,R.fechaInicio) WHERE R.id = ?";
 
-
+        try (PreparedStatement pst = conexion.prepareStatement(SQL)) {
+            pst.setInt(1,reparacion.getId());
+            pst.executeUpdate();
+        } catch (Exception throwables) {
+            throwables.printStackTrace();
+        }
+    }
 }

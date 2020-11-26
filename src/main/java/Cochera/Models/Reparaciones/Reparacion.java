@@ -17,23 +17,28 @@ import java.util.HashMap;
 public class Reparacion extends Modelo {
 
     private int id,mecanicoID,clienteID,vehiculoRepararID;
+    private final IntegerProperty presupuestoEstimado,presupuestoReal; //Todo cambiar a float en todos lados
+    private final StringProperty estado,tiempoEstimado,tiempoReal,componentes;
 
-    private ObjectProperty<Time> tiempoEstimado,tiempoReal;
-
-    private IntegerProperty presupuestoEstimado,presupuestoReal; //Todo cambiar a float en todos lados
-
-    private StringProperty estado;
-
-
-    Mecanico mecanico;
-    Cliente cliente;
-    VehiculoReparar vehiculoReparar;
+    private Mecanico mecanico;
+    private Cliente cliente;
+    private VehiculoReparar vehiculoReparar;
 
     public static final String PENDIENTE="pendiente";
     public static final String ENPROCESO="en proceso";
     public static final String FINALIZADO="finalizado";
+    public static final String AVISADO="avisado";
 
-    public Reparacion(){  }
+    public Reparacion() {
+
+        tiempoEstimado = new SimpleStringProperty();
+        tiempoReal = new SimpleStringProperty();
+        estado = new SimpleStringProperty();
+        componentes = new SimpleStringProperty();
+
+        presupuestoEstimado = new SimpleIntegerProperty();
+        presupuestoReal = new SimpleIntegerProperty();
+    }
 
     public Reparacion(ResultSet rs) throws SQLException {
 
@@ -44,42 +49,55 @@ public class Reparacion extends Modelo {
         mecanico=new Mecanico(rs);
         cliente=new Cliente(rs);
         vehiculoReparar=new VehiculoReparar(rs);
-       /* mecanicoID=rs.getInt(tabla+".mecanicoID");
-        clienteID=rs.getInt(tabla+".clienteID");
-        vehiculoRepararID=rs.getInt(tabla+".vehiculoRepararID");*/
 
-        tiempoEstimado= new SimpleObjectProperty<Time>(rs.getTime(tabla+".tiempoEstimado"));
-        tiempoReal= new SimpleObjectProperty<Time>(rs.getTime(tabla+".tiempoReal"));
+        mecanicoID=rs.getInt(tabla+".mecanicoID");
+        clienteID=rs.getInt(tabla+".clienteID");
+        vehiculoRepararID=rs.getInt(tabla+".vehiculoRepararID");
+
+
 
         estado=new SimpleStringProperty(rs.getString(tabla+".estado"));
+        tiempoEstimado= new SimpleStringProperty(rs.getString(tabla+".tiempoEstimado"));
+        tiempoReal= new SimpleStringProperty(rs.getString(tabla+".tiempoReal"));
+        componentes = new SimpleStringProperty(rs.getString(tabla+".componentes"));
 
         presupuestoEstimado=new SimpleIntegerProperty(rs.getInt(tabla+".presupuestoEstimado"));
         presupuestoReal=new SimpleIntegerProperty(rs.getInt(tabla+".presupuestoReal"));
     }
 
+    public String getComponentes() {
+        return componentes.get();
+    }
 
+    public StringProperty componentesProperty() {
+        return componentes;
+    }
 
-    public Time getTiempoEstimado() {
+    public void setComponentes(String componentes) {
+        this.componentes.set(componentes);
+    }
+
+    public String getTiempoEstimado() {
         return tiempoEstimado.get();
     }
 
-    public ObjectProperty<Time> tiempoEstimadoProperty() {
+    public StringProperty tiempoEstimadoProperty() {
         return tiempoEstimado;
     }
 
-    public void setTiempoEstimado(Time tiempoEstimado) {
+    public void setTiempoEstimado(String tiempoEstimado) {
         this.tiempoEstimado.set(tiempoEstimado);
     }
 
-    public Time getTiempoReal() {
+    public String getTiempoReal() {
         return tiempoReal.get();
     }
 
-    public ObjectProperty<Time> tiempoRealProperty() {
+    public StringProperty tiempoRealProperty() {
         return tiempoReal;
     }
 
-    public void setTiempoReal(Time tiempoReal) {
+    public void setTiempoReal(String tiempoReal) {
         this.tiempoReal.set(tiempoReal);
     }
 
@@ -175,8 +193,6 @@ public class Reparacion extends Modelo {
     public void setEstado(String estado) {
         this.estado.set(estado);
     }
-}
 
-//guardar mecanico como clase
-//guaradar vehiuclorepara como clase
-//guaradar cliente como clase
+
+}

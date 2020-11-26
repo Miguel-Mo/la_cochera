@@ -14,8 +14,7 @@ public abstract class Vehiculo extends Modelo {
     protected ObjectProperty<Date> fechaRegistro;
     protected IntegerProperty vehiculoID, concesionarioID;
     protected TipoVehiculo tipoVehiculo;
-    protected CombustibleVehiculo combustibleVehiculo;
-    protected int tipoID, combustibleID;
+    protected int tipoID;
 
     public Vehiculo() {
         potencia = new SimpleStringProperty();
@@ -28,7 +27,6 @@ public abstract class Vehiculo extends Modelo {
         concesionarioID = new SimpleIntegerProperty();
 
         tipoVehiculo = new TipoVehiculo();
-        combustibleVehiculo = new CombustibleVehiculo();
     }
 
     public Vehiculo(ResultSet rs) throws SQLException {
@@ -38,21 +36,14 @@ public abstract class Vehiculo extends Modelo {
         concesionarioID = new SimpleIntegerProperty(rs.getInt(tabla + ".concesionarioID"));
 
         tipoVehiculo = new TipoVehiculo(rs);
-        combustibleVehiculo = new CombustibleVehiculo(rs);
+
         tipoID = tipoVehiculo.getId();
-        combustibleID = combustibleVehiculo.getId();
+
 
         potencia = new SimpleStringProperty(rs.getString(tabla + ".potencia"));
         marca = new SimpleStringProperty(rs.getString(tabla + ".marca"));
         modelo = new SimpleStringProperty(rs.getString(tabla + ".modelo"));
         fechaRegistro = new SimpleObjectProperty<>(new Date(rs.getTimestamp(tabla + ".fechaRegistro").getTime()));
-    }
-
-    public CombustibleVehiculo getCombustibleVehiculo() {return combustibleVehiculo;}
-
-    public void setCombustibleVehiculo(CombustibleVehiculo combustibleVehiculo) {
-        this.combustibleID = combustibleVehiculo.getId();
-        this.combustibleVehiculo = combustibleVehiculo;
     }
 
     public TipoVehiculo getTipoVehiculo() {

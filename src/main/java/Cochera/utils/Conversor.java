@@ -37,19 +37,12 @@ public class Conversor {
 
 
     private static final SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-    public static Date stringToDate(String fecha){
-
-        try {
-            return format.parse(fecha);
-        } catch (ParseException e) {
-            return null;
-        }
-
-
+    public static Date stringToDate(String fecha) {
+        try { return format.parse(fecha); }
+        catch (ParseException e) { return null; }
     }
 
     public static Date datePickerToDate(DatePicker datePicker) {
         return Date.from(Instant.from(datePicker.getValue().atStartOfDay(ZoneId.systemDefault())));
     }
-
 }

@@ -11,7 +11,8 @@ public class VehiculoVender extends Vehiculo {
     private final FloatProperty precio;
     private final BooleanProperty vendido, segundaMano;
     private final StringProperty tiempoUsado;
-    private int id, vehiculoID;
+    protected CombustibleVehiculo combustibleVehiculo;
+    private int id, vehiculoID, combustibleID;
     private final IntegerProperty kmRecorridos;
 
     public VehiculoVender() {
@@ -23,6 +24,7 @@ public class VehiculoVender extends Vehiculo {
         tiempoUsado = new SimpleStringProperty();
 
         kmRecorridos= new SimpleIntegerProperty();
+        combustibleVehiculo = new CombustibleVehiculo();
     }
 
     public VehiculoVender(ResultSet rs) throws SQLException {
@@ -41,6 +43,24 @@ public class VehiculoVender extends Vehiculo {
 
         id = rs.getInt(tabla + ".id");
         vehiculoID = rs.getInt(tabla + ".vehiculoID");
+
+        combustibleVehiculo = new CombustibleVehiculo(rs);
+        combustibleID = combustibleVehiculo.getId();
+    }
+
+    public int getCombustibleID() {
+        return combustibleID;
+    }
+
+    public void setCombustibleID(int combustibleID) {
+        this.combustibleID = combustibleID;
+    }
+
+    public CombustibleVehiculo getCombustibleVehiculo() {return combustibleVehiculo;}
+
+    public void setCombustibleVehiculo(CombustibleVehiculo combustibleVehiculo) {
+        this.combustibleID = combustibleVehiculo.getId();
+        this.combustibleVehiculo = combustibleVehiculo;
     }
 
     public float getPrecio() {

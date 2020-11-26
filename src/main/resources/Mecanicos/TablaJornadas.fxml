@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import Cochera.utils.vistas.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="root_anchorpane" prefHeight="683.0" prefWidth="1799.0" stylesheets="@../css/tablas.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Cochera.Controllers.Mecanicos.ControladorReparacion">
+
+    <SplitPane dividerPositions="0.1313" layoutX="-1.0" prefHeight="683.0" prefWidth="1800.0">
+
+        <AnchorPane id="busqueda_pane" minHeight="0.0" minWidth="0.0" prefHeight="600.0" prefWidth="100.0">
+
+
+            <Label id="lNombreMecanico" layoutX="32.0" layoutY="134.0" prefHeight="27.0" prefWidth="100.0" text="Nombre">
+                <font>
+                    <Font name="System Bold" size="18.0" />
+                </font>
+            </Label>
+            <Label id="lPuestoMecanico" layoutX="32.0" layoutY="188.0" text="Puesto: Mecánico">
+            <font>
+               <Font size="14.0" />
+            </font></Label>
+            
+        </AnchorPane>
+
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="498.0" prefWidth="1046.0" style="-fx-background-color: white;">
+
+            <TableView fx:id="tabla" layoutX="101.0" layoutY="120.0" prefHeight="494.0" prefWidth="1108.0">
+                <columns>
+                    <TableColumn fx:id="marca" prefWidth="160.0" text="Marca" />
+                    <TableColumn fx:id="modelo" prefWidth="160.0" text="Modelo" />
+                    <TableColumn fx:id="cliente" prefWidth="205.0" text="Cliente" />
+                    <TableColumn fx:id="tiempoEstimado" prefWidth="210.0" text="Tiempo Estimado" />
+                    <TableColumn fx:id="estado" prefWidth="150.0" text="Estado" />
+                    <TableColumn fx:id="acciones" prefWidth="222.0" text="Acciones" />
+                </columns>
+            </TableView>
+
+        </AnchorPane>
+    </SplitPane>
+</AnchorPane>

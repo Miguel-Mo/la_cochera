@@ -48,7 +48,7 @@ public class PropuestaDAO extends AbstractDAO<Propuesta> implements Crud<Propues
                 "LEFT JOIN vehiculos_vender ON propuesta_venta.vehiculoVenderID = vehiculos_vender.id\n" +
                 "LEFT JOIN vehiculos ON vehiculos_vender.vehiculoID = vehiculos.id\n" +
                 "LEFT JOIN tipos_vehiculos ON vehiculos.tipoID = tipos_vehiculos.id " +
-                "LEFT JOIN combustible_vehiculos ON vehiculos.combustibleID = combustible_vehiculos.id";
+                "LEFT JOIN combustible_vehiculos ON vehiculos_vender.combustibleID = combustible_vehiculos.id";
 
         try (PreparedStatement pst = conexion.prepareStatement(SQL)) {
 
@@ -75,7 +75,7 @@ public class PropuestaDAO extends AbstractDAO<Propuesta> implements Crud<Propues
                 "LEFT JOIN vehiculos_vender ON propuesta_venta.vehiculoVenderID = vehiculos_vender.id\n" +
                 "LEFT JOIN vehiculos ON vehiculos_vender.vehiculoID = vehiculos.id\n" +
                 "LEFT JOIN tipos_vehiculos ON vehiculos.tipoID = tipos_vehiculos.id " +
-                "LEFT JOIN combustible_vehiculos ON vehiculos.combustibleID = combustible_vehiculos.id where propuesta_venta.id=?";
+                "LEFT JOIN combustible_vehiculos ON vehiculos_vender.combustibleID = combustible_vehiculos.id where propuesta_venta.id=?";
 
         Propuesta propuesta = null;
 

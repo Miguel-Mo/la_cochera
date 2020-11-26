@@ -68,9 +68,10 @@ public class CModalPropuesta extends CMNuevoEditar<Propuesta> {
     @Override
     protected void preEstablecerObjeto() {
         try (VehiculoVenderDAO dao = new VehiculoVenderDAO()) {
-            cbVehiculo.setItems(dao.read().filtered(
+            cbVehiculo.setItems(dao.read());
+            /*cbVehiculo.setItems(dao.read().filtered(
                     vehiculo -> !vehiculo.isVendido() && vehiculo.getConcesionarioID() == concesionarioVendedor
-            ));
+            ));*/
         } catch (SQLException e) {
             e.printStackTrace();
         }
